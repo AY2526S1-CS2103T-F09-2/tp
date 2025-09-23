@@ -25,6 +25,8 @@ public class PersonCard extends UiPart<Region> {
      */
 
     public final Person person;
+    @FXML
+    private Label remark;
 
     @FXML
     private HBox cardPane;
@@ -55,5 +57,6 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        remark.setText(person.getRemark().value);
     }
 }
