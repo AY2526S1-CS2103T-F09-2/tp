@@ -1,4 +1,3 @@
-package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -24,20 +23,19 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Remark remark;
-    private final Set<Tag> tags = new HashSet<>();
 
+    private final Set<Tag> tags = new HashSet<>();
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Remark remark, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.remark = remark;
+
     }
 
     public Name getName() {
@@ -56,6 +54,7 @@ public class Person {
         return address;
     }
 
+ 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -77,9 +76,6 @@ public class Person {
                 && otherPerson.getName().equals(getName());
     }
 
-    public Remark getRemark() {
-        return this.remark;
-    }
 
     /**
      * Returns true if both persons have the same identity and data fields.
