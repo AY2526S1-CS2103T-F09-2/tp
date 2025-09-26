@@ -33,7 +33,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
+    private static final String VALID_REMARK = "This is a remark";
     private static final String WHITESPACE = " \t\r\n";
 
     @Test
