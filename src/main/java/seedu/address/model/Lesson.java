@@ -2,8 +2,22 @@ package seedu.address.model;
 
 public class Lesson {
 
-   private String lessonDate;
-   private boolean isCompleted;
+    private String lessonDate;
+    private boolean isCompleted;
+    
+    /**
+     * Represents an empty Lesson.
+     * This is used when a Student has no upcoming lessons.
+     */
+    private static final class EmptyLesson extends Lesson {
+        
+        private EmptyLesson() {
+            super("No upcoming lessons");
+        }
+
+    } 
+
+    public static final Lesson EMPTY = new EmptyLesson();
 
     /** 
     * This method creates a new Lesson object
@@ -11,6 +25,7 @@ public class Lesson {
     */
     public Lesson(String lessonDate) {
      this.lessonDate = lessonDate;
+     this.isCompleted = false;
     }   
     
     /** 
