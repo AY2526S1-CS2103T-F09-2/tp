@@ -35,8 +35,7 @@ public class Lesson {
      */
     public String getLessonDate() {
         return lessonDate;
-    }
-    
+    }    
     @Override
     public String toString() {
         return lessonDate;
