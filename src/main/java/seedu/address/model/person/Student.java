@@ -14,7 +14,7 @@ public class Student extends Person {
     private Lesson nextLesson;
 
     /**
-     * Creates a new Student object
+     * Constructs a new Student object
      */
     public Student(Name name, Phone phone, Email email, 
                    Address address, Set<Tag> tags, Lesson nextLesson) {
