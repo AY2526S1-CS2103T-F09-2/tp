@@ -21,5 +21,8 @@ public class Student extends Person {
         this.hasPaid = false;
         this.nextLesson = nextLesson;
     }   
-    
+
+    public Lesson getNextLesson() {
+        return nextLesson;
+    }
 }
