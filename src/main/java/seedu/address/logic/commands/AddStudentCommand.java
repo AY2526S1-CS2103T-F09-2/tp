@@ -12,7 +12,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.model.Model;
 import seedu.address.model.person.Student;
 
-
+/**
+ * Adds a student to the address book.
+ */
 public class AddStudentCommand extends Command {
 
     
@@ -35,7 +37,7 @@ public class AddStudentCommand extends Command {
     private final Student toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Student}
+     * Creates an AddStudentCommand to add the specified {@code Student}
      */
     public AddStudentCommand(Student student) {
         requireNonNull(student);
