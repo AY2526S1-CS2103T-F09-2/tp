@@ -5,6 +5,11 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -13,9 +18,20 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command {
 
-    private static final String COMMAND_WORD = "add";
-    private static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    private static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String COMMAND_WORD = "add";
+    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+        + "Parameters: "
+        + PREFIX_NAME + "NAME "
+        + PREFIX_PHONE + "PHONE "
+        + PREFIX_EMAIL + "EMAIL "
+        + PREFIX_ADDRESS + "ADDRESS "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_NAME + "Alice Pauline"
+        + PREFIX_PHONE + "92345123 "
+        + PREFIX_EMAIL + "1200033@gmail.com";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
 
