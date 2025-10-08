@@ -19,6 +19,5 @@ public class Student extends Person {
         super(name, phone, email, address, tags);
         this.hasPaid = false;
         this.nextLesson = nextLesson;
-    }
-    
+    }   
 }
