@@ -7,7 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.address.model.Lesson;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -15,6 +17,9 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    @FXML
+    private Label lessonLabel;
+
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -55,5 +60,15 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        if (person instanceof Student) {
+            Lesson lesson = ((Student) person).getNextLesson();
+            if (lesson != null && !lesson.equals(Lesson.EMPTY)) {
+                lessonLabel.setText("Lesson: " + lesson.getLessonDate());
+            } else {
+                lessonLabel.setText("Lesson: None");
+            }
+        } else {
+            lessonLabel.setText("");
+        }
     }
 }
