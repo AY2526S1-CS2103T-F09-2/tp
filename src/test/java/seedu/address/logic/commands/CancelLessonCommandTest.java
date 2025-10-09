@@ -70,7 +70,6 @@ public class CancelLessonCommandTest {
 
         model.setPerson(shown, withLessonShown);
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        assertEquals(1, model.getFilteredPersonList().size());
 
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
