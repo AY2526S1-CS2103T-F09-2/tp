@@ -114,4 +114,13 @@ public class Person {
                 .toString();
     }
 
+    /**
+     * Returns payment status of person. [Default = false]
+     * ModelManager currently creates List of contacts using Person class
+     * so temporarily added payment status method here so that payment command would work
+     * Method would be moved to Student class in future
+     */
+    public boolean getPaymentStatus() {
+        return false;
+    }
 }

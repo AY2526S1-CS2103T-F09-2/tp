@@ -1,5 +1,4 @@
 package seedu.address.logic.commands;
-
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,16 +10,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
- * Adds a person to the address book.
+ * Adds a student to the address book.
  */
-public class AddCommand extends Command {
+public class AddStudentCommand extends Command {
 
-    public static final String COMMAND_WORD = "add";
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    
+    public static final String COMMAND_WORD = "addstu";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
         + "Parameters: "
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
@@ -31,16 +30,19 @@ public class AddCommand extends Command {
         + PREFIX_NAME + "Alice Pauline"
         + PREFIX_PHONE + "92345123 "
         + PREFIX_EMAIL + "1200033@gmail.com";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New Student added: %1$s";
+    public static final String MESSAGE_DUPLICATE_STUDENT = "This Student already exists in the address book";
 
-    private final Person toAdd;
+
+    private final Student toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddStudentCommand to add the specified student
+     * @param Student student to be added
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddStudentCommand(Student student) {
+        requireNonNull(student);
+        toAdd = student;
     }
 
     @Override
@@ -48,7 +50,7 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_STUDENT);
         }
 
         model.addPerson(toAdd);
@@ -62,11 +64,11 @@ public class AddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddCommand)) {
+        if (!(other instanceof AddStudentCommand)) {
             return false;
         }
 
-        AddCommand otherAddCommand = (AddCommand) other;
+        AddStudentCommand otherAddCommand = (AddStudentCommand) other;
         return toAdd.equals(otherAddCommand.toAdd);
     }
 
@@ -76,4 +78,5 @@ public class AddCommand extends Command {
                 .add("toAdd", toAdd)
                 .toString();
     }
+    
 }
