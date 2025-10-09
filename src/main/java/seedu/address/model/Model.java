@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * The API of the Model component.
@@ -84,4 +85,15 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} already has a lesson in the address book.
+     */
+    boolean hasLesson(Student student);
+
+    /**
+     * Adds the given lesson.
+     * {@code lesson} must not already exist in the address book.
+     */
+    void addLesson(Student student, Lesson lesson);
 }

@@ -15,11 +15,16 @@ public class Student extends Person {
     /**
      * Creates a new Student object
      */
-    public Student(Name name, Phone phone, Email email, 
+    public Student(Name name, Phone phone, Email email,
                    Address address, Set<Tag> tags, Lesson nextLesson) {
         super(name, phone, email, address, tags);
         this.hasPaid = false;
         this.nextLesson = nextLesson;
-    }   
-    
+    }
+
+    public Lesson getNextLesson() {
+        return this.nextLesson;
+    }
+
+
 }
