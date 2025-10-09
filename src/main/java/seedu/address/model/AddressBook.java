@@ -3,10 +3,12 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -93,6 +95,37 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
+    public boolean hasLesson(Student student) {
+        for (Person p : persons.asUnmodifiableObservableList()) {
+            if (p.equals(student) && p instanceof Student) {
+                Student s = (Student) p;
+                return s.getNextLesson() != null && !s.getNextLesson().equals(Lesson.EMPTY);
+            }
+        }
+        return false;  // Student not found or no lesson
+    }
+
+
+    public void addLesson(Student student, Lesson lesson) {
+        for (Person p : persons.asUnmodifiableObservableList()) {
+            if (p.equals(student) && p instanceof Student) {
+                Student s = (Student) p;
+                Student updatedStudent = new Student(
+                        s.getName(),
+                        s.getPhone(),
+                        s.getEmail(),
+                        s.getAddress(),
+                        s.getTags(),
+                        lesson
+                );
+                persons.setPerson(s, updatedStudent);
+            }
+        }
+
+    }
+
+
 
     //// util methods
 
