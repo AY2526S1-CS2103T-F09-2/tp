@@ -24,7 +24,7 @@ public class Student extends Person {
     }
     /**
      *  This method shows the string representation of the Student object
-     */   
+     */
     @Override
     public String toString() {
         String personString = super.toString();
@@ -32,5 +32,9 @@ public class Student extends Person {
                 .add("Has Paid", hasPaid)
                 .add("Next Lesson", nextLesson)
                 .toString();
+    }
+
+    public Lesson getNextLesson() {
+        return nextLesson;
     }
 }
