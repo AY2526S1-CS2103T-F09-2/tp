@@ -45,4 +45,19 @@ public class PaymentCommand extends Command {
         return new CommandResult(String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
                 personToCheck.getName(), personToCheck.getPaymentStatus()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PaymentCommand)) {
+            return false;
+        }
+
+        PaymentCommand otherPaymentCommand = (PaymentCommand) other;
+        return targetIndex.equals(otherPaymentCommand.targetIndex);
+    }
 }
