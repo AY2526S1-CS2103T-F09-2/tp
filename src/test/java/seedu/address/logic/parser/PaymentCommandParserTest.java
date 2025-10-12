@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.PaymentCommand;
+import seedu.address.model.person.PaymentStatus;
+
+import java.util.Optional;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -13,7 +16,7 @@ public class PaymentCommandParserTest {
     private PaymentCommandParser parser = new PaymentCommandParser();
 
     @Test
-    public void parse_validArgs_returnsPaymentCommand() {
+    public void parse_validIndexWithoutStatus_returnsPaymentCommand() {
         // valid index
         PaymentCommand expectedPaymentCommand = new PaymentCommand(INDEX_FIRST_PERSON);
         assertParseSuccess(parser, "1", expectedPaymentCommand);
@@ -23,7 +26,7 @@ public class PaymentCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException() {
+    public void parse_invalidArgsWithoutStatus_throwsParseException() {
         String failureMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE);
 
         // whitespace between numbers
@@ -34,5 +37,32 @@ public class PaymentCommandParserTest {
 
         // number + invalid characters
         assertParseFailure(parser, "1 test", failureMessage);
+    }
+
+    @Test
+    public void parse_validIndexWithStatus_returnsPaymentCommand() {
+        // paid and unpaid statuses
+        PaymentCommand paidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatus.PAID));
+        assertParseSuccess(parser, "1 s/paid", paidStatus);
+
+        PaymentCommand unpaidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatus.UNPAID));
+        assertParseSuccess(parser, "1 s/unpaid", unpaidStatus);
+
+        // multiple whitespace between keywords
+        assertParseSuccess(parser, " \n 1 \n \t  \t s/   \n \t \t paid", paidStatus);
+    }
+
+    @Test
+    public void parse_invalidArgsWithStatus_throwsParseException() {
+        String failureMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE);
+
+        // invalid status string
+        assertParseFailure(parser, "1 s/foo", failureMessage);
+
+        // empty status string
+        assertParseFailure(parser, "1 s/", failureMessage);
+
+        // status string with whitespaces and empty status
+        assertParseFailure(parser, "     1    s/  ", failureMessage);
     }
 }
