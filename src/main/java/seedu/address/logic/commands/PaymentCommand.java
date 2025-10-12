@@ -21,8 +21,8 @@ public class PaymentCommand extends Command {
     public static final String COMMAND_WORD = "payment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of person. "
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + "Parameters: INDEX (must be a positive integer) [s/STATUS] (STATUS must be 'paid' or 'unpaid')\n"
+            + "Example: " + COMMAND_WORD + " 1 s/ paid";
 
     public static final String MESSAGE_PAYMENT_STATUS_SUCCESS = """
             Name: %1$s
