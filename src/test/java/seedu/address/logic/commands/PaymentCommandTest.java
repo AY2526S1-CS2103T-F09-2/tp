@@ -7,8 +7,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 import seedu.address.model.person.Person;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,16 +44,16 @@ public class PaymentCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PaymentStatus originalPaymentStatus = personToEdit.getPaymentStatus();
 
-        PaymentStatus newPaymentStatus = null;
-        // invert payment status twice to test both PAID and UNPAID status
-        for (int i = 0; i < 2; i++) {
-            newPaymentStatus = invertPaymentStatus(personToEdit.getPaymentStatus());
-            PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(newPaymentStatus));
-            Person newPerson = Person.withPaymentStatus(personToEdit, newPaymentStatus);
+        final List<PaymentStatusValue> paymentStatusValues = List.of(PaymentStatusValue.PAID, PaymentStatusValue.UNPAID);
 
+        for (PaymentStatusValue statusValue : paymentStatusValues) {
+            Optional<PaymentStatusValue> newPaymentStatus = Optional.of(statusValue);
+            PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
+
+            Person newPerson = Person.withPaymentStatus(personToEdit,
+                    personToEdit.getPaymentStatus().update(newPaymentStatus));
             String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
                     newPerson.getName(), newPerson.getPaymentStatus());
-
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
             expectedModel.setPerson(personToEdit, newPerson);
 
@@ -61,7 +63,7 @@ public class PaymentCommandTest {
         }
 
         // Check payment status back to original
-        assertEquals(originalPaymentStatus, newPaymentStatus);
+        assertEquals(originalPaymentStatus, personToEdit.getPaymentStatus());
     }
 
 
@@ -83,15 +85,5 @@ public class PaymentCommandTest {
         Index index = Index.fromZeroBased(size + 1);
         PaymentCommand paymentCommand = new PaymentCommand(index);
         assertCommandFailure(paymentCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
-    }
-
-    /**
-     * Method inverts payment status from paid to unpaid, vice versa.
-     *
-     * @param paymentStatus paymentStatus to invert
-     * @return Inverted payment stastus
-     */
-    private PaymentStatus invertPaymentStatus(PaymentStatus paymentStatus) {
-        return paymentStatus == PaymentStatus.PAID ? PaymentStatus.UNPAID : PaymentStatus.PAID;
     }
 }

@@ -26,7 +26,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT_STATUS);
             Optional<String> paymentStatusString = argMultimap.getValue(PREFIX_PAYMENT_STATUS);
 
-            // if argument provided to s/ flag then check if it is a valid argument
+            // if argument s/ flag used then check if it is a valid argument
             if ((paymentStatusString.isPresent() && !PaymentStatus.isValidPaymentStatus(paymentStatusString))
                     || argMultimap.getPreamble().isEmpty()) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -38,7 +38,7 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
             if (paymentStatusString.isEmpty()) {
                 return new PaymentCommand(index);
             }
-            Optional<PaymentStatus> status = PaymentStatus.fromOptionalString(paymentStatusString);
+            Optional<PaymentStatus.PaymentStatusValue> status = PaymentStatus.fromOptionalString(paymentStatusString);
             return new PaymentCommand(index, status);
         } catch (ParseException pe) {
             throw new ParseException(

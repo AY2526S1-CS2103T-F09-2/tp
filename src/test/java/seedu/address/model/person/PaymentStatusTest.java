@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -78,5 +80,38 @@ public class PaymentStatusTest {
      */
     private Optional<String> opt(String value) {
         return Optional.of(value);
+    }
+
+    @Test
+    public void update_nullPaymentStatus_throwsNullPointerException () {
+        assertThrows(NullPointerException.class,
+                () -> new PaymentStatus(1).update(null));
+    }
+
+    @Test
+    public void update_paidStatus_paymentStatusDecrementedByOne () {
+        PaymentStatus paymentStatus = new PaymentStatus(1);
+        PaymentStatus expected = new PaymentStatus(0);
+
+        assertEquals(expected, paymentStatus.update(Optional.of(PaymentStatus.PaymentStatusValue.PAID)));
+    }
+
+    @Test
+    public void update_unpaidStatus_paymentStatusIncrementedByOne () {
+        PaymentStatus paymentStatus = new PaymentStatus(1);
+        PaymentStatus expected = new PaymentStatus(2);
+
+        assertEquals(expected, paymentStatus.update(Optional.of(PaymentStatus.PaymentStatusValue.UNPAID)));
+    }
+
+    @Test
+    public void equals() {
+        PaymentStatus paymentStatus = new PaymentStatus(1);
+
+        // same value
+        assertEquals(paymentStatus, new PaymentStatus(1));
+
+        // different value
+        assertNotEquals(paymentStatus, new PaymentStatus(2));
     }
 }

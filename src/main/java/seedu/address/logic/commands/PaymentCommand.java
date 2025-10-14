@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,7 +31,7 @@ public class PaymentCommand extends Command {
             """;
 
     private final Index targetIndex;
-    private final Optional<PaymentStatus> toSetPaymentStatus;
+    private final Optional<PaymentStatusValue> toSetPaymentStatus;
 
     /**
      * Creates a PaymentCommand for a student given a specified {@code targetIndex}.
@@ -50,7 +51,7 @@ public class PaymentCommand extends Command {
      * @param targetIndex index of student in list.
      * @param toSetPaymentStatus PaymentStatus to set.
      */
-    public PaymentCommand(Index targetIndex, Optional<PaymentStatus> toSetPaymentStatus) {
+    public PaymentCommand(Index targetIndex, Optional<PaymentStatusValue> toSetPaymentStatus) {
         this.targetIndex = targetIndex;
         this.toSetPaymentStatus = toSetPaymentStatus;
     }
@@ -65,17 +66,14 @@ public class PaymentCommand extends Command {
         }
 
         Person person = lastShownList.get(targetIndex.getZeroBased());
+        PaymentStatus updatedPaymentStatus = person.getPaymentStatus().update(toSetPaymentStatus);
 
-        if (toSetPaymentStatus.isPresent()) {
-            PaymentStatus updatedPaymentStatus = toSetPaymentStatus.get();
-
-            // Create edited person with updated payment status
+        // If payment status is changed
+        if (updatedPaymentStatus != person.getPaymentStatus()) {
             Person editedPerson = Person.withPaymentStatus(person, updatedPaymentStatus);
-
             model.setPerson(person, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            return new CommandResult(String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                    editedPerson.getName(), editedPerson.getPaymentStatus()));
+            person = editedPerson;
         }
 
         return new CommandResult(String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,

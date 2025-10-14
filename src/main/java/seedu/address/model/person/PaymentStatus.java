@@ -7,27 +7,46 @@ import java.util.Optional;
 
 /**
  * Represents a Person's payment status.
- * Guarantees: immutable; is  valid as declared in {@link #isValidPaymentStatus(Optional)}
+ * Guarantees: immutable; value is either {@code PAID} or {@code UNPAID},
+ * and must be valid as checked by {@link #isValidPaymentStatus(Optional)}.
  */
-public enum PaymentStatus {
-    PAID, UNPAID;
+public class PaymentStatus {
+
+    /**
+     * Enumerates the possible values of a person's payment status.
+     * A person is either marked as {@code PAID} or {@code UNPAID}.
+     */
+    public enum PaymentStatusValue {
+        PAID, UNPAID;
+
+        @Override
+        public String toString() {
+            return this == PAID ? "paid" : "unpaid";
+        }
+    }
 
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
 
+    private final int outstandingLessonPayments;
+
+    public PaymentStatus(int outstandingLessonPayments) {
+        this.outstandingLessonPayments = outstandingLessonPayments;
+    }
+
     /**
      * Converts an Optional&lt;String&gt; into an PaymentStatus.
      */
-    public static Optional<PaymentStatus> fromOptionalString(Optional<String> optionalString) {
+    public static Optional<PaymentStatusValue> fromOptionalString(Optional<String> optionalString) {
         requireNonNull(optionalString);
         checkArgument(isValidPaymentStatus(optionalString), MESSAGE_CONSTRAINTS);
 
         String status = optionalString.get().trim().toLowerCase();
         switch (status) {
         case "paid":
-            return Optional.of(PaymentStatus.PAID);
+            return Optional.of(PaymentStatusValue.PAID);
         case "unpaid":
-            return Optional.of(PaymentStatus.UNPAID);
+            return Optional.of(PaymentStatusValue.UNPAID);
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
@@ -45,8 +64,61 @@ public enum PaymentStatus {
         return str.equals("paid") || str.equals("unpaid");
     }
 
+    /**
+     * Returns a new {@code PaymentStatus} updated with the given {@code newStatus} value.
+     * Guarantees: immutable;
+     * @param newStatus {@code newStatus} value determines PaymentStatus action to perform.
+     * @return A new {@code PaymentStatus} if {@code PaymentStatusValue} provided,
+     *     else returns same {@code PaymentStatusValue}
+     */
+    public PaymentStatus update(Optional<PaymentStatusValue> newStatus) {
+        requireNonNull(newStatus);
+
+        if (newStatus.isEmpty()) {
+            return this;
+        }
+
+        return switch (newStatus.get()) {
+        case PAID -> this.paid();
+        case UNPAID -> this.unpaid();
+        };
+    }
+
+    private PaymentStatus paid() {
+        return new PaymentStatus(outstandingLessonPayments - 1);
+    }
+
+    private PaymentStatus unpaid() {
+        return new PaymentStatus(outstandingLessonPayments + 1);
+    }
+
+    public int getOutstandingLessonPayments() {
+        return this.outstandingLessonPayments;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof PaymentStatus)) {
+            return false;
+        }
+
+        PaymentStatus otherPaymentStatus = (PaymentStatus) other;
+        return this.getOutstandingLessonPayments() == otherPaymentStatus.getOutstandingLessonPayments();
+    }
+
     @Override
     public String toString() {
-        return this == PAID ? "paid" : "unpaid";
+        if (outstandingLessonPayments == 0) {
+            return "All lessons have been paid";
+        } else if (outstandingLessonPayments <= 0) {
+            return "Overpaid lessons = " + outstandingLessonPayments;
+        } else {
+            return "Unpaid lessons = " + outstandingLessonPayments;
+        }
     }
 }

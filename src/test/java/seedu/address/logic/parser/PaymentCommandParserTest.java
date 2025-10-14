@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.PaymentCommand;
-import seedu.address.model.person.PaymentStatus;
+import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 
 import java.util.Optional;
 
@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 public class PaymentCommandParserTest {
 
-    private PaymentCommandParser parser = new PaymentCommandParser();
+    private final PaymentCommandParser parser = new PaymentCommandParser();
 
     @Test
     public void parse_validIndexWithoutStatus_returnsPaymentCommand() {
@@ -42,10 +42,10 @@ public class PaymentCommandParserTest {
     @Test
     public void parse_validIndexWithStatus_returnsPaymentCommand() {
         // paid and unpaid statuses
-        PaymentCommand paidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatus.PAID));
+        PaymentCommand paidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatusValue.PAID));
         assertParseSuccess(parser, "1 s/paid", paidStatus);
 
-        PaymentCommand unpaidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatus.UNPAID));
+        PaymentCommand unpaidStatus = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatusValue.UNPAID));
         assertParseSuccess(parser, "1 s/unpaid", unpaidStatus);
 
         // multiple whitespace between keywords

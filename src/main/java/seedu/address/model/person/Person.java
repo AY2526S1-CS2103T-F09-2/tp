@@ -34,7 +34,8 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.paymentStatus = PaymentStatus.UNPAID;
+        // Start with no outstanding lesson payments for now
+        this.paymentStatus = new PaymentStatus(0);
     }
 
     /**
