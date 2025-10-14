@@ -130,7 +130,7 @@ Examples:
 
 ### Locating persons by tag: `searchtag`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons whose tags contain any of the given keywords.
 
 Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
@@ -143,7 +143,7 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `searchtag chemistry` returns all persons tagged with `chemistry`
-* `searchtag phy chem` returns all persons with tags containing `phy`(e.g.`physics`) or `chem` (e.g.`chemistry`)
+* `searchtag fri col` returns all persons with tags containing `fri`(e.g. `friends`) or `col` (e.g. `colleagues`)
   ![result for 'searchtag fri col'](images/searchtagFriCol.png)
 
 ### Deleting a person : `delete`
