@@ -27,7 +27,7 @@ public class AddStudentCommandTest {
 
         assertEquals(String.format(AddStudentCommand.MESSAGE_SUCCESS, Messages.format(validStudent)),
                 commandResult.getFeedbackToUser());
-  
+
     }
 
     @Test

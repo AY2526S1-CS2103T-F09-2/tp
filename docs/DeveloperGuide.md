@@ -264,7 +264,7 @@ _{Explain here how the data archiving feature will be implemented}_
 
 * has a need to manage a significant number of student/parent contacts
 * has a need to keep track of student's subjects
-* has to keep track of student's weekly meeting time 
+* has to keep track of student's weekly meeting time
 * prefer desktop apps over other types
 * can type fast
 * prefers typing to mouse interactions
@@ -325,7 +325,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 2a1. StudentConnect shows an error message.
 
         Use case resumes at step 2.
-    
+
   Use case ends.
 
 
@@ -404,7 +404,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     * 2a.  StudentConnect throws an error.
 
-      
+
         Use case ends.
 
 ### Non-Functional Requirements
