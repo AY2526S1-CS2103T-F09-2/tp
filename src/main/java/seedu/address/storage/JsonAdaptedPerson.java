@@ -19,18 +19,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-
 /**
  * Jackson-friendly version of {@link Person}.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "type"
-)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
-    @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "student"),
-    @JsonSubTypes.Type(value = JsonAdaptedPerson.class, name = "person")
+        @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "student"),
+        @JsonSubTypes.Type(value = JsonAdaptedPerson.class, name = "person")
 })
 class JsonAdaptedPerson {
 
@@ -41,7 +36,6 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
@@ -70,13 +64,15 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
- 
+
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -117,7 +113,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
-  
+
     }
 
 }
