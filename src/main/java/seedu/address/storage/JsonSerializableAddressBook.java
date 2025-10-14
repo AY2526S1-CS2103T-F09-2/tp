@@ -36,11 +36,14 @@ class JsonSerializableAddressBook {
     /**
      * Converts a given {@code ReadOnlyAddressBook} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created
+     *               {@code JsonSerializableAddressBook}.
      */
     public JsonSerializableAddressBook(ReadOnlyAddressBook source) {
-        persons.addAll(source.getPersonList().stream().filter(ins -> !(ins instanceof Student)).map(JsonAdaptedPerson::new).collect(Collectors.toList()));
-        Stream<Student> students = source.getPersonList().stream().filter(ins -> ins instanceof Student).map(ins -> (Student) ins);
+        persons.addAll(source.getPersonList().stream().filter(ins -> !(ins instanceof Student))
+                .map(JsonAdaptedPerson::new).collect(Collectors.toList()));
+        Stream<Student> students = source.getPersonList().stream().filter(ins -> ins instanceof Student)
+                .map(ins -> (Student) ins);
         persons.addAll(students.map(JsonAdaptedStudent::new).collect(Collectors.toList()));
     }
 
@@ -52,7 +55,7 @@ class JsonSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
         for (JsonAdaptedPerson jsonAdaptedPerson : persons) {
- 
+
             Person person = jsonAdaptedPerson.toModelType();
             if (addressBook.hasPerson(person)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
@@ -61,7 +64,5 @@ class JsonSerializableAddressBook {
         }
         return addressBook;
     }
-
-
 
 }

@@ -1,4 +1,5 @@
 package seedu.address.testutil;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,7 +22,7 @@ public class StudentBuilder {
     public static final String DEFAULT_ADDRESS = "102, College Ave West 29, #04-123";
     private static final String DEFAULT_TAG = "sec3";
     private static final String DEFUALT_LESSON = "2025-10-07 14:00 Math";
-    
+
     private Name name;
     private Phone phone;
     private Email email;
@@ -59,7 +60,5 @@ public class StudentBuilder {
     public Student build() {
         return new Student(name, phone, email, address, tags, lesson);
     }
-
-
 
 }
