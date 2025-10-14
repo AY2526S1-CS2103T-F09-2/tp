@@ -31,27 +31,28 @@ import seedu.address.model.person.Student;
 
 public class CancelLessonCommandTest {
     private Model model;
+
+    private final Student withLesson = new Student(
+            new Name("test"),
+            new Phone("12345678"),
+            new Email("test@gmail.com"),
+            new Address("123 test st"),
+            Collections.emptySet(),
+            new Lesson("Tue 3pm-5pm")
+    );
+    private final Student noLesson = new Student(
+            new Name("test"),
+            new Phone("12345678"),
+            new Email("test@gmail.com"),
+            new Address("123 test st"),
+            Collections.emptySet(),
+            Lesson.EMPTY
+    );
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
-
-    private final Student withLesson = new Student(
-                new Name("test"),
-                new Phone("12345678"),
-                new Email("test@gmail.com"),
-                new Address("123 test st"),
-                Collections.emptySet(),
-                new Lesson("Tue 3pm-5pm")
-                );
-    private final Student noLesson = new Student(
-                new Name("test"),
-                new Phone("12345678"),
-                new Email("test@gmail.com"),
-                new Address("123 test st"),
-                Collections.emptySet(),
-                Lesson.EMPTY
-                );
 
     @Test
     public void execute_filteredList_success() {

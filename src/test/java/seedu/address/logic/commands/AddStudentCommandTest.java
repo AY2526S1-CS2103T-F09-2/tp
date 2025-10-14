@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -31,13 +32,14 @@ public class AddStudentCommandTest {
     }
 
     @Test
-    public void execute_duplicateStudent_throwsCommandException() throws Exception{
+    public void execute_duplicateStudent_throwsCommandException() throws Exception {
 
         Student validStudent = new StudentBuilder().build();
         Model model = new ModelManager();
         CommandResult commandResult = new AddStudentCommand(validStudent).execute(model);
         AddStudentCommand secondTime = new AddStudentCommand(validStudent);
-        assertThrows(CommandException.class,  () -> secondTime.execute(model), AddStudentCommand.MESSAGE_DUPLICATE_STUDENT);
+        assertThrows(CommandException.class, () -> secondTime.execute(model),
+                AddStudentCommand.MESSAGE_DUPLICATE_STUDENT);
     }
 
 
