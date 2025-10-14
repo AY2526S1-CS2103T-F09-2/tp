@@ -19,6 +19,8 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
     @FXML
     private Label lessonLabel;
+    @FXML
+    private Label paymentStatusLabel;
 
 
     /**
@@ -69,6 +71,10 @@ public class PersonCard extends UiPart<Region> {
             }
         } else {
             lessonLabel.setText("");
+        }
+        //Display payment status for the person
+        if (paymentStatusLabel != null && person.getPaymentStatus() != null) {
+            paymentStatusLabel.setText("Payment: " + person.getPaymentStatus().toString());
         }
     }
 }
