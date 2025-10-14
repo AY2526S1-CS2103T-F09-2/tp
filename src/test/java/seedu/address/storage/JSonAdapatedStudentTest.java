@@ -1,4 +1,5 @@
 package seedu.address.storage;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
@@ -9,9 +10,9 @@ import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORM
 import static seedu.address.testutil.Assert.assertThrows;
 import seedu.address.testutil.StudentBuilder;
 
-public class JSonAdpatedStudentTest {
-    
-    private final Student TYPICAL_STUDENT = new StudentBuilder().build();
+public class JSonAdapatedStudentTest {
+
+    private static final Student TYPICAL_STUDENT = new StudentBuilder().build();
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
@@ -24,11 +25,11 @@ public class JSonAdpatedStudentTest {
         JsonAdaptedPerson student = new JsonAdaptedStudent(TYPICAL_STUDENT.getName().toString(),
                 TYPICAL_STUDENT.getPhone().toString(), TYPICAL_STUDENT.getEmail().toString(),
                 TYPICAL_STUDENT.getAddress().toString(), TYPICAL_STUDENT.getTags().stream()
-                .map(JsonAdaptedTag::new).toList(), null);
+                        .map(JsonAdaptedTag::new).toList(),
+                null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
- 
+
     }
-    
 
 }
