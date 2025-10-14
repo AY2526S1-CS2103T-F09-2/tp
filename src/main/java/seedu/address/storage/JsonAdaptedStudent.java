@@ -57,7 +57,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         if (lesson != null) {
             return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson));
         } else {
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, Lesson.EMPTY);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
         }
     }
 
