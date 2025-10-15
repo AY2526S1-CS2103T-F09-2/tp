@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
 import seedu.address.model.person.Name;
@@ -29,8 +29,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_LESSON + "Tuesday";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the " +
-            "address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the "
+            + "address book";
 
     private Name studentName;
     private Lesson toAdd;

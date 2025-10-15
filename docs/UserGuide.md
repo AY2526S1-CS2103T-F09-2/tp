@@ -142,6 +142,17 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Cancel a lesson : `cancelLesson INDEX`
+
+* Cancels the scheduled upcoming lesson at the specified 'INDEX'.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer**
+* This command checks if the person at the specified index is a student. If they are not, the command returns an error message. If the person is a student, the command cancels their upcoming lesson.
+
+Examples:
+* `list` followed by `cancelLesson 1` cancels the 1st person's upcoming lesson if the 1st person is a student.
+* `cancelLesson 2` returns message 'The person is not a student' if the 2nd person is not a student and does nothing to them.
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.

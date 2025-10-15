@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
 import java.util.Optional;
+
+import org.junit.jupiter.api.Test;
 
 public class PaymentStatusTest {
 
@@ -83,13 +84,13 @@ public class PaymentStatusTest {
     }
 
     @Test
-    public void update_nullPaymentStatus_throwsNullPointerException () {
-        assertThrows(NullPointerException.class,
-                () -> new PaymentStatus(1).update(null));
+    public void update_nullPaymentStatus_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () ->
+                new PaymentStatus(1).update(null));
     }
 
     @Test
-    public void update_paidStatus_paymentStatusDecrementedByOne () {
+    public void update_paidStatus_paymentStatusDecrementedByOne() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
         PaymentStatus expected = new PaymentStatus(0);
 
@@ -97,7 +98,7 @@ public class PaymentStatusTest {
     }
 
     @Test
-    public void update_unpaidStatus_paymentStatusIncrementedByOne () {
+    public void update_unpaidStatus_paymentStatusIncrementedByOne() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
         PaymentStatus expected = new PaymentStatus(2);
 
