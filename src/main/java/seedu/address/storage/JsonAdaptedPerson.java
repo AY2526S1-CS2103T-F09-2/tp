@@ -12,13 +12,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Lesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,8 +24,8 @@ import seedu.address.model.tag.Tag;
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "student"),
-        @JsonSubTypes.Type(value = JsonAdaptedPerson.class, name = "person")
+    @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "student"),
+    @JsonSubTypes.Type(value = JsonAdaptedPerson.class, name = "person")
 })
 class JsonAdaptedPerson {
 
