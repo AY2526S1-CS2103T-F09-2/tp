@@ -146,12 +146,15 @@ Examples:
 
 * Cancels the scheduled upcoming lesson at the specified 'INDEX'.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer**
-* This command checks if the person at the specified index is a student. If they are not, the command returns an error message. If the person is a student, the command cancels their upcoming lesson.
+* The index **must be a positive integer** not greater than the total number of persons in the addressbook
+* This command checks if the person at the specified index is a student. 
+* If the person is not a student, the command returns an error message. 
+* If the person is a student with a scheduled lesson, the command cancels that lesson. 
+* If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
-* `list` followed by `cancelLesson 1` cancels the 1st person's upcoming lesson if the 1st person is a student.
-* `cancelLesson 2` returns message 'The person is not a student' if the 2nd person is not a student and does nothing to them.
+* `list` followed by `cancelLesson 2` cancels the 1st person's upcoming lesson if the 2nd person is a student with a scheduled lesson.
+* `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
 
 ### Clearing all entries : `clear`
 
