@@ -1,4 +1,5 @@
 package seedu.address.testutil;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -59,7 +60,5 @@ public class StudentBuilder {
     public Student build() {
         return new Student(name, phone, email, address, tags, lesson);
     }
-
-
 
 }
