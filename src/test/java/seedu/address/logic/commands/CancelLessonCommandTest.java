@@ -10,8 +10,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.Collections;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,36 +20,19 @@ import seedu.address.model.Lesson;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
+import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class CancelLessonCommandTest {
     private Model model;
+    private final Student withLesson = new StudentBuilder().build();
+    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.EMPTY).build();
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
-
-    private final Student withLesson = new Student(
-                new Name("test"),
-                new Phone("12345678"),
-                new Email("test@gmail.com"),
-                new Address("123 test st"),
-                Collections.emptySet(),
-                new Lesson("Tue 3pm-5pm")
-                );
-    private final Student noLesson = new Student(
-                new Name("test"),
-                new Phone("12345678"),
-                new Email("test@gmail.com"),
-                new Address("123 test st"),
-                Collections.emptySet(),
-                Lesson.EMPTY
-                );
 
     @Test
     public void execute_filteredList_success() {
@@ -75,24 +56,12 @@ public class CancelLessonCommandTest {
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
                 "Tue 3pm-5pm",
-                Messages.format(new Student(
-                        withLessonShown.getName(),
-                        withLessonShown.getPhone(),
-                        withLessonShown.getEmail(),
-                        withLessonShown.getAddress(),
-                        withLessonShown.getTags(),
-                        Lesson.EMPTY)
-                )
+                Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build())
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(withLessonShown, new Student(
-                withLessonShown.getName(),
-                withLessonShown.getPhone(),
-                withLessonShown.getEmail(),
-                withLessonShown.getAddress(),
-                withLessonShown.getTags(),
-                Lesson.EMPTY));
+        expectedModel.setPerson(withLessonShown,
+                new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertEquals(1, model.getFilteredPersonList().size());
 
@@ -107,25 +76,12 @@ public class CancelLessonCommandTest {
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
-                "Tue 3pm-5pm",
-                Messages.format(new Student(
-                        withLesson.getName(),
-                        withLesson.getPhone(),
-                        withLesson.getEmail(),
-                        withLesson.getAddress(),
-                        withLesson.getTags(),
-                        Lesson.EMPTY)
-                )
+                "2025-10-07 14:00 Math",
+                Messages.format(noLesson)
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(withLesson, new Student(
-                withLesson.getName(),
-                withLesson.getPhone(),
-                withLesson.getEmail(),
-                withLesson.getAddress(),
-                withLesson.getTags(),
-                Lesson.EMPTY));
+        expectedModel.setPerson(withLesson, noLesson);
 
         assertCommandSuccess(cancelLessonCommand, model, expectedMessage, expectedModel);
     }
@@ -151,13 +107,7 @@ public class CancelLessonCommandTest {
     @Test
     public void execute_personNotStudentUnfilteredList_failure() {
         Person first = model.getFilteredPersonList().get(0);
-        Person notStudent = new Person(
-                new Name("test"),
-                new Phone("12345678"),
-                new Email("test@gmail.com"),
-                new Address("123 test st"),
-                Collections.emptySet()
-                );
+        Person notStudent = new PersonBuilder().build();
         model.setPerson(first, notStudent);
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         assertCommandFailure(cancelLessonCommand, model, CancelLessonCommand.MESSAGE_NOT_A_STUDENT);
