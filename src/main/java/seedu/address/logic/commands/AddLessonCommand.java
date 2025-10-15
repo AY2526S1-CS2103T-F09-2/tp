@@ -29,8 +29,8 @@ public class AddLessonCommand extends Command {
             + PREFIX_LESSON + "Tuesday";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the " +
-            "address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the "
+            + "address book";
 
     private Name studentName;
     private Lesson toAdd;
