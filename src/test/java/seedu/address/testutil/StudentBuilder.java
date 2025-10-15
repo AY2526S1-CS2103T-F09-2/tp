@@ -61,4 +61,14 @@ public class StudentBuilder {
         return new Student(name, phone, email, address, tags, lesson);
     }
 
+    /**
+     * builds a new student and only change the lesson field.
+     * @param newLesson the new lesson to be recorded.
+     * @return the modified StudentBuilder instance.
+     */
+    public StudentBuilder withNewLesson(Lesson newLesson) {
+        this.lesson = newLesson;
+        return this;
+    }
+
 }
