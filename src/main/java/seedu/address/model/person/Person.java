@@ -25,8 +25,10 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    private final PaymentStatus paymentStatus;
+
     /**
-     * Every field must be present and not null.
+     * Every field must be present and not null. Constructs a new person object.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
@@ -35,6 +37,21 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        // Start with no outstanding lesson payments for now
+        this.paymentStatus = new PaymentStatus(0);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, PaymentStatus paymentStatus) {
+        requireAllNonNull(name, phone, email, address, tags);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.paymentStatus = paymentStatus;
     }
 
     public Name getName() {
@@ -120,7 +137,25 @@ public class Person {
      * so temporarily added payment status method here so that payment command would work
      * Method would be moved to Student class in future
      */
-    public boolean getPaymentStatus() {
-        return false;
+    public PaymentStatus getPaymentStatus() {
+        return this.paymentStatus;
+    }
+
+    /**
+     * Creates a new {@code Person} with same fields but containing new {@code PaymentStatus}
+     *
+     * @param person Person whose fields to copy over.
+     * @param updatedPaymentStatus Payment Status to set for new person.
+     * @return New Person with updated {@code PaymentStatus}.
+     */
+    public static Person withPaymentStatus(Person person, PaymentStatus updatedPaymentStatus) {
+        return new Person(
+                person.getName(),
+                person.getPhone(),
+                person.getEmail(),
+                person.getAddress(),
+                person.getTags(),
+                updatedPaymentStatus
+        );
     }
 }
