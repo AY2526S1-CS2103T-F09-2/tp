@@ -17,6 +17,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Jason friendly version of student
+ */
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     private String lesson;
