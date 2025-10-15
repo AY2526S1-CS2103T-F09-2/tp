@@ -45,7 +45,8 @@ public class PaymentCommandTest {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PaymentStatus originalPaymentStatus = personToEdit.getPaymentStatus();
 
-        final List<PaymentStatusValue> paymentStatusValues = List.of(PaymentStatusValue.PAID, PaymentStatusValue.UNPAID);
+        final List<PaymentStatusValue> paymentStatusValues = List.of(PaymentStatusValue.PAID,
+                PaymentStatusValue.UNPAID);
 
         for (PaymentStatusValue statusValue : paymentStatusValues) {
             Optional<PaymentStatusValue> newPaymentStatus = Optional.of(statusValue);
