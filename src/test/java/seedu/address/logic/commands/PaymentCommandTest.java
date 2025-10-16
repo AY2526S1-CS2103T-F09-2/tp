@@ -88,4 +88,24 @@ public class PaymentCommandTest {
         PaymentCommand paymentCommand = new PaymentCommand(index);
         assertCommandFailure(paymentCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
+
+    @Test
+    public void toStringMethod() {
+        Index index = Index.fromOneBased(1);
+
+        // flag s/ not included
+        PaymentCommand paymentCommand = new PaymentCommand(index);
+        String expected = PaymentCommand.class.getCanonicalName()
+                + "{index=" + index + ", "
+                + "flag=null" + "}";
+        assertEquals(expected, paymentCommand.toString());
+
+        // flag s/ included
+        Optional<PaymentStatusValue> toSetPaymentStatus = Optional.of(PaymentStatusValue.UNPAID);
+        PaymentCommand paymentCommandWithFlag = new PaymentCommand(index, toSetPaymentStatus);
+        String expectedWithFlag = PaymentCommand.class.getCanonicalName()
+                + "{index=" + index + ", "
+                + "flag=" + toSetPaymentStatus.get() + "}";
+        assertEquals(expectedWithFlag, paymentCommandWithFlag.toString());
+    }
 }

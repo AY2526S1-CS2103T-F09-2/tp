@@ -134,6 +134,20 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Payment Status of a person : `payment`
+
+Displays an existing person's payment status in the address book. Optionally, can mark 1 lesson as paid or unpaid using `s/` flag.
+
+Format: `payment INDEX [optional: s/paid|unpaid]`
+
+* Check payment status of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Optionally, you may include a status flag using s/paid or s/unpaid to update the person's lesson payment status.
+* When the status is updated using s/, the system will automatically adjust the internal payment count (e.g., increment or decrement based on the change to "paid" or "unpaid").
+
+Examples:
+* `list` followed by `payment 2` displays payment status of the 2nd person in the address book.
+* `list` followed by `payment 2 s/paid` marks 1 lesson of 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
+* `list` followed by `payment 2 s/unpaid` marks 1 lesson of 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
 ### Locating persons by tag: `searchtag`
 
 Finds persons whose tags contain any of the given keywords.
@@ -170,10 +184,10 @@ Examples:
 
 * Cancels the scheduled upcoming lesson at the specified 'INDEX'.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the addressbook
-* This command checks if the person at the specified index is a student. 
-* If the person is not a student, the command returns an error message. 
-* If the person is a student with a scheduled lesson, the command cancels that lesson. 
+* The index **must be a positive integer** not greater than the total number of persons in the addressbook.
+* This command checks if the person at the specified index is a student.
+* If the person is not a student, the command returns an error message.
+* If the person is a student with a scheduled lesson, the command cancels that lesson.
 * If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
@@ -228,11 +242,12 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
+--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`
 **Help** | `help`
