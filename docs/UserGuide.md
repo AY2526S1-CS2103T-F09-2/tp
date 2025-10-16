@@ -157,7 +157,7 @@ Examples:
 * `list` followed by `addLesson n/John l/Wednesday` add John's upcoming lesson and displays it in the address book.
 * `find Betsy` followed by `addLesson n/Betsy l/Monday` adds Betsy's lesson and displays it in the address book.
 
-### Cancel a lesson : `cancelLesson`
+### Cancel a lesson : `cancelLesson INDEX`
 
 Cancels the scheduled upcoming lesson at the specified index.
 
