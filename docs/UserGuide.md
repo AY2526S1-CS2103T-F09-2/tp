@@ -73,19 +73,25 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a new student: `addstu`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have 0 or 1 address
 A person can have any number of tags (including 0)
+All other fields are compulsory
+When a student is initialised, *by default* : 
+1. the student has not paid for any lesson(refer to track for more info)
+2. the student does not have any lesson (refer to addLesson for more info)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history`
+* `addstu n/Cindy Wong p/12355677 e/12345@example.com`
 
 ### Listing all persons : `list`
 
@@ -128,6 +134,38 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Payment Status of a person : `payment`
+
+Displays an existing person's payment status in the address book. Optionally, can mark 1 lesson as paid or unpaid using `s/` flag.
+
+Format: `payment INDEX [optional: s/paid|unpaid]`
+
+* Check payment status of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Optionally, you may include a status flag using s/paid or s/unpaid to update the person's lesson payment status.
+* When the status is updated using s/, the system will automatically adjust the internal payment count (e.g., increment or decrement based on the change to "paid" or "unpaid").
+
+Examples:
+* `list` followed by `payment 2` displays payment status of the 2nd person in the address book.
+* `list` followed by `payment 2 s/paid` marks 1 lesson of 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
+* `list` followed by `payment 2 s/unpaid` marks 1 lesson of 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+### Locating persons by tag: `searchtag`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `searchtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `chem` will match `Chem`
+* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
+* Only tags are searched.
+* Partial matches are allowed. e.g. `chem` will match `chemistry`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. physics math will return all persons with either tag.
+
+Examples:
+* `searchtag chemistry` returns all persons tagged with `chemistry`
+* `searchtag fri col` returns all persons with tags containing `fri`(e.g. `friends`) or `col` (e.g. `colleagues`)
+  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -142,14 +180,26 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Add a lesson : `addLesson NAME`
+
+* Add the scheduled upcoming lesson for the specified person called 'NAME'.
+* The name refers to the name shown in the displayed person list.
+* This command checks if the person exists in the address book.
+* If the person is a student with a scheduled lesson, the command shows an error.
+* If they are a student with no scheduled lesson, the upcoming lesson will be added and displayed in the address book.
+
+Examples:
+* `list` followed by `addLesson John` add John's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson Betsy` adds Betsy's lesson and displays it in the address book.
+
 ### Cancel a lesson : `cancelLesson INDEX`
 
 * Cancels the scheduled upcoming lesson at the specified 'INDEX'.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the addressbook
-* This command checks if the person at the specified index is a student. 
-* If the person is not a student, the command returns an error message. 
-* If the person is a student with a scheduled lesson, the command cancels that lesson. 
+* The index **must be a positive integer** not greater than the total number of persons in the addressbook.
+* This command checks if the person at the specified index is a student.
+* If the person is not a student, the command returns an error message.
+* If the person is a student with a scheduled lesson, the command cancels that lesson.
 * If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
@@ -204,11 +254,12 @@ _Details coming soon ..._
 ## Command summary
 
 Action | Format, Examples
---------|------------------
+--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
+**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`
 **Help** | `help`

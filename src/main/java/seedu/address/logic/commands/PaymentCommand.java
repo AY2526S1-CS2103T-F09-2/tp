@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,8 +23,8 @@ public class PaymentCommand extends Command {
     public static final String COMMAND_WORD = "payment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of person. "
-            + "Parameters: INDEX (must be a positive integer) [s/STATUS] (STATUS must be 'paid' or 'unpaid')\n"
-            + "Example: " + COMMAND_WORD + " 1 s/ paid";
+            + "Parameters: INDEX [optional: s/paid|unpaid]\n"
+            + "Example: " + COMMAND_WORD + " 1 s/unpaid";
 
     public static final String MESSAGE_PAYMENT_STATUS_SUCCESS = """
             Name: %1$s
@@ -93,5 +94,13 @@ public class PaymentCommand extends Command {
 
         PaymentCommand otherPaymentCommand = (PaymentCommand) other;
         return targetIndex.equals(otherPaymentCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", targetIndex)
+                .add("flag", toSetPaymentStatus.orElse(null))
+                .toString();
     }
 }
