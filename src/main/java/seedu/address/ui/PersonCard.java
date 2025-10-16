@@ -22,6 +22,7 @@ public class PersonCard extends UiPart<Region> {
     private Label lessonLabel;
     @FXML
     private Label paymentStatusLabel;
+
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -43,6 +44,9 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label lessonLabel;
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */

@@ -15,21 +15,21 @@ public class Lesson {
         private EmptyLesson() {
             super("No upcoming lessons");
         }
-    } 
+    }
 
     public static final Lesson EMPTY = new EmptyLesson();
     private String lessonDate;
     private boolean isCompleted;
 
-    /** 
+    /**
     * This method creates a new Lesson object
     * @param lessonDate
     */
     public Lesson(String lessonDate) {
         this.lessonDate = lessonDate;
         this.isCompleted = false;
-    }   
-    /** 
+    }
+    /**
      * This method returns the date of the specific lesson of the student
      * @return String
      */
@@ -42,7 +42,7 @@ public class Lesson {
         return lessonDate;
     }
 
-    /** 
+    /**
      * This method returns true if the lesson is completed
      * @return boolean
      */

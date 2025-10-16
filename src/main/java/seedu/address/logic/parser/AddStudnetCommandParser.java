@@ -1,15 +1,16 @@
 package seedu.address.logic.parser;
 
-import java.util.Set;
-import java.util.stream.Stream;
-
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import seedu.address.logic.commands.AddStudentCommand;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.Set;
+import java.util.stream.Stream;
+
+import seedu.address.logic.commands.AddStudentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Lesson;
 import seedu.address.model.person.Address;
@@ -19,8 +20,11 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Parses input arguments and creates a new AddStudentCommand object
+ */
 public class AddStudnetCommandParser implements Parser<AddStudentCommand> {
-    
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
@@ -35,12 +39,12 @@ public class AddStudnetCommandParser implements Parser<AddStudentCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
-        final String DEFAULT = "N/A";
+        final String Default = "N/A";
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, DEFAULT).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, DEFAULT).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, Default).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, Default).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Student student = new Student(name, phone, email, address, tagList, Lesson.EMPTY);
@@ -48,7 +52,7 @@ public class AddStudnetCommandParser implements Parser<AddStudentCommand> {
 
     }
 
-        /**
+    /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */

@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -46,7 +45,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
-    public void setPersons(List<Person> persons) {
+    public void setPersons(List<? extends Person> persons) {
         this.persons.setPersons(persons);
     }
 
@@ -96,6 +95,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Checks if a student has a lesson.
+     * @param student
+     * @return true for having an upcoming lesson and false for not.
+     */
     public boolean hasLesson(Student student) {
         for (Person p : persons.asUnmodifiableObservableList()) {
             if (p.equals(student) && p instanceof Student) {
@@ -103,10 +107,14 @@ public class AddressBook implements ReadOnlyAddressBook {
                 return s.getNextLesson() != null && !s.getNextLesson().equals(Lesson.EMPTY);
             }
         }
-        return false;  // Student not found or no lesson
+        return false; // Student not found or no lesson
     }
 
-
+    /**
+     * Adds a new lesson to a student.
+     * @param student the student to have a new upcoming lesson
+     * @param lesson details of the lesson to be added.
+     */
     public void addLesson(Student student, Lesson lesson) {
         for (Person p : persons.asUnmodifiableObservableList()) {
             if (p.equals(student) && p instanceof Student) {
