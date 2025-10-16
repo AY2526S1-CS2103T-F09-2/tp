@@ -28,9 +28,9 @@ public class AddLessonCommand extends Command {
             + PREFIX_NAME + "John Doe "
             + PREFIX_LESSON + "Tuesday";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the "
             + "address book";
+    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
 
     private Name studentName;
     private Lesson toAdd;
@@ -40,8 +40,8 @@ public class AddLessonCommand extends Command {
      */
     public AddLessonCommand(Name name, Lesson lesson) {
         requireNonNull(name);
-        requireNonNull(lesson);
         this.studentName = name;
+        requireNonNull(lesson);
         this.toAdd = lesson;
     }
 
@@ -51,7 +51,6 @@ public class AddLessonCommand extends Command {
         // Search the full person list for matching name
         Person foundPerson = null;
         for (Person p : model.getAddressBook().getPersonList()) {
-            System.out.println("Found person: " + p.getName().fullName);
             if (p.getName().fullName.equalsIgnoreCase(studentName.fullName)) {
                 foundPerson = p;
                 break;
@@ -110,9 +109,9 @@ public class AddLessonCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("student", studentName)
-                .add("toAdd", toAdd)
-                .toString();
+        return new ToStringBuilder(this).
+                add("student", studentName).
+                add("toAdd", toAdd).
+                toString();
     }
 }
