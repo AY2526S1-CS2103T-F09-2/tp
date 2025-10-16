@@ -63,7 +63,7 @@ public class AddLessonCommand extends Command {
         // If already a Student, check for lesson
         if (foundPerson instanceof Student) {
             Student targetStudent = (Student) foundPerson;
-            if (model.hasLesson(targetStudent)) {
+            if (targetStudent.getNextLesson() != null && !targetStudent.getNextLesson().isEmpty()) {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
             model.addLesson(targetStudent, toAdd);

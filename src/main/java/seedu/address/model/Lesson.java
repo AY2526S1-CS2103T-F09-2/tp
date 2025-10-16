@@ -15,6 +15,17 @@ public class Lesson {
         private EmptyLesson() {
             super("No upcoming lessons");
         }
+
+        @Override
+        public boolean isEmpty() {
+            return true;
+        }
+    }
+    /**
+    * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
+    */
+    public boolean isEmpty() {
+        return "No upcoming lessons".equals(lessonDate) || lessonDate == null || lessonDate.trim().isEmpty();
     }
 
     public static final Lesson EMPTY = new EmptyLesson();
