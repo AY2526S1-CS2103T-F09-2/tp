@@ -142,21 +142,27 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-### Add a lesson : `addLesson NAME`
+### Add a lesson : `addLesson`
 
-* Add the scheduled upcoming lesson for the specified person called 'NAME'.
+Add the scheduled upcoming lesson for the specified person.
+
+Format: `addLesson n/NAME l/LESSON_DATE`
+
 * The name refers to the name shown in the displayed person list.
 * This command checks if the person exists in the address book.
 * If the person is a student with a scheduled lesson, the command shows an error.
 * If they are a student with no scheduled lesson, the upcoming lesson will be added and displayed in the address book.
 
 Examples:
-* `list` followed by `addLesson John` add John's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson Betsy` adds Betsy's lesson and displays it in the address book.
+* `list` followed by `addLesson n/John l/Wednesday` add John's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson n/Betsy l/Monday` adds Betsy's lesson and displays it in the address book.
 
-### Cancel a lesson : `cancelLesson INDEX`
+### Cancel a lesson : `cancelLesson`
 
-* Cancels the scheduled upcoming lesson at the specified 'INDEX'.
+Cancels the scheduled upcoming lesson at the specified index.
+
+Format: `cancelLesson INDEX`
+
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** not greater than the total number of persons in the addressbook
 * This command checks if the person at the specified index is a student. 
