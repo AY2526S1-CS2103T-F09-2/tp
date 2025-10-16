@@ -180,6 +180,18 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
+### Add a lesson : `addLesson NAME`
+
+* Add the scheduled upcoming lesson for the specified person called 'NAME'.
+* The name refers to the name shown in the displayed person list.
+* This command checks if the person exists in the address book.
+* If the person is a student with a scheduled lesson, the command shows an error.
+* If they are a student with no scheduled lesson, the upcoming lesson will be added and displayed in the address book.
+
+Examples:
+* `list` followed by `addLesson John` add John's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson Betsy` adds Betsy's lesson and displays it in the address book.
+
 ### Cancel a lesson : `cancelLesson INDEX`
 
 * Cancels the scheduled upcoming lesson at the specified 'INDEX'.
