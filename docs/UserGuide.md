@@ -128,6 +128,17 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Payment Status of a person : `payment`
+
+Displays an existing person's payment status in the address book.
+
+Format: `payment INDEX [optional: s/paid|unpaid]`
+
+* Check payment status of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Optionally, you may include a status flag using s/paid or s/unpaid to update the person's lesson payment status.
+* When the status is updated using s/, the system will automatically adjust the internal payment count (e.g., increment or decrement based on the change to "paid" or "unpaid").
+
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
@@ -189,12 +200,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples
---------|------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List** | `list`
-**Help** | `help`
+Action | Format, Examples                                                                                                                                                      
+--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
+**Clear** | `clear`                                                                                                                                                               
+**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
+**List** | `list`                                                                                                                                                                
+**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`                                                                                                
+**Help** | `help`                                                                                                                                                                
