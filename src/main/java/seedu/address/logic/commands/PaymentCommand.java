@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -93,5 +94,13 @@ public class PaymentCommand extends Command {
 
         PaymentCommand otherPaymentCommand = (PaymentCommand) other;
         return targetIndex.equals(otherPaymentCommand.targetIndex);
+    }
+
+    @Override
+    public String toString() {
+        return new ToStringBuilder(this)
+                .add("index", targetIndex)
+                .add("flag", toSetPaymentStatus.orElse(null))
+                .toString();
     }
 }
