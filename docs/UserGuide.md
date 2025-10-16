@@ -128,6 +128,24 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
+### Locating persons by tag: `searchtag`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `searchtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `chem` will match `Chem`
+* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
+* Only tags are searched.
+* Partial matches are allowed. e.g. `chem` will match `chemistry`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. physics math will return all persons with either tag.
+
+Examples:
+* `searchtag chemistry` returns all persons tagged with `chemistry`
+* `searchtag fri col` returns all persons with tags containing `fri`(e.g. `friends`) or `col` (e.g. `colleagues`)
+  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+
 ### Deleting a person : `delete`
 
 Deletes the specified person from the address book.
