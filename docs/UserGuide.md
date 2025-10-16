@@ -157,9 +157,9 @@ Examples:
 
 * Cancels the scheduled upcoming lesson at the specified 'INDEX'.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the addressbook
-* This command checks if the person at the specified index is a student. 
-* If the person is not a student, the command returns an error message. 
+* The index **must be a positive integer** not greater than the total number of persons in the addressbook.
+* This command checks if the person at the specified index is a student.
+* If the person is not a student, the command returns an error message.
 * If the person is a student with a scheduled lesson, the command cancels that lesson. 
 * If they are a student with no scheduled lesson, an error message will be displayed.
 
@@ -216,11 +216,11 @@ _Details coming soon ..._
 
 Action | Format, Examples                                                                                                                                                      
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague` 
-**Clear** | `clear`                                                                                                                                                               
-**Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                   
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                           
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                            
-**List** | `list`                                                                                                                                                                
-**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`                                                                                                
-**Help** | `help`                                                                                                                                                                
+**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Clear** | `clear`
+**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**List** | `list`
+**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`
+**Help** | `help`
