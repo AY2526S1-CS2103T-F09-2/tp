@@ -160,7 +160,7 @@ Examples:
 * The index **must be a positive integer** not greater than the total number of persons in the addressbook.
 * This command checks if the person at the specified index is a student.
 * If the person is not a student, the command returns an error message.
-* If the person is a student with a scheduled lesson, the command cancels that lesson. 
+* If the person is a student with a scheduled lesson, the command cancels that lesson.
 * If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
@@ -214,7 +214,7 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action | Format, Examples                                                                                                                                                      
+Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
