@@ -73,19 +73,25 @@ Shows a message explaining how to access the help page.
 Format: `help`
 
 
-### Adding a person: `add`
+### Adding a new student: `addstu`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+A person can have 0 or 1 address
 A person can have any number of tags (including 0)
+All other fields are compulsory
+When a student is initialised, *by default* : 
+1. the student has not paid for any lesson(refer to track for more info)
+2. the student does not have any lesson (refer to addLesson for more info)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history`
+* `addstu n/Cindy Wong p/12355677 e/12345@example.com`
 
 ### Listing all persons : `list`
 
@@ -142,6 +148,23 @@ Examples:
 * `list` followed by `payment 2` displays payment status of the 2nd person in the address book.
 * `list` followed by `payment 2 s/paid` marks 1 lesson of 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
 * `list` followed by `payment 2 s/unpaid` marks 1 lesson of 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+### Locating persons by tag: `searchtag`
+
+Finds persons whose tags contain any of the given keywords.
+
+Format: `searchtag KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `chem` will match `Chem`
+* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
+* Only tags are searched.
+* Partial matches are allowed. e.g. `chem` will match `chemistry`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. physics math will return all persons with either tag.
+
+Examples:
+* `searchtag chemistry` returns all persons tagged with `chemistry`
+* `searchtag fri col` returns all persons with tags containing `fri`(e.g. `friends`) or `col` (e.g. `colleagues`)
+  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
 
 ### Deleting a person : `delete`
 

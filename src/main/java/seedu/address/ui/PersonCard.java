@@ -17,6 +17,11 @@ import seedu.address.model.person.Student;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    public final Person person;
+    @FXML
+    private Label lessonLabel;
+    @FXML
+    private Label paymentStatusLabel;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -25,9 +30,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Person person;
-
     @FXML
     private HBox cardPane;
     @FXML
@@ -42,8 +44,7 @@ public class PersonCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
-    @FXML
-    private Label lessonLabel;
+
 
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
@@ -68,6 +69,10 @@ public class PersonCard extends UiPart<Region> {
             }
         } else {
             lessonLabel.setText("");
+        }
+        //Display payment status for the person
+        if (paymentStatusLabel != null && person.getPaymentStatus() != null) {
+            paymentStatusLabel.setText("Payment: " + person.getPaymentStatus().toString());
         }
     }
 }
