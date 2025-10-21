@@ -9,10 +9,11 @@ import java.time.format.DateTimeParseException;
  */
 public class Lesson {
 
-    private static Lesson empty;
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String EMPTY_MESSAGE = "No lessons yet";
 
+    private static Lesson empty;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
+    
     private final LocalDate lessonDate;
 
     /**

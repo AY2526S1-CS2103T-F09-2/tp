@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class RecurringLesson extends Lesson {
 
     private static final int MAX_INTERVAL = 365;
-    int intervalDays;
+    private final int intervalDays;
 
     /**
      * This method creates a new ReuccringLesson object
@@ -17,6 +17,13 @@ public class RecurringLesson extends Lesson {
     public RecurringLesson(String lessonDateString, int intervalDays) {
         super(lessonDateString);
         this.intervalDays = intervalDays;
+    }
+
+    /**
+     * Returns the interval day for the recurring lesson
+     */
+    public int getIntervalDays() {
+        return intervalDays;
     }
 
     /**
