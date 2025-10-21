@@ -96,6 +96,9 @@ public class PaymentStatus {
         return this.outstandingLessonPayments;
     }
 
+    /**
+     * Check if string value can be parsed as an integer so that {@code PaymentStatus} can be instantiated.
+     */
     public static boolean isValidString(String paymentStatus) {
         try {
             Integer.parseInt(paymentStatus);
