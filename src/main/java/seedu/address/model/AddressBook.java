@@ -1,8 +1,7 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
@@ -104,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         for (Person p : persons.asUnmodifiableObservableList()) {
             if (p.equals(student) && p instanceof Student) {
                 Student s = (Student) p;
-                return s.getNextLesson() != null && !s.getNextLesson().equals(Lesson.EMPTY);
+                return s.getNextLesson() != null && !s.getNextLesson().equals(Lesson.getEmpty());
             }
         }
         return false; // Student not found or no lesson

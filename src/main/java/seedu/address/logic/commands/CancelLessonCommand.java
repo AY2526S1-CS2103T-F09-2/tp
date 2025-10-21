@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.List;
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -11,6 +9,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -55,7 +54,7 @@ public class CancelLessonCommand extends Command {
 
         Lesson next = student.getNextLesson();
 
-        if (next == null || next == Lesson.EMPTY) {
+        if (next == null || next == Lesson.getEmpty()) {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
@@ -65,7 +64,7 @@ public class CancelLessonCommand extends Command {
                 student.getEmail(),
                 student.getAddress(),
                 student.getTags(),
-                Lesson.EMPTY);
+                Lesson.getEmpty());
 
         model.setPerson(student, edited);
 

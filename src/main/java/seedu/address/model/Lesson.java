@@ -9,9 +9,8 @@ import java.time.format.DateTimeParseException;
  */
 public class Lesson {
 
-    public static final Lesson EMPTY = new EmptyLesson();
-
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    private static Lesson EMPTY;
+    private static final String DATE_FORMAT = "yyyy-MM-dd";
 
     private final LocalDateTime lessonDate;
 
@@ -20,12 +19,23 @@ public class Lesson {
      * @param lessonDate
      */
     public Lesson(String lessonDateString) {
-        this.lessonDate = LocalDateTime.parse(lessonDateString, DATE_FORMATTER);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        this.lessonDate = LocalDateTime.parse(lessonDateString, formatter);
     }
 
     public Lesson(LocalDateTime lessonDate) {
         this.lessonDate = lessonDate;
     }
+    /**
+     * Returns an empty lesson
+     * @return
+     */
+    public static Lesson getEmpty() {
+        if (Lesson.EMPTY == null) {
+            Lesson.EMPTY = new EmptyLesson();
+        }
+        return EMPTY;
+    } 
 
     /**
      * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
@@ -63,7 +73,7 @@ public class Lesson {
     public Lesson getNextLesson() {
         return EMPTY;
     }
-    
+
     /**
      * A util function that checks whether the input date is a valid input
      * @param input
@@ -71,7 +81,8 @@ public class Lesson {
      */
     public static boolean isValidLessonDate(String input) {
         try {
-            LocalDateTime.parse(input, DATE_FORMATTER);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+            LocalDateTime.parse(input, formatter);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -92,5 +103,11 @@ public class Lesson {
         public boolean isEmpty() {
             return true;
         }
+
+        @Override
+        public boolean isOutdated() {
+            return false;
+        }
+        
     }
 }
