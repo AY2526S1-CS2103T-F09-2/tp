@@ -26,6 +26,7 @@ public class Lesson {
     public Lesson(LocalDate lessonDate) {
         this.lessonDate = lessonDate;
     }
+
     /**
      * Returns an empty lesson
      * @return
@@ -35,7 +36,7 @@ public class Lesson {
             Lesson.EMPTY = new EmptyLesson();
         }
         return EMPTY;
-    } 
+    }
 
     /**
      * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
@@ -115,6 +116,5 @@ public class Lesson {
         public String toString() {
             return EMPTY_MESSAGE;
         }
-
     }
 }
