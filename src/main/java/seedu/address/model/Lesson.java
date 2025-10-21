@@ -1,5 +1,8 @@
 package seedu.address.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a Lesson in the address book.
  */
@@ -7,45 +10,55 @@ public class Lesson {
 
     public static final Lesson EMPTY = new EmptyLesson();
 
-    private String lessonDate;
-    private boolean isCompleted;
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    private final LocalDateTime lessonDate;
 
     /**
      * This method creates a new Lesson object
      * @param lessonDate
      */
-    public Lesson(String lessonDate) {
-        this.lessonDate = lessonDate;
-        this.isCompleted = false;
+    public Lesson(String lessonDateString) {
+        this.lessonDate = LocalDateTime.parse(lessonDateString, DATE_FORMATTER);
     }
 
     /**
     * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
     */
     public boolean isEmpty() {
-        return "No upcoming lessons".equals(lessonDate) || lessonDate == null || lessonDate.trim().isEmpty();
+        return false;
+    }
+
+    /**
+     * This method returns the string representation of the date of the specific lesson of the student
+     * @return String
+     */
+    public String getLessonDate() {
+        return lessonDate.toString();
     }
 
     /**
      * This method returns the date of the specific lesson of the student
      * @return String
      */
-    public String getLessonDate() {
+    public LocalDateTime getLessonDateTime() {
         return lessonDate;
     }
 
     @Override
     public String toString() {
-        return lessonDate;
+        return lessonDate.toString();
     }
 
-    /**
-     * This method returns true if the lesson is completed
-     * @return boolean
-     */
-    public boolean isCompleted() {
-        return isCompleted;
+    public boolean isOutdated() {
+        return lessonDate.isBefore(LocalDateTime.now());
     }
+
+    public Lesson getNextLesson() {
+        return EMPTY;
+    }
+
+
 
     /**
      * Represents an empty Lesson.
