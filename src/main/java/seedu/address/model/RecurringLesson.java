@@ -19,11 +19,19 @@ public class RecurringLesson extends Lesson {
         this.intervalDays = intervalDays;
     }
 
+    /**
+     * Initialise a new recurring lesson with lesson date
+     * @param lessonDate
+     * @param intervalDays
+     */
     public RecurringLesson(LocalDate lessonDate, int intervalDays) {
         super(lessonDate);
         this.intervalDays = intervalDays;
     }
 
+    /**
+     * Output the next lesson after the previous becomes obsolete
+     */
     @Override
     public Lesson getNextLesson() {
         LocalDate nextLessonDate = getLessonDateTime().plusDays(intervalDays);
@@ -35,6 +43,11 @@ public class RecurringLesson extends Lesson {
         return super.toString() + " (every " + intervalDays + " days)";
     }
 
+    /**
+     * Checks whether a lesson interval is valid
+     * @param input the String input of the interval
+     * @return whether the lesson is valid
+     */
     public static boolean isValidInterval(String input) {
         try {
             int interval = Integer.parseInt(input);

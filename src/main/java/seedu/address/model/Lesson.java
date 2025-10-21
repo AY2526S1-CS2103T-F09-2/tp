@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Lesson {
 
-    private static Lesson EMPTY;
+    private static Lesson empty;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     public static final String EMPTY_MESSAGE = "No lessons yet";
 
@@ -32,10 +32,10 @@ public class Lesson {
      * @return
      */
     public static Lesson getEmpty() {
-        if (Lesson.EMPTY == null) {
-            Lesson.EMPTY = new EmptyLesson();
+        if (Lesson.empty == null) {
+            Lesson.empty = new EmptyLesson();
         }
-        return EMPTY;
+        return empty;
     }
 
     /**
