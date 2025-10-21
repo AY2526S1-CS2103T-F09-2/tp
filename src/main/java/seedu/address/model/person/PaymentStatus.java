@@ -96,6 +96,15 @@ public class PaymentStatus {
         return this.outstandingLessonPayments;
     }
 
+    public static boolean isValidString(String paymentStatus) {
+        try {
+            Integer.parseInt(paymentStatus);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -116,9 +125,9 @@ public class PaymentStatus {
         if (outstandingLessonPayments == 0) {
             return "All lessons have been paid";
         } else if (outstandingLessonPayments <= 0) {
-            return "Overpaid lessons = " + outstandingLessonPayments;
+            return outstandingLessonPayments + " overpaid lessons";
         } else {
-            return "Unpaid lessons = " + outstandingLessonPayments;
+            return outstandingLessonPayments + " unpaid lessons";
         }
     }
 }

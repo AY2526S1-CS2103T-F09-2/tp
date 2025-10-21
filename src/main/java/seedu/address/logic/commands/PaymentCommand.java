@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
  * Displays a person's payment status using it's displayed index from the address book.
@@ -66,19 +67,24 @@ public class PaymentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // Convert Person to Student
         Person person = lastShownList.get(targetIndex.getZeroBased());
-        PaymentStatus updatedPaymentStatus = person.getPaymentStatus().update(toSetPaymentStatus);
+        if (!(person instanceof Student student)) {
+            throw new CommandException("Please add a lesson to student before running this command");
+        }
+
+        PaymentStatus updatedPaymentStatus = student.getPaymentStatus().update(toSetPaymentStatus);
 
         // If payment status is changed
-        if (updatedPaymentStatus != person.getPaymentStatus()) {
-            Person editedPerson = Person.withPaymentStatus(person, updatedPaymentStatus);
-            model.setPerson(person, editedPerson);
+        if (updatedPaymentStatus != student.getPaymentStatus()) {
+            Student editedStudent = student.updatePaymentStatus(student, updatedPaymentStatus);
+            model.setPerson(student, editedStudent);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            person = editedPerson;
+            student = editedStudent;
         }
 
         return new CommandResult(String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                person.getName(), person.getPaymentStatus()));
+                student.getName(), student.getPaymentStatus()));
     }
 
     @Override

@@ -60,19 +60,20 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person instanceof Student) {
-            Lesson lesson = ((Student) person).getNextLesson();
+        if (person instanceof Student student) {
+            Lesson lesson = student.getNextLesson();
             if (lesson != null && !lesson.equals(Lesson.EMPTY)) {
                 lessonLabel.setText("Lesson: " + lesson.getLessonDate());
             } else {
                 lessonLabel.setText("Lesson: None");
             }
+
+            //Display payment status for the person
+            if (paymentStatusLabel != null && student.getPaymentStatus() != null) {
+                paymentStatusLabel.setText("Payment: " + student.getPaymentStatus().toString());
+            }
         } else {
             lessonLabel.setText("");
-        }
-        //Display payment status for the person
-        if (paymentStatusLabel != null && person.getPaymentStatus() != null) {
-            paymentStatusLabel.setText("Payment: " + person.getPaymentStatus().toString());
         }
     }
 }
