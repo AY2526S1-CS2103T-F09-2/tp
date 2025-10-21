@@ -16,6 +16,7 @@ public class Lesson {
 
     /**
      * This method creates a new Lesson object
+     * 
      * @param lessonDate
      */
     public Lesson(String lessonDateString) {
@@ -23,14 +24,16 @@ public class Lesson {
     }
 
     /**
-    * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
-    */
+     * Returns true if this lesson is empty (i.e., Lesson.EMPTY)
+     */
     public boolean isEmpty() {
         return false;
     }
 
     /**
-     * This method returns the string representation of the date of the specific lesson of the student
+     * This method returns the string representation of the date of the specific
+     * lesson of the student
+     * 
      * @return String
      */
     public String getLessonDate() {
@@ -39,6 +42,7 @@ public class Lesson {
 
     /**
      * This method returns the date of the specific lesson of the student
+     * 
      * @return String
      */
     public LocalDateTime getLessonDateTime() {
@@ -58,8 +62,6 @@ public class Lesson {
         return EMPTY;
     }
 
-
-
     /**
      * Represents an empty Lesson.
      * This is used when a Student has no upcoming lessons.
@@ -76,4 +78,3 @@ public class Lesson {
         }
     }
 }
-
