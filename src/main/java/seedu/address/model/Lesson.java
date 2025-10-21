@@ -16,11 +16,14 @@ public class Lesson {
 
     /**
      * This method creates a new Lesson object
-     * 
      * @param lessonDate
      */
     public Lesson(String lessonDateString) {
         this.lessonDate = LocalDateTime.parse(lessonDateString, DATE_FORMATTER);
+    }
+
+    public Lesson(LocalDateTime lessonDate) {
+        this.lessonDate = lessonDate;
     }
 
     /**
@@ -33,7 +36,6 @@ public class Lesson {
     /**
      * This method returns the string representation of the date of the specific
      * lesson of the student
-     * 
      * @return String
      */
     public String getLessonDate() {
@@ -42,7 +44,6 @@ public class Lesson {
 
     /**
      * This method returns the date of the specific lesson of the student
-     * 
      * @return String
      */
     public LocalDateTime getLessonDateTime() {

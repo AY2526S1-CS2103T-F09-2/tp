@@ -11,11 +11,15 @@ public class ReuccringLesson extends Lesson {
 
     /**
      * This method creates a new ReuccringLesson object
-     * 
      * @param lessonDate
      */
     public ReuccringLesson(String lessonDateString, int intervalDays) {
         super(lessonDateString);
+        this.intervalDays = intervalDays;
+    }
+
+    public ReuccringLesson(LocalDateTime lessonDate, int intervalDays) {
+        super(lessonDate);
         this.intervalDays = intervalDays;
     }
 
