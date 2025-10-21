@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -11,19 +11,19 @@ public class Lesson {
 
     private static Lesson EMPTY;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+    public static final String EMPTY_MESSAGE = "No lessons yet";
 
-    private final LocalDateTime lessonDate;
+    private final LocalDate lessonDate;
 
     /**
      * This method creates a new Lesson object
      * @param lessonDate
      */
     public Lesson(String lessonDateString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-        this.lessonDate = LocalDateTime.parse(lessonDateString, formatter);
+        this.lessonDate = LocalDate.parse(lessonDateString);
     }
 
-    public Lesson(LocalDateTime lessonDate) {
+    public Lesson(LocalDate lessonDate) {
         this.lessonDate = lessonDate;
     }
     /**
@@ -48,30 +48,33 @@ public class Lesson {
      * This method returns the string representation of the date of the specific
      * lesson of the student
      * @return String
+     * @deprecated for removal
      */
+    @Deprecated
     public String getLessonDate() {
         return lessonDate.toString();
     }
 
     /**
      * This method returns the date of the specific lesson of the student
-     * @return String
+     * @return LocalDate object of the lesson
      */
-    public LocalDateTime getLessonDateTime() {
+    public LocalDate getLessonDateTime() {
         return lessonDate;
     }
 
     @Override
     public String toString() {
-        return lessonDate.toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        return lessonDate.format(formatter);
     }
 
     public boolean isOutdated() {
-        return lessonDate.isBefore(LocalDateTime.now());
+        return lessonDate.isBefore(LocalDate.now());
     }
 
     public Lesson getNextLesson() {
-        return EMPTY;
+        return getEmpty();
     }
 
     /**
@@ -81,12 +84,11 @@ public class Lesson {
      */
     public static boolean isValidLessonDate(String input) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
-            LocalDateTime.parse(input, formatter);
+            LocalDate toConvert = LocalDate.parse(input);
+            return toConvert.isAfter(LocalDate.now()) || toConvert.equals(LocalDate.now());
         } catch (DateTimeParseException e) {
             return false;
         }
-        return true;
     }
 
     /**
@@ -96,7 +98,7 @@ public class Lesson {
      */
     private static final class EmptyLesson extends Lesson {
         private EmptyLesson() {
-            super("No upcoming lessons");
+            super(LocalDate.now());
         }
 
         @Override
@@ -108,6 +110,11 @@ public class Lesson {
         public boolean isOutdated() {
             return false;
         }
-        
+
+        @Override
+        public String toString() {
+            return EMPTY_MESSAGE;
+        }
+
     }
 }

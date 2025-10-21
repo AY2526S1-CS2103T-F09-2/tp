@@ -1,11 +1,11 @@
 package seedu.address.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 /**
- * Represents a ReuccringLesson in the address book.
+ * Represents a RecurringLesson in the address book.
  */
-public class ReuccringLesson extends Lesson {
+public class RecurringLesson extends Lesson {
 
     private static final int MAX_INTERVAL = 365;
     int intervalDays;
@@ -14,20 +14,20 @@ public class ReuccringLesson extends Lesson {
      * This method creates a new ReuccringLesson object
      * @param lessonDate
      */
-    public ReuccringLesson(String lessonDateString, int intervalDays) {
+    public RecurringLesson(String lessonDateString, int intervalDays) {
         super(lessonDateString);
         this.intervalDays = intervalDays;
     }
 
-    public ReuccringLesson(LocalDateTime lessonDate, int intervalDays) {
+    public RecurringLesson(LocalDate lessonDate, int intervalDays) {
         super(lessonDate);
         this.intervalDays = intervalDays;
     }
 
     @Override
     public Lesson getNextLesson() {
-        LocalDateTime nextLessonDate = getLessonDateTime().plusDays(intervalDays);
-        return new ReuccringLesson(nextLessonDate.toLocalDate().toString(), intervalDays);
+        LocalDate nextLessonDate = getLessonDateTime().plusDays(intervalDays);
+        return new RecurringLesson(nextLessonDate, intervalDays);
     }
 
     @Override
