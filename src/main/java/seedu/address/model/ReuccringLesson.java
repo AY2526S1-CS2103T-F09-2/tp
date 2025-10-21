@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
  */
 public class ReuccringLesson extends Lesson {
 
+    private static final int MAX_INTERVAL = 365;
     int intervalDays;
 
     /**
@@ -32,5 +33,14 @@ public class ReuccringLesson extends Lesson {
     @Override
     public String toString() {
         return super.toString() + " (every " + intervalDays + " days)";
+    }
+
+    public static boolean isValidInterval(String input) {
+        try {
+            int interval = Integer.parseInt(input);
+            return interval > 0 && interval < MAX_INTERVAL;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }

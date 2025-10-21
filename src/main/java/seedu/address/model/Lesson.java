@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a Lesson in the address book.
@@ -61,6 +62,20 @@ public class Lesson {
 
     public Lesson getNextLesson() {
         return EMPTY;
+    }
+    
+    /**
+     * A util function that checks whether the input date is a valid input
+     * @param input
+     * @return whether the input can be accepted by the format
+     */
+    public static boolean isValidLessonDate(String input) {
+        try {
+            LocalDateTime.parse(input, DATE_FORMATTER);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
