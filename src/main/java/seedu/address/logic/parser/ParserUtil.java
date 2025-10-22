@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -120,5 +121,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String education} into an {@code EducationLevel}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code education} is invalid.
+     */
+    public static EducationLevel parseEducation(String education) throws ParseException {
+        requireNonNull(education);
+        String trimmed = education.trim();
+        if (trimmed.isEmpty()) {
+            return EducationLevel.UNKNOWN;
+        }
+        return EducationLevel.fromString(trimmed);
     }
 }
