@@ -119,7 +119,7 @@ class JsonAdaptedPerson {
         final Set<Tag> modelTags = new HashSet<>(personTags);
         EducationLevel modelEdu = EducationLevel.UNKNOWN;
         if (educationLevel != null) {
-            modelEdu = EducationLevel.fromString(educationLevel);
+            modelEdu = EducationLevel.valueOf(educationLevel);
         }
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, new PaymentStatus(0), modelEdu);
     }
