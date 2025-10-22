@@ -103,7 +103,8 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        EducationLevel updateEducationLevel = editPersonDescriptor.getEducationLevel().orElse(personToEdit.getEducationLevel());
+        EducationLevel updateEducationLevel = editPersonDescriptor.getEducationLevel()
+                .orElse(personToEdit.getEducationLevel());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 personToEdit.getPaymentStatus(), updateEducationLevel);
     }
@@ -163,7 +164,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, educationLevel);
         }
 
         public void setName(Name name) {
