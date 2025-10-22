@@ -12,7 +12,8 @@ public class RecurringLesson extends Lesson {
 
     /**
      * This method creates a new ReuccringLesson object
-     * @param lessonDate
+     * @param lessonDateString
+     * @param intervalDays
      */
     public RecurringLesson(String lessonDateString, int intervalDays) {
         super(lessonDateString);
