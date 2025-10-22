@@ -26,6 +26,7 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     private final PaymentStatus paymentStatus;
+    private final EducationLevel educationLevel;
 
     /**
      * Every field must be present and not null. Constructs a new person object.
@@ -39,6 +40,7 @@ public class Person {
         this.tags.addAll(tags);
         // Start with no outstanding lesson payments for now
         this.paymentStatus = new PaymentStatus(0);
+        this.educationLevel = EducationLevel.UNKNOWN;
     }
 
     /**
@@ -52,6 +54,22 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.paymentStatus = paymentStatus;
+        this.educationLevel = EducationLevel.UNKNOWN;
+    }
+
+    /**
+     * Constructs a {@code Person} with all fields specified, including payment status and education level.
+     */
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
+                  PaymentStatus paymentStatus, EducationLevel educationLevel) {
+        requireAllNonNull(name, phone, email, address, tags, paymentStatus, educationLevel);
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.tags.addAll(tags);
+        this.paymentStatus = paymentStatus;
+        this.educationLevel = educationLevel;
     }
 
     public Name getName() {
@@ -76,6 +94,13 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns the education level of the person.
+     */
+    public EducationLevel getEducationLevel() {
+        return educationLevel;
     }
 
     /**
@@ -111,7 +136,8 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags);
+                && tags.equals(otherPerson.tags)
+                && educationLevel == otherPerson.educationLevel;
     }
 
     @Override
