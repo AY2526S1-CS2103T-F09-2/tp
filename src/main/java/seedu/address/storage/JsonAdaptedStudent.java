@@ -62,7 +62,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         Address modelAddress = model.getAddress();
         Set<Tag> modelTags = new HashSet<>(model.getTags());
         if (lesson != null) {
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson));
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson),
+                    model.getPaymentStatus(), model.getEducationLevel());
         } else {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
         }
