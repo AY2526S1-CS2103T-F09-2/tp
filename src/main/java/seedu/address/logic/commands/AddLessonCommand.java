@@ -36,7 +36,8 @@ public class AddLessonCommand extends Command {
     private Lesson toAdd;
 
     /**
-     * Creates an AddLessonCommand to add the specified {@Lesson Lesson} for a student identified by {@Name name}
+     * Creates an AddLessonCommand to add the specified {@Lesson Lesson} for a
+     * student identified by {@Name name}
      */
     public AddLessonCommand(Name name, Lesson lesson) {
         requireNonNull(name);
@@ -74,8 +75,7 @@ public class AddLessonCommand extends Command {
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
-                    toAdd
-            );
+                    toAdd);
             model.setPerson(foundPerson, newStudent);
         }
         // Find the updated student from the full person list
