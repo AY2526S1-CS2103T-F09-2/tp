@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -8,6 +9,7 @@ import static seedu.address.logic.commands.PaymentCommand.MESSAGE_NO_LESSON;
 import static seedu.address.logic.commands.PaymentCommand.MESSAGE_PAYMENT_STATUS_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.List;
@@ -130,6 +132,21 @@ public class PaymentCommandTest {
                 + "{index=" + index + ", "
                 + "flag=" + toSetPaymentStatus.get() + "}";
         assertEquals(expectedWithFlag, paymentCommandWithFlag.toString());
+    }
+
+    @Test
+    public void equals() {
+        // same PaymentCommand
+        PaymentCommand paymentCommand1 = new PaymentCommand(INDEX_FIRST_PERSON);
+        assertEquals(paymentCommand1, paymentCommand1);
+
+        // same index
+        PaymentCommand paymentCommand2 = new PaymentCommand(Index.fromOneBased(1));
+        assertEquals(paymentCommand1, paymentCommand2);
+
+        // different index
+        PaymentCommand paymentCommand3 = new PaymentCommand(INDEX_SECOND_PERSON);
+        assertNotEquals(paymentCommand1, paymentCommand3);
     }
 
     private Student generateStudent(Person person) {
