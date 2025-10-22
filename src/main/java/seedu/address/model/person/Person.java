@@ -182,7 +182,8 @@ public class Person {
                 person.getEmail(),
                 person.getAddress(),
                 person.getTags(),
-                updatedPaymentStatus
+                updatedPaymentStatus,
+                person.getEducationLevel()
         );
     }
 }
