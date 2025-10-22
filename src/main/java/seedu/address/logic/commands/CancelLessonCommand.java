@@ -55,7 +55,7 @@ public class CancelLessonCommand extends Command {
 
         Lesson next = student.getNextLesson();
 
-        if (next == null || next == Lesson.EMPTY) {
+        if (next == null || next == Lesson.getEmpty()) {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
@@ -65,7 +65,7 @@ public class CancelLessonCommand extends Command {
                 student.getEmail(),
                 student.getAddress(),
                 student.getTags(),
-                Lesson.EMPTY);
+                Lesson.getEmpty());
 
         model.setPerson(student, edited);
 

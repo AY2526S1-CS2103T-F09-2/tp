@@ -39,15 +39,15 @@ public class AddStudnetCommandParser implements Parser<AddStudentCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
-        final String Default = "N/A";
+        final String defaultString = "N/A";
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, Default).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, Default).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, defaultString).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, defaultString).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Student student = new Student(name, phone, email, address, tagList, Lesson.EMPTY);
+        Student student = new Student(name, phone, email, address, tagList, Lesson.getEmpty());
         return new AddStudentCommand(student);
 
     }
