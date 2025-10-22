@@ -32,6 +32,8 @@ public class PaymentCommand extends Command {
             Payment status: %2$s
             """;
 
+    public static final String MESSAGE_NO_LESSON = "Please add a lesson to student before running this command";
+
     private final Index targetIndex;
     private final Optional<PaymentStatusValue> toSetPaymentStatus;
 
@@ -70,7 +72,7 @@ public class PaymentCommand extends Command {
         // Convert Person to Student
         Person person = lastShownList.get(targetIndex.getZeroBased());
         if (!(person instanceof Student student)) {
-            throw new CommandException("Please add a lesson to student before running this command");
+            throw new CommandException(MESSAGE_NO_LESSON);
         }
 
         PaymentStatus updatedPaymentStatus = student.getPaymentStatus().update(toSetPaymentStatus);

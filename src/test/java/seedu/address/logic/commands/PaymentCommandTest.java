@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.PaymentCommand.MESSAGE_NO_LESSON;
 import static seedu.address.logic.commands.PaymentCommand.MESSAGE_PAYMENT_STATUS_SUCCESS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -15,7 +16,12 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.model.*;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Lesson;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 import seedu.address.model.person.Person;
@@ -26,7 +32,17 @@ public class PaymentCommandTest {
     private final Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndex_returnsCorrectPaymentStatus() throws Exception {
+    public void execute_personClassPaymentStatus_throwsCommandException() throws Exception {
+        PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON);
+        PaymentCommand paymentCommandWithFlag = new PaymentCommand(INDEX_FIRST_PERSON,
+                Optional.of(PaymentStatusValue.PAID));
+
+        assertCommandFailure(paymentCommand, model, MESSAGE_NO_LESSON);
+        assertCommandFailure(paymentCommandWithFlag, model, MESSAGE_NO_LESSON);
+    }
+
+    @Test
+    public void execute_validIndexAndIsStudentClass_returnsCorrectPaymentStatus() throws Exception {
         Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON);
 
@@ -37,16 +53,20 @@ public class PaymentCommandTest {
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(model.getFilteredPersonList().get(0), student);
+
+        addLessonToModel(student);
+
         assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_validIndexAndStatus_returnsCorrectPaymentStatus() throws Exception {
+    public void execute_validStatusFlag_returnsCorrectPaymentStatus() throws Exception {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         Student student = generateStudent(personToEdit);
 
         PaymentStatus originalPaymentStatus = student.getPaymentStatus();
+        addLessonToModel(student);
 
         final List<PaymentStatusValue> paymentStatusValues = List.of(PaymentStatusValue.PAID,
                 PaymentStatusValue.UNPAID);
@@ -113,7 +133,6 @@ public class PaymentCommandTest {
     }
 
     private Student generateStudent(Person person) {
-        Student student = null;
         if (person instanceof Student) {
             return (Student) person;
         }
@@ -125,5 +144,10 @@ public class PaymentCommandTest {
                 person.getTags(),
                 new Lesson("Tuesday")
         );
+    }
+
+    private void addLessonToModel(Student student) throws CommandException {
+        AddLessonCommand addLessonCommand = new AddLessonCommand(student.getName(), new Lesson("Tuesday"));
+        addLessonCommand.execute(model);
     }
 }
