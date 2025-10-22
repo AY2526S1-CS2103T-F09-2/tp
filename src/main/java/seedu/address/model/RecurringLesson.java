@@ -20,13 +20,6 @@ public class RecurringLesson extends Lesson {
     }
 
     /**
-     * Returns the interval day for the recurring lesson
-     */
-    public int getIntervalDays() {
-        return intervalDays;
-    }
-
-    /**
      * Initialise a new recurring lesson with lesson date
      * @param lessonDate
      * @param intervalDays
@@ -34,6 +27,13 @@ public class RecurringLesson extends Lesson {
     public RecurringLesson(LocalDate lessonDate, int intervalDays) {
         super(lessonDate);
         this.intervalDays = intervalDays;
+    }
+
+    /**
+     * Returns the interval day for the recurring lesson
+     */
+    public int getIntervalDays() {
+        return intervalDays;
     }
 
     /**
