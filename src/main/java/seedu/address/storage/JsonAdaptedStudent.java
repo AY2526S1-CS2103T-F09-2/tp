@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     private String lesson;
-    private String paymentStatus; // reserved until payment feature is implemented
+    private String paymentStatus;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -33,8 +33,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lesson,
-                              @JsonProperty("paymentStatus") String paymentStatus,
-                              @JsonProperty("educationLevel") String educationLevel) {
+            @JsonProperty("paymentStatus") String paymentStatus,
+            @JsonProperty("educationLevel") String educationLevel) {
         super(name, phone, email, address, tags, educationLevel);
         this.lesson = lesson;
         this.paymentStatus = paymentStatus;
@@ -64,28 +64,29 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         Email modelEmail = model.getEmail();
         Address modelAddress = model.getAddress();
         Set<Tag> modelTags = new HashSet<>(model.getTags());
+
+        // Handle case where null fields in JSON
+        Lesson tmpLesson;
+        int outstandingPayments;
+
         if (lesson == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
-        }
-
-        // Parse payment status from JSON
-        PaymentStatus modelPaymentStatus;
-        if (paymentStatus != null) {
-            try {
-                int outstandingPayments = Integer.parseInt(paymentStatus);
-                modelPaymentStatus = new PaymentStatus(outstandingPayments);
-            } catch (NumberFormatException e) {
-                // For backward compatibility with string values like "paid" or "unpaid"
-                // Default to 0 for "paid" or similar, 1 for "unpaid"
-                modelPaymentStatus = new PaymentStatus(paymentStatus.equalsIgnoreCase("paid") ? 0 : 1);
-            }
+            tmpLesson = Lesson.getEmpty();
         } else {
-            // Default to 0 if not specified
-            modelPaymentStatus = new PaymentStatus(0);
+            tmpLesson = new Lesson(lesson);
         }
 
-        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson),
-                modelPaymentStatus, model.getEducationLevel());
+        if (!PaymentStatus.isValidPaymentStatus(paymentStatus)) {
+            throw new IllegalValueException("paymentStatus error in json");
+        }
+
+        if (paymentStatus == null) {
+            outstandingPayments = PaymentStatus.ZERO_OUTSTANDING_PAYMENTS;
+        } else {
+            outstandingPayments = Integer.parseInt(paymentStatus);
+        }
+
+        return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
+                tmpLesson, outstandingPayments, model.getEducationLevel());
     }
 
 }

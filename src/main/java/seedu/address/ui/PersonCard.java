@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.Lesson;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -61,8 +62,8 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person instanceof Student) {
-            Lesson lesson = ((Student) person).getNextLesson();
+        if (person instanceof Student student) {
+            Lesson lesson = student.getNextLesson();
             if (lesson != null && !lesson.equals(Lesson.getEmpty())) {
                 lessonLabel.setText("Lesson: " + lesson.getLessonDate());
             } else {
@@ -71,10 +72,14 @@ public class PersonCard extends UiPart<Region> {
         } else {
             lessonLabel.setText("");
         }
+
         //Display payment status for the person
-        if (paymentStatusLabel != null && person.getPaymentStatus() != null) {
-            paymentStatusLabel.setText("Payment: " + person.getPaymentStatus().toString());
+        if (person instanceof Student student && paymentStatusLabel != null && student.getPaymentStatus() != null) {
+            paymentStatusLabel.setText("Payment: " + student.getPaymentStatus().toString());
+        } else {
+            paymentStatusLabel.setText("Payment: " + PaymentStatus.getZeroPaymentStatus());
         }
+
         // Display education level for the person
         if (educationLabel != null && person.getEducationLevel() != null) {
             educationLabel.setText("Education: " + person.getEducationLevel().toString());

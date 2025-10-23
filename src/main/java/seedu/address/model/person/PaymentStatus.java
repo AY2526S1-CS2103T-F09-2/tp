@@ -13,8 +13,8 @@ import java.util.Optional;
 public class PaymentStatus {
 
     /**
-     * Enumerates the possible values of a person's payment status.
-     * A person is either marked as {@code PAID} or {@code UNPAID}.
+     * Enumerates the possible values of a student's payment status.
+     * A student is either marked as {@code PAID} or {@code UNPAID}.
      */
     public enum PaymentStatusValue {
         PAID, UNPAID;
@@ -28,6 +28,7 @@ public class PaymentStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
 
+    public static final int ZERO_OUTSTANDING_PAYMENTS = 0;
     private final int outstandingLessonPayments;
 
     public PaymentStatus(int outstandingLessonPayments) {
@@ -50,18 +51,6 @@ public class PaymentStatus {
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Returns true if statusString is valid.
-     */
-    public static boolean isValidPaymentStatus(Optional<String> statusString) {
-        requireNonNull(statusString);
-        if (statusString.isEmpty()) {
-            return false;
-        }
-        String str = statusString.get().trim().toLowerCase();
-        return str.equals("paid") || str.equals("unpaid");
     }
 
     /**
@@ -96,6 +85,31 @@ public class PaymentStatus {
         return this.outstandingLessonPayments;
     }
 
+    /**
+     * Check if string value can be parsed as an integer so that {@code PaymentStatus} can be instantiated.
+     */
+    public static boolean isValidPaymentStatus(String paymentStatus) {
+        paymentStatus = paymentStatus.trim();
+        try {
+            Integer.parseInt(paymentStatus);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    /**
+     * Returns true if statusString is valid.
+     */
+    public static boolean isValidPaymentStatus(Optional<String> statusString) {
+        requireNonNull(statusString);
+        if (statusString.isEmpty()) {
+            return false;
+        }
+        String str = statusString.get().trim().toLowerCase();
+        return str.equals("paid") || str.equals("unpaid");
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -115,10 +129,14 @@ public class PaymentStatus {
     public String toString() {
         if (outstandingLessonPayments == 0) {
             return "All lessons have been paid";
-        } else if (outstandingLessonPayments <= 0) {
-            return "Overpaid lessons = " + outstandingLessonPayments;
+        } else if (outstandingLessonPayments < 0) {
+            return outstandingLessonPayments + " overpaid lessons";
         } else {
-            return "Unpaid lessons = " + outstandingLessonPayments;
+            return outstandingLessonPayments + " unpaid lessons";
         }
+    }
+
+    public static PaymentStatus getZeroPaymentStatus() {
+        return new PaymentStatus(ZERO_OUTSTANDING_PAYMENTS);
     }
 }

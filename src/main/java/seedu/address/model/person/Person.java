@@ -25,7 +25,6 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
-    private final PaymentStatus paymentStatus;
     private final EducationLevel educationLevel;
 
     /**
@@ -38,8 +37,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        // Start with no outstanding lesson payments for now
-        this.paymentStatus = new PaymentStatus(0);
         this.educationLevel = EducationLevel.UNKNOWN;
     }
 
@@ -53,7 +50,6 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.paymentStatus = paymentStatus;
         this.educationLevel = EducationLevel.UNKNOWN;
     }
 
@@ -61,14 +57,13 @@ public class Person {
      * Constructs a {@code Person} with all fields specified, including payment status and education level.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  PaymentStatus paymentStatus, EducationLevel educationLevel) {
-        requireAllNonNull(name, phone, email, address, tags, paymentStatus, educationLevel);
+                  EducationLevel educationLevel) {
+        requireAllNonNull(name, phone, email, address, tags, educationLevel);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.paymentStatus = paymentStatus;
         this.educationLevel = educationLevel;
     }
 
@@ -156,34 +151,5 @@ public class Person {
                 .add("tags", tags)
                 .add("educationLevel", educationLevel)
                 .toString();
-    }
-
-    /**
-     * Returns payment status of person. [Default = false]
-     * ModelManager currently creates List of contacts using Person class
-     * so temporarily added payment status method here so that payment command would work
-     * Method would be moved to Student class in future
-     */
-    public PaymentStatus getPaymentStatus() {
-        return this.paymentStatus;
-    }
-
-    /**
-     * Creates a new {@code Person} with same fields but containing new {@code PaymentStatus}
-     *
-     * @param person Person whose fields to copy over.
-     * @param updatedPaymentStatus Payment Status to set for new person.
-     * @return New Person with updated {@code PaymentStatus}.
-     */
-    public static Person withPaymentStatus(Person person, PaymentStatus updatedPaymentStatus) {
-        return new Person(
-                person.getName(),
-                person.getPhone(),
-                person.getEmail(),
-                person.getAddress(),
-                person.getTags(),
-                updatedPaymentStatus,
-                person.getEducationLevel()
-        );
     }
 }

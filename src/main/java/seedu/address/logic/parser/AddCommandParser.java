@@ -17,7 +17,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -60,7 +59,7 @@ public class AddCommandParser implements Parser<AddCommand> {
             edu = ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION_LEVEL).get());
         }
 
-        Person person = new Person(name, phone, email, address, tagList, new PaymentStatus(0), edu);
+        Person person = new Person(name, phone, email, address, tagList, edu);
 
         return new AddCommand(person);
     }

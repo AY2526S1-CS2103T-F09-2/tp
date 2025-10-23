@@ -17,14 +17,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
 /**
- * Displays a person's payment status using it's displayed index from the
- * address book.
+ * Displays a Student's payment status using it's displayed index from the address book.
  */
 public class PaymentCommand extends Command {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of student. "
             + "Parameters: INDEX [optional: s/paid|unpaid]\n"
             + "Example: " + COMMAND_WORD + " 1 s/unpaid";
 
@@ -33,6 +32,8 @@ public class PaymentCommand extends Command {
             Payment status: %2$s
             """;
 
+    public static final String MESSAGE_NO_LESSON = "Please add a lesson to student before running this command";
+
     private final Index targetIndex;
     private final Optional<PaymentStatusValue> toSetPaymentStatus;
 
@@ -40,7 +41,6 @@ public class PaymentCommand extends Command {
      * Creates a PaymentCommand for a student given a specified {@code targetIndex}.
      *
      * {@code PaymentStatus} is unchanged here.
-     *
      * @param targetIndex index of student in list.
      */
     public PaymentCommand(Index targetIndex) {
@@ -49,8 +49,7 @@ public class PaymentCommand extends Command {
     }
 
     /**
-     * Creates a PaymentCommand for a student given a specified {@code targetIndex}
-     * and {@code toSetPaymentStatus}.
+     * Creates a PaymentCommand for a student given a specified {@code targetIndex} and {@code toSetPaymentStatus}.
      * Sets PaymentStatus of student according to {@code PaymentStatus}.
      *
      * @param targetIndex        index of student in list.
@@ -70,25 +69,24 @@ public class PaymentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
+        // Convert Person to Student
         Person person = lastShownList.get(targetIndex.getZeroBased());
-        PaymentStatus updatedPaymentStatus = person.getPaymentStatus().update(toSetPaymentStatus);
+        if (!(person instanceof Student student)) {
+            throw new CommandException(MESSAGE_NO_LESSON);
+        }
+
+        PaymentStatus updatedPaymentStatus = student.getPaymentStatus().update(toSetPaymentStatus);
 
         // If payment status is changed
-        if (!updatedPaymentStatus.equals(person.getPaymentStatus())) {
-            Person editedPerson;
-            // Check if the person is a Student to preserve lesson information
-            if (person instanceof Student) {
-                editedPerson = Student.withPaymentStatus((Student) person, updatedPaymentStatus);
-            } else {
-                editedPerson = Person.withPaymentStatus(person, updatedPaymentStatus);
-            }
-            model.setPerson(person, editedPerson);
+        if (updatedPaymentStatus != student.getPaymentStatus()) {
+            Student editedStudent = student.updatePaymentStatus(student, updatedPaymentStatus);
+            model.setPerson(student, editedStudent);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-            person = editedPerson;
+            student = editedStudent;
         }
 
         return new CommandResult(String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                person.getName(), person.getPaymentStatus()));
+                student.getName(), student.getPaymentStatus()));
     }
 
     @Override

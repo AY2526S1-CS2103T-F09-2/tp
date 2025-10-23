@@ -16,7 +16,6 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -121,6 +120,6 @@ class JsonAdaptedPerson {
         if (educationLevel != null) {
             modelEdu = EducationLevel.valueOf(educationLevel);
         }
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, new PaymentStatus(0), modelEdu);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelEdu);
     }
 }
