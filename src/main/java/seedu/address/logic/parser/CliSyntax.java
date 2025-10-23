@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_LESSON = new Prefix("l/");
     public static final Prefix PREFIX_PAYMENT_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_INTERVAL = new Prefix("every/");
+    public static final Prefix PREFIX_EDUCATION_LEVEL = new Prefix("edu/");
 
 }
 
