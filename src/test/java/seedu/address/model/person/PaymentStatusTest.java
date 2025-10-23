@@ -109,10 +109,27 @@ public class PaymentStatusTest {
     public void equals() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
 
+        //same instance
+        assertEquals(paymentStatus, paymentStatus);
+
         // same value
-        assertEquals(paymentStatus, new PaymentStatus(1));
+        assertEquals(new PaymentStatus(1), paymentStatus);
 
         // different value
-        assertNotEquals(paymentStatus, new PaymentStatus(2));
+        assertNotEquals(new PaymentStatus(2), paymentStatus);
+
+        // not PaymentStatus instance
+        assertNotEquals(null, paymentStatus);
+    }
+
+    @Test
+    public void isValidString_validString_success() {
+        assertTrue(PaymentStatus.isValidString("1"));
+        assertTrue(PaymentStatus.isValidString(" 12 "));
+    }
+
+    @Test
+    public void isValidString_invalidString_throwsNumberFormatException() {
+        assertThrows(NumberFormatException.class, () -> PaymentStatus.isValidString("abcd"));
     }
 }

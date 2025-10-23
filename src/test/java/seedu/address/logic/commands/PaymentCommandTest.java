@@ -146,7 +146,10 @@ public class PaymentCommandTest {
 
         // different index
         PaymentCommand paymentCommand3 = new PaymentCommand(INDEX_SECOND_PERSON);
-        assertNotEquals(paymentCommand1, paymentCommand3);
+        assertNotEquals(paymentCommand3, paymentCommand1);
+
+        // not instanceof paymentCommand
+        assertNotEquals(null, paymentCommand1);
     }
 
     private Student generateStudent(Person person) {
