@@ -11,7 +11,7 @@ import seedu.address.model.Lesson;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.StudentBuilder;
 
-public class JSonAdapatedStudentTest {
+public class JsonAdaptedStudentTest {
 
     private static final Student TYPICAL_STUDENT = new StudentBuilder().build();
 
@@ -27,7 +27,7 @@ public class JSonAdapatedStudentTest {
                 TYPICAL_STUDENT.getPhone().toString(), TYPICAL_STUDENT.getEmail().toString(),
                 TYPICAL_STUDENT.getAddress().toString(), TYPICAL_STUDENT.getTags().stream()
                         .map(JsonAdaptedTag::new).toList(),
-                null, TYPICAL_STUDENT.getEducationLevel().toString());
+                null, null, TYPICAL_STUDENT.getEducationLevel().toString());
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
 
