@@ -24,7 +24,7 @@ import seedu.address.model.tag.Tag;
 public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     private String lesson;
-    private String paymentStatus; // reserved until payment feature is implemented
+    private String paymentStatus;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -63,20 +63,29 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         Email modelEmail = model.getEmail();
         Address modelAddress = model.getAddress();
         Set<Tag> modelTags = new HashSet<>(model.getTags());
-        if (lesson == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
-        }
 
-        if (paymentStatus == null) {
-            throw new IllegalValueException("PaymentStatus value error");
+        // Handle case where null fields in JSON
+        Lesson tmpLesson;
+        int outstandingPayments;
+
+        if (lesson == null) {
+            tmpLesson = Lesson.getEmpty();
+        } else {
+            tmpLesson = new Lesson(lesson);
         }
 
         if (!PaymentStatus.isValidString(paymentStatus)) {
             throw new IllegalValueException("paymentStatus error in json");
         }
 
+        if (paymentStatus == null) {
+            outstandingPayments = 0;
+        } else {
+            outstandingPayments = Integer.parseInt(paymentStatus);
+        }
+
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                new Lesson(lesson), Integer.parseInt(paymentStatus));
+                tmpLesson, outstandingPayments);
     }
 
 }

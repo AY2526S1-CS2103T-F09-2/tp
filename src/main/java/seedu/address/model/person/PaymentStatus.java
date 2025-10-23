@@ -128,7 +128,7 @@ public class PaymentStatus {
     public String toString() {
         if (outstandingLessonPayments == 0) {
             return "All lessons have been paid";
-        } else if (outstandingLessonPayments <= 0) {
+        } else if (outstandingLessonPayments < 0) {
             return outstandingLessonPayments + " overpaid lessons";
         } else {
             return outstandingLessonPayments + " unpaid lessons";
