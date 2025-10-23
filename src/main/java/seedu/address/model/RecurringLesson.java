@@ -12,7 +12,8 @@ public class RecurringLesson extends Lesson {
 
     /**
      * This method creates a new ReuccringLesson object
-     * @param lessonDate
+     * @param lessonDateString
+     * @param intervalDays
      */
     public RecurringLesson(String lessonDateString, int intervalDays) {
         super(lessonDateString);
@@ -62,5 +63,23 @@ public class RecurringLesson extends Lesson {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof RecurringLesson)) {
+            return false;
+        }
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        RecurringLesson other = (RecurringLesson) o;
+        return this.getIntervalDays() == other.getIntervalDays();
     }
 }

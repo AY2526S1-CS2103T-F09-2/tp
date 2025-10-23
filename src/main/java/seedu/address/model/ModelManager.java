@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -120,9 +121,25 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Student student, Lesson lesson) {
         addressBook.addLesson(student, lesson);
-
     }
 
+    @Override
+    public void refreshLessonDates() {
+        LocalDate today = LocalDate.now();
+        for (Person p : addressBook.getPersonList()) {
+            if (p instanceof Student) {
+                Student s = (Student) p;
+                Lesson current = s.getNextLesson();
+                Lesson normalized = (current == null ? Lesson.getEmpty() : current.getUpcomingLesson(today));
+                if (!normalized.equals(current)) {
+                    Student updated = new Student(
+                            s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized
+                    );
+                    setPerson(s, updated);
+                }
+            }
+        }
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
