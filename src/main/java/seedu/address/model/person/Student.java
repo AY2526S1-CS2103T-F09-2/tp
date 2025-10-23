@@ -27,11 +27,13 @@ public class Student extends Person {
      * Constructs a new Student object
      */
     public Student(Name name, Phone phone, Email email,
-                   Address address, Set<Tag> tags, Lesson nextLesson, int outstandingLessons) {
-        super(name, phone, email, address, tags);
+                   Address address, Set<Tag> tags, Lesson nextLesson,
+                   int outstandingLessons, EducationLevel educationLevel) {
+        super(name, phone, email, address, tags, educationLevel);
         this.paymentStatus = new PaymentStatus(outstandingLessons);
         this.nextLesson = nextLesson;
     }
+
 
     /**
      * Constructs a new Student object.
@@ -42,6 +44,17 @@ public class Student extends Person {
         this.nextLesson = student.getNextLesson();
     }
 
+
+    /**
+     * Constructs a new Student carrying over payment status and education level.
+     */
+    public Student(Name name, Phone phone, Email email,
+                   Address address, Set<Tag> tags, Lesson nextLesson,
+                   PaymentStatus paymentStatus, EducationLevel educationLevel) {
+        super(name, phone, email, address, tags, educationLevel);
+        this.paymentStatus = paymentStatus;
+        this.nextLesson = nextLesson;
+    }
     /**
      *  This method shows the string representation of the Student object
      */

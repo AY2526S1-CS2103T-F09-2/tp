@@ -33,8 +33,9 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lesson,
-                              @JsonProperty("paymentStatus") String paymentStatus) {
-        super(name, phone, email, address, tags);
+            @JsonProperty("paymentStatus") String paymentStatus,
+            @JsonProperty("educationLevel") String educationLevel) {
+        super(name, phone, email, address, tags, educationLevel);
         this.lesson = lesson;
         this.paymentStatus = paymentStatus;
     }
@@ -85,7 +86,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
-                tmpLesson, outstandingPayments);
+                tmpLesson, outstandingPayments, model.getEducationLevel());
     }
 
 }

@@ -28,6 +28,7 @@ public class PaymentStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
 
+    public static final PaymentStatus NULL_PAYMENT_STATUS = new PaymentStatus(0);
     private final int outstandingLessonPayments;
 
     public PaymentStatus(int outstandingLessonPayments) {

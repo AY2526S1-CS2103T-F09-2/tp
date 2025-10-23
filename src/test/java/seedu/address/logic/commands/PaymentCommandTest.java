@@ -162,12 +162,12 @@ public class PaymentCommandTest {
                 person.getEmail(),
                 person.getAddress(),
                 person.getTags(),
-                new Lesson("Tuesday")
+                new Lesson("2026-01-01")
         );
     }
 
     private void addLessonToModel(Student student) throws CommandException {
-        AddLessonCommand addLessonCommand = new AddLessonCommand(student.getName(), new Lesson("Tuesday"));
+        AddLessonCommand addLessonCommand = new AddLessonCommand(student.getName(), new Lesson("2026-01-01"));
         addLessonCommand.execute(model);
     }
 }
