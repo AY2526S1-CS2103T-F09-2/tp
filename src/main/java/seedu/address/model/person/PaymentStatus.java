@@ -29,7 +29,6 @@ public class PaymentStatus {
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
 
     public static final int ZERO_OUTSTANDING_PAYMENTS = 0;
-    public static final PaymentStatus NULL_PAYMENT_STATUS = new PaymentStatus(ZERO_OUTSTANDING_PAYMENTS);
     private final int outstandingLessonPayments;
 
     public PaymentStatus(int outstandingLessonPayments) {
@@ -135,5 +134,9 @@ public class PaymentStatus {
         } else {
             return outstandingLessonPayments + " unpaid lessons";
         }
+    }
+
+    public static PaymentStatus getZeroPaymentStatus() {
+        return new PaymentStatus(ZERO_OUTSTANDING_PAYMENTS);
     }
 }

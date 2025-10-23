@@ -77,7 +77,7 @@ public class PersonCard extends UiPart<Region> {
         if (person instanceof Student student && paymentStatusLabel != null && student.getPaymentStatus() != null) {
             paymentStatusLabel.setText("Payment: " + student.getPaymentStatus().toString());
         } else {
-            paymentStatusLabel.setText("Payment: " + PaymentStatus.NULL_PAYMENT_STATUS);
+            paymentStatusLabel.setText("Payment: " + PaymentStatus.getZeroPaymentStatus());
         }
 
         // Display education level for the person
