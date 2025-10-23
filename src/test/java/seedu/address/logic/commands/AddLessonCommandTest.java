@@ -18,7 +18,7 @@ import seedu.address.testutil.StudentBuilder;
 public class AddLessonCommandTest {
 
     private static final Name VALID_NAME = new Name("John Doe");
-    private static final Lesson VALID_LESSON = new Lesson("Tuesday");
+    private static final Lesson VALID_LESSON = new Lesson("2028-02-05");
 
     @Test
     public void execute_validLesson_success() throws Exception {

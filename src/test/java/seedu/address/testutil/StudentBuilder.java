@@ -21,7 +21,7 @@ public class StudentBuilder {
     public static final String DEFAULT_EMAIL = "anBeng@gmail.com";
     public static final String DEFAULT_ADDRESS = "102, College Ave West 29, #04-123";
     private static final String DEFAULT_TAG = "sec3";
-    private static final String DEFUALT_LESSON = "2025-10-07 14:00 Math";
+    private static final String DEFUALT_LESSON = "2028-10-07";
 
     private Name name;
     private Phone phone;
