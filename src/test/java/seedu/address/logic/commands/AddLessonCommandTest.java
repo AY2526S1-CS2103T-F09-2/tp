@@ -61,7 +61,6 @@ public class AddLessonCommandTest {
         CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
         assertEquals("Student does not exist", thrown.getMessage());
     }
-
 }
 
 
