@@ -67,6 +67,6 @@ public class Student extends Person {
                 student.getAddress(),
                 student.getTags(),
                 student.getNextLesson(),
-                updatedPaymentStatus);
+                student.getPaymentStatus(), student.getEducationLevel());
     }
 }
