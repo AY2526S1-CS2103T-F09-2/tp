@@ -80,7 +80,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         }
 
         if (paymentStatus == null) {
-            outstandingPayments = 0;
+            outstandingPayments = PaymentStatus.ZERO_OUTSTANDING_PAYMENTS;
         } else {
             outstandingPayments = Integer.parseInt(paymentStatus);
         }

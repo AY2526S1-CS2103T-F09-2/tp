@@ -52,7 +52,7 @@ public class PaymentCommand extends Command {
      * Creates a PaymentCommand for a student given a specified {@code targetIndex} and {@code toSetPaymentStatus}.
      * Sets PaymentStatus of student according to {@code PaymentStatus}.
      *
-     * @param targetIndex index of student in list.
+     * @param targetIndex        index of student in list.
      * @param toSetPaymentStatus PaymentStatus to set.
      */
     public PaymentCommand(Index targetIndex, Optional<PaymentStatusValue> toSetPaymentStatus) {

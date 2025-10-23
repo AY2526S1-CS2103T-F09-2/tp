@@ -92,7 +92,7 @@ public class PaymentStatusTest {
     @Test
     public void update_paidStatus_paymentStatusDecrementedByOne() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
-        PaymentStatus expected = new PaymentStatus(0);
+        PaymentStatus expected = new PaymentStatus(PaymentStatus.ZERO_OUTSTANDING_PAYMENTS);
 
         assertEquals(expected, paymentStatus.update(Optional.of(PaymentStatus.PaymentStatusValue.PAID)));
     }

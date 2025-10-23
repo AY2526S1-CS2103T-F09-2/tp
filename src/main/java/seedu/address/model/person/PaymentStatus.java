@@ -28,7 +28,8 @@ public class PaymentStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
 
-    public static final PaymentStatus NULL_PAYMENT_STATUS = new PaymentStatus(0);
+    public static final int ZERO_OUTSTANDING_PAYMENTS = 0;
+    public static final PaymentStatus NULL_PAYMENT_STATUS = new PaymentStatus(ZERO_OUTSTANDING_PAYMENTS);
     private final int outstandingLessonPayments;
 
     public PaymentStatus(int outstandingLessonPayments) {
@@ -51,18 +52,6 @@ public class PaymentStatus {
         default:
             throw new IllegalArgumentException(MESSAGE_CONSTRAINTS);
         }
-    }
-
-    /**
-     * Returns true if statusString is valid.
-     */
-    public static boolean isValidPaymentStatus(Optional<String> statusString) {
-        requireNonNull(statusString);
-        if (statusString.isEmpty()) {
-            return false;
-        }
-        String str = statusString.get().trim().toLowerCase();
-        return str.equals("paid") || str.equals("unpaid");
     }
 
     /**
@@ -108,6 +97,18 @@ public class PaymentStatus {
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    /**
+     * Returns true if statusString is valid.
+     */
+    public static boolean isValidPaymentStatus(Optional<String> statusString) {
+        requireNonNull(statusString);
+        if (statusString.isEmpty()) {
+            return false;
+        }
+        String str = statusString.get().trim().toLowerCase();
+        return str.equals("paid") || str.equals("unpaid");
     }
 
     @Override
