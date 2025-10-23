@@ -62,7 +62,7 @@ public class PersonCard extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         if (person instanceof Student student) {
             Lesson lesson = student.getNextLesson();
-            if (lesson != null && !lesson.equals(Lesson.EMPTY)) {
+            if (lesson != null && !lesson.equals(Lesson.getEmpty())) {
                 lessonLabel.setText("Lesson: " + lesson.getLessonDate());
             } else {
                 lessonLabel.setText("Lesson: None");

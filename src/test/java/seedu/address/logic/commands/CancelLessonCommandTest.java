@@ -3,12 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,10 +25,11 @@ import seedu.address.model.person.Student;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
+
 public class CancelLessonCommandTest {
     private Model model;
     private final Student withLesson = new StudentBuilder().build();
-    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.EMPTY).build();
+    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -56,12 +57,12 @@ public class CancelLessonCommandTest {
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
                 "Tue 3pm-5pm",
-                Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build())
+                Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.getEmpty()).build())
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(withLessonShown,
-                new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build());
+                new StudentBuilder(withLessonShown).withNewLesson(Lesson.getEmpty()).build());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertEquals(1, model.getFilteredPersonList().size());
 
