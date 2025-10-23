@@ -132,4 +132,10 @@ public class PaymentStatusTest {
     public void isValidPaymentStatus_invalidPaymentStatus_returnsFalse() {
         assertFalse(PaymentStatus.isValidPaymentStatus("abcd"));
     }
+
+    @Test
+    public void testGetZeroPaymentStatus() {
+        PaymentStatus zeroStatus = PaymentStatus.getZeroPaymentStatus();
+        assertEquals("All lessons have been paid", zeroStatus.toString());
+    }
 }
