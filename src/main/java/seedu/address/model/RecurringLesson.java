@@ -64,4 +64,22 @@ public class RecurringLesson extends Lesson {
             return false;
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof RecurringLesson)) {
+            return false;
+        }
+
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        RecurringLesson other = (RecurringLesson) o;
+        return this.getIntervalDays() == other.getIntervalDays();
+    }
 }

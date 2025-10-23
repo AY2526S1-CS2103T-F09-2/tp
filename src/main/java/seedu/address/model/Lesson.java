@@ -17,7 +17,7 @@ public class Lesson {
 
     /**
      * This method creates a new Lesson object
-     * @param lessonDate
+     * @param lessonDateString
      */
     public Lesson(String lessonDateString) {
         this.lessonDate = LocalDate.parse(lessonDateString);
@@ -79,6 +79,19 @@ public class Lesson {
     }
 
     /**
+     * Returns the most recent upcoming lesson with reference to today's date
+     * @param today local date of today
+     * @return the most recent upcoming lesson
+     */
+    public Lesson getUpcomingLesson(LocalDate today) {
+        Lesson current = this;
+        while (!current.isEmpty() && current.isOutdated()) {
+            current = current.getNextLesson();
+        }
+        return current;
+    }
+
+    /**
      * A util function that checks whether the input date is a valid input
      * @param input
      * @return whether the input can be accepted by the format
@@ -90,6 +103,26 @@ public class Lesson {
         } catch (DateTimeParseException e) {
             return false;
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Lesson)) {
+            return false;
+        }
+
+        Lesson other = (Lesson) o;
+
+        if (this.isEmpty() && other.isEmpty()) {
+            return true;
+        }
+
+        return this.getLessonDateTime().equals(other.getLessonDateTime())
+                && this.getClass().equals(other.getClass()); //prevent the other class being recurring lesson
     }
 
     /**
