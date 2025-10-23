@@ -13,8 +13,8 @@ import java.util.Optional;
 public class PaymentStatus {
 
     /**
-     * Enumerates the possible values of a person's payment status.
-     * A person is either marked as {@code PAID} or {@code UNPAID}.
+     * Enumerates the possible values of a student's payment status.
+     * A student is either marked as {@code PAID} or {@code UNPAID}.
      */
     public enum PaymentStatusValue {
         PAID, UNPAID;

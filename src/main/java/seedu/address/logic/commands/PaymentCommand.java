@@ -17,13 +17,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
 /**
- * Displays a person's payment status using it's displayed index from the address book.
+ * Displays a Student's payment status using it's displayed index from the address book.
  */
 public class PaymentCommand extends Command {
 
     public static final String COMMAND_WORD = "payment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of person. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of student. "
             + "Parameters: INDEX [optional: s/paid|unpaid]\n"
             + "Example: " + COMMAND_WORD + " 1 s/unpaid";
 
