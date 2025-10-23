@@ -22,7 +22,8 @@ public class PersonCard extends UiPart<Region> {
     private Label lessonLabel;
     @FXML
     private Label paymentStatusLabel;
-
+    @FXML
+    private Label educationLabel;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -73,6 +74,10 @@ public class PersonCard extends UiPart<Region> {
         //Display payment status for the person
         if (paymentStatusLabel != null && person.getPaymentStatus() != null) {
             paymentStatusLabel.setText("Payment: " + person.getPaymentStatus().toString());
+        }
+        // Display education level for the person
+        if (educationLabel != null && person.getEducationLevel() != null) {
+            educationLabel.setText("Education: " + person.getEducationLevel().toString());
         }
     }
 }

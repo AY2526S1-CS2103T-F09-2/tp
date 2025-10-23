@@ -31,8 +31,9 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedStudent(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lesson) {
-        super(name, phone, email, address, tags);
+            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lesson,
+            @JsonProperty("educationLevel") String educationLevel) {
+        super(name, phone, email, address, tags, educationLevel);
         this.lesson = lesson;
     }
 
@@ -61,7 +62,8 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         Address modelAddress = model.getAddress();
         Set<Tag> modelTags = new HashSet<>(model.getTags());
         if (lesson != null) {
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson));
+            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, new Lesson(lesson),
+                    model.getPaymentStatus(), model.getEducationLevel());
         } else {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName()));
         }
