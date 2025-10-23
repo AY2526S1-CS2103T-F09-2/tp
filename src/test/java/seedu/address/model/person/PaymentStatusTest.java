@@ -129,7 +129,7 @@ public class PaymentStatusTest {
     }
 
     @Test
-    public void isValidString_invalidString_throwsNumberFormatException() {
-        assertThrows(NumberFormatException.class, () -> PaymentStatus.isValidString("abcd"));
+    public void isValidString_invalidString_returnsFalse() {
+        assertFalse(PaymentStatus.isValidString("abcd"));
     }
 }
