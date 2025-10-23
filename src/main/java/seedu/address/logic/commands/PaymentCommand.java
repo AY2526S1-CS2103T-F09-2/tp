@@ -14,9 +14,11 @@ import seedu.address.model.Model;
 import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.PaymentStatus.PaymentStatusValue;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Student;
 
 /**
- * Displays a person's payment status using it's displayed index from the address book.
+ * Displays a person's payment status using it's displayed index from the
+ * address book.
  */
 public class PaymentCommand extends Command {
 
@@ -38,6 +40,7 @@ public class PaymentCommand extends Command {
      * Creates a PaymentCommand for a student given a specified {@code targetIndex}.
      *
      * {@code PaymentStatus} is unchanged here.
+     *
      * @param targetIndex index of student in list.
      */
     public PaymentCommand(Index targetIndex) {
@@ -46,10 +49,11 @@ public class PaymentCommand extends Command {
     }
 
     /**
-     * Creates a PaymentCommand for a student given a specified {@code targetIndex} and {@code toSetPaymentStatus}.
+     * Creates a PaymentCommand for a student given a specified {@code targetIndex}
+     * and {@code toSetPaymentStatus}.
      * Sets PaymentStatus of student according to {@code PaymentStatus}.
      *
-     * @param targetIndex index of student in list.
+     * @param targetIndex        index of student in list.
      * @param toSetPaymentStatus PaymentStatus to set.
      */
     public PaymentCommand(Index targetIndex, Optional<PaymentStatusValue> toSetPaymentStatus) {
@@ -70,8 +74,14 @@ public class PaymentCommand extends Command {
         PaymentStatus updatedPaymentStatus = person.getPaymentStatus().update(toSetPaymentStatus);
 
         // If payment status is changed
-        if (updatedPaymentStatus != person.getPaymentStatus()) {
-            Person editedPerson = Person.withPaymentStatus(person, updatedPaymentStatus);
+        if (!updatedPaymentStatus.equals(person.getPaymentStatus())) {
+            Person editedPerson;
+            // Check if the person is a Student to preserve lesson information
+            if (person instanceof Student) {
+                editedPerson = Student.withPaymentStatus((Student) person, updatedPaymentStatus);
+            } else {
+                editedPerson = Person.withPaymentStatus(person, updatedPaymentStatus);
+            }
             model.setPerson(person, editedPerson);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             person = editedPerson;
