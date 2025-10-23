@@ -123,13 +123,13 @@ public class PaymentStatusTest {
     }
 
     @Test
-    public void isValidString_validString_success() {
-        assertTrue(PaymentStatus.isValidString("1"));
-        assertTrue(PaymentStatus.isValidString(" 12 "));
+    public void isValidPaymentStatus_validPaymentStatus_success() {
+        assertTrue(PaymentStatus.isValidPaymentStatus("1"));
+        assertTrue(PaymentStatus.isValidPaymentStatus(" 12 "));
     }
 
     @Test
-    public void isValidString_invalidString_returnsFalse() {
-        assertFalse(PaymentStatus.isValidString("abcd"));
+    public void isValidPaymentStatus_invalidPaymentStatus_returnsFalse() {
+        assertFalse(PaymentStatus.isValidPaymentStatus("abcd"));
     }
 }

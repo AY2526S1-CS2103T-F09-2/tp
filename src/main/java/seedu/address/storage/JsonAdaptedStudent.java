@@ -75,7 +75,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             tmpLesson = new Lesson(lesson);
         }
 
-        if (!PaymentStatus.isValidString(paymentStatus)) {
+        if (!PaymentStatus.isValidPaymentStatus(paymentStatus)) {
             throw new IllegalValueException("paymentStatus error in json");
         }
 

@@ -100,7 +100,7 @@ public class PaymentStatus {
     /**
      * Check if string value can be parsed as an integer so that {@code PaymentStatus} can be instantiated.
      */
-    public static boolean isValidString(String paymentStatus) {
+    public static boolean isValidPaymentStatus(String paymentStatus) {
         paymentStatus = paymentStatus.trim();
         try {
             Integer.parseInt(paymentStatus);
