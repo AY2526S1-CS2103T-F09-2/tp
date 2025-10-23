@@ -47,7 +47,7 @@ public class CancelLessonCommandTest {
                 shown.getEmail(),
                 shown.getAddress(),
                 shown.getTags(),
-                new Lesson("Tue 3pm-5pm")
+                new Lesson("2025-11-01")
         );
 
         model.setPerson(shown, withLessonShown);
@@ -56,7 +56,7 @@ public class CancelLessonCommandTest {
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
-                "Tue 3pm-5pm",
+                "2025-11-01",
                 Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.getEmpty()).build())
         );
 
@@ -77,7 +77,7 @@ public class CancelLessonCommandTest {
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
-                "2025-10-07 14:00 Math",
+                "2025-10-07",
                 Messages.format(noLesson)
         );
 
