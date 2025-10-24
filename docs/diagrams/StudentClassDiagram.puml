@@ -1,0 +1,37 @@
+@startuml studentClassDiagram
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package model {
+class Person
+class Student
+class Lesson {
+  -lessonDate: LocalDate
+  +getNextLesson(): Lesson
+}
+class PaymentStatus
+}
+package storage{
+class JsonAdaptedPerson
+class JsonAdaptedStudent
+}
+
+package logic {
+class addStudentCommand
+class deleteCommand
+}
+
+Person <|-- Student
+JsonAdaptedPerson <|-- JsonAdaptedStudent
+
+
+Student "1" --> "1" Lesson
+Student "1" --> "1" PaymentStatus
+
+Lesson  --> "1" Lesson : nextLesson
+addStudentCommand --> Student: creates >
+deleteCommand --> Student: deletes >
+Student ..> JsonAdaptedStudent: converts to
+@enduml

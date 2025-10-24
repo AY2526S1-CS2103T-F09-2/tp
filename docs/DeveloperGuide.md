@@ -133,6 +133,9 @@ The `Model` component,
 
 </div>
 
+The `Student` Component
+* The student component is a new component that is introduced in the application TutorConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
+* The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in TutorConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
 
 ### Storage component
 
