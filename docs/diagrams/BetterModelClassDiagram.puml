@@ -18,4 +18,28 @@ Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
+Person *--> EducationLevel
+
+Person <|-- Student
+Student *--> PaymentStatus
+Student *--> Lesson
+
+
+enum EducationLevel {
+	UNKNOWN
+	PRIMARY
+	SECONDARY
+	DIPLOMA
+	BACHELORS
+	MASTERS
+	PHD
+	OTHER
+}
+
+class Student {
+	-PaymentStatus paymentStatus
+	-Lesson nextLesson
+	-EducationLevel educationLevel
+}
+
 @enduml
