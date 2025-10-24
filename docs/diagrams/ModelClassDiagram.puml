@@ -48,8 +48,8 @@ Person *--> Address
 Person *--> "*" Tag
 
 Student --|> Person
-Student *--> "0..1" NextLesson
-Student *--> "0..1"PaymentStatus
+Student *--> Lesson
+Student *--> PaymentStatus
 
 Person *--> EducationLevel
 Person -[hidden]up--> I
