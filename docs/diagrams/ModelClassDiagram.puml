@@ -20,6 +20,9 @@ Class Name
 Class Phone
 Class Tag
 
+class Student
+class Lesson
+
 Class I #FFFFFF
 }
 
@@ -42,6 +45,9 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+Student --|> Person
+Student o--> "0..1" Lesson
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
