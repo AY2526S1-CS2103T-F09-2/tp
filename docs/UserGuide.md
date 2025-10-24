@@ -71,7 +71,6 @@ Shows a message explaining how to access the help page.
 
 Format: `help`
 
-
 ### Adding a new student: `addstu`
 
 Adds a person to the address book.
