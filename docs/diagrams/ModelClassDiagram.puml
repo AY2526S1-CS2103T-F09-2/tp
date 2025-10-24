@@ -47,10 +47,12 @@ Person *--> Address
 Person *--> "*" Tag
 
 Student --|> Person
-Student o--> "0..1" Lesson
+Student *--> "0..1" NextLesson
+Student *--> "0..1"PaymentStatus
 
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+Student -[hidden]up--> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
