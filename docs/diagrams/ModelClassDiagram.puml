@@ -21,6 +21,9 @@ Class Phone
 Class Tag
 Class "<<enumeration>>\nEducationLevel" as EducationLevel
 
+class Student
+class Lesson
+
 Class I #FFFFFF
 }
 
@@ -43,9 +46,15 @@ Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
+
+Student --|> Person
+Student *--> Lesson
+Student *--> PaymentStatus
+
 Person *--> EducationLevel
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+Student -[hidden]up--> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
