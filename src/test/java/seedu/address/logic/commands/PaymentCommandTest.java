@@ -77,8 +77,7 @@ public class PaymentCommandTest {
             Optional<PaymentStatusValue> newPaymentStatus = Optional.of(statusValue);
             PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
 
-            Student newStudent = student.updatePaymentStatus(student,
-                    student.getPaymentStatus().update(newPaymentStatus));
+            Student newStudent = student.updatePaymentStatus(student.getPaymentStatus().update(newPaymentStatus));
             String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
                     newStudent.getName(), newStudent.getPaymentStatus());
             Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -112,6 +111,17 @@ public class PaymentCommandTest {
         Index index = Index.fromZeroBased(size + 1);
         PaymentCommand paymentCommand = new PaymentCommand(index);
         assertCommandFailure(paymentCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_paidStatusArgumentWhenOverpaid_throwsCommandException() throws Exception {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student student = generateStudent(person).updatePaymentStatus(new PaymentStatus(0));
+        model.setPerson(person, student);
+
+        PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatusValue.PAID));
+
+        assertThrows(CommandException.class, PaymentStatus.MESSAGE_OVERPAID, () -> paymentCommand.execute(model));
     }
 
     @Test
