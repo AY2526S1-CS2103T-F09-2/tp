@@ -75,11 +75,18 @@ public class PaymentCommand extends Command {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
+        int outstandingLessonPayments = student.getPaymentStatus().getOutstandingLessonPayments();
+
+        if (toSetPaymentStatus.map(status -> status == PaymentStatusValue.PAID).orElse(false)
+                && outstandingLessonPayments <= 0) {
+            throw new CommandException(PaymentStatus.MESSAGE_OVERPAID);
+        }
+
         PaymentStatus updatedPaymentStatus = student.getPaymentStatus().update(toSetPaymentStatus);
 
         // If payment status is changed
         if (updatedPaymentStatus != student.getPaymentStatus()) {
-            Student editedStudent = student.updatePaymentStatus(student, updatedPaymentStatus);
+            Student editedStudent = student.updatePaymentStatus(updatedPaymentStatus);
             model.setPerson(student, editedStudent);
             model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
             student = editedStudent;
