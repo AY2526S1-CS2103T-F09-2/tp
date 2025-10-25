@@ -1,0 +1,73 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":PaymentCommandParser" as PaymentCommandParser LOGIC_COLOR
+participant "d:PaymentCommand" as PaymentCommand LOGIC_COLOR
+participant "r:CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Student #27C5F5
+participant "s:Student" as Student #32A4C9
+end box
+
+[-> LogicManager : execute("payment 1")
+activate LogicManager
+
+LogicManager -> AddressBookParser : parseCommand("payment 1")
+activate AddressBookParser
+
+create PaymentCommandParser
+AddressBookParser -> PaymentCommandParser
+activate PaymentCommandParser
+
+PaymentCommandParser --> AddressBookParser
+deactivate PaymentCommandParser
+
+AddressBookParser -> PaymentCommandParser : parse("1")
+activate PaymentCommandParser
+
+create PaymentCommand
+PaymentCommandParser -> PaymentCommand
+activate PaymentCommand
+
+PaymentCommand --> PaymentCommandParser :
+deactivate PaymentCommand
+
+PaymentCommandParser --> AddressBookParser : d
+deactivate PaymentCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+PaymentCommandParser -[hidden]-> AddressBookParser
+destroy PaymentCommandParser
+
+AddressBookParser --> LogicManager : d
+deactivate AddressBookParser
+
+LogicManager -> PaymentCommand : execute(m)
+activate PaymentCommand
+
+PaymentCommand -> Student
+activate Student
+
+Student -> Student : getPaymentStatus()
+Student -> Student : update(newPaymentStatusToSet)
+Student --> PaymentCommand : newPaymentStatus
+
+deactivate Student
+
+create CommandResult
+PaymentCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> PaymentCommand
+deactivate CommandResult
+
+PaymentCommand --> LogicManager : r
+deactivate PaymentCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
