@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -26,6 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private EducationLevel educationLevel;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -36,6 +38,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        educationLevel = EducationLevel.UNKNOWN;
     }
 
     /**
@@ -47,6 +50,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
+        educationLevel = personToCopy.getEducationLevel();
     }
 
     /**
@@ -88,9 +92,14 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
-
+    /**
+     * Sets the {@code EducationLevel} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withEducation(EducationLevel educationLevel) {
+        this.educationLevel = educationLevel;
+        return this;
+    }
     public Person build() {
         return new Person(name, phone, email, address, tags);
     }
-
 }

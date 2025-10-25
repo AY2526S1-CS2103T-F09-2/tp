@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
@@ -192,5 +193,29 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+    // Education-level specific tests
+    @Test
+    public void parseEducation_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseEducation(null));
+    }
+
+    @Test
+    public void parseEducation_empty_returnsUnknown() throws Exception {
+        assertEquals(EducationLevel.UNKNOWN, ParserUtil.parseEducation(""));
+        assertEquals(EducationLevel.UNKNOWN, ParserUtil.parseEducation("   \t  "));
+    }
+
+    @Test
+    public void parseEducation_recognizedSynonym_mapsCorrectly() throws Exception {
+        assertEquals(EducationLevel.PRIMARY_1, ParserUtil.parseEducation("primary 1"));
+        assertEquals(EducationLevel.SEC_4, ParserUtil.parseEducation("SEC 4"));
+        assertEquals(EducationLevel.J2, ParserUtil.parseEducation("jc 2"));
+    }
+
+    @Test
+    public void parseEducation_unrecognized_returnsOther() throws Exception {
+        assertEquals(EducationLevel.OTHER, ParserUtil.parseEducation("polytechnic"));
+        assertEquals(EducationLevel.OTHER, ParserUtil.parseEducation("random"));
     }
 }
