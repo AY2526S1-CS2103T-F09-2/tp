@@ -69,7 +69,7 @@ public class AddLessonCommand extends Command {
         }
         // If already a Student, check for lesson
         if (foundPerson instanceof Student) {
-            Student targetStudent = (Student) foundPerson;
+            Student targetStudent = ((Student) foundPerson).unpaid();
             if (targetStudent.getNextLesson() != null && !targetStudent.getNextLesson().isEmpty()) {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
@@ -82,7 +82,7 @@ public class AddLessonCommand extends Command {
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
-                    toAdd);
+                    toAdd).unpaid();
             model.setPerson(foundPerson, newStudent);
         }
         // Find the updated student from the full person list

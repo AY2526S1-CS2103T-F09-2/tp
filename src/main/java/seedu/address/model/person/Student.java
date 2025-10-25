@@ -1,8 +1,11 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Lesson;
 import seedu.address.model.tag.Tag;
 
@@ -81,9 +84,40 @@ public class Student extends Person {
     }
 
     /**
-     * Converts a Student into a new Student object with new paymentStatus to ensure immutability
+     * Converts the current Student object into a new Student object with new paymentStatus to ensure immutability.
      */
-    public Student updatePaymentStatus(Student student, PaymentStatus paymentStatus) {
-        return new Student(student, paymentStatus);
+    public Student updatePaymentStatus(PaymentStatus paymentStatus) {
+        requireNonNull(paymentStatus);
+        return new Student(this, paymentStatus);
+    }
+
+    /**
+     * Returns a new instance of Student who has paid for a Lesson.
+     */
+    public Student paid() throws CommandException {
+        return new Student(this, this.paymentStatus.update(PaymentStatus.PaymentStatusValue.PAID));
+    }
+
+    /**
+     * Returns a new instance of Student who has not paid for a Lesson.
+     */
+    public Student unpaid() throws CommandException {
+        return new Student(this, this.paymentStatus.update(PaymentStatus.PaymentStatusValue.UNPAID));
+    }
+
+    /**
+     * Returns a new instance of Student who has no Lesson.
+     */
+    public Student setEmptyLesson() {
+        return new Student(
+                this.getName(),
+                this.getPhone(),
+                this.getEmail(),
+                this.getAddress(),
+                this.getTags(),
+                Lesson.getEmpty(),
+                this.paymentStatus.getOutstandingLessonPayments(),
+                this.getEducationLevel()
+        );
     }
 }

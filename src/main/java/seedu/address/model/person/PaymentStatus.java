@@ -27,6 +27,7 @@ public class PaymentStatus {
 
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
+    public static final String MESSAGE_OVERPAID = "Unsuccessful as already overpaid / no outstanding lessons to pay";
 
     public static final int ZERO_OUTSTANDING_PAYMENTS = 0;
     private final int outstandingLessonPayments;
@@ -67,7 +68,20 @@ public class PaymentStatus {
             return this;
         }
 
-        return switch (newStatus.get()) {
+        return update(newStatus.get());
+    }
+
+    /**
+     * Returns a new {@code PaymentStatus} updated with the given {@code newStatus} value.
+     * Guarantees: immutable;
+     * @param newStatus {@code newStatus} value determines PaymentStatus action to perform.
+     * @return A new {@code PaymentStatus} if {@code PaymentStatusValue} provided,
+     *     else returns same {@code PaymentStatusValue}
+     */
+    public PaymentStatus update(PaymentStatusValue newStatus) {
+        requireNonNull(newStatus);
+
+        return switch (newStatus) {
         case PAID -> this.paid();
         case UNPAID -> this.unpaid();
         };

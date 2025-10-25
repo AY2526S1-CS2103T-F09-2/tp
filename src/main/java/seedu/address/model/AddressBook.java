@@ -125,7 +125,9 @@ public class AddressBook implements ReadOnlyAddressBook {
                         s.getEmail(),
                         s.getAddress(),
                         s.getTags(),
-                        lesson
+                        lesson,
+                        student.getPaymentStatus(),
+                        student.getEducationLevel()
                 );
                 persons.setPerson(s, updatedStudent);
             }

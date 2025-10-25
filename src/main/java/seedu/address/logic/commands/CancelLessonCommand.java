@@ -59,13 +59,8 @@ public class CancelLessonCommand extends Command {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
-        Student edited = new Student(
-                student.getName(),
-                student.getPhone(),
-                student.getEmail(),
-                student.getAddress(),
-                student.getTags(),
-                Lesson.getEmpty());
+        student = student.paid();
+        Student edited = student.setEmptyLesson();
 
         model.setPerson(student, edited);
 

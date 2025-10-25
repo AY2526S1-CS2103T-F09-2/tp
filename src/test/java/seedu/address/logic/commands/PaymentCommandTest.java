@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -54,43 +53,47 @@ public class PaymentCommandTest {
                 student.getName(), student.getPaymentStatus());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(model.getFilteredPersonList().get(0), student);
+        expectedModel.setPerson(person, student);
 
-        addLessonToModel(student);
-
-        assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
+        // no change in model
+        assertCommandSuccess(paymentCommand, expectedModel, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_validStatusFlag_returnsCorrectPaymentStatus() throws Exception {
         Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
+        // change person to become student for testing
         Student student = generateStudent(personToEdit);
+        addLessonToModel(student); // student has 1 unpaid lesson
 
-        PaymentStatus originalPaymentStatus = student.getPaymentStatus();
-        addLessonToModel(student);
+        // get back same student with updated fields
+        personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        student = generateStudent(personToEdit);
 
-        final List<PaymentStatusValue> paymentStatusValues = List.of(PaymentStatusValue.PAID,
-                PaymentStatusValue.UNPAID);
+        // pay for 1 lesson
+        Optional<PaymentStatusValue> newPaymentStatus = Optional.of(PaymentStatusValue.PAID);
+        PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
+        Student newStudent = student.paid();
 
-        for (PaymentStatusValue statusValue : paymentStatusValues) {
-            Optional<PaymentStatusValue> newPaymentStatus = Optional.of(statusValue);
-            PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
+        String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
+                newStudent.getName(), newStudent.getPaymentStatus());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(student, newStudent);
+        assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
 
-            Student newStudent = student.updatePaymentStatus(student,
-                    student.getPaymentStatus().update(newPaymentStatus));
-            String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                    newStudent.getName(), newStudent.getPaymentStatus());
-            Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-            expectedModel.setPerson(student, newStudent);
+        student = newStudent;
 
-            assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
+        // unpay for 1 lesson
+        newPaymentStatus = Optional.of(PaymentStatusValue.UNPAID);
+        paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
+        newStudent = student.unpaid();
 
-            student = newStudent;
-        }
-
-        // Check payment status back to original
-        assertEquals(originalPaymentStatus, student.getPaymentStatus());
+        expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
+                newStudent.getName(), newStudent.getPaymentStatus());
+        expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        expectedModel.setPerson(student, newStudent);
+        assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
     }
 
 
@@ -112,6 +115,17 @@ public class PaymentCommandTest {
         Index index = Index.fromZeroBased(size + 1);
         PaymentCommand paymentCommand = new PaymentCommand(index);
         assertCommandFailure(paymentCommand, model, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_paidStatusArgumentWhenOverpaid_throwsCommandException() throws Exception {
+        Person person = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Student student = generateStudent(person).updatePaymentStatus(new PaymentStatus(0));
+        model.setPerson(person, student);
+
+        PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, Optional.of(PaymentStatusValue.PAID));
+
+        assertThrows(CommandException.class, PaymentStatus.MESSAGE_OVERPAID, () -> paymentCommand.execute(model));
     }
 
     @Test

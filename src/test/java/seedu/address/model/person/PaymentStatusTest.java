@@ -86,7 +86,8 @@ public class PaymentStatusTest {
     @Test
     public void update_nullPaymentStatus_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new PaymentStatus(1).update(null));
+                new PaymentStatus(1).update(
+                        (Optional<PaymentStatus.PaymentStatusValue>) null));
     }
 
     @Test
