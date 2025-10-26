@@ -42,7 +42,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         this.interval = interval;
         this.paymentStatus = paymentStatus;
     }
-
     /**
      * Converts a given {@code Student} into this class for Jackson use.
      */
@@ -52,11 +51,9 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         this.interval = source.getNextLesson().getIntervalDays();
         this.paymentStatus = String.valueOf(source.getPaymentStatus().getOutstandingLessonPayments());
     }
-
     /**
      * Converts this Jackson-friendly adapted student object into the model's
      * {@code Student} object.
-     *
      * @throws IllegalValueException if there were any data constraints violated in
      *                               the adapted person.
      */
@@ -68,7 +65,6 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         Email modelEmail = model.getEmail();
         Address modelAddress = model.getAddress();
         Set<Tag> modelTags = new HashSet<>(model.getTags());
-
         // Handle case where null fields in JSON
         Lesson tmpLesson;
         int outstandingPayments;
@@ -83,28 +79,27 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         } else {
             outstandingPayments = Integer.parseInt(paymentStatus);
         }
-
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 tmpLesson, outstandingPayments, model.getEducationLevel());
     }
-
     /**
      * A helper method that helps to build a lesson from the JSON format
      * @param lessonString the date String stored in JSON
      * @param interval the interval between each recurring lesson(normal lesson = 0)
      * @return the lesson represented in JSON parameters
      */
-    private Lesson initilaiseLesson(String lessonString,int interval) {
+    private Lesson initilaiseLesson(String lessonString, int interval) {
         if (this.lesson == null) {
             return Lesson.getEmpty();
-        } else if(interval == 0) {
+        } else if (interval == 0) {
             return new Lesson(this.lesson);
-        } else if(interval <= -1) {
+        } else if (interval <= -1) {
             return Lesson.getEmpty();
         } else {
             assert interval > 0;
             return new RecurringLesson(lessonString, interval);
         }
-        
     }
+
 }
+

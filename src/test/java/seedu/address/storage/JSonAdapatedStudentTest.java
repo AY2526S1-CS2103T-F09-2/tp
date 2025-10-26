@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,6 @@ import seedu.address.testutil.StudentBuilder;
 public class JSonAdapatedStudentTest {
 
     private static final Student TYPICAL_STUDENT = new StudentBuilder().build();
-    
 
     @Test
     public void toModelType_validStudentDetails_returnsStudent() throws Exception {
@@ -29,7 +28,7 @@ public class JSonAdapatedStudentTest {
         assertEquals(student.toModelType().getNextLesson(), Lesson.getEmpty());
     }
 
-    @Test 
+    @Test
     public void toModelType_reucrringLesson_returnStudent() throws Exception {
         RecurringLesson recur = new RecurringLesson(LocalDate.now(), 5);
         Student recurStudent = new StudentBuilder().withNewLesson(recur).build();
