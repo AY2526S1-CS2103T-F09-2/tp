@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Lesson;
+import seedu.address.model.RecurringLesson;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -25,6 +26,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
     private String lesson;
     private String paymentStatus;
+    private int interval;
 
     /**
      * Constructs a {@code JsonAdaptedStudent} with the given student details.
@@ -34,9 +36,10 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             @JsonProperty("email") String email, @JsonProperty("address") String address,
             @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lesson,
             @JsonProperty("paymentStatus") String paymentStatus,
-            @JsonProperty("educationLevel") String educationLevel) {
+            @JsonProperty("educationLevel") String educationLevel, @JsonProperty("interval") int interval) {
         super(name, phone, email, address, tags, educationLevel);
         this.lesson = lesson;
+        this.interval = interval;
         this.paymentStatus = paymentStatus;
     }
 
@@ -46,6 +49,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(Student source) {
         super(source); // call JsonAdaptedA constructor
         this.lesson = source.getNextLesson().getLessonDate();
+        this.rate = source.getNextLesson().getIntervalDays();
         this.paymentStatus = String.valueOf(source.getPaymentStatus().getOutstandingLessonPayments());
     }
 
@@ -68,12 +72,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         // Handle case where null fields in JSON
         Lesson tmpLesson;
         int outstandingPayments;
-
-        if (lesson == null) {
-            tmpLesson = Lesson.getEmpty();
-        } else {
-            tmpLesson = new Lesson(lesson);
-        }
+        tmpLesson = initilaiseLesson(this.lesson, this.interval);
 
         if (!PaymentStatus.isValidPaymentStatus(paymentStatus)) {
             throw new IllegalValueException("paymentStatus error in json");
@@ -87,6 +86,22 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
 
         return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags,
                 tmpLesson, outstandingPayments, model.getEducationLevel());
+    }
+
+    /**
+     * A helper method that helps to build a lesson from the JSON format
+     * @param lessonString the date String stored in JSON
+     * @param interval the interval between each recurring lesson(normal lesson = 0)
+     * @return the lesson represented in JSON parameters
+     */
+    private Lesson initilaiseLesson(String lessonString,int interval) {
+        if (this.lesson == null) {
+            return Lesson.getEmpty();
+        } else if(interval <= 0) {
+            return new Lesson(this.lesson);
+        } else {
+            return new RecurringLesson(lessonString, interval);
+        }
     }
 
 }
