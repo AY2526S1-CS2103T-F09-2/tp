@@ -49,7 +49,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     public JsonAdaptedStudent(Student source) {
         super(source); // call JsonAdaptedA constructor
         this.lesson = source.getNextLesson().getLessonDate();
-        this.rate = source.getNextLesson().getIntervalDays();
+        this.interval = source.getNextLesson().getIntervalDays();
         this.paymentStatus = String.valueOf(source.getPaymentStatus().getOutstandingLessonPayments());
     }
 
@@ -103,5 +103,4 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
             return new RecurringLesson(lessonString, interval);
         }
     }
-
 }
