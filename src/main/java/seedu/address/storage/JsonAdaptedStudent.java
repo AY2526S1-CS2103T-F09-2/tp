@@ -97,10 +97,14 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
     private Lesson initilaiseLesson(String lessonString,int interval) {
         if (this.lesson == null) {
             return Lesson.getEmpty();
-        } else if(interval <= 0) {
+        } else if(interval == 0) {
             return new Lesson(this.lesson);
+        } else if(interval <= -1) {
+            return Lesson.getEmpty();
         } else {
+            assert interval > 0;
             return new RecurringLesson(lessonString, interval);
         }
+        
     }
 }

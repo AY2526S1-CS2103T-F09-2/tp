@@ -157,5 +157,13 @@ public class Lesson {
         public String toString() {
             return EMPTY_MESSAGE;
         }
+
+        /**
+         * This method is purely for the sake of convenience in storage
+         */
+        @Override
+        public int getIntervalDays() {
+            return -1;
+        }
     }
 }
