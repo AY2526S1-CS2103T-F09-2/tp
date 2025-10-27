@@ -75,7 +75,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​`
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have 0 or 1 address
@@ -84,12 +84,14 @@ All other fields are compulsory
 When a student is initialised, *by default* : 
 1. the student has not paid for any lesson(refer to track for more info)
 2. the student does not have any lesson (refer to addLesson for more info)
-</div>
+3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. </div>
 
 Examples:
-* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history`
-* `addstu n/Cindy Wong p/12355677 e/12345@example.com`
+* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
+* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
+* `addstu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
+* `addstu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
+* `addstu n/Alex Tan p/91223344 e/alex@example.com`
 
 ### Listing all persons : `list`
 
