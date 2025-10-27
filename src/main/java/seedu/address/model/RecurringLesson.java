@@ -33,6 +33,7 @@ public class RecurringLesson extends Lesson {
     /**
      * Returns the interval day for the recurring lesson
      */
+    @Override
     public int getIntervalDays() {
         return intervalDays;
     }

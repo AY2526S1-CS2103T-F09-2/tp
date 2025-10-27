@@ -57,6 +57,14 @@ public class Lesson {
     }
 
     /**
+     * Returns the interval day for a normal lesson
+     * It returns 0 just for the convenience of storage
+     */
+    public int getIntervalDays() {
+        return 0;
+    }
+
+    /**
      * This method returns the date of the specific lesson of the student
      * @return LocalDate object of the lesson
      */
@@ -148,6 +156,14 @@ public class Lesson {
         @Override
         public String toString() {
             return EMPTY_MESSAGE;
+        }
+
+        /**
+         * This method is purely for the sake of convenience in storage
+         */
+        @Override
+        public int getIntervalDays() {
+            return -1;
         }
     }
 }
