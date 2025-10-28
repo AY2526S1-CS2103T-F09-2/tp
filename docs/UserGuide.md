@@ -38,6 +38,78 @@ title: User Guide
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+## Basic Concepts
+
+To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
+
+### Student
+A student is represented as an item in the student list. You can add a student by callling the [`addstu`](#adding-a-new-student-addstu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
+The number index is based on the order that the student is added into the list.
+
+A student has the following attributes, as shown on the example above:
+1. name: The name of the student
+2. phone number: The phone number of a student
+3. email address: The email address of a student
+4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
+4. [tag](#tag): Tags that record extra informations of a student
+5. [lesson](#lesson): The lesson that the student has 
+
+<div markdown="block" class="alert alert-info">
+A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
+</div>
+
+### Student list
+The list of the student that appears at the bottom of the application interface. It shows all students that is stored in the application. These students in the student list can be accessed by commands such as [`addLesson`](#add-a-lesson--addlesson), whenever we need to refer to a specific student that is **already created**.
+ 
+### tag 
+A tag is a piece of text that records a unique characteristic of the student. You can add optionally add any number of tags when you create a new [student](#student) by calling the [`addstu`](#adding-a-new-student-addstu) command.
+
+In StudentConnect, you can use the tag in the following way:
+1. Record the subject of the [student](#student) (e.g. `history`, `chemistry`) if you teach multiple subjects
+2. Record information about the [student](#student) that you need to remind yourself (e.g. `50$/hr`)
+3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `feedback/no-feedback`)
+4. Record the platform that you use if you are hosting online lessons(e.g. `platform:Giggle meet`)
+
+### lesson
+
+A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
+* For instance, a lesson that starts at `November 10th 2024 5pm` should be represented as `2024-11-10` in the system.
+ 
+When a student is created, the student by defualt does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
+
+A lesson is considered **passed** if the date of lesson recorded is **before the current date**(Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
+
+### Recurring lessons
+
+As most tutors conduct lessons regularly—such as every week or every few days—**recurring lessons** help you keep track of lessons that happen on a routine schedule.
+
+A **recurring lesson** has two key attributes:
+
+* **`LESSONDATE`**: the date when the first lesson starts
+* **`INTERVAL`**: the number of days between each lesson
+
+For example, if your lesson starts on `2025-10-10` and occurs once every week, then:
+
+* `LESSONDATE` = `2025-10-10`
+* `INTERVAL` = `7`
+
+The system automatically updates a recurring lesson whenever its `LESSONDATE` is earlier than the current date. It does this by adding the `INTERVAL` (in days) to the previous `LESSONDATE`, moving it forward to the next scheduled lesson.
+
+For instance:
+
+* Today’s date = `2025-10-20`
+* Current `LESSONDATE` = `2025-10-19`
+* `INTERVAL` = `7`
+
+Since the recorded lesson date has already passed, the system updates it to **2025-10-26** — one week later.
+
+This ensures your recurring lessons always reflect the *next upcoming* session without requiring manual changes.
+
+
+
+### payment status
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Features
 
