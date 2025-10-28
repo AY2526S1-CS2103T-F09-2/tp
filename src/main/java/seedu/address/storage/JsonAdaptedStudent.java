@@ -68,7 +68,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
         // Handle case where null fields in JSON
         Lesson tmpLesson;
         int outstandingPayments;
-        tmpLesson = initilaiseLesson(this.lesson, this.interval);
+        tmpLesson = initialiseLesson(this.lesson, this.interval);
 
         if (!PaymentStatus.isValidPaymentStatus(paymentStatus)) {
             throw new IllegalValueException("paymentStatus error in json");
@@ -88,7 +88,7 @@ public class JsonAdaptedStudent extends JsonAdaptedPerson {
      * @param interval the interval between each recurring lesson(normal lesson = 0)
      * @return the lesson represented in JSON parameters
      */
-    private Lesson initilaiseLesson(String lessonString, int interval) {
+    private Lesson initialiseLesson(String lessonString, int interval) {
         if (this.lesson == null) {
             return Lesson.getEmpty();
         } else if (interval == 0) {
