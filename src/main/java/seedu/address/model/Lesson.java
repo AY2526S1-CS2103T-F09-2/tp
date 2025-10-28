@@ -13,6 +13,7 @@ public class Lesson {
 
     private static Lesson empty;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final int MAX_DATE_RANGE = 365;
     private final LocalDate lessonDate;
 
     /**
@@ -107,7 +108,9 @@ public class Lesson {
     public static boolean isValidLessonDate(String input) {
         try {
             LocalDate toConvert = LocalDate.parse(input);
-            return toConvert.isAfter(LocalDate.now()) || toConvert.equals(LocalDate.now());
+            boolean isAfterNow = toConvert.isAfter(LocalDate.now()) || toConvert.equals(LocalDate.now());
+            boolean isWithinrange = toConvert.isBefore(LocalDate.now().plusDays(MAX_DATE_RANGE));
+            return isAfterNow && isWithinrange;
         } catch (DateTimeParseException e) {
             return false;
         }
