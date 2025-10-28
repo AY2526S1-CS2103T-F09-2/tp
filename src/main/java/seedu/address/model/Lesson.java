@@ -10,7 +10,7 @@ import java.time.format.DateTimeParseException;
 public class Lesson {
 
     public static final String EMPTY_MESSAGE = "No lessons yet";
-    
+
     private static Lesson empty;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final int MAX_DATE_RANGE = 365;

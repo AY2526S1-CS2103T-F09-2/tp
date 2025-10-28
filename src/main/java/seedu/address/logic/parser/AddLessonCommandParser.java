@@ -19,7 +19,8 @@ import seedu.address.model.person.Name;
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
     public static final String INTERVAL_ERROR = "Invalid interval days: it must be an integer between 1 and 364.";
-    public static final String DATE_ERROR = "Invalid date: it must be of format YYYY-MM-DD and within 365 days from now";
+    public static final String DATE_ERROR = "Invalid date: it must be of format:"
+            + "YYYY-MM-DD and within 365 days from now";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddLessonCommand

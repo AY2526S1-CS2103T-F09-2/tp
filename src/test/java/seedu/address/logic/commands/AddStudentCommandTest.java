@@ -40,5 +40,5 @@ public class AddStudentCommandTest {
         AddStudentCommand secondTime = new AddStudentCommand(validStudent);
         assertThrows(CommandException.class, () -> secondTime.execute(model),
                 AddStudentCommand.MESSAGE_DUPLICATE_STUDENT);
-    }    
+    }
 }

@@ -38,7 +38,7 @@ public class RecurringLessonTest {
         assertNotEquals(expected, output);
     }
 
-    @Test 
+    @Test
     public void isOutdatedTest() {
         LocalDate now = LocalDate.now();
         RecurringLesson dummyLesson = new RecurringLesson(now, 4); // Now
