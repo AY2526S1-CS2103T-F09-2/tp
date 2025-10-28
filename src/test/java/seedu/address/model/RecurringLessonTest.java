@@ -39,13 +39,30 @@ public class RecurringLessonTest {
     }
 
     @Test
+    public void isOutdatedTest() {
+        LocalDate now = LocalDate.now();
+        RecurringLesson dummyLesson = new RecurringLesson(now, 4); // Now
+        assertFalse(dummyLesson.isOutdated());
+        dummyLesson = new RecurringLesson(now.minusDays(1), 4); // before
+        assertTrue(dummyLesson.isOutdated());
+        dummyLesson = new RecurringLesson(now.plusDays(1), 4); // after
+        assertFalse(dummyLesson.isOutdated());
+    }
+
+    @Test
     public void intervalCheckTest() {
         assertFalse(RecurringLesson.isValidInterval("1000"));
         assertFalse(RecurringLesson.isValidInterval("NotANumber"));
         assertFalse(RecurringLesson.isValidInterval(""));
+        assertFalse(RecurringLesson.isValidInterval(" "));
         assertFalse(RecurringLesson.isValidInterval("-1"));
+        assertTrue(RecurringLesson.isValidInterval("364"));
+        assertFalse(RecurringLesson.isValidInterval("366"));
+        assertFalse(RecurringLesson.isValidInterval("0.5"));
         assertFalse(RecurringLesson.isValidInterval("0"));
+        assertTrue(RecurringLesson.isValidInterval("1"));
         assertTrue(RecurringLesson.isValidInterval("3"));
+        assertFalse(RecurringLesson.isValidInterval("<div />"));
     }
 
 }

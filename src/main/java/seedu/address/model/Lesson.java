@@ -13,6 +13,7 @@ public class Lesson {
 
     private static Lesson empty;
     private static final String DATE_FORMAT = "yyyy-MM-dd";
+    private static final int MAX_DATE_RANGE = 365;
     private final LocalDate lessonDate;
 
     /**
@@ -54,6 +55,14 @@ public class Lesson {
     @Deprecated
     public String getLessonDate() {
         return lessonDate.toString();
+    }
+
+    /**
+     * Returns the interval day for a normal lesson
+     * It returns 0 just for the convenience of storage
+     */
+    public int getIntervalDays() {
+        return 0;
     }
 
     /**
@@ -99,7 +108,9 @@ public class Lesson {
     public static boolean isValidLessonDate(String input) {
         try {
             LocalDate toConvert = LocalDate.parse(input);
-            return toConvert.isAfter(LocalDate.now()) || toConvert.equals(LocalDate.now());
+            boolean isAfterNow = toConvert.isAfter(LocalDate.now()) || toConvert.equals(LocalDate.now());
+            boolean isWithinrange = toConvert.isBefore(LocalDate.now().plusDays(MAX_DATE_RANGE));
+            return isAfterNow && isWithinrange;
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -148,6 +159,14 @@ public class Lesson {
         @Override
         public String toString() {
             return EMPTY_MESSAGE;
+        }
+
+        /**
+         * This method is purely for the sake of convenience in storage
+         */
+        @Override
+        public int getIntervalDays() {
+            return -1;
         }
     }
 }

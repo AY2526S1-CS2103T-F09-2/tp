@@ -25,7 +25,7 @@ public class AddLessonCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_LESSON + "LESSON_DATE "
-            + "[optional]" + PREFIX_INTERVAL + "INTERVAL_DAYS_FOR_RECURRING\n"
+            + "[" + PREFIX_INTERVAL + "]" + "INTERVAL_DAYS_FOR_RECURRING\n"
             + "Example:\n"
             + "Normal Lesson: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
