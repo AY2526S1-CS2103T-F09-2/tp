@@ -27,7 +27,7 @@ public class AddStudentCommand extends Command {
         + PREFIX_ADDRESS + "ADDRESS "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + "Alice Pauline"
+        + PREFIX_NAME + "Alice Pauline "
         + PREFIX_PHONE + "92345123 "
         + PREFIX_EMAIL + "1200033@gmail.com";
     public static final String MESSAGE_SUCCESS = "New Student added: %1$s";
