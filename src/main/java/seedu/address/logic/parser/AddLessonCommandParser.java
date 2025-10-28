@@ -18,6 +18,9 @@ import seedu.address.model.person.Name;
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
+    public static final String INTERVAL_ERROR = "Invalid interval days: it must be an integer between 1 and 364.";
+    public static final String DATE_ERROR = "Invalid date: it must be of format YYYY-MM-DD and within 365 days from now";
+
     /**
      * Parses the given {@code String} of arguments in the context of the AddLessonCommand
      * and returns an AddLessonCommand object for execution.
@@ -41,7 +44,10 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
             String interval = argMultimap.getValue(PREFIX_INTERVAL).get().trim();
             if (!RecurringLesson.isValidInterval(interval)) {
-                throw new ParseException("Invalid interval days: it must be an integer between 1 and 364.");
+                throw new ParseException(AddLessonCommandParser.INTERVAL_ERROR);
+            }
+            if (!Lesson.isValidLessonDate(lessonDate)) {
+                throw new ParseException(AddLessonCommandParser.DATE_ERROR);
             }
             int intervalDays = Integer.parseInt(interval);
             lesson = new RecurringLesson(lessonDate, intervalDays);

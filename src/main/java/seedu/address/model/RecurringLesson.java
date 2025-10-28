@@ -81,6 +81,6 @@ public class RecurringLesson extends Lesson {
         }
 
         RecurringLesson other = (RecurringLesson) o;
-        return this.getIntervalDays() == other.getIntervalDays();
+        return this.getIntervalDays() == other.getIntervalDays() && this.getLessonDateTime().equals(other.getLessonDateTime());
     }
 }
