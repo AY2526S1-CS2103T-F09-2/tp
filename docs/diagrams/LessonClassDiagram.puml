@@ -19,7 +19,7 @@ class RecurringLesson {
   -interval: Integer
 }
 
-class EmptyLesson <<Singleton>> 
+class EmptyLesson <<Singleton>>
 
 class ModelManager
 
@@ -41,6 +41,6 @@ addLessonCommand --> Student: creates >
 cancelLessonCommand --> Student: deletes >
 Lesson ..> ModelMananger: updates itself
 
-Student *-- Lesson 
+Student *-- Lesson
 
 @enduml
