@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Adds a lesson for a student to the address book.
@@ -20,45 +20,38 @@ public class AddLessonCommand extends Command {
     public static final String COMMAND_WORD = "addLesson";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson for a student to the address book. "
-            + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + "Parameters: INDEX "
             + PREFIX_LESSON + "LESSON_DATE\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + "Example: " + COMMAND_WORD + " 2 "
             + PREFIX_LESSON + "Tuesday";
 
     public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
-    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the " +
-            "address book";
+    public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the "
+            + "address book";
 
-    private Name studentName;
-    private Lesson toAdd;
+    private final Index targetIndex;
+    private final Lesson toAdd;
 
     /**
-     * Creates an AddLessonCommand to add the specified {@Lesson Lesson} for a student identified by {@Name name}
+     * Creates an AddLessonCommand to add the specified {@link Lesson} for the
+     * student at the given {@link Index}.
      */
-    public AddLessonCommand(Name name, Lesson lesson) {
-        requireNonNull(name);
+    public AddLessonCommand(Index index, Lesson lesson) {
+        requireNonNull(index);
         requireNonNull(lesson);
-        this.studentName = name;
+        this.targetIndex = index;
         this.toAdd = lesson;
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        // Search the full person list for matching name
-        Person foundPerson = null;
-        for (Person p : model.getAddressBook().getPersonList()) {
-            System.out.println("Found person: " + p.getName().fullName);
-            if (p.getName().fullName.equalsIgnoreCase(studentName.fullName)) {
-                foundPerson = p;
-                break;
-            }
+        // Use filtered list and the provided index to locate the student
+        var lastShownList = model.getFilteredPersonList();
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
-        if (foundPerson == null) {
-            throw new CommandException("Student does not exist");
-        }
+        Person foundPerson = lastShownList.get(targetIndex.getZeroBased());
         // If already a Student, check for lesson
         if (foundPerson instanceof Student) {
             Student targetStudent = (Student) foundPerson;
@@ -74,18 +67,12 @@ public class AddLessonCommand extends Command {
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
-                    toAdd
-            );
+                    toAdd);
             model.setPerson(foundPerson, newStudent);
         }
-        // Find the updated student from the full person list
-        Student updatedStudent = null;
-        for (Person p : model.getAddressBook().getPersonList()) {
-            if (p instanceof Student && p.getName().fullName.equalsIgnoreCase(studentName.fullName)) {
-                updatedStudent = (Student) p;
-                break;
-            }
-        }
+        // Retrieve the updated person at the same index for display
+        Person updated = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Student updatedStudent = (updated instanceof Student) ? (Student) updated : null;
         if (updatedStudent == null) {
             throw new CommandException("Failed to update student");
         }
@@ -104,13 +91,14 @@ public class AddLessonCommand extends Command {
         }
 
         AddLessonCommand otherAddLessonCommand = (AddLessonCommand) other;
-        return toAdd.equals(otherAddLessonCommand.toAdd);
+        return targetIndex.equals(otherAddLessonCommand.targetIndex)
+                && toAdd.equals(otherAddLessonCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("student", studentName)
+                .add("index", targetIndex)
                 .add("toAdd", toAdd)
                 .toString();
     }
