@@ -25,13 +25,13 @@ public class AddStudentCommand extends Command {
         + PREFIX_NAME + "NAME "
         + PREFIX_PHONE + "PHONE "
         + PREFIX_EMAIL + "EMAIL "
-        + PREFIX_ADDRESS + "ADDRESS "
+        + "[" + PREFIX_ADDRESS + "ADDRESS] "
         + "[" + PREFIX_EDUCATION_LEVEL + "EDUCATION_LEVEL] "
         + "[" + PREFIX_TAG + "TAG]...\n"
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + "Alice Pauline"
+        + PREFIX_NAME + "Alice Pauline "
         + PREFIX_PHONE + "92345123 "
-        + PREFIX_EMAIL + "1200033@gmail.com"
+        + PREFIX_EMAIL + "1200033@gmail.com "
         + PREFIX_EDUCATION_LEVEL + "primary 3";
 
     public static final String MESSAGE_SUCCESS = "New Student added: %1$s";
