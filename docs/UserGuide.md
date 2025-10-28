@@ -105,9 +105,15 @@ Since the recorded lesson date has already passed, the system updates it to **20
 
 This ensures your recurring lessons always reflect the *next upcoming* session without requiring manual changes.
 
-
-
 ### payment status
+Payment tracking has been an anathema to private tutors, especially when there are multiple students with different payment habits. We use the payment status to make this issue simple.
+
+The payment status records the balance between **the number of lessons that students has paid** or the **number of lessons that has passed**
+* If the student has paid for `10` lessons and `13` lessons has passed in total, the payment status will be `10-13 = -3`, which means that the students has **3 outstanding lessons that needs to be paid**. You can combine this with the [tag](#tag) feature to also record the price of each lesson and everything becomes easy calculation.
+
+**The number of lessons that students has paid** is tracked manually. You can update this by using [payment](#payment) command.
+**The number of lessons passed** is automatically updated whenever a lesson is passed(See [lesson](#lesson) for more details).
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -261,7 +267,6 @@ Format: `addLesson n/NAME l/LESSON_DATE [every/INTERVAL]`
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.  
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` indentifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` indentifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
-
 
 
 Examples:
