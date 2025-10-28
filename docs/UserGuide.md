@@ -82,8 +82,8 @@ A person can have 0 or 1 address
 A person can have any number of tags (including 0)
 All other fields are compulsory
 When a student is initialised, *by default* : 
-1. the student has not paid for any lesson(refer to track for more info)
-2. the student does not have any lesson (refer to addLesson for more info)
+1. the student has not paid for any lesson(refer to `payment` for more info)
+2. the student does not have any lesson (refer to `addLesson` for more info)
 </div>
 
 Examples:
@@ -182,12 +182,15 @@ Examples:
 
 Add the scheduled upcoming lesson for the specified person.
 
-Format: `addLesson n/NAME l/LESSON_DATE`
+Format: `addLesson n/NAME l/LESSON_DATE [every/INTERVAL]`
 
-* The name refers to the name shown in the displayed person list.
-* This command checks if the person exists in the address book.
-* If the person is a student with a scheduled lesson, the command shows an error.
-* If they are a student with no scheduled lesson, the upcoming lesson will be added and displayed in the address book.
+* The `NAME` refers to the name of the student who you wants to add the lesson. You cannot add a lesson to a student that does not exist in the list
+* If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
+* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
+* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.  
+* If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` indentifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` indentifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
+
+
 
 Examples:
 * `list` followed by `addLesson n/John l/Wednesday` add John's upcoming lesson and displays it in the address book.
@@ -246,6 +249,12 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
+**Q**: How do I edit student information if I input anything wrong?<br>
+**A**: StudentConnect so far does not support edit function.You may use the command `delete INDEX` frist and then recreate the student
+
+**Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
+**A**: No, your lesson will only delete/update itself(depending on the type of the lesson) after the date of the lesson has passed. For example, if today is 2025-10-29 and your lesson is set on that day. It will only be considered outdated on 2025-10-30.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -259,7 +268,9 @@ _Details coming soon ..._
 
 Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addLesson** | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`
+**cancelLesson** | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3` 
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
