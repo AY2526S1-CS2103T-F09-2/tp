@@ -146,16 +146,17 @@ Examples:
 
 Add the scheduled upcoming lesson for the specified person.
 
-Format: `addLesson n/NAME l/LESSON_DATE`
+Format: `addLesson INDEX l/LESSON_DATE`
 
-* The name refers to the name shown in the displayed person list.
-* This command checks if the person exists in the address book.
+* Adds a lesson for the student at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * If the person is a student with a scheduled lesson, the command shows an error.
 * If they are a student with no scheduled lesson, the upcoming lesson will be added and displayed in the address book.
 
 Examples:
-* `list` followed by `addLesson n/John l/Wednesday` add John's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson n/Betsy l/Monday` adds Betsy's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 l/Wednesday` add the 2nd person's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson 1 l/Monday` adds the 1st person's lesson and displays it in the address book.
 
 ### Cancel a lesson : `cancelLesson`
 
