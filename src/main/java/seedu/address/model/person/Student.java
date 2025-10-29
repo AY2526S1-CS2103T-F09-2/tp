@@ -64,7 +64,7 @@ public class Student extends Person {
      * Constructs a new Student carrying over payment status and education level.
      */
     public Student(Person person) {
-        super(person.getName(), person.getPhone(), person.getEmail(), 
+        super(person.getName(), person.getPhone(), person.getEmail(),
                 person.getAddress(), person.getTags(), person.getEducationLevel());
         this.paymentStatus = PaymentStatus.getZeroPaymentStatus();
         this.nextLesson = Lesson.getEmpty();
