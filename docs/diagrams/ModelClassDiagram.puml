@@ -23,6 +23,7 @@ Class "<<enumeration>>\nEducationLevel" as EducationLevel
 
 class Student
 class Lesson
+class PaymentStatus
 
 Class I #FFFFFF
 }
