@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
@@ -29,7 +30,8 @@ import seedu.address.testutil.StudentBuilder;
 public class CancelLessonCommandTest {
     private Model model;
     private final Student withLesson = new StudentBuilder().build();
-    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+    private Student noLesson = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -82,7 +84,8 @@ public class CancelLessonCommandTest {
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(withLesson, noLesson);
+        Student expectedTarget = (Student) expectedModel.getFilteredPersonList().get(0);
+        expectedModel.setPerson(expectedTarget, noLesson);
 
         assertCommandSuccess(cancelLessonCommand, model, expectedMessage, expectedModel);
     }
