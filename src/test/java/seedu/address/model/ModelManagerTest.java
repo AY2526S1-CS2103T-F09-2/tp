@@ -159,6 +159,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void refreshLessonDates_emptyLesson_remainEmpty() {
+        Student s = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+
+        AddressBook ab = new AddressBook();
+        ab.addPerson(s);
+
+        ModelManager mn = new ModelManager(ab, new UserPrefs());
+        mn.refreshLessonDates();
+
+        Student cur = (Student) mn.getAddressBook().getPersonList().get(0);
+        assertTrue(cur.getNextLesson().isEmpty(), "Empty lesson remains empty after refresh");
+    }
+
+    @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
