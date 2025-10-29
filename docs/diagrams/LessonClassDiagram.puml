@@ -39,7 +39,7 @@ Lesson <|-- EmptyLesson
 Lesson  --> "1" Lesson : nextLesson
 addLessonCommand --> Lesson: creates >
 cancelLessonCommand --> Lesson: deletes >
-Lesson ..> ModelMananger: updates itself
+Lesson ..> ModelManager: updates itself
 
 Student *-- Lesson
 
