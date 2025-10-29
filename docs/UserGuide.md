@@ -14,7 +14,7 @@ title: User Guide
 1. Ensure you have Java `17` or above installed in your Computer.<br>
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F09-2/tp).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
 
@@ -75,7 +75,7 @@ Format: `help`
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have 0 or 1 address
