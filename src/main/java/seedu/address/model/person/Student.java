@@ -43,7 +43,8 @@ public class Student extends Person {
      * Constructs a new Student object.
      */
     private Student(Student student, PaymentStatus paymentStatus) {
-        super(student.getName(), student.getPhone(), student.getEmail(), student.getAddress(), student.getTags());
+        super(student.getName(), student.getPhone(), student.getEmail(), student.getAddress(), student.getTags(),
+                student.getEducationLevel());
         this.paymentStatus = paymentStatus;
         this.nextLesson = student.getNextLesson();
     }

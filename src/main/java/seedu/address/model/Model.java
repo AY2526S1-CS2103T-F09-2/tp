@@ -97,5 +97,8 @@ public interface Model {
      */
     void addLesson(Student student, Lesson lesson);
 
+    /**
+     * Updates the lesson date of a student's lesson field to the most recent lesson with a date later than today
+     */
     void refreshLessonDates();
 }

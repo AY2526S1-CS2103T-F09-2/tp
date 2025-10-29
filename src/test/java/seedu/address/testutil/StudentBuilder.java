@@ -5,8 +5,10 @@ import java.util.Set;
 
 import seedu.address.model.Lesson;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
@@ -20,8 +22,10 @@ public class StudentBuilder {
     public static final String DEFAULT_PHONE = "87651234";
     public static final String DEFAULT_EMAIL = "anBeng@gmail.com";
     public static final String DEFAULT_ADDRESS = "102, College Ave West 29, #04-123";
-    private static final String DEFAULT_TAG = "sec3";
-    private static final String DEFUALT_LESSON = "2025-10-07";
+    private static final String DEFAULT_TAG = "stu";
+    private static final String DEFAULT_LESSON = "2025-10-07";
+    private static final int DEFAULT_OUTSTANDINGLESSON = 1;
+    private static final String DEFAULT_EDUCATIONLEVEL = "sec3";
 
     private Name name;
     private Phone phone;
@@ -29,6 +33,8 @@ public class StudentBuilder {
     private Address address;
     private Set<Tag> tags;
     private Lesson lesson;
+    private PaymentStatus paymentStatus;
+    private EducationLevel educationLevel;
 
     /**
      * Creates a {@code StudentBuilder} with the default details.
@@ -39,8 +45,10 @@ public class StudentBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        lesson = new Lesson(DEFUALT_LESSON);
+        lesson = new Lesson(DEFAULT_LESSON);
         tags.add(new Tag(DEFAULT_TAG));
+        paymentStatus = new PaymentStatus(DEFAULT_OUTSTANDINGLESSON);
+        educationLevel = EducationLevel.fromString(DEFAULT_EDUCATIONLEVEL);
     }
 
     /**
@@ -52,13 +60,16 @@ public class StudentBuilder {
         email = studentToCopy.getEmail();
         address = studentToCopy.getAddress();
         tags = new HashSet<>(studentToCopy.getTags());
+        lesson = studentToCopy.getNextLesson();
+        paymentStatus = studentToCopy.getPaymentStatus();
+        educationLevel = studentToCopy.getEducationLevel();
     }
 
     /**
      * builds a new student with default values for testing
      */
     public Student build() {
-        return new Student(name, phone, email, address, tags, lesson);
+        return new Student(name, phone, email, address, tags, lesson, paymentStatus, educationLevel);
     }
 
     /**
