@@ -82,7 +82,10 @@ public class AddLessonCommand extends Command {
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
-                    toAdd).unpaid();
+                    toAdd,
+                    seedu.address.model.person.PaymentStatus.getZeroPaymentStatus(),
+                    foundPerson.getEducationLevel()
+            ).unpaid();
             model.setPerson(foundPerson, newStudent);
         }
         // Find the updated student from the full person list

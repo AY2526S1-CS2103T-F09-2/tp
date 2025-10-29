@@ -128,10 +128,18 @@ public class ModelManager implements Model {
             if (p instanceof Student) {
                 Student s = (Student) p;
                 Lesson current = s.getNextLesson();
-                Lesson normalized = (current == null ? Lesson.getEmpty() : current.getUpcomingLesson());
+                Lesson normalized;
+
+                if (current == null || current.isEmpty()) {
+                    normalized = Lesson.getEmpty();
+                } else {
+                    normalized = current.getUpcomingLesson();
+                }
+
                 if (!normalized.equals(current)) {
                     Student updated = new Student(
-                            s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized
+                            s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized,
+                            s.getPaymentStatus(), s.getEducationLevel()
                     );
                     setPerson(s, updated);
                 }

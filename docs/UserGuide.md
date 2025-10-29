@@ -296,18 +296,19 @@ Examples:
 
 Add the scheduled upcoming lesson for the specified person.
 
-Format: `addLesson n/NAME l/LESSON_DATE [every/INTERVAL]`
+Format: `addLesson INDEX l/LESSON_DATE [every/INTERVAL]`
 
-* The `NAME` refers to the name of the student who you wants to add the lesson. You cannot add a lesson to a student that does not exist in the list
+* Adds a lesson for the student at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
-* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.  
+* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` indentifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` indentifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 
-
 Examples:
-* `list` followed by `addLesson n/John l/Wednesday` add John's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson n/Betsy l/Monday` adds Betsy's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 l/Wednesday` add the 2nd person's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson 1 l/Monday` adds the 1st person's lesson and displays it in the address book.
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -378,7 +379,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4`
 **addLesson** | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`
 **cancelLesson** | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3` 
 **Clear** | `clear`
@@ -386,6 +387,7 @@ Action | Format, Examples
 **CancelLesson** | `cancelLesson INDEX` <br> e.g. `cancelLesson 6`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
+**Searchtag** | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`
 **List** | `list`
 **PaymentStatus** | `payment INDEX [s/paid\| s/unpaid]`<br> e.g. `payment 1 s/unpaid`
 **Help** | `help`

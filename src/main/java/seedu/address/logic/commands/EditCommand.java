@@ -21,13 +21,16 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Lesson;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.EducationLevel;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Student;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -105,6 +108,22 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         EducationLevel updateEducationLevel = editPersonDescriptor.getEducationLevel()
                 .orElse(personToEdit.getEducationLevel());
+        // Preserve subclass-specific state: if editing a Student, carry over lesson and payment status
+        if (personToEdit instanceof Student) {
+            Student studentToEdit = (Student) personToEdit;
+            Lesson existingLesson = studentToEdit.getNextLesson();
+            PaymentStatus existingPayment = studentToEdit.getPaymentStatus();
+            return new Student(
+                    updatedName,
+                    updatedPhone,
+                    updatedEmail,
+                    updatedAddress,
+                    updatedTags,
+                    existingLesson,
+                    existingPayment,
+                    updateEducationLevel
+            );
+        }
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updateEducationLevel);
     }
 
