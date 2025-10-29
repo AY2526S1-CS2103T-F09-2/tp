@@ -11,7 +11,7 @@ For example, a tutor managing 20 students can easily find student's contact info
 
 **Assumption**: This guide assumes you are somewhat familiar with using command-line (like opening a terminal and running commands).
 * Table of Contents
-{:toc}
+  {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ Before diving into commands, let’s quickly set up TutorConnect so you can star
 **1. Check your Java version**<br>
 Make sure your computer has **Java 17 or newer installed**.
    * **Mac users:** Please use the exact JDK version recommended [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
-> 💡 **Not sure how to check your Java version? See [this quick guide](https://www.java.com/en/download/help/version_manual.html).**
+>  :bulb: **Not sure how to check your Java version? See [this quick guide](https://www.java.com/en/download/help/version_manual.html).**
 
 **2. Download StudentConnect**<br>
 Get the latest `.jar` file from [our GitHub releases page](https://github.com/AY2526S1-CS2103T-F09-2/tp).
@@ -80,7 +80,7 @@ A student can only have **zero or one lesson**. If you try to add a new lesson t
 ### Student list
 The list of the student that appears at the bottom of the application interface. It shows all students that is stored in the application. These students in the student list can be accessed by commands such as [`addLesson`](#add-a-lesson--addlesson), whenever we need to refer to a specific student that is **already created**.
  
-### tag 
+### Tag 
 A tag is a piece of text that records a unique characteristic of the student. You can add optionally add any number of tags when you create a new [student](#student) by calling the [`addstu`](#adding-a-new-student-addstu) command.
 
 In StudentConnect, you can use the tag in the following way:
@@ -89,7 +89,7 @@ In StudentConnect, you can use the tag in the following way:
 3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `feedback/no-feedback`)
 4. Record the platform that you use if you are hosting online lessons(e.g. `platform:Giggle meet`)
 
-### lesson
+### Lesson
 
 A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
 * For instance, a lesson that starts at `November 10th 2024 5pm` should be represented as `2024-11-10` in the system.
@@ -97,6 +97,8 @@ A lesson is represented by a single date, which is the date (in the fixed format
 When a student is created, the student by defualt does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
 A lesson is considered **passed** if the date of lesson recorded is **before the current date**(Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
+
+## Advance Concepts
 
 ### Recurring lessons
 
@@ -124,14 +126,14 @@ Since the recorded lesson date has already passed, the system updates it to **20
 
 This ensures your recurring lessons always reflect the *next upcoming* session without requiring manual changes.
 
-### payment status
+### Payment Status
 Payment tracking has been an anathema to private tutors, especially when there are multiple students with different payment habits. We use the payment status to make this issue simple.
 
 The payment status records the balance between **the number of lessons that students has paid** or the **number of lessons that has passed**
 * If the student has paid for `10` lessons and `13` lessons has passed in total, the payment status will be `10-13 = -3`, which means that the students has **3 outstanding lessons that needs to be paid**. You can combine this with the [tag](#tag) feature to also record the price of each lesson and everything becomes easy calculation.
 
-**The number of lessons that students has paid** is tracked manually. You can update this by using [payment](#payment) command.
-**The number of lessons passed** is automatically updated whenever a lesson is passed(See [lesson](#lesson) for more details).
+**The number of lessons that students has paid** is tracked manually. You can update this by using [payment](#payment-status) command.
+**The number of lessons passed** is automatically updated whenever a lesson has passed(See [lesson](#lesson) for more details).
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -142,11 +144,11 @@ The payment status records the balance between **the number of lessons that stud
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user.<br>
+* Words in `UPPER_CASE` are the parameters to be supplied by you.<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+  e.g. `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
@@ -160,7 +162,7 @@ The payment status records the balance between **the number of lessons that stud
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Viewing help : `help`
+### Getting help : `help`
 
 Shows a message explaining how to access the help page.
 
@@ -254,6 +256,7 @@ Examples:
 * `list` followed by `payment 2` displays payment status of the 2nd person in the address book.
 * `list` followed by `payment 2 s/paid` marks 1 lesson of 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
 * `list` followed by `payment 2 s/unpaid` marks 1 lesson of 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+
 ### Locating persons by tag: `searchtag`
 
 Finds persons whose tags contain any of the given keywords.
