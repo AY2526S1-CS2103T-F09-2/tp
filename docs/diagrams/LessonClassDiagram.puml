@@ -37,8 +37,8 @@ Lesson <|-- EmptyLesson
 
 
 Lesson  --> "1" Lesson : nextLesson
-addLessonCommand --> Student: creates >
-cancelLessonCommand --> Student: deletes >
+addLessonCommand --> Lesson: creates >
+cancelLessonCommand --> Lesson: deletes >
 Lesson ..> ModelMananger: updates itself
 
 Student *-- Lesson
