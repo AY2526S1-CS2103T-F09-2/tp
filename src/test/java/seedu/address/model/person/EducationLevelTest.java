@@ -86,6 +86,14 @@ public class EducationLevelTest {
     }
 
     @Test
+    public void fromString_noSpaceForms_mapCorrectly() {
+        assertEquals(EducationLevel.SEC_3, EducationLevel.fromString("SEc3"));
+        assertEquals(EducationLevel.PRIMARY_5, EducationLevel.fromString("primaryfive"));
+        assertEquals(EducationLevel.PRIMARY_6, EducationLevel.fromString("pri6"));
+        assertEquals(EducationLevel.J2, EducationLevel.fromString("JC2"));
+    }
+
+    @Test
     public void enumUtilityMethods_valuesAndValueOfCovered() {
         // Cover the synthetic enum methods
         EducationLevel[] all = EducationLevel.values();
