@@ -221,13 +221,15 @@ Examples:
 
 ### Payment Status of a person : `payment`
 
-Displays an existing person's payment status in the address book. Optionally, can mark 1 lesson as paid or unpaid using `s/` flag.
+Displays or updates the payment status of a person in the address book.
 
-Format: `payment INDEX [optional: s/paid|unpaid]`
+Format: `payment INDEX [s/paid | s/unpaid]`
 
-* Check payment status of the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
-* Optionally, you may include a status flag using s/paid or s/unpaid to update the person's lesson payment status.
-* When the status is updated using s/, the system will automatically adjust the internal payment count (e.g., increment or decrement based on the change to "paid" or "unpaid").
+* Check payment status of the person at the specified `INDEX`.
+  * The index refers to the index number shown in the displayed person list.
+  * The index **must be a positive integer** 1, 2, 3, …​
+* Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
+* When a status flag is provided, the system updates the student’s payment record accordingly.
 
 Examples:
 * `list` followed by `payment 2` displays payment status of the 2nd person in the address book.
