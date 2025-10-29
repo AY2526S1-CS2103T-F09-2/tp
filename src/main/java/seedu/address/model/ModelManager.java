@@ -125,12 +125,11 @@ public class ModelManager implements Model {
 
     @Override
     public void refreshLessonDates() {
-        LocalDate today = LocalDate.now();
         for (Person p : addressBook.getPersonList()) {
             if (p instanceof Student) {
                 Student s = (Student) p;
                 Lesson current = s.getNextLesson();
-                Lesson normalized = (current == null ? Lesson.getEmpty() : current.getUpcomingLesson(today));
+                Lesson normalized = (current == null ? Lesson.getEmpty() : current.getUpcomingLesson());
                 if (!normalized.equals(current)) {
                     Student updated = new Student(
                             s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized

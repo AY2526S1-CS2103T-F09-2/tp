@@ -88,10 +88,9 @@ public class Lesson {
 
     /**
      * Returns the most recent upcoming lesson with reference to today's date
-     * @param today local date of today
      * @return the most recent upcoming lesson
      */
-    public Lesson getUpcomingLesson(LocalDate today) {
+    public Lesson getUpcomingLesson() {
         Lesson current = this;
         while (!current.isEmpty() && current.isOutdated()) {
             current = current.getNextLesson();
