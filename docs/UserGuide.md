@@ -11,7 +11,7 @@ For example, a tutor managing 20 students can easily find student's contact info
 
 **Assumption**: This guide assumes you are somewhat familiar with using command-line (like opening a terminal and running commands).
 * Table of Contents
-  {:toc}
+{:toc}
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -160,7 +160,6 @@ The payment status records the balance between **the number of lessons that stud
 **The number of lessons that students has paid** is tracked manually. You can update this by using [payment](#payment-status) command.
 **The number of lessons passed** is automatically updated whenever a lesson has passed(See [lesson](#lesson) for more details).
 
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -215,7 +214,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
 * To change the education level, provide edu/EDUCATION_LEVEL. To clear it back to UNKNOWN, pass edu/ with nothing after it.
 
@@ -274,8 +273,8 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
   e.g. physics math will return all persons with either tag.
 
 Examples:
-* `searchtag chemistry` returns all persons tagged with `chemistry`
-* `searchtag fri col` returns all persons with tags containing `fri`(e.g. `friends`) or `col` (e.g. `colleagues`)
+* `searchtag cHemiStrY` returns all persons tagged with `chemistry`
+* `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
   ![result for 'searchtag fri col'](images/searchtagFriCol.png)
 
 ### Deleting a person : `delete`
