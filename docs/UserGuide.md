@@ -3,7 +3,13 @@ layout: page
 title: User Guide
 ---
 **Hi private tutors!**
-**TutorConnect** is a **desktop app for managing student contacts for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). With a few simple commands, you can unleash the potential of the powerful commands in **TutorConnect** that manages all your students, your lessons and your payments at ease!
+Welcome to **TutorConnect** — a contact and lesson management tool designed specifically for private tutors.
+
+TutorConnect helps you keep track of students, lessons and payments efficiently. It combines the speed of Command Line Interface (CLI) commands with a simple GUI, making it ideal for tutors who prefer quick keyboard input but still appreciate visual feedback.
+
+For example, a tutor managing 20 students can easily find student's contact information — all through short, easy commands.
+
+**Assumption**: This guide assumes you are somewhat familiar with using command-line (like opening a terminal and running commands).
 * Table of Contents
 {:toc}
 
@@ -11,31 +17,44 @@ title: User Guide
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
-   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+Before diving into commands, let’s quickly set up TutorConnect so you can start managing your students right away.
 
-1. Download the latest `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F09-2/tp).
+**1. Check your Java version**<br>
+Make sure your computer has **Java 17 or newer installed**.
+   * **Mac users:** Please use the exact JDK version recommended [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
+> 💡 **Not sure how to check your Java version? See [this quick guide](https://www.java.com/en/download/help/version_manual.html).**
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+**2. Download StudentConnect**<br>
+Get the latest `.jar` file from [our GitHub releases page](https://github.com/AY2526S1-CS2103T-F09-2/tp).
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+**3. Set up your home folder**<br>
+Move the downloaded `.jar` file into a folder where you’d like TutorConnect to store your data (this will be your “<u>home folder</u>”).
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+**4. Run the app**<br>
+Open a command terminal and navigate to the <u>home folder</u> where you saved the jar file to.<br>
+Then run: `java -jar addressbook.jar`
+   
+After a few seconds, you should see a window like this:<br>![Ui](images/Ui.png)
 
-   * `list` : Lists all contacts.
+**5. Try out some basic commands**<br>
+Type a command in the box and press Enter to run it. 
 
-   * `addstu n/John Doe p/98765432 e/johnd@example.com` : Adds a student named `John Doe` to the Address Book.
+Here are a few to get you started:
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
+* `help` &ndash; Opens the help window.
 
-   * `clear` : Deletes all contacts.
+* `list` &ndash; Lists all contacts.
 
-   * `exit` : Exits the app.
+* `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
 
-1. Refer to the [Features](#features) below for details of each command.
+* `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
+
+* `clear` &ndash; Deletes all contacts.
+
+* `exit` &ndash; Exits the app.
+
+**6. Explore more features**<br>
+Check out the [Features](#features) below for a full list of commands and details.
 
 --------------------------------------------------------------------------------------------------------------------
 ## Basic Concepts
