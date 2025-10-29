@@ -38,6 +38,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         String lessonDate = argMultimap.getValue(PREFIX_LESSON).get().trim();
         Lesson lesson;
+        if (!Lesson.isValidLessonDate(lessonDate)) {
+                throw new ParseException("Invalid date: must be in yyyy-MM-DD format within 364 days from now");
+        }
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
             String interval = argMultimap.getValue(PREFIX_INTERVAL).get().trim();
             if (!RecurringLesson.isValidInterval(interval)) {
