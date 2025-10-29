@@ -71,7 +71,7 @@ A student has the following attributes, as shown on the example above:
 3. email address: The email address of a student
 4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
 4. [tag](#tag): Tags that record extra informations of a student
-5. [lesson](#lesson): The lesson that the student has 
+5. [lesson](#lesson): The lesson that the student has
 
 <div markdown="block" class="alert alert-info">
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
@@ -343,21 +343,21 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q**: How do I transfer my data to another Computer?<br>
+**Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
 
 **Q**: How do I edit student information if I input anything wrong?<br>
-**A**: StudentConnect so far does not support edit function.You may use the command `delete INDEX` frist and then recreate the student
+**A**: StudentConnect so far does not support edit function. You may use the command `delete INDEX` first and then recreate the student.
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
-**A**: No, your lesson will only delete/update itself(depending on the type of the lesson) after the date of the lesson has passed. For example, if today is 2025-10-29 and your lesson is set on that day. It will only be considered outdated on 2025-10-30.
+**A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-10-29` and your lesson is set on that day. It will only be considered outdated on `2025-10-30`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -372,14 +372,14 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **addLesson** | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`
 **cancelLesson** | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3` 
 **Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Delete** | `delete INDEX`<br> e.g. `delete 3`
 **CancelLesson** | `cancelLesson INDEX` <br> e.g. `cancelLesson 6`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
+**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
 **List** | `list`
-**PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`
+**PaymentStatus** | `payment INDEX [s/paid\| s/unpaid]`<br> e.g. `payment 1 s/unpaid`
 **Help** | `help`
