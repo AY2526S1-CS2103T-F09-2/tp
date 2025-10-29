@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
-import java.time.LocalDate;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -125,7 +124,6 @@ public class ModelManager implements Model {
 
     @Override
     public void refreshLessonDates() {
-        LocalDate today = LocalDate.now();
         for (Person p : addressBook.getPersonList()) {
             if (p instanceof Student) {
                 Student s = (Student) p;
@@ -135,7 +133,7 @@ public class ModelManager implements Model {
                 if (current == null || current.isEmpty()) {
                     normalized = Lesson.getEmpty();
                 } else {
-                    normalized = current.getUpcomingLesson(today);
+                    normalized = current.getUpcomingLesson();
                 }
 
                 if (!normalized.equals(current)) {
