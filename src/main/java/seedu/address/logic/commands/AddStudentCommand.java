@@ -37,7 +37,7 @@ public class AddStudentCommand extends Command {
 
     /**
      * Creates an AddStudentCommand to add the specified student
-     *
+     * 
      * @param student student to be added
      */
     public AddStudentCommand(Student student) {
