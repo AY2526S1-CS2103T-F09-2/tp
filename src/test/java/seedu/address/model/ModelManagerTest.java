@@ -13,16 +13,11 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
-import java.util.concurrent.BlockingDeque;
-
-import javax.swing.text.SimpleAttributeSet;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.StudentBuilder;
