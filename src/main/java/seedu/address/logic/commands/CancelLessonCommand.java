@@ -11,6 +11,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -55,17 +56,21 @@ public class CancelLessonCommand extends Command {
 
         Lesson next = student.getNextLesson();
 
-        if (next == null || next == Lesson.EMPTY) {
+        if (next == null || next.equals(Lesson.getEmpty())) {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
+        PaymentStatus newPay = student.getPaymentStatus().update(PaymentStatus.PaymentStatusValue.PAID);
         Student edited = new Student(
                 student.getName(),
                 student.getPhone(),
                 student.getEmail(),
                 student.getAddress(),
                 student.getTags(),
-                Lesson.EMPTY);
+                Lesson.getEmpty(),
+                newPay,
+                student.getEducationLevel()
+        );
 
         model.setPerson(student, edited);
 

@@ -8,15 +8,26 @@ import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.Lesson;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.EducationLevel;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Person}.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = JsonAdaptedStudent.class, name = "student"),
+    @JsonSubTypes.Type(value = JsonAdaptedPerson.class, name = "person")
+})
 class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
@@ -26,23 +37,23 @@ class JsonAdaptedPerson {
     private final String email;
     private final String address;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
-    private final String lessonDate;
-
+    private final String educationLevel;
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags, @JsonProperty("lessonDate") String lessonDate) {
+            @JsonProperty("tags") List<JsonAdaptedTag> tags,
+            @JsonProperty("educationLevel") String educationLevel) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.educationLevel = educationLevel;
         if (tags != null) {
             this.tags.addAll(tags);
         }
-        this.lessonDate = lessonDate;
     }
 
     /**
@@ -56,17 +67,16 @@ class JsonAdaptedPerson {
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
-        if (source instanceof Student) {
-            lessonDate = ((Student) source).getNextLesson().getLessonDate();
-        } else {
-            lessonDate = null;
-        }
+        educationLevel = source.getEducationLevel().name();
+
     }
 
     /**
-     * Converts this Jackson-friendly adapted person object into the model's {@code Person} object.
+     * Converts this Jackson-friendly adapted person object into the model's
+     * {@code Person} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person.
+     * @throws IllegalValueException if there were any data constraints violated in
+     *                               the adapted person.
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
@@ -106,18 +116,10 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
         final Set<Tag> modelTags = new HashSet<>(personTags);
-
-        Lesson lesson = (lessonDate == null) ? Lesson.EMPTY : new Lesson(lessonDate);
-
-        if (lessonDate != null) {
-            return new Student(modelName, modelPhone, modelEmail, modelAddress, modelTags, lesson);
-        } else {
-            return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        EducationLevel modelEdu = EducationLevel.UNKNOWN;
+        if (educationLevel != null) {
+            modelEdu = EducationLevel.valueOf(educationLevel);
         }
-
-
-
-
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelEdu);
     }
-
 }

@@ -8,6 +8,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.Lesson;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -17,10 +18,13 @@ import seedu.address.model.person.Student;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
+    public final Person person;
     @FXML
     private Label lessonLabel;
-
-
+    @FXML
+    private Label paymentStatusLabel;
+    @FXML
+    private Label educationLabel;
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
@@ -28,9 +32,6 @@ public class PersonCard extends UiPart<Region> {
      *
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
-
-    public final Person person;
-
     @FXML
     private HBox cardPane;
     @FXML
@@ -46,6 +47,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
+
     /**
      * Creates a {@code PersonCode} with the given {@code Person} and index to display.
      */
@@ -60,15 +62,27 @@ public class PersonCard extends UiPart<Region> {
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
-        if (person instanceof Student) {
-            Lesson lesson = ((Student) person).getNextLesson();
-            if (lesson != null && !lesson.equals(Lesson.EMPTY)) {
+        if (person instanceof Student student) {
+            Lesson lesson = student.getNextLesson();
+            if (lesson != null && !lesson.equals(Lesson.getEmpty())) {
                 lessonLabel.setText("Lesson: " + lesson.getLessonDate());
             } else {
                 lessonLabel.setText("Lesson: None");
             }
         } else {
             lessonLabel.setText("");
+        }
+
+        //Display payment status for the person
+        if (person instanceof Student student && paymentStatusLabel != null && student.getPaymentStatus() != null) {
+            paymentStatusLabel.setText("Payment: " + student.getPaymentStatus().toString());
+        } else {
+            paymentStatusLabel.setText("Payment: " + PaymentStatus.getZeroPaymentStatus());
+        }
+
+        // Display education level for the person
+        if (educationLabel != null && person.getEducationLevel() != null) {
+            educationLabel.setText("Education: " + person.getEducationLevel().toString());
         }
     }
 }

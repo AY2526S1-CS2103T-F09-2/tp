@@ -19,6 +19,11 @@ Class Email
 Class Name
 Class Phone
 Class Tag
+Class "<<enumeration>>\nEducationLevel" as EducationLevel
+
+class Student
+class Lesson
+class PaymentStatus
 
 Class I #FFFFFF
 }
@@ -36,19 +41,25 @@ ModelManager -right-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 AddressBook *--> "1" UniquePersonList
-UniquePersonList --> "~* all" Person
+UniquePersonList --> "  ~*filtered" Person
 Person *--> Name
 Person *--> Phone
 Person *--> Email
 Person *--> Address
 Person *--> "*" Tag
 
+Student --|> Person
+Student *--> Lesson
+Student *--> PaymentStatus
+
+Person *--> EducationLevel
 Person -[hidden]up--> I
 UniquePersonList -[hidden]right-> I
+Student -[hidden]up--> I
 
 Name -[hidden]right-> Phone
 Phone -[hidden]right-> Address
 Address -[hidden]right-> Email
 
-ModelManager --> "~* filtered" Person
+ModelManager --> "~* all     " Person
 @enduml
