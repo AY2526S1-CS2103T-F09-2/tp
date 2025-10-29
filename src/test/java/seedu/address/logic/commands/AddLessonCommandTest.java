@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Lesson;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.PersonBuilder;
@@ -17,7 +18,6 @@ import seedu.address.testutil.StudentBuilder;
 
 public class AddLessonCommandTest {
 
-    private static final Name VALID_NAME = new Name("John Doe");
     private static final Lesson VALID_LESSON = new Lesson("2025-01-01");
 
     @Test
@@ -25,7 +25,8 @@ public class AddLessonCommandTest {
         Model model = new ModelManager();
         Person person = new PersonBuilder().build();
         model.addPerson(person);
-        AddLessonCommand command = new AddLessonCommand(person.getName(), VALID_LESSON);
+        Index index = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(index, VALID_LESSON);
         CommandResult result = command.execute(model);
         // Check feedback contains success message
         // Find the updated student
@@ -50,16 +51,18 @@ public class AddLessonCommandTest {
         Model model = new ModelManager();
         Student student = new StudentBuilder().build();
         model.addPerson(student);
-        AddLessonCommand command = new AddLessonCommand(student.getName(), VALID_LESSON);
+        Index index = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(index, VALID_LESSON);
         assertThrows(CommandException.class, () -> command.execute(model));
     }
 
     @Test
     public void execute_studentNotFound_failure() {
         Model model = new ModelManager();
-        AddLessonCommand command = new AddLessonCommand(new Name("Nonexistent"), VALID_LESSON);
+        Index invalidIndex = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(invalidIndex, VALID_LESSON);
         CommandException thrown = assertThrows(CommandException.class, () -> command.execute(model));
-        assertEquals("Student does not exist", thrown.getMessage());
+        assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, thrown.getMessage());
     }
 }
 

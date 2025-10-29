@@ -61,7 +61,7 @@ public class AddLessonCommand extends Command {
 
         Person foundPerson = lastShownList.get(targetIndex.getZeroBased());
 
-        Student newStudent;
+    Student newStudent;
         // If already a Student, check if they already have a lesson
         if (foundPerson instanceof Student) {
             Student targetStudent = (Student) foundPerson;
@@ -72,8 +72,8 @@ public class AddLessonCommand extends Command {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
 
-            // Create new student with the lesson
-            newStudent = new Student(
+        // Create new student with the lesson
+        newStudent = new Student(
                     targetStudent.getName(),
                     targetStudent.getPhone(),
                     targetStudent.getEmail(),
@@ -82,15 +82,19 @@ public class AddLessonCommand extends Command {
                     toAdd,
                     targetStudent.getPaymentStatus(),
                     targetStudent.getEducationLevel());
+        // increment outstanding payment for the newly added lesson
+        newStudent = newStudent.unpaid();
         } else {
             // Convert Person to Student and add lesson
-            newStudent = new Student(
+        newStudent = new Student(
                     foundPerson.getName(),
                     foundPerson.getPhone(),
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
                     toAdd);
+        // mark as unpaid for the new lesson
+        newStudent = newStudent.unpaid();
         }
 
         model.setPerson(foundPerson, newStudent);

@@ -181,7 +181,7 @@ public class PaymentCommandTest {
     }
 
     private void addLessonToModel(Student student) throws CommandException {
-        AddLessonCommand addLessonCommand = new AddLessonCommand(student.getName(), new Lesson("2026-01-01"));
+        AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, new Lesson("2026-01-01"));
         addLessonCommand.execute(model);
     }
 }
