@@ -352,7 +352,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 Action | Format, Examples
 --------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4`
 **addLesson** | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`
 **cancelLesson** | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3` 
 **Clear** | `clear`
@@ -360,6 +360,7 @@ Action | Format, Examples
 **CancelLesson** | `cancelLesson INDEX` <br> e.g. `cancelLesson 6`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
+**Searchtag** | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g., `searchtag chemistry physics`
 **List** | `list`
 **PaymentStatus** | `payment INDEX [optional: s/paid\|unpaid]`<br> e.g., `payment 1 s/unpaid`
 **Help** | `help`
