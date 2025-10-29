@@ -82,7 +82,8 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        String expected = AddCommand.DEPRECATED_MESSAGE;
+
         assertEquals(expected, addCommand.toString());
     }
 
@@ -167,6 +168,11 @@ public class AddCommandTest {
 
         @Override
         public void addLesson(Student student, Lesson lesson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void refreshLessonDates() {
             throw new AssertionError("This method should not be called.");
         }
     }

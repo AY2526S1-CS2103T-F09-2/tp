@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -33,23 +34,39 @@ public class AddStudnetCommandParser implements Parser<AddStudentCommand> {
     @Override
     public AddStudentCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS, PREFIX_TAG,
+                        PREFIX_EDUCATION_LEVEL);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddStudentCommand.MESSAGE_USAGE));
         }
-        final String Default = "N/A";
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS);
+        final String defaultString = "N/A";
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_EDUCATION_LEVEL);
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, Default).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, Default).get());
+        Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, defaultString).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, defaultString).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Student student = new Student(name, phone, email, address, tagList, Lesson.EMPTY);
-        return new AddStudentCommand(student);
+        // Education level is optional; default to UNKNOWN when not provided.
+        seedu.address.model.person.EducationLevel edu = argMultimap.getValue(PREFIX_EDUCATION_LEVEL)
+                .map(value -> {
+                    try {
+                        return ParserUtil.parseEducation(value);
+                    } catch (seedu.address.logic.parser.exceptions.ParseException e) {
+                        // Fallback to UNKNOWN if parsing fails; AddStudentCommand should not hard-fail for edu
+                        return seedu.address.model.person.EducationLevel.UNKNOWN;
+                    }
+                })
+                .orElse(seedu.address.model.person.EducationLevel.UNKNOWN);
 
+        Student student = new Student(
+                name, phone, email, address, tagList, Lesson.getEmpty(),
+                seedu.address.model.person.PaymentStatus.ZERO_OUTSTANDING_PAYMENTS,
+                edu);
+        return new AddStudentCommand(student);
     }
 
     /**

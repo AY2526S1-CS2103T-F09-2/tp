@@ -25,10 +25,11 @@ import seedu.address.model.person.Student;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.StudentBuilder;
 
+
 public class CancelLessonCommandTest {
     private Model model;
     private final Student withLesson = new StudentBuilder().build();
-    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.EMPTY).build();
+    private final Student noLesson = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
     @BeforeEach
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
@@ -46,7 +47,7 @@ public class CancelLessonCommandTest {
                 shown.getEmail(),
                 shown.getAddress(),
                 shown.getTags(),
-                new Lesson("Tue 3pm-5pm")
+                new Lesson("2025-11-01")
         );
 
         model.setPerson(shown, withLessonShown);
@@ -55,13 +56,13 @@ public class CancelLessonCommandTest {
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
-                "Tue 3pm-5pm",
-                Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build())
+                "2025-11-01",
+                Messages.format(new StudentBuilder(withLessonShown).withNewLesson(Lesson.getEmpty()).build())
         );
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(withLessonShown,
-                new StudentBuilder(withLessonShown).withNewLesson(Lesson.EMPTY).build());
+                new StudentBuilder(withLessonShown).withNewLesson(Lesson.getEmpty()).build());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertEquals(1, model.getFilteredPersonList().size());
 
@@ -76,7 +77,7 @@ public class CancelLessonCommandTest {
         CancelLessonCommand cancelLessonCommand = new CancelLessonCommand(INDEX_FIRST_PERSON);
         String expectedMessage = String.format(
                 CancelLessonCommand.MESSAGE_CANCEL_SUCCESS,
-                "2025-10-07 14:00 Math",
+                "2025-10-07",
                 Messages.format(noLesson)
         );
 

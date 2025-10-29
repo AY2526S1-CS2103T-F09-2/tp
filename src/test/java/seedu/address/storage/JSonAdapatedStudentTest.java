@@ -1,13 +1,13 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.storage.JsonAdaptedPerson.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.Assert.assertThrows;
+
+import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Lesson;
+import seedu.address.model.RecurringLesson;
 import seedu.address.model.person.Student;
 import seedu.address.testutil.StudentBuilder;
 
@@ -22,15 +22,19 @@ public class JSonAdapatedStudentTest {
     }
 
     @Test
-    public void toModelType_nullLesson_throwsIllegalValueException() {
-        JsonAdaptedPerson student = new JsonAdaptedStudent(TYPICAL_STUDENT.getName().toString(),
-                TYPICAL_STUDENT.getPhone().toString(), TYPICAL_STUDENT.getEmail().toString(),
-                TYPICAL_STUDENT.getAddress().toString(), TYPICAL_STUDENT.getTags().stream()
-                        .map(JsonAdaptedTag::new).toList(),
-                null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Lesson.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, student::toModelType);
-
+    public void toModelType_emptyLesson_returnStudent() throws Exception {
+        Student emptyLesson = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+        JsonAdaptedStudent student = new JsonAdaptedStudent(emptyLesson);
+        assertEquals(student.toModelType().getNextLesson(), Lesson.getEmpty());
     }
 
+    @Test
+    public void toModelType_reucrringLesson_returnStudent() throws Exception {
+        RecurringLesson recur = new RecurringLesson(LocalDate.now(), 5);
+        Student recurStudent = new StudentBuilder().withNewLesson(recur).build();
+        JsonAdaptedStudent studentJson = new JsonAdaptedStudent(recurStudent);
+        Student convertedBack = studentJson.toModelType();
+        assertEquals(recur.getIntervalDays(), convertedBack.getNextLesson().getIntervalDays());
+        assertEquals(recur.getNextLesson(), convertedBack.getNextLesson().getNextLesson());
+    }
 }

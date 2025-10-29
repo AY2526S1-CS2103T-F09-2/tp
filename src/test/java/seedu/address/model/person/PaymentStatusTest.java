@@ -86,13 +86,14 @@ public class PaymentStatusTest {
     @Test
     public void update_nullPaymentStatus_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () ->
-                new PaymentStatus(1).update(null));
+                new PaymentStatus(1).update(
+                        (Optional<PaymentStatus.PaymentStatusValue>) null));
     }
 
     @Test
     public void update_paidStatus_paymentStatusDecrementedByOne() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
-        PaymentStatus expected = new PaymentStatus(0);
+        PaymentStatus expected = new PaymentStatus(PaymentStatus.ZERO_OUTSTANDING_PAYMENTS);
 
         assertEquals(expected, paymentStatus.update(Optional.of(PaymentStatus.PaymentStatusValue.PAID)));
     }
@@ -109,10 +110,33 @@ public class PaymentStatusTest {
     public void equals() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
 
+        //same instance
+        assertEquals(paymentStatus, paymentStatus);
+
         // same value
-        assertEquals(paymentStatus, new PaymentStatus(1));
+        assertEquals(new PaymentStatus(1), paymentStatus);
 
         // different value
-        assertNotEquals(paymentStatus, new PaymentStatus(2));
+        assertNotEquals(new PaymentStatus(2), paymentStatus);
+
+        // not PaymentStatus instance
+        assertNotEquals(null, paymentStatus);
+    }
+
+    @Test
+    public void isValidPaymentStatus_validPaymentStatus_success() {
+        assertTrue(PaymentStatus.isValidPaymentStatus("1"));
+        assertTrue(PaymentStatus.isValidPaymentStatus(" 12 "));
+    }
+
+    @Test
+    public void isValidPaymentStatus_invalidPaymentStatus_returnsFalse() {
+        assertFalse(PaymentStatus.isValidPaymentStatus("abcd"));
+    }
+
+    @Test
+    public void testGetZeroPaymentStatus() {
+        PaymentStatus zeroStatus = PaymentStatus.getZeroPaymentStatus();
+        assertEquals("All lessons have been paid", zeroStatus.toString());
     }
 }

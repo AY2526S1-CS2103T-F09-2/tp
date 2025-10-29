@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
@@ -23,25 +24,32 @@ public class AddLessonCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a lesson for a student to the address book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_LESSON + "LESSON_DATE\n"
-            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_LESSON + "LESSON_DATE "
+            + "[" + PREFIX_INTERVAL + "]" + "INTERVAL_DAYS_FOR_RECURRING\n"
+            + "Example:\n"
+            + "Normal Lesson: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            + PREFIX_LESSON + "Tuesday";
+            + PREFIX_LESSON + "2025-01-01\n"
+            + "Recurring Lesson: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_LESSON + "2025-01-01"
+            + PREFIX_INTERVAL + "7";
 
-    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
     public static final String MESSAGE_DUPLICATE_LESSON = "This student already has an existing lesson in the "
             + "address book";
+    public static final String MESSAGE_SUCCESS = "New lesson added: %1$s";
 
     private Name studentName;
     private Lesson toAdd;
 
     /**
-     * Creates an AddLessonCommand to add the specified {@Lesson Lesson} for a student identified by {@Name name}
+     * Creates an AddLessonCommand to add the specified {@Lesson Lesson} for a
+     * student identified by {@Name name}
      */
     public AddLessonCommand(Name name, Lesson lesson) {
         requireNonNull(name);
-        requireNonNull(lesson);
         this.studentName = name;
+        requireNonNull(lesson);
         this.toAdd = lesson;
     }
 
@@ -51,7 +59,6 @@ public class AddLessonCommand extends Command {
         // Search the full person list for matching name
         Person foundPerson = null;
         for (Person p : model.getAddressBook().getPersonList()) {
-            System.out.println("Found person: " + p.getName().fullName);
             if (p.getName().fullName.equalsIgnoreCase(studentName.fullName)) {
                 foundPerson = p;
                 break;
@@ -62,8 +69,8 @@ public class AddLessonCommand extends Command {
         }
         // If already a Student, check for lesson
         if (foundPerson instanceof Student) {
-            Student targetStudent = (Student) foundPerson;
-            if (model.hasLesson(targetStudent)) {
+            Student targetStudent = ((Student) foundPerson).unpaid();
+            if (targetStudent.getNextLesson() != null && !targetStudent.getNextLesson().isEmpty()) {
                 throw new CommandException(MESSAGE_DUPLICATE_LESSON);
             }
             model.addLesson(targetStudent, toAdd);
@@ -75,8 +82,7 @@ public class AddLessonCommand extends Command {
                     foundPerson.getEmail(),
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
-                    toAdd
-            );
+                    toAdd).unpaid();
             model.setPerson(foundPerson, newStudent);
         }
         // Find the updated student from the full person list
