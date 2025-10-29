@@ -102,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasLesson(Student student) {
         for (Person p : persons.asUnmodifiableObservableList()) {
-            if (p.equals(student) && p instanceof Student) {
+            if (p instanceof Student && p.getName().equals(student.getName())) {
                 Student s = (Student) p;
                 return s.getNextLesson() != null && !s.getNextLesson().equals(Lesson.getEmpty());
             }
@@ -127,9 +127,10 @@ public class AddressBook implements ReadOnlyAddressBook {
                         s.getTags(),
                         lesson,
                         student.getPaymentStatus(),
-                        student.getEducationLevel()
+                        s.getEducationLevel()
                 );
                 persons.setPerson(s, updatedStudent);
+                break;
             }
         }
 
