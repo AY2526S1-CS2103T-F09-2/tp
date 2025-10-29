@@ -211,7 +211,8 @@ Format: `cancelLesson INDEX`
 * If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
-* `list` followed by `cancelLesson 2` cancels the 1st person's upcoming lesson if the 2nd person is a student with a scheduled lesson.
+* `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
+![result for 'cancelLesson 6'](images/CancelLesson6.png)
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
 
 ### Clearing all entries : `clear`
@@ -266,6 +267,7 @@ Action | Format, Examples
 **Add** | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 **Clear** | `clear`
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
+**CancelLesson** | `cancelLesson INDEX` <br> e.g. `cancelLesson 6`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List** | `list`
