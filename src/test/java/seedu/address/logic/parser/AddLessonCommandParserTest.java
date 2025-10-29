@@ -14,14 +14,15 @@ public class AddLessonCommandParserTest {
 
     @Test
     public void parse_normal_success() throws Exception {
-    String input = " 1 l/2025-11-02";
-    assertEquals(new AddLessonCommand(Index.fromOneBased(1), new Lesson("2025-11-02")),
+        String input = " 1 l/2025-11-02";
+        assertEquals(new AddLessonCommand(Index.fromOneBased(1), new Lesson("2025-11-02")),
                 parser.parse(input));
     }
+
     @Test
     public void parse_recurring_success() throws Exception {
-    String input = " 1 l/2025-11-02 every/7";
-    assertEquals(new AddLessonCommand(Index.fromOneBased(1),
-        new RecurringLesson("2025-11-02", 7)), parser.parse(input));
+        String input = " 1 l/2025-11-02 every/7";
+        assertEquals(new AddLessonCommand(Index.fromOneBased(1),
+                new RecurringLesson("2025-11-02", 7)), parser.parse(input));
     }
 }

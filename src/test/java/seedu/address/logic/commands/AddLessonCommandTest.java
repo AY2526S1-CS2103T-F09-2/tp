@@ -40,10 +40,8 @@ public class AddLessonCommandTest {
         assertEquals(
                 String.format(
                         AddLessonCommand.MESSAGE_SUCCESS,
-                        seedu.address.logic.Messages.format(updatedStudent)
-                ),
-                result.getFeedbackToUser()
-        );
+                        seedu.address.logic.Messages.format(updatedStudent)),
+                result.getFeedbackToUser());
     }
 
     @Test
@@ -65,6 +63,3 @@ public class AddLessonCommandTest {
         assertEquals(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, thrown.getMessage());
     }
 }
-
-
-

@@ -21,27 +21,27 @@ public class AddStudentCommand extends Command {
 
     public static final String COMMAND_WORD = "addstu";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student to the address book. "
-        + "Parameters: "
-        + PREFIX_NAME + "NAME "
-        + PREFIX_PHONE + "PHONE "
-        + PREFIX_EMAIL + "EMAIL "
-        + "[" + PREFIX_ADDRESS + "ADDRESS] "
-        + "[" + PREFIX_EDUCATION_LEVEL + "EDUCATION_LEVEL] "
-        + "[" + PREFIX_TAG + "TAG]...\n"
-        + "Example: " + COMMAND_WORD + " "
-        + PREFIX_NAME + "Alice Pauline "
-        + PREFIX_PHONE + "92345123 "
-        + PREFIX_EMAIL + "1200033@gmail.com "
-        + PREFIX_EDUCATION_LEVEL + "primary 3";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EDUCATION_LEVEL + "EDUCATION_LEVEL] "
+            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Alice Pauline "
+            + PREFIX_PHONE + "92345123 "
+            + PREFIX_EMAIL + "1200033@gmail.com "
+            + PREFIX_EDUCATION_LEVEL + "primary 3";
 
     public static final String MESSAGE_SUCCESS = "New Student added: %1$s";
     public static final String MESSAGE_DUPLICATE_STUDENT = "This Student already exists in the address book";
-
 
     private final Student toAdd;
 
     /**
      * Creates an AddStudentCommand to add the specified student
+     *
      * @param student student to be added
      */
     public AddStudentCommand(Student student) {
