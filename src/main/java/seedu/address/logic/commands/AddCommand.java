@@ -17,6 +17,7 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
     public static final String MESSAGE_SUCCESS = "(DEPRECATED) New student added: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": (DEPRECATED) Please use addstu";
+    public static final String DEPRECATED_MESSAGE = "This command is deprecated";
 
     public static final String MESSAGE_DUPLICATE_PERSON = "This student already exists in the address book";
 
@@ -59,8 +60,6 @@ public class AddCommand extends Command {
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
-                .toString();
+        return DEPRECATED_MESSAGE;
     }
 }
