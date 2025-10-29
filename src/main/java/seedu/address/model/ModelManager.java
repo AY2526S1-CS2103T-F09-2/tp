@@ -120,9 +120,24 @@ public class ModelManager implements Model {
     @Override
     public void addLesson(Student student, Lesson lesson) {
         addressBook.addLesson(student, lesson);
-
     }
 
+    @Override
+    public void refreshLessonDates() {
+        for (Person p : addressBook.getPersonList()) {
+            if (p instanceof Student) {
+                Student s = (Student) p;
+                Lesson current = s.getNextLesson();
+                Lesson normalized = (current == null ? Lesson.getEmpty() : current.getUpcomingLesson());
+                if (!normalized.equals(current)) {
+                    Student updated = new Student(
+                            s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized
+                    );
+                    setPerson(s, updated);
+                }
+            }
+        }
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
