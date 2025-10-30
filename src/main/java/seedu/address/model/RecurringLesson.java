@@ -12,6 +12,7 @@ public class RecurringLesson extends Lesson {
 
     /**
      * This method creates a new ReuccringLesson object
+     *
      * @param lessonDateString
      * @param intervalDays
      */
@@ -22,6 +23,7 @@ public class RecurringLesson extends Lesson {
 
     /**
      * Initialise a new recurring lesson with lesson date
+     *
      * @param lessonDate
      * @param intervalDays
      */
@@ -49,11 +51,13 @@ public class RecurringLesson extends Lesson {
 
     @Override
     public String toString() {
-        return super.toString() + " (every " + intervalDays + " days)";
+        String dayWord = intervalDays == 1 ? "day" : "days";
+        return super.toString() + " (every " + intervalDays + " " + dayWord + ")";
     }
 
     /**
      * Checks whether a lesson interval is valid
+     *
      * @param input the String input of the interval
      * @return whether the lesson is valid
      */
