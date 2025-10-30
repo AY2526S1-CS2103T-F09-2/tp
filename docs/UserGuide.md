@@ -4,13 +4,13 @@ title: User Guide
 ---
 
 **Hi private tutors!**
-Welcome to **TutorConnect** — a contact and lesson management tool designed specifically for private tutors.
 
-TutorConnect helps you keep track of students, lessons and payments efficiently. It combines the speed of Command Line Interface (CLI) commands with a simple GUI, making it ideal for tutors who prefer quick keyboard input but still appreciate visual feedback.
+**StudentConnect** is a desktop application designed to help private tutors manage student contacts and lesson schedules. With simple commands, you can record and retrieve important student information with ease.
 
-For example, a tutor managing 20 students can easily find student's contact information — all through short, easy commands.
+No matter what subjects you teach, which education levels you target, or whether your lessons are online or in-person, **StudentConnect** supports your tutoring needs. If juggling multiple students feels overwhelming, our features are here to help. With just a few quick commands, you can manage student contacts, schedule lessons, and track payments — all in one place.
 
-**Assumption**: This guide assumes you are somewhat familiar with using command-line (like opening a terminal and running commands).
+The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
+
 * Table of Contents
 {:toc}
 
@@ -21,24 +21,28 @@ For example, a tutor managing 20 students can easily find student's contact info
 
 ## Quick start
 
-Before diving into commands, let’s quickly set up TutorConnect so you can start managing your students right away.
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-**1. Check your Java version**<br>
-Make sure your computer has **Java 17 or newer installed**.
-   * **Mac users:** Please use the exact JDK version recommended [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
->  :bulb: **Not sure how to check your Java version? See [this quick guide](https://www.java.com/en/download/help/version_manual.html).**
+<div markdown="block" class="alert alert-info">
+:information_source:**How to check whether my Java version is above 17?**<br>
+If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
+</div>
 
-**2. Download StudentConnect**<br>
-Get the latest `.jar` file from [our GitHub releases page](https://github.com/AY2526S1-CS2103T-F09-2/tp).
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
 
-**3. Set up your home folder**<br>
-Move the downloaded `.jar` file into a folder where you’d like TutorConnect to store your data (this will be your “<u>home folder</u>”).
 
-**4. Run the app**<br>
-Open a command terminal and navigate to the <u>home folder</u> where you saved the jar file to.<br>
-Then run: `java -jar addressbook.jar`
-   
-After a few seconds, you should see a window like this:<br>![Ui](images/Ui.png)
+3. Once you have downladed the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the appication can be stored so **make sure that you place the file in an empty folder.**
+
+4. There are a few different ways to launch the application :
+* double click the `.jar` file that you have downloaded.
+* *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
 
 **5. Try out some basic commands**<br>
 Type a command in the box and press Enter to run it. 
@@ -91,7 +95,7 @@ Check out the [Features](#features) below for a full list of commands and detail
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
 ### Student
-A student is represented as an item in the student list. You can add a student by callling the [`addstu`](#adding-a-new-student-addstu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
+A student is represented as an item in the student list. You can add a student by calling the [`addstu`](#adding-a-new-student-addstu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
 The number index is based on the order that the student is added into the list.
 
 A student has the following attributes, as shown on the example above:
@@ -99,8 +103,8 @@ A student has the following attributes, as shown on the example above:
 2. phone number: The phone number of a student
 3. email address: The email address of a student
 4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
-4. [tag](#tag): Tags that record extra informations of a student
-5. [lesson](#lesson): The lesson that the student has
+5. [tag](#tag-): Tags that record extra information of a student
+6. [lesson](#lesson): The lesson that the student has
 
 <div markdown="block" class="alert alert-info">
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
@@ -123,9 +127,11 @@ In StudentConnect, you can use the tag in the following way:
 A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
 * For instance, a lesson that starts at `November 10th 2024 5pm` should be represented as `2024-11-10` in the system.
  
-When a student is created, the student by defualt does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
+When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
 A lesson is considered **passed** if the date of lesson recorded is **before the current date**(Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Advance Concepts
 
@@ -159,7 +165,7 @@ This ensures your recurring lessons always reflect the *next upcoming* session w
 Payment tracking has been an anathema to private tutors, especially when there are multiple students with different payment habits. We use the payment status to make this issue simple.
 
 The payment status records the balance between **the number of lessons that students has paid** or the **number of lessons that has passed**
-* If the student has paid for `10` lessons and `13` lessons has passed in total, the payment status will be `10-13 = -3`, which means that the students has **3 outstanding lessons that needs to be paid**. You can combine this with the [tag](#tag) feature to also record the price of each lesson and everything becomes easy calculation.
+* If the student has paid for `10` lessons and `13` lessons has passed in total, the payment status will be `10-13 = -3`, which means that the students has **3 outstanding lessons that needs to be paid**. You can combine this with the [tag](#tag-) feature to also record the price of each lesson and everything becomes easy calculation.
 
 **The number of lessons that students has paid** is tracked manually. You can update this by using [payment](#payment-status) command.
 **The number of lessons passed** is automatically updated whenever a lesson has passed(See [lesson](#lesson) for more details).
@@ -234,11 +240,11 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `hans` will match `Hans`
-- The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-- Only the name is searched.
-- Only full words will be matched e.g. `Han` will not match `Hans`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive. e.g. `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the name is searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
 Examples:
@@ -257,6 +263,7 @@ Format: `payment INDEX [s/paid | s/unpaid]`
   * The index refers to the index number shown in the displayed person list.
   * The index **must be a positive integer** 1, 2, 3, …​
 * Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
+  * Vertical bar `|` means “or” i.e. you can choose only one of the options given.
 * When a status flag is provided, the system updates the student’s payment record accordingly.
 
 Examples:
@@ -270,11 +277,11 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
-- The search is case-insensitive. e.g `chem` will match `Chem`
-- The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
-- Only tags are searched.
-- Partial matches are allowed. e.g. `chem` will match `chemistry`
-- Persons matching at least one keyword will be returned (i.e. `OR` search).
+* The search is case-insensitive. e.g. `chem` will match `Chem`
+* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
+* Only tags are searched.
+* Partial matches are allowed. e.g. `chem` will match `chemistry`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. physics math will return all persons with either tag.
 
 Examples:
@@ -309,7 +316,7 @@ Format: `addLesson INDEX l/LESSON_DATE [every/INTERVAL]`
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
-* If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` indentifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` indentifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
+* If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 
 Examples:
 * `list` followed by `addLesson 2 l/Wednesday` add the 2nd person's upcoming lesson and displays it in the address book.
@@ -321,12 +328,12 @@ Cancels the scheduled upcoming lesson at the specified index.
 
 Format: `cancelLesson INDEX`
 
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** not greater than the total number of persons in the addressbook.
-- This command checks if the person at the specified index is a student.
-- If the person is not a student, the command returns an error message.
-- If the person is a student with a scheduled lesson, the command cancels that lesson.
-- If they are a student with no scheduled lesson, an error message will be displayed.
+* The index refers to the index number shown in the displayed person list.
+* The index **must be a positive integer** not greater than the total number of persons in the address book.
+* This command checks if the person at the specified index is a student.
+* If the person is not a student, the command returns an error message.
+* If the person is a student with a scheduled lesson, the command cancels that lesson.
+* If they are a student with no scheduled lesson, an error message will be displayed.
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
@@ -345,6 +352,10 @@ Exits the program.
 
 Format: `exit`
 
+--------------------------------------------------------------------------------------------------------------------
+
+## Managing Data Storage
+
 ### Saving the data
 
 AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
@@ -355,7 +366,7 @@ AddressBook data are saved automatically as a JSON file `[JAR file location]/dat
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -382,17 +393,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-Action | Format, Examples
---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**addstu** | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4`
-**addLesson** | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`
-**cancelLesson** | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3` 
-**Clear** | `clear`
-**Delete** | `delete INDEX`<br> e.g. `delete 3`
-**CancelLesson** | `cancelLesson INDEX` <br> e.g. `cancelLesson 6`
-**Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`
-**Find** | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`
-**Searchtag** | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`
-**List** | `list`
-**PaymentStatus** | `payment INDEX [s/paid\| s/unpaid]`<br> e.g. `payment 1 s/unpaid`
-**Help** | `help`
+| Action             | Format, Examples                                                                                                                                                                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Student**    | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
+| **Add Lesson**     | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`                                                                                                               |
+| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
+| **Clear**          | `clear`                                                                                                                                                                                                   |
+| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
+| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
+| **List**           | `list`                                                                                                                                                                                                    |
+| **Payment Status** | `payment INDEX [s/paid \| s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
+| **Help**           | `help`                                                                                                                                                                                                    |
