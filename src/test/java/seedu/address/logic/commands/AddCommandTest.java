@@ -82,7 +82,8 @@ public class AddCommandTest {
     @Test
     public void toStringMethod() {
         AddCommand addCommand = new AddCommand(ALICE);
-        String expected = AddCommand.class.getCanonicalName() + "{toAdd=" + ALICE + "}";
+        String expected = AddCommand.DEPRECATED_MESSAGE;
+
         assertEquals(expected, addCommand.toString());
     }
 
