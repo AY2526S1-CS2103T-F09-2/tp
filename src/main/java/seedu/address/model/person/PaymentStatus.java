@@ -147,6 +147,9 @@ public class PaymentStatus {
             int overpaidCount = -outstandingLessonPayments;
             return overpaidCount + " overpaid lessons";
         } else {
+            if (outstandingLessonPayments == 1) {
+                return outstandingLessonPayments + " unpaid lesson";
+            }
             return outstandingLessonPayments + " unpaid lessons";
         }
     }
