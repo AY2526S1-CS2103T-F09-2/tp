@@ -65,4 +65,16 @@ public class RecurringLessonTest {
         assertFalse(RecurringLesson.isValidInterval("<div />"));
     }
 
+    @Test
+    public void toString_singularAndPluralDayFormatting() {
+        LocalDate now = LocalDate.now();
+        RecurringLesson oneDay = new RecurringLesson(now, 1);
+        RecurringLesson twoDays = new RecurringLesson(now, 2);
+
+        String dateStr = now.toString(); // Lesson.toString formats as yyyy-MM-dd, same as LocalDate.toString
+
+        assertEquals(dateStr + " (every 1 day)", oneDay.toString());
+        assertEquals(dateStr + " (every 2 days)", twoDays.toString());
+    }
+
 }
