@@ -146,6 +146,9 @@ public class PaymentStatus {
         } else if (outstandingLessonPayments < 0) {
             return outstandingLessonPayments + " overpaid lessons";
         } else {
+            if (outstandingLessonPayments == 1) {
+                return outstandingLessonPayments + " unpaid lesson";
+            }
             return outstandingLessonPayments + " unpaid lessons";
         }
     }
