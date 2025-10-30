@@ -31,75 +31,83 @@ public enum EducationLevel {
     OTHER;
     private static final Map<String, EducationLevel> STRING_TO_LEVEL = new HashMap<>();
 
+    private static String normalize(String s) {
+        return s == null ? null : s.toLowerCase().replaceAll("\\s+", "");
+    }
+
+    private static void putKey(String key, EducationLevel level) {
+        STRING_TO_LEVEL.put(normalize(key), level);
+    }
+
     static {
         // Primary
-        STRING_TO_LEVEL.put("primary 1", PRIMARY_1);
-        STRING_TO_LEVEL.put("primary one", PRIMARY_1);
-        STRING_TO_LEVEL.put("pri 1", PRIMARY_1);
-        STRING_TO_LEVEL.put("pri one", PRIMARY_1);
+        putKey("primary 1", PRIMARY_1);
+        putKey("primary one", PRIMARY_1);
+        putKey("pri 1", PRIMARY_1);
+        putKey("pri one", PRIMARY_1);
 
-        STRING_TO_LEVEL.put("primary 2", PRIMARY_2);
-        STRING_TO_LEVEL.put("primary two", PRIMARY_2);
-        STRING_TO_LEVEL.put("pri 2", PRIMARY_2);
-        STRING_TO_LEVEL.put("pri two", PRIMARY_2);
+        putKey("primary 2", PRIMARY_2);
+        putKey("primary two", PRIMARY_2);
+        putKey("pri 2", PRIMARY_2);
+        putKey("pri two", PRIMARY_2);
 
-        STRING_TO_LEVEL.put("primary 3", PRIMARY_3);
-        STRING_TO_LEVEL.put("primary three", PRIMARY_3);
-        STRING_TO_LEVEL.put("pri 3", PRIMARY_3);
-        STRING_TO_LEVEL.put("pri three", PRIMARY_3);
+        putKey("primary 3", PRIMARY_3);
+        putKey("primary three", PRIMARY_3);
+        putKey("pri 3", PRIMARY_3);
+        putKey("pri three", PRIMARY_3);
 
-        STRING_TO_LEVEL.put("primary 4", PRIMARY_4);
-        STRING_TO_LEVEL.put("primary four", PRIMARY_4);
-        STRING_TO_LEVEL.put("pri 4", PRIMARY_4);
-        STRING_TO_LEVEL.put("pri four", PRIMARY_4);
+        putKey("primary 4", PRIMARY_4);
+        putKey("primary four", PRIMARY_4);
+        putKey("pri 4", PRIMARY_4);
+        putKey("pri four", PRIMARY_4);
 
-        STRING_TO_LEVEL.put("primary 5", PRIMARY_5);
-        STRING_TO_LEVEL.put("primary five", PRIMARY_5);
-        STRING_TO_LEVEL.put("pri 5", PRIMARY_5);
-        STRING_TO_LEVEL.put("pri five", PRIMARY_5);
+        putKey("primary 5", PRIMARY_5);
+        putKey("primary five", PRIMARY_5);
+        putKey("pri 5", PRIMARY_5);
+        putKey("pri five", PRIMARY_5);
 
-        STRING_TO_LEVEL.put("primary 6", PRIMARY_6);
-        STRING_TO_LEVEL.put("primary six", PRIMARY_6);
-        STRING_TO_LEVEL.put("pri 6", PRIMARY_6);
-        STRING_TO_LEVEL.put("pri six", PRIMARY_6);
+        putKey("primary 6", PRIMARY_6);
+        putKey("primary six", PRIMARY_6);
+        putKey("pri 6", PRIMARY_6);
+        putKey("pri six", PRIMARY_6);
 
         // Secondary
-        STRING_TO_LEVEL.put("secondary 1", SEC_1);
-        STRING_TO_LEVEL.put("secondary one", SEC_1);
-        STRING_TO_LEVEL.put("sec 1", SEC_1);
-        STRING_TO_LEVEL.put("sec one", SEC_1);
+        putKey("secondary 1", SEC_1);
+        putKey("secondary one", SEC_1);
+        putKey("sec 1", SEC_1);
+        putKey("sec one", SEC_1);
 
-        STRING_TO_LEVEL.put("secondary 2", SEC_2);
-        STRING_TO_LEVEL.put("secondary two", SEC_2);
-        STRING_TO_LEVEL.put("sec 2", SEC_2);
-        STRING_TO_LEVEL.put("sec two", SEC_2);
+        putKey("secondary 2", SEC_2);
+        putKey("secondary two", SEC_2);
+        putKey("sec 2", SEC_2);
+        putKey("sec two", SEC_2);
 
-        STRING_TO_LEVEL.put("secondary 3", SEC_3);
-        STRING_TO_LEVEL.put("secondary three", SEC_3);
-        STRING_TO_LEVEL.put("sec 3", SEC_3);
-        STRING_TO_LEVEL.put("sec three", SEC_3);
+        putKey("secondary 3", SEC_3);
+        putKey("secondary three", SEC_3);
+        putKey("sec 3", SEC_3);
+        putKey("sec three", SEC_3);
 
-        STRING_TO_LEVEL.put("secondary 4", SEC_4);
-        STRING_TO_LEVEL.put("secondary four", SEC_4);
-        STRING_TO_LEVEL.put("sec 4", SEC_4);
-        STRING_TO_LEVEL.put("sec four", SEC_4);
+        putKey("secondary 4", SEC_4);
+        putKey("secondary four", SEC_4);
+        putKey("sec 4", SEC_4);
+        putKey("sec four", SEC_4);
 
-        STRING_TO_LEVEL.put("secondary 5", SEC_5);
-        STRING_TO_LEVEL.put("secondary five", SEC_5);
-        STRING_TO_LEVEL.put("sec 5", SEC_5);
-        STRING_TO_LEVEL.put("sec five", SEC_5);
+        putKey("secondary 5", SEC_5);
+        putKey("secondary five", SEC_5);
+        putKey("sec 5", SEC_5);
+        putKey("sec five", SEC_5);
 
         // Junior College
-        STRING_TO_LEVEL.put("j1", J1);
-        STRING_TO_LEVEL.put("junior 1", J1);
-        STRING_TO_LEVEL.put("jc 1", J1);
+        putKey("j1", J1);
+        putKey("junior 1", J1);
+        putKey("jc 1", J1);
 
-        STRING_TO_LEVEL.put("j2", J2);
-        STRING_TO_LEVEL.put("junior 2", J2);
-        STRING_TO_LEVEL.put("jc 2", J2);
+        putKey("j2", J2);
+        putKey("junior 2", J2);
+        putKey("jc 2", J2);
 
         // Other
-        STRING_TO_LEVEL.put("other", OTHER);
+        putKey("other", OTHER);
     }
 
     /**
@@ -120,6 +128,7 @@ public enum EducationLevel {
         if (s == null) {
             return UNKNOWN;
         }
-        return STRING_TO_LEVEL.getOrDefault(s.trim().toLowerCase(), OTHER);
+        String key = normalize(s);
+        return STRING_TO_LEVEL.getOrDefault(key, OTHER);
     }
 }

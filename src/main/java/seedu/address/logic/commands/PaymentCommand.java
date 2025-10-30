@@ -24,7 +24,7 @@ public class PaymentCommand extends Command {
     public static final String COMMAND_WORD = "payment";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Display payment status of student. "
-            + "Parameters: INDEX [optional: s/paid|unpaid]\n"
+            + "Parameters: INDEX [s/paid | s/unpaid]\n"
             + "Example: " + COMMAND_WORD + " 1 s/unpaid";
 
     public static final String MESSAGE_PAYMENT_STATUS_SUCCESS = """
