@@ -96,7 +96,6 @@ public class PaymentCommandTest {
         assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
     }
 
-
     @Test
     public void execute_nullTargetIndex_throwsNullPointerException() {
         PaymentCommand paymentCommand = new PaymentCommand(null);
@@ -176,12 +175,11 @@ public class PaymentCommandTest {
                 person.getEmail(),
                 person.getAddress(),
                 person.getTags(),
-                new Lesson("2026-01-01")
-        );
+                new Lesson("2026-01-01"));
     }
 
     private void addLessonToModel(Student student) throws CommandException {
-        AddLessonCommand addLessonCommand = new AddLessonCommand(student.getName(), new Lesson("2026-01-01"));
+        AddLessonCommand addLessonCommand = new AddLessonCommand(INDEX_FIRST_PERSON, new Lesson("2026-01-01"));
         addLessonCommand.execute(model);
     }
 }

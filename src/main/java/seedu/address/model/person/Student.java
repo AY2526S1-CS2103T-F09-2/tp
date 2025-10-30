@@ -43,7 +43,8 @@ public class Student extends Person {
      * Constructs a new Student object.
      */
     private Student(Student student, PaymentStatus paymentStatus) {
-        super(student.getName(), student.getPhone(), student.getEmail(), student.getAddress(), student.getTags());
+        super(student.getName(), student.getPhone(), student.getEmail(), student.getAddress(), student.getTags(),
+                student.getEducationLevel());
         this.paymentStatus = paymentStatus;
         this.nextLesson = student.getNextLesson();
     }
@@ -58,6 +59,16 @@ public class Student extends Person {
         super(name, phone, email, address, tags, educationLevel);
         this.paymentStatus = paymentStatus;
         this.nextLesson = nextLesson;
+    }
+
+    /**
+     * Constructs a new Student carrying over payment status and education level.
+     */
+    public Student(Person person) {
+        super(person.getName(), person.getPhone(), person.getEmail(),
+                person.getAddress(), person.getTags(), person.getEducationLevel());
+        this.paymentStatus = PaymentStatus.getZeroPaymentStatus();
+        this.nextLesson = Lesson.getEmpty();
     }
 
     /**
