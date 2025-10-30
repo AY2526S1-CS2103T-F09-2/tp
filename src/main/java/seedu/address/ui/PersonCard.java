@@ -26,11 +26,13 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label educationLabel;
     /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+     * Note: Certain keywords such as "location" and "resources" are reserved
+     * keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The
+     *      issue on AddressBook level 4</a>
      */
     @FXML
     private HBox cardPane;
@@ -47,9 +49,9 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-
     /**
-     * Creates a {@code PersonCode} with the given {@code Person} and index to display.
+     * Creates a {@code PersonCode} with the given {@code Person} and index to
+     * display.
      */
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
@@ -65,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
         if (person instanceof Student student) {
             Lesson lesson = student.getNextLesson();
             if (lesson != null && !lesson.equals(Lesson.getEmpty())) {
-                lessonLabel.setText("Lesson: " + lesson.getLessonDate());
+                lessonLabel.setText("Lesson: " + lesson);
             } else {
                 lessonLabel.setText("Lesson: None");
             }
@@ -73,7 +75,7 @@ public class PersonCard extends UiPart<Region> {
             lessonLabel.setText("");
         }
 
-        //Display payment status for the person
+        // Display payment status for the person
         if (person instanceof Student student && paymentStatusLabel != null && student.getPaymentStatus() != null) {
             paymentStatusLabel.setText("Payment: " + student.getPaymentStatus().toString());
         } else {

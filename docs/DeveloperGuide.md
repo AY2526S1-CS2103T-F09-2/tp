@@ -119,7 +119,7 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-The `Model` component,
+#### The `Model` component,
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -130,11 +130,19 @@ The `Model` component,
 <img src="images/BetterModelClassDiagram.png" width="450" />
 </div>
 
-The `Student` Component
-* The student component is a new component that is introduced in the application TutorConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
+#### The `Student` Component
+* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
 * The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in TutorConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
+
+#### The `Lesson` Component 
+* The lesson component represents a single lesson that is owned by a student that is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` java object that records the date of a lesson. 
+* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which is represents the state where the student does not have any lesson. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It seves as a check on whether the student has any lesson. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
+* Another sub-class of lesson is called `RecurringLesson`, which handles lessons that regularly updates itself after a certain time interval. It has a `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
+* The behaviour of a lesson object largely are mostly tied to the commands that creates or deletes a lesson. Additionally, whenever the application is launched. TJe `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of lesson whose date is `INTERVAL` days past the previous lesson date.
+
+<img src="images/LessonClassDiagram.png" width="600" />
 
 ### Storage component
 

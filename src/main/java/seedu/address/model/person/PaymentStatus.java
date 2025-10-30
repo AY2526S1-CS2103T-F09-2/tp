@@ -144,8 +144,12 @@ public class PaymentStatus {
         if (outstandingLessonPayments == 0) {
             return "All lessons have been paid";
         } else if (outstandingLessonPayments < 0) {
-            return outstandingLessonPayments + " overpaid lessons";
+            int overpaidCount = -outstandingLessonPayments;
+            return overpaidCount + " overpaid lessons";
         } else {
+            if (outstandingLessonPayments == 1) {
+                return outstandingLessonPayments + " unpaid lesson";
+            }
             return outstandingLessonPayments + " unpaid lessons";
         }
     }

@@ -10,13 +10,17 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Student;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.StudentBuilder;
 
 public class ModelManagerTest {
 
@@ -91,6 +95,81 @@ public class ModelManagerTest {
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
+    }
+
+    @Test
+    public void refreshLessonDates_recurringLessonPastDate_advancesToNewDate() {
+        LocalDate today = LocalDate.now();
+        LocalDate fifteenDaysAgo = today.minusDays(15);
+        RecurringLesson r = new RecurringLesson(fifteenDaysAgo, 7);
+        Student s = new StudentBuilder().withNewLesson(r).build();
+
+        AddressBook ab = new AddressBook();
+        ab.addPerson(s);
+
+        ModelManager mn = new ModelManager(ab, new UserPrefs());
+        mn.refreshLessonDates();
+
+        Student cur = (Student) mn.getAddressBook().getPersonList().get(0);
+
+        Lesson next = cur.getNextLesson();
+        assertTrue(next instanceof RecurringLesson, "Should remain recurring");
+
+        LocalDate d = next.getLessonDateTime();
+        assertFalse(d.isBefore(today), "Current lesson should not be before today");
+
+        long days = ChronoUnit.DAYS.between(fifteenDaysAgo, d);
+        assertEquals(0, days % 7, "Lesson updated in 7-day step");
+    }
+
+    @Test
+    public void refreshLessonDates_futureLesson_noChange() {
+        LocalDate today = LocalDate.now();
+        LocalDate future = today.plusDays(5);
+
+        Lesson l = new Lesson(future);
+        Student s = new StudentBuilder().withNewLesson(l).build();
+
+        AddressBook ab = new AddressBook();
+        ab.addPerson(s);
+
+        ModelManager mn = new ModelManager(ab, new UserPrefs());
+        mn.refreshLessonDates();
+
+        Student cur = (Student) mn.getAddressBook().getPersonList().get(0);
+        assertEquals(future, cur.getNextLesson().getLessonDateTime(), "Future lesson stay unchanged");
+    }
+
+    @Test
+    public void refreshLessonDates_passedDate_becomesEmpty() {
+        LocalDate today = LocalDate.now();
+        LocalDate past = today.minusDays(3);
+
+        Lesson l = new Lesson(past);
+        Student s = new StudentBuilder().withNewLesson(l).build();
+
+        AddressBook ab = new AddressBook();
+        ab.addPerson(s);
+
+        ModelManager mn = new ModelManager(ab, new UserPrefs());
+        mn.refreshLessonDates();
+
+        Student cur = (Student) mn.getAddressBook().getPersonList().get(0);
+        assertTrue(cur.getNextLesson().isEmpty(), "Lesson with a past date should become empty");
+    }
+
+    @Test
+    public void refreshLessonDates_emptyLesson_remainEmpty() {
+        Student s = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+
+        AddressBook ab = new AddressBook();
+        ab.addPerson(s);
+
+        ModelManager mn = new ModelManager(ab, new UserPrefs());
+        mn.refreshLessonDates();
+
+        Student cur = (Student) mn.getAddressBook().getPersonList().get(0);
+        assertTrue(cur.getNextLesson().isEmpty(), "Empty lesson remains empty after refresh");
     }
 
     @Test
