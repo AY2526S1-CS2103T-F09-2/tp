@@ -4,8 +4,11 @@ title: User Guide
 ---
 **Hi private tutors!**
 
-**StudentConnect** is a **desktop app for managing student contacts for private tutors**. You can us commands to record and look up student information which can be imporant to your tutoring tasks. Whether you are teaching any subjects, targeting at any education levels or hosting online/offline lessons, **StudentConnect** will always bring the beneift that you want! As long as you are troubled with managing several students together, check out our commands. With a few simple commands, you can unleash the potential of the powerful commands in **StudentConnect** that keeps all your students contacts,schedules your lessons and tracks your payments at ease!</br>
-The quick start section right below will give you a quick overview on how to being. Fret not if you are unfamiliar with commands applications before, it's never too late to start!
+**StudentConnect** is a desktop application designed to help private tutors manage student contacts and lesson schedules. With simple commands, you can record and retrieve important student information with ease.
+
+No matter what subjects you teach, which education levels you target, or whether your lessons are online or in-person, **StudentConnect** supports your tutoring needs. If juggling multiple students feels overwhelming, our features are here to help. With just a few quick commands, you can manage student contacts, schedule lessons, and track payments — all in one place.
+
+The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
 
 * Table of Contents
 {:toc}
