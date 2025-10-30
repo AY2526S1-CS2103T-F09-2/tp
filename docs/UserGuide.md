@@ -18,31 +18,31 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 ## Quick start
 
-1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide<br>
+
    **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
 
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-<div markdown="block" class="alert alert-info">
-:information_source: **How to check whether my Java version is above 17?**<br>
-If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
-</div>
+    <div markdown="block" class="alert alert-info">
+    :information_source: **How to check whether my Java version is above 17?**<br>
+    If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
+    </div>
 
-2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
-
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application.
 
 3. Once you have downloaded the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the application can be stored so **make sure that you place the file in an empty folder.**
 
 4. There are a few different ways to launch the application :
-* double-click the `.jar` file that you have downloaded.
-* *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   * double-click the `.jar` file that you have downloaded.
+   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-**5. Try out some basic commands**<br>
+**6. Try out some basic commands**<br>
 Type a command in the box and press Enter to run it. 
 
 Here are a few to get you started:
