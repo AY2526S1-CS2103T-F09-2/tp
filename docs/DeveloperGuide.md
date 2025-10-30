@@ -320,6 +320,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class in the addressbook.
 
 --------------------------------------------------------------------------------------------------------------------
 
