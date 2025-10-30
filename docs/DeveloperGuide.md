@@ -119,7 +119,7 @@ How the parsing works:
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
-#### The `Model` component,
+#### The `Model` component
 
 * stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
 * stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
@@ -132,7 +132,7 @@ How the parsing works:
 
 #### The `Student` Component
 * The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
-* The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in TutorConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
+* The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
 

@@ -11,7 +11,7 @@ No matter what subjects you teach, which education levels you target, or whether
 
 The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
 
-* Table of Contents
+## Table of Contents
 {:toc}
 
 - Table of Contents
@@ -21,8 +21,9 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 ## Quick start
 
-1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide<br>
-   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+   **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 <div markdown="block" class="alert alert-info">
@@ -106,7 +107,7 @@ A student has the following attributes, as shown on the example above:
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-danger">:bulb: **Warning:**
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
 </div>
 
@@ -184,7 +185,7 @@ Format: `help`
 
 ### Adding a new student: `addStu`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Warning:**
+<div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 The `add` command available in the previous versions is deprecated and cannot be used anymore.
 Use this command instead to add a new student
 </div>
@@ -193,14 +194,13 @@ Adds a person to the address book.
 
 Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have 0 or 1 address
-A person can have any number of tags (including 0)
-All other fields are compulsory
-When a student is initialised, *by default* : 
-1. the student has not paid for any lesson(refer to track for more info)
-2. the student does not have any lesson (refer to addLesson for more info)
-3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. </div>
+* A person can have 0 or 1 address 
+* A person can have any number of tags (including 0)
+* All other fields are compulsory 
+* When a student is initialised, *by default* :
+  1. the student has not paid for any lesson(refer to track for more info)
+  2. the student does not have any lesson (refer to addLesson for more info)
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
 
 Examples:
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
