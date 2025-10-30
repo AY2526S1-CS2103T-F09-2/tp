@@ -180,7 +180,7 @@ Format: `help`
 
 ### Adding a new student: `addstu`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Warning:**
+<div markdown="span" class="alert alert-warning">:bulb: **Warning:**
 The `add` command available in the previous versions is deprecated and cannot be used anymore.
 Use this command instead to add a new student
 </div>
