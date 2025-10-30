@@ -14,9 +14,6 @@ The Quick Start section below will guide you through your first steps. Don’t w
 ## Table of Contents
 {:toc}
 
-- Table of Contents
-  {:toc}
-
 ---
 
 ## Quick start
