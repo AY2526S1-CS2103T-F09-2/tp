@@ -179,4 +179,116 @@ public class AddLessonCommandTest {
                 + ", toAdd=" + VALID_LESSON + "}";
         assertEquals(expected, command.toString());
     }
+
+    @Test
+    public void toString_recurringLesson_correctFormat() {
+        AddLessonCommand command = new AddLessonCommand(Index.fromOneBased(2), VALID_RECURRING_LESSON);
+        String result = command.toString();
+        assertTrue(result.contains("index=" + Index.fromOneBased(2)));
+        assertTrue(result.contains("toAdd=" + VALID_RECURRING_LESSON));
+    }
+
+    @Test
+    public void execute_personConvertedToStudent_success() throws Exception {
+        Model model = new ModelManager();
+        Person person = new PersonBuilder().build();
+        model.addPerson(person);
+        Index index = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(index, VALID_LESSON);
+        command.execute(model);
+
+        // Verify the person was converted to a student
+        Person updatedPerson = model.getFilteredPersonList().get(0);
+        assertTrue(updatedPerson instanceof Student);
+        Student student = (Student) updatedPerson;
+        assertNotEquals(Lesson.getEmpty(), student.getNextLesson());
+    }
+
+    @Test
+    public void execute_addLessonMarksStudentAsUnpaid_success() throws Exception {
+        Model model = new ModelManager();
+        Person person = new PersonBuilder().build();
+        model.addPerson(person);
+        Index index = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(index, VALID_LESSON);
+        command.execute(model);
+
+        // Verify the student has unpaid status (outstanding lesson count incremented)
+        Student student = (Student) model.getFilteredPersonList().get(0);
+        assertTrue(student.getPaymentStatus().getOutstandingLessonPayments() > 0);
+    }
+
+    @Test
+    public void execute_studentWithRecurringLesson_cannotAddAnotherLesson() throws Exception {
+        Model model = new ModelManager();
+        Person person = new PersonBuilder().build();
+        model.addPerson(person);
+        Index index = Index.fromOneBased(1);
+
+        // Add first recurring lesson
+        AddLessonCommand firstCommand = new AddLessonCommand(index, VALID_RECURRING_LESSON);
+        firstCommand.execute(model);
+
+        // Try to add another lesson - should fail
+        AddLessonCommand secondCommand = new AddLessonCommand(index, ANOTHER_VALID_LESSON);
+        CommandException thrown = assertThrows(CommandException.class, () -> secondCommand.execute(model));
+        assertEquals(AddLessonCommand.MESSAGE_DUPLICATE_LESSON, thrown.getMessage());
+    }
+
+    @Test
+    public void execute_multipleStudentsAddLessonToSecond_success() throws Exception {
+        Model model = new ModelManager();
+        Person person1 = new PersonBuilder().build();
+        Person person2 = new PersonBuilder().withName("Bob").withEmail("bob@example.com").build();
+        model.addPerson(person1);
+        model.addPerson(person2);
+
+        Index indexSecond = Index.fromOneBased(2);
+        AddLessonCommand command = new AddLessonCommand(indexSecond, VALID_LESSON);
+        command.execute(model);
+
+        // Verify second person got the lesson
+        Student secondStudent = (Student) model.getFilteredPersonList().get(1);
+        assertNotEquals(Lesson.getEmpty(), secondStudent.getNextLesson());
+    }
+
+    @Test
+    public void execute_multipleStudentsFirstHasNoLesson_success() throws Exception {
+        Model model = new ModelManager();
+        Student student1 = new StudentBuilder().withNewLesson(Lesson.getEmpty()).build();
+        Person person2 = new PersonBuilder().withName("Bob").withEmail("bob@example.com").build();
+        model.addPerson(student1);
+        model.addPerson(person2);
+
+        Index indexFirst = Index.fromOneBased(1);
+        AddLessonCommand command = new AddLessonCommand(indexFirst, VALID_LESSON);
+        command.execute(model);
+
+        // Verify first student got the lesson
+        Student firstStudent = (Student) model.getFilteredPersonList().get(0);
+        assertNotEquals(Lesson.getEmpty(), firstStudent.getNextLesson());
+        assertEquals(VALID_LESSON, firstStudent.getNextLesson());
+    }
+
+    @Test
+    public void equals_recurringVsNonRecurring_returnsFalse() {
+        AddLessonCommand addNormalLesson = new AddLessonCommand(Index.fromOneBased(1), VALID_LESSON);
+        AddLessonCommand addRecurringLesson = new AddLessonCommand(Index.fromOneBased(1), VALID_RECURRING_LESSON);
+        assertFalse(addNormalLesson.equals(addRecurringLesson));
+    }
+
+    @Test
+    public void equals_differentRecurringIntervals_returnsFalse() {
+        RecurringLesson monthlyLesson = new RecurringLesson("2025-01-01", 30);
+        AddLessonCommand addWeeklyLesson = new AddLessonCommand(Index.fromOneBased(1), VALID_RECURRING_LESSON);
+        AddLessonCommand addMonthlyLesson = new AddLessonCommand(Index.fromOneBased(1), monthlyLesson);
+        assertFalse(addWeeklyLesson.equals(addMonthlyLesson));
+    }
+
+    @Test
+    public void equals_sameRecurringLesson_returnsTrue() {
+        AddLessonCommand command1 = new AddLessonCommand(Index.fromOneBased(1), VALID_RECURRING_LESSON);
+        AddLessonCommand command2 = new AddLessonCommand(Index.fromOneBased(1), VALID_RECURRING_LESSON);
+        assertTrue(command1.equals(command2));
+    }
 }
