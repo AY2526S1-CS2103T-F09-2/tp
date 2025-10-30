@@ -77,4 +77,30 @@ public class RecurringLessonTest {
         assertEquals(dateStr + " (every 2 days)", twoDays.toString());
     }
 
+    @Test
+    public void toString_weeklyLesson_displaysCorrectly() {
+        LocalDate testDate = LocalDate.of(2025, 11, 2);
+        RecurringLesson weeklyLesson = new RecurringLesson(testDate, 7);
+
+        assertEquals("2025-11-02 (every 7 days)", weeklyLesson.toString());
+    }
+
+    @Test
+    public void equals_sameIntervalAndDate_returnsTrue() {
+        LocalDate date = LocalDate.of(2025, 11, 2);
+        RecurringLesson lesson1 = new RecurringLesson(date, 7);
+        RecurringLesson lesson2 = new RecurringLesson(date, 7);
+
+        assertEquals(lesson1, lesson2);
+    }
+
+    @Test
+    public void equals_differentInterval_returnsFalse() {
+        LocalDate date = LocalDate.of(2025, 11, 2);
+        RecurringLesson lesson1 = new RecurringLesson(date, 7);
+        RecurringLesson lesson2 = new RecurringLesson(date, 14);
+
+        assertNotEquals(lesson1, lesson2);
+    }
+
 }
