@@ -189,14 +189,13 @@ Adds a person to the address book.
 
 Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have 0 or 1 address
-A person can have any number of tags (including 0)
-All other fields are compulsory
-When a student is initialised, *by default* : 
-1. the student has not paid for any lesson(refer to track for more info)
-2. the student does not have any lesson (refer to addLesson for more info)
-3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. </div>
+* A person can have 0 or 1 address 
+* A person can have any number of tags (including 0)
+* All other fields are compulsory 
+* When a student is initialised, *by default* :
+  1. the student has not paid for any lesson(refer to track for more info)
+  2. the student does not have any lesson (refer to addLesson for more info)
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
 
 Examples:
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
