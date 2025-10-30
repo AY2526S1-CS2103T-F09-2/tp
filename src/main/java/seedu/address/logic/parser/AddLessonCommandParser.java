@@ -42,6 +42,9 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         }
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
             String intervalStr = argMultimap.getValue(PREFIX_INTERVAL).get().trim();
+            if (!RecurringLesson.isValidInterval(intervalStr)) {
+                throw new ParseException("Interval must be a positive integer less than 365");
+            }
             try {
                 int interval = Integer.parseInt(intervalStr);
                 lesson = new RecurringLesson(lessonDate, interval);
