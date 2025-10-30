@@ -17,7 +17,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 ## Quick start
 
-1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide<br>
    **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
@@ -29,10 +29,10 @@ If you use these websites links to download the platform, they are from the late
 2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
 
 
-3. Once you have downladed the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the appication can be stored so **make sure that you place the file in an empty folder.**
+3. Once you have downloaded the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the application can be stored so **make sure that you place the file in an empty folder.**
 
 4. There are a few different ways to launch the application :
-* double click the `.jar` file that you have downloaded.
+* double-click the `.jar` file that you have downloaded.
 * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -125,7 +125,7 @@ A lesson is represented by a single date, which is the date (in the fixed format
  
 When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
-A lesson is considered **passed** if the date of lesson recorded is **before the current date**(Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
+A lesson is considered **passed** if the date of lesson recorded is **before the current date** (Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -187,7 +187,7 @@ Use this command instead to add a new student
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have 0 or 1 address
@@ -272,12 +272,11 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `chem` will match `Chem`
+* The search is case-insensitive. e.g. `chem` will match `ChEm`
 * The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
 * Only tags are searched.
 * Partial matches are allowed. e.g. `chem` will match `chemistry`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. physics math will return all persons with either tag.
+* Persons matching at least one keyword will be returned.
 
 Examples:
 * `searchtag cHemiStrY` returns all persons tagged with `chemistry`
@@ -356,7 +355,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. **Do not edit that data file as it will affect the app's startup functionality.**
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -387,16 +386,16 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                          |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                                                         |
+|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**    | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
-| **Add Lesson**     | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`                                                                                                               |
-| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
-| **Clear**          | `clear`                                                                                                                                                                                                   |
-| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
-| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
-| **List**           | `list`                                                                                                                                                                                                    |
-| **Payment Status** | `payment INDEX [s/paid \| s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
-| **Help**           | `help`                                                                                                                                                                                                    |
+| **Add Lesson**     | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`                                                                                                              |
+| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                         | 
+| **Clear**          | `clear`                                                                                                                                                                                                  |
+| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                       |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                               |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                |
+| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                               |
+| **List**           | `list`                                                                                                                                                                                                   |
+| **Payment Status** | `payment INDEX [s/paid | s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
+| **Help**           | `help`                                                                                                                                                                                                   |
