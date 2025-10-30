@@ -3,7 +3,10 @@ layout: page
 title: User Guide
 ---
 **Hi private tutors!**
-**TutorConnect** is a **desktop app for managing student contacts for private tutors, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). With a few simple commands, you can unleash the potential of the powerful commands in **TutorConnect** that manages all your students, your lessons and your payments at ease!
+
+**StudentConnect** is a **desktop app for managing student contacts for private tutors**. You can us commands to record and look up student information which can be imporant to your tutoring tasks. Whether you are teaching any subjects, targeting at any education levels or hosting online/offline lessons, **StudentConnect** will always bring the beneift that you want! As long as you are troubled with managing several students together, check out our commands. With a few simple commands, you can unleash the potential of the powerful commands in **StudentConnect** that keeps all your students contacts,schedules your lessons and tracks your payments at ease!</br>
+The quick start section right below will give you a quick overview on how to being. Fret not if you are unfamiliar with commands applications before, it's never too late to start!
+
 * Table of Contents
 {:toc}
 
@@ -11,18 +14,27 @@ title: User Guide
 
 ## Quick start
 
-1. Ensure you have Java `17` or above installed in your Computer.<br>
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-1. Download the latest `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases).
+<div markdown="block" class="alert alert-info">
+:information_source:**How to check whether my Java version is above 17?**<br>
+If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
+</div>
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+
+3. Once you have downladed the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the appication can be stored so **make sure that you place the file in an empty folder.**
+
+4. There are a few different ways to launch the application :
+* double click the `.jar` file that you have downloaded.
+* *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * `list` : Lists all contacts.
@@ -35,7 +47,7 @@ title: User Guide
 
    * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
