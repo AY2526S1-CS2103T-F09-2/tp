@@ -1,0 +1,46 @@
+@startuml  LessonClassDiagram
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor STORAGE_COLOR
+skinparam classBackgroundColor STORAGE_COLOR
+
+package model {
+
+class Student
+
+class Lesson {
+  _-EMPTY: EmptyLesson
+  -lessonDate: LocalDate
+  _+getEmpty(): Lesson
+  +getNextLesson(): Lesson
+}
+
+class RecurringLesson {
+  -interval: Integer
+}
+
+class EmptyLesson <<Singleton>>
+
+class ModelManager
+
+}
+
+package logic {
+class addLessonCommand
+class cancelLessonCommand
+}
+
+Lesson <|-- RecurringLesson
+Lesson <|-- EmptyLesson
+
+
+
+
+Lesson  --> "1" Lesson : nextLesson
+addLessonCommand --> Lesson: creates >
+cancelLessonCommand --> Lesson: deletes >
+Lesson ..> ModelManager: updates itself
+
+Student *-- Lesson
+
+@enduml
