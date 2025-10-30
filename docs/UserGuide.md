@@ -11,11 +11,8 @@ No matter what subjects you teach, which education levels you target, or whether
 
 The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
 
-## Table of Contents
+* Table of Contents
 {:toc}
-
-- Table of Contents
-  {:toc}
 
 ---
 
