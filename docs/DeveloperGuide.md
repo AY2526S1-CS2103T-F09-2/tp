@@ -127,10 +127,9 @@ The `Model` component,
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
 <img src="images/BetterModelClassDiagram.png" width="450" />
-
 </div>
+
 The `Student` Component
 * The student component is a new component that is introduced in the application TutorConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
 * The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in TutorConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
