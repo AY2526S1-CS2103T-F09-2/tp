@@ -36,8 +36,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
    * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
-   ![Ui](images/Ui.png)
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.![Ui](images/Ui.png)<br>
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
@@ -59,7 +58,7 @@ Here are a few to get you started:
 
 * `exit` &ndash; Exits the app.
 
-**6. Explore more features**<br>
+**7. Explore more features**<br>
 Check out the [Features](#features) below for a full list of commands and details.
 
 --------------------------------------------------------------------------------------------------------------------
