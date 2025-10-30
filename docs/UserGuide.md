@@ -187,7 +187,7 @@ Use this command instead to add a new student
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address 
 * A person can have any number of tags (including 0)
