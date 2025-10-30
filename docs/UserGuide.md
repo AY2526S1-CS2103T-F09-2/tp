@@ -18,7 +18,8 @@ The Quick Start section below will guide you through your first steps. Don’t w
 ## Quick start
 
 1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
-   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+   **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 <div markdown="block" class="alert alert-info">
@@ -102,7 +103,7 @@ A student has the following attributes, as shown on the example above:
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-danger">:bulb: **Warning:**
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
 </div>
 
