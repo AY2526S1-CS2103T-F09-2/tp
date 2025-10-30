@@ -67,8 +67,8 @@ public class PersonCard extends UiPart<Region> {
         if (person instanceof Student student) {
             Lesson lesson = student.getNextLesson();
             if (lesson != null && !lesson.equals(Lesson.getEmpty())) {
-                lessonLabel.setText("Lesson: " + lesson.toString());
-            } else {git 
+                lessonLabel.setText("Lesson: " + lesson);
+            } else {
                 lessonLabel.setText("Lesson: None");
             }
         } else {
