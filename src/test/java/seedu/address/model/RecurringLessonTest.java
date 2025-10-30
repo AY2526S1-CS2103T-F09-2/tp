@@ -65,4 +65,42 @@ public class RecurringLessonTest {
         assertFalse(RecurringLesson.isValidInterval("<div />"));
     }
 
+    @Test
+    public void toString_singularAndPluralDayFormatting() {
+        LocalDate now = LocalDate.now();
+        RecurringLesson oneDay = new RecurringLesson(now, 1);
+        RecurringLesson twoDays = new RecurringLesson(now, 2);
+
+        String dateStr = now.toString(); // Lesson.toString formats as yyyy-MM-dd, same as LocalDate.toString
+
+        assertEquals(dateStr + " (every 1 day)", oneDay.toString());
+        assertEquals(dateStr + " (every 2 days)", twoDays.toString());
+    }
+
+    @Test
+    public void toString_weeklyLesson_displaysCorrectly() {
+        LocalDate testDate = LocalDate.of(2025, 11, 2);
+        RecurringLesson weeklyLesson = new RecurringLesson(testDate, 7);
+
+        assertEquals("2025-11-02 (every 7 days)", weeklyLesson.toString());
+    }
+
+    @Test
+    public void equals_sameIntervalAndDate_returnsTrue() {
+        LocalDate date = LocalDate.of(2025, 11, 2);
+        RecurringLesson lesson1 = new RecurringLesson(date, 7);
+        RecurringLesson lesson2 = new RecurringLesson(date, 7);
+
+        assertEquals(lesson1, lesson2);
+    }
+
+    @Test
+    public void equals_differentInterval_returnsFalse() {
+        LocalDate date = LocalDate.of(2025, 11, 2);
+        RecurringLesson lesson1 = new RecurringLesson(date, 7);
+        RecurringLesson lesson2 = new RecurringLesson(date, 14);
+
+        assertNotEquals(lesson1, lesson2);
+    }
+
 }

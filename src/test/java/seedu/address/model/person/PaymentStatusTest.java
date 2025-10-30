@@ -85,9 +85,8 @@ public class PaymentStatusTest {
 
     @Test
     public void update_nullPaymentStatus_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () ->
-                new PaymentStatus(1).update(
-                        (Optional<PaymentStatus.PaymentStatusValue>) null));
+        assertThrows(NullPointerException.class, () -> new PaymentStatus(1).update(
+                (Optional<PaymentStatus.PaymentStatusValue>) null));
     }
 
     @Test
@@ -110,7 +109,7 @@ public class PaymentStatusTest {
     public void equals() {
         PaymentStatus paymentStatus = new PaymentStatus(1);
 
-        //same instance
+        // same instance
         assertEquals(paymentStatus, paymentStatus);
 
         // same value
@@ -138,5 +137,17 @@ public class PaymentStatusTest {
     public void testGetZeroPaymentStatus() {
         PaymentStatus zeroStatus = PaymentStatus.getZeroPaymentStatus();
         assertEquals("All lessons have been paid", zeroStatus.toString());
+    }
+
+    @Test
+    public void toString_formatsSingularPluralAndOverpaid() {
+        // singular unpaid
+        assertEquals("1 unpaid lesson", new PaymentStatus(1).toString());
+
+        // plural unpaid
+        assertEquals("3 unpaid lessons", new PaymentStatus(3).toString());
+
+        // overpaid (negative outstanding)
+        assertEquals("2 overpaid lessons", new PaymentStatus(-2).toString());
     }
 }
