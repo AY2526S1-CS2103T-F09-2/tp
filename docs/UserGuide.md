@@ -3,13 +3,13 @@ layout: page
 title: User Guide
 ---
 **Hi private tutors!**
-Welcome to **TutorConnect** — a contact and lesson management tool designed specifically for private tutors.
 
-TutorConnect helps you keep track of students, lessons and payments efficiently. It combines the speed of Command Line Interface (CLI) commands with a simple GUI, making it ideal for tutors who prefer quick keyboard input but still appreciate visual feedback.
+**StudentConnect** is a desktop application designed to help private tutors manage student contacts and lesson schedules. With simple commands, you can record and retrieve important student information with ease.
 
-For example, a tutor managing 20 students can easily find student's contact information — all through short, easy commands.
+No matter what subjects you teach, which education levels you target, or whether your lessons are online or in-person, **StudentConnect** supports your tutoring needs. If juggling multiple students feels overwhelming, our features are here to help. With just a few quick commands, you can manage student contacts, schedule lessons, and track payments — all in one place.
 
-**Assumption**: This guide assumes you are somewhat familiar with using command-line (like opening a terminal and running commands).
+The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
+
 * Table of Contents
 {:toc}
 
@@ -17,24 +17,28 @@ For example, a tutor managing 20 students can easily find student's contact info
 
 ## Quick start
 
-Before diving into commands, let’s quickly set up TutorConnect so you can start managing your students right away.
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
+   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+   **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-**1. Check your Java version**<br>
-Make sure your computer has **Java 17 or newer installed**.
-   * **Mac users:** Please use the exact JDK version recommended [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
->  :bulb: **Not sure how to check your Java version? See [this quick guide](https://www.java.com/en/download/help/version_manual.html).**
+<div markdown="block" class="alert alert-info">
+:information_source:**How to check whether my Java version is above 17?**<br>
+If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
+</div>
 
-**2. Download StudentConnect**<br>
-Get the latest `.jar` file from [our GitHub releases page](https://github.com/AY2526S1-CS2103T-F09-2/tp).
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
 
-**3. Set up your home folder**<br>
-Move the downloaded `.jar` file into a folder where you’d like TutorConnect to store your data (this will be your “<u>home folder</u>”).
 
-**4. Run the app**<br>
-Open a command terminal and navigate to the <u>home folder</u> where you saved the jar file to.<br>
-Then run: `java -jar addressbook.jar`
-   
-After a few seconds, you should see a window like this:<br>![Ui](images/Ui.png)
+3. Once you have downladed the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the appication can be stored so **make sure that you place the file in an empty folder.**
+
+4. There are a few different ways to launch the application :
+* double click the `.jar` file that you have downloaded.
+* *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   ![Ui](images/Ui.png)
+
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+   Some example commands you can try:
 
 **5. Try out some basic commands**<br>
 Type a command in the box and press Enter to run it. 
