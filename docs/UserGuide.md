@@ -31,7 +31,7 @@ If you use these websites links to download the platform, they are from the late
 4. There are a few different ways to launch the application :
 * double click the `.jar` file that you have downloaded.
 * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
