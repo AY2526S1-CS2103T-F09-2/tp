@@ -36,24 +36,31 @@ The Quick Start section below will guide you through your first steps. Don’t w
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
    * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.![Ui](images/Ui.png)<br>
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
-5. Try out some basic commands<br>
-Type a command in the box and press Enter to run it. 
+   <br>
+   
+   ![Ui](images/Ui.png)
 
-Here are a few to get you started:
+    <br>
 
-* `help` &ndash; Opens the help window.
+5. Try out some basic commands
 
-* `list` &ndash; Lists all contacts.
+    Type a command in the box and press Enter to run it. 
 
-* `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+    Here are a few to get you started:
 
-* `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
+   * `help` &ndash; Opens the help window.
 
-* `clear` &ndash; Deletes all contacts.
+   * `list` &ndash; Lists all contacts.
 
-* `exit` &ndash; Exits the app.
+   * `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+
+   * `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
+
+   * `clear` &ndash; Deletes all contacts.
+
+   * `exit` &ndash; Exits the app.
 
 6. Explore more features<br>
 Check out the [Features](#features) below for a full list of commands and details.
