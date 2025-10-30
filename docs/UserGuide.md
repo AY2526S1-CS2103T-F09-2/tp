@@ -27,7 +27,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
 <div markdown="block" class="alert alert-info">
-:information_source:**How to check whether my Java version is above 17?**<br>
+:information_source: **How to check whether my Java version is above 17?**<br>
 If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
 </div>
 
@@ -145,20 +145,20 @@ A **recurring lesson** has two key attributes:
 * **`LESSONDATE`**: the date when the first lesson starts
 * **`INTERVAL`**: the number of days between each lesson
 
-For example, if your lesson starts on `2025-10-10` and occurs once every week, then:
+For example, if your lesson starts on `2025-12-10` and occurs once every week, then:
 
-* `LESSONDATE` = `2025-10-10`
+* `LESSONDATE` = `2025-12-10`
 * `INTERVAL` = `7`
 
 The system automatically updates a recurring lesson whenever its `LESSONDATE` is earlier than the current date. It does this by adding the `INTERVAL` (in days) to the previous `LESSONDATE`, moving it forward to the next scheduled lesson.
 
 For instance:
 
-* Today’s date = `2025-10-20`
-* Current `LESSONDATE` = `2025-10-19`
+* Today’s date = `2025-12-20`
+* Current `LESSONDATE` = `2025-12-19`
 * `INTERVAL` = `7`
 
-Since the recorded lesson date has already passed, the system updates it to **2025-10-26** — one week later.
+Since the recorded lesson date has already passed, the system updates it to **2025-12-26** — one week later.
 
 This ensures your recurring lessons always reflect the *next upcoming* session without requiring manual changes.
 
@@ -307,19 +307,19 @@ Examples:
 
 Add the scheduled upcoming lesson for the specified person.
 
-Format: `addLesson INDEX l/LESSON_DATE [every/INTERVAL]`
+Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified `INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
-* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
+* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-12-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 
 Examples:
-* `list` followed by `addLesson 2 l/Wednesday` add the 2nd person's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson 1 l/Monday` adds the 1st person's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -379,7 +379,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: StudentConnect so far does not support edit function. You may use the command `delete INDEX` first and then recreate the student.
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
-**A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-10-29` and your lesson is set on that day. It will only be considered outdated on `2025-10-30`.
+**A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -388,20 +388,20 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                         |
-|--------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**    | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
-| **Add Lesson**     | `addLesson n/NAME l/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul l/2025-11-13`                                                                                                              |
-| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                         | 
-| **Clear**          | `clear`                                                                                                                                                                                                  |
-| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                       |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                               |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                |
-| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                               |
-| **List**           | `list`                                                                                                                                                                                                   |
-| **Payment Status** | `payment INDEX [s/paid | s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
-| **Help**           | `help`                                                                                                                                                                                                   |
+| **Add Lesson**     | `addLesson n/NAME d/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul d/2025-12-13`                                                                                                               |
+| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
+| **Clear**          | `clear`                                                                                                                                                                                                   |
+| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
+| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
+| **List**           | `list`                                                                                                                                                                                                    |
+| **Payment Status** | `payment INDEX [s/paid                                                                                                                                                                                    | s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
+| **Help**           | `help`                                                                                                                                                                                                    |
