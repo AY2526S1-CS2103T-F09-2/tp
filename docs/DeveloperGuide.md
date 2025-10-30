@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * **StudentConnect** is built upon the [**AB3(Address Book Level 3)**](https://se-education.org/addressbook-level3) project.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
