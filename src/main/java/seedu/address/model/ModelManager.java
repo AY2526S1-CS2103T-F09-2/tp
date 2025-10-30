@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -11,6 +13,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.PaymentStatus;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Student;
 
@@ -136,13 +139,34 @@ public class ModelManager implements Model {
                     normalized = current.getUpcomingLesson();
                 }
 
-                if (!normalized.equals(current)) {
-                    Student updated = new Student(
-                            s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized,
-                            s.getPaymentStatus(), s.getEducationLevel()
-                    );
-                    setPerson(s, updated);
+                if (normalized.equals(current)) {
+                    continue;
                 }
+
+                int passedLessons = 0;
+
+                if (current instanceof RecurringLesson) {
+                    LocalDate from = current.getLessonDateTime();
+                    LocalDate to = normalized.getLessonDateTime();
+                    int intervalDays = current.getIntervalDays();
+                    long days = ChronoUnit.DAYS.between(from, to);
+
+                    passedLessons = (int) days / intervalDays;
+                } else {
+                    passedLessons = 1;
+                }
+
+                PaymentStatus ps = s.getPaymentStatus();
+                for (int i = 0; i < passedLessons; i++) {
+                    ps = ps.update(PaymentStatus.PaymentStatusValue.UNPAID);
+                }
+
+                Student updated = new Student(
+                        s.getName(), s.getPhone(), s.getEmail(), s.getAddress(), s.getTags(), normalized,
+                        ps, s.getEducationLevel()
+                );
+
+                setPerson(s, updated);
             }
         }
     }
