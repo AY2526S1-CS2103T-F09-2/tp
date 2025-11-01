@@ -196,7 +196,9 @@ For example, if you want to enter Primary 3, you may type:
 | Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
 | Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
 
-Note: All the following inputs are **case insensitive**, which means that you can switch any letter to upper case without affecting the result
+Note: 
+* Inputs are **case-insensitive**, so `PRI 3`, `Primary 3`, or `pri three` are all valid.
+* **Spacing doesn’t matter**, meaning extra spaces before, after, or between words/numbers will be ignored. For example, `pri 3` or `p ri mary 3` will work correctly
 
 This flexibility means you don't need to memorise a strict format — simply type the education level in a natural way, and the system will understand your input.
   
