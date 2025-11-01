@@ -5,8 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Optional;
 
-import seedu.address.logic.commands.exceptions.CommandException;
-
 /**
  * Represents a Person's payment status.
  * Guarantees: immutable; value is either {@code PAID} or {@code UNPAID},
