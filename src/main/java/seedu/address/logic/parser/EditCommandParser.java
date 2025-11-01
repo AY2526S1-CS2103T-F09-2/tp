@@ -92,10 +92,16 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (tags.isEmpty()) {
             return Optional.empty();
         }
-        // Treat any number of empty/whitespace-only tag prefixes (e.g., t/ t/ t/) as a single "clear tags" signal
-        boolean allEmpty = tags.stream().allMatch(s -> s == null || s.trim().isEmpty());
-        Collection<String> tagSet = allEmpty ? Collections.emptySet() : tags;
-        return Optional.of(ParserUtil.parseTags(tagSet));
+        // Filter out empty/whitespace-only tag values (so mixed forms like "t/ t/chem" work)
+        java.util.List<String> nonEmpty = tags.stream()
+                .filter(s -> s != null && !s.trim().isEmpty())
+                .toList();
+
+        // If all provided tags are empty, treat it as a clear-tags signal
+        if (nonEmpty.isEmpty()) {
+            return Optional.of(Collections.emptySet());
+        }
+        return Optional.of(ParserUtil.parseTags(nonEmpty));
     }
 
 }
