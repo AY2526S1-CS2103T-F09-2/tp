@@ -106,6 +106,7 @@ A student has the following attributes, as shown in the example above:
 4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
+7. education level: The education level of the student 
 
 <div markdown="block" class="alert alert-danger">:bulb: **Warning:**
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
@@ -171,6 +172,34 @@ The payment status records the balance between **the number of lessons that stud
 **The number of lessons that students have paid for** is tracked manually. You can update this by using the  [payment](#payment-status) command. 
 **The number of lessons passed** is automatically updated whenever a lesson has passed(See [lesson](#lesson) for more details).
 
+### Education Level
+Keeping track of students at different education levels can be confusing — especially when you're teaching multiple levels at once. To help you stay organised, StudentConnect allows you to record each student's education level.
+
+You can set or update a student's education level using the `addStu` or `edit` command.
+
+**Supported Education Levels**
+
+To ensure consistency and make tracking easier, **StudentConnect** only accepts the following education levels:
+
+* `primary 1` to `primary 6`
+* `secondary 1` to `secondary 5`
+* `junior 1` to `junior 2` ("junior" refers to junior college)
+
+**Flexible Input Formats**
+
+We understand that typing long forms can be tedious. That’s why multiple input formats are supported.
+For example, if you want to enter Primary 3, you may type:
+
+| Format           | Example        | Notes                                                   |
+|------------------|-------------------|---------------------------------------------------------|
+| Original form    | `primary 3`      | Full words + number                                     |
+| Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
+| Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
+
+Note: All the following inputs are **case insensitive**, which means that you can switch any letter to upper case without affecting the result
+
+This flexibility means you don't need to memorise a strict format — simply type the education level in a natural way, and the system will understand your input.
+  
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
@@ -200,7 +229,7 @@ Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
 * When a student is initialised, *by default* :
   1. The student has not paid for any lesson(refer to track for more info) 
   2. The student does not have any lessons (refer to addLesson for more info) 
-  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level)
 
 Examples:
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
@@ -226,7 +255,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e., adding tags is not cumulative. 
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* To change the education level, provide edu/EDUCATION_LEVEL. To clear it back to UNKNOWN, pass edu/ with nothing after it.
+* To change the education level, provide `edu/EDUCATION_LEVEL`. To clear it back to UNKNOWN, pass edu/ with nothing after it. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level)
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
