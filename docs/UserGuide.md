@@ -271,6 +271,11 @@ Examples:
 * `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book. 
 * `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
 
+<div markdown="span" class="alert alert-danger">:bulb: **Warning:**
+There is a soft bound from negative to positive **1 million** for the number of outstanding lessons that you can have.
+If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
+</div>
+
 ### Locating persons by tag: `searchtag`
 
 Finds persons whose tags contain any of the given keywords.
