@@ -81,7 +81,10 @@ public class PaymentCommand extends Command {
                 && outstandingLessonPayments <= 0) {
             throw new CommandException(PaymentStatus.MESSAGE_OVERPAID);
         }
-
+        if (toSetPaymentStatus.map(status -> status == PaymentStatusValue.UNPAID).orElse(false)
+                && outstandingLessonPayments >= 999999) {
+            throw new CommandException(PaymentStatus.OVERFLOW);
+        }
         PaymentStatus updatedPaymentStatus = student.getPaymentStatus().update(toSetPaymentStatus);
 
         // If payment status is changed

@@ -5,6 +5,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Optional;
 
+import seedu.address.logic.commands.exceptions.CommandException;
+
 /**
  * Represents a Person's payment status.
  * Guarantees: immutable; value is either {@code PAID} or {@code UNPAID},
@@ -28,7 +30,8 @@ public class PaymentStatus {
     public static final String MESSAGE_CONSTRAINTS =
             "If PaymentStatus s/ is included, it can only take 'paid' or 'unpaid' values";
     public static final String MESSAGE_OVERPAID = "Unsuccessful as already overpaid / no outstanding lessons to pay";
-
+    public static final String OVERFLOW = "The number of outstanding lessons can not exceed 1 million \n"
+            + "The payment update is aborted";
     public static final int ZERO_OUTSTANDING_PAYMENTS = 0;
     private final int outstandingLessonPayments;
 
