@@ -100,8 +100,8 @@ A student is represented as an item in the student list. You can add a student b
 The number index is based on the order in which the student is added to the list.
 
 A student has the following attributes, as shown in the example above:
-1. name: The name of the student
-2. phone number: The phone number of a student
+1. name: The name of the student(must be **less than or equals to 35 characters**)
+2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
 4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
 5. [tag](#tag-): Tags that record extra information of a student
@@ -187,7 +187,7 @@ Format: `help`
 
 <div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 The `add` command available in the previous versions is deprecated and cannot be used anymore.
-Use this command instead to add a new student
+Use this command instead to add a new student.
 </div>
 
 Adds a person to the address book.
