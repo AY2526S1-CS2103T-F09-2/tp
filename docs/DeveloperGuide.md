@@ -199,6 +199,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As a private tutor | I want to track my students' education level                  | so that I can tailor my lessons accordingly                  |
 | `* * *`  | As a private tutor | I want to search for students by tags                         | so that I can quickly filter students with specific subjects |
 | `* * *`  | As a private tutor | I want to be able to edit my students' list                   | so that I can keep their information up to date              |
+| `* * *`  | As a private tutor | I want to be able to cancel my student's lesson               | so that I can manage schedule changes                        |
 | `* * *`  | As a private tutor | I want to keep track of my students’ (recurrent) lesson times | so that I will not forget about the schedules                |
 
 
