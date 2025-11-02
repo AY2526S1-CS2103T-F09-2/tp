@@ -203,6 +203,7 @@ Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   1. the student has not paid for any lesson(refer to track for more info)
   2. the student does not have any lesson (refer to addLesson for more info)
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
+  4. If `edu/` is used but left empty or contains only spaces (e.g., ' '), the education level defaults to `UNKNOWN`.
 
 Examples:
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
