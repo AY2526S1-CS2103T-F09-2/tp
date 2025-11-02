@@ -126,7 +126,7 @@ In StudentConnect, you can use the tag in the following way:
 ### Lesson
 
 A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
-* For instance, a lesson that starts at `November 10th 2024 5pm` should be represented as `2024-11-10` in the system.
+* For instance, a lesson that starts at `November 10th 2024` should be represented as `2024-11-10` in the system.
  
 When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
