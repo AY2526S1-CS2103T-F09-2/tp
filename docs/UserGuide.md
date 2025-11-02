@@ -118,10 +118,10 @@ The list of the student that appears at the bottom of the application interface.
 A tag is a piece of text that records a unique characteristic of the student. You can add optionally add any number of tags when you create a new [student](#student) by calling the [`addstu`](#adding-a-new-student-addstu) command.
 
 In StudentConnect, you can use the tag in the following way:
-1. Record the subject of the [student](#student) (e.g. `history`, `chemistry`) if you teach multiple subjects
-2. Record information about the [student](#student) that you need to remind yourself (e.g. `50$/hr`)
-3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `feedback/no-feedback`)
-4. Record the platform that you use if you are hosting online lessons(e.g. `platform:Giggle meet`)
+1. Record the subject of the [student](#student) (e.g. `History`, `Chemistry`) if you teach multiple subjects
+2. Record information about the [student](#student) that you need to remind yourself (e.g. `50PerHr`)
+3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `Feedback` or `NoFeedback`)
+4. Record the platform that you use if you are hosting online lessons(e.g. `Online`)
 
 ### Lesson
 
