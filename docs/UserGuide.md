@@ -54,7 +54,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
    * `list` &ndash; Lists all contacts.
 
-   * `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+   * `addStu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
 
    * `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
 
@@ -192,7 +192,7 @@ Use this command instead to add a new student
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
+Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address 
 * A person can have any number of tags (including 0)
@@ -203,11 +203,11 @@ Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
 
 Examples:
-* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
-* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
-* `addstu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
-* `addstu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
-* `addstu n/Alex Tan p/91223344 e/alex@example.com`
+* `addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
+* `addStu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
+* `addStu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
+* `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
+* `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
 ### Listing all persons : `list`
 
