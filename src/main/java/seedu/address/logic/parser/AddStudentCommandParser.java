@@ -48,7 +48,14 @@ public class AddStudentCommandParser implements Parser<AddStudentCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValueWithDefault(PREFIX_EMAIL, defaultString).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValueWithDefault(PREFIX_ADDRESS, defaultString).get());
-        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        // Allow multiple empty tag prefixes (t/ t/ t/). Ignore empty ones; if all empty, zero tags.
+        java.util.Collection<String> rawTags = argMultimap.getAllValues(PREFIX_TAG);
+        java.util.List<String> nonEmptyTags = rawTags.stream()
+                .filter(s -> s != null && !s.trim().isEmpty())
+                .toList();
+        Set<Tag> tagList = nonEmptyTags.isEmpty()
+                ? java.util.Collections.emptySet()
+                : ParserUtil.parseTags(nonEmptyTags);
 
         // Education level is optional; default to UNKNOWN when not provided.
         seedu.address.model.person.EducationLevel edu = argMultimap.getValue(PREFIX_EDUCATION_LEVEL)

@@ -233,7 +233,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The person didn't exist.
 
-    * 2a1. StudentConnect shows an error message.
+    * 2a1. StudentConnect returns `0 persons listed!`.
 
         Use case resumes at step 2.
 
