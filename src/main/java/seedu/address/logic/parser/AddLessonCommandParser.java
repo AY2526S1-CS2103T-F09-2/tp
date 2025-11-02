@@ -4,10 +4,11 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
-import seedu.address.commons.core.index.Index;
 import java.time.LocalDate;
 import java.time.YearMonth;
 import java.time.format.DateTimeParseException;
+
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Lesson;
@@ -61,7 +62,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                         boolean monthIntersects = (!firstOfMonth.isAfter(upper)) && (!lastOfMonth.isBefore(now));
                         if (monthIntersects) {
                             throw new ParseException(
-                                    "Invalid date: must be a real calendar date in yyyy-MM-DD format within 364 days from now");
+                                    "Invalid date: must be a real calendar date in yyyy-MM-DD format "
+                                            + "within 364 days from now");
                         }
                     }
                 } catch (Exception ex) {
