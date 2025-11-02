@@ -430,8 +430,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 | Action             | Format, Examples                                                                                                                                                                                          |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
-| **Add Lesson**     | `addLesson INDEX d/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                            |
+| **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
+| **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                            |
 | **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
 | **Clear**          | `clear`                                                                                                                                                                                                   |
 | **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
