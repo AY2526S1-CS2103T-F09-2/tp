@@ -14,54 +14,55 @@ The Quick Start section below will guide you through your first steps. Don’t w
 * Table of Contents
 {:toc}
 
-- Table of Contents
-  {:toc}
-
 ---
 
 ## Quick start
 
-1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can clck the following link to download the platform and install it by double clicking the downloaded file and follow the installation guide<br>
-   **window users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide<br>
+
+   **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
-<div markdown="block" class="alert alert-info">
-:information_source:**How to check whether my Java version is above 17?**<br>
-If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
-</div>
+    <div markdown="block" class="alert alert-info">
+    :information_source: **How to check whether my Java version is above 17?**<br>
+    If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
+    </div>
 
-2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application. 
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application.
 
-
-3. Once you have downladed the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the appication can be stored so **make sure that you place the file in an empty folder.**
+3. Once you have downloaded the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the application can be stored so **make sure that you place the file in an empty folder.**
 
 4. There are a few different ways to launch the application :
-* double click the `.jar` file that you have downloaded.
-* *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
-   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   * double-click the `.jar` file that you have downloaded.
+   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
+
+   <br>
+   
    ![Ui](images/Ui.png)
 
-5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
-   Some example commands you can try:
+    <br>
 
-**5. Try out some basic commands**<br>
-Type a command in the box and press Enter to run it. 
+5. Try out some basic commands
 
-Here are a few to get you started:
+    Type a command in the box and press Enter to run it. 
 
-* `help` &ndash; Opens the help window.
+    Here are a few to get you started:
 
-* `list` &ndash; Lists all contacts.
+   * `help` &ndash; Opens the help window.
 
-* `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+   * `list` &ndash; Lists all contacts.
 
-* `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
+   * `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
 
-* `clear` &ndash; Deletes all contacts.
+   * `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
 
-* `exit` &ndash; Exits the app.
+   * `clear` &ndash; Deletes all contacts.
 
-**6. Explore more features**<br>
+   * `exit` &ndash; Exits the app.
+
+6. Explore more features<br>
 Check out the [Features](#features) below for a full list of commands and details.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -106,7 +107,7 @@ A student has the following attributes, as shown on the example above:
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 
-<div markdown="block" class="alert alert-info">
+<div markdown="block" class="alert alert-danger">:bulb: **Warning:**
 A student can only have **zero or one lesson**. If you try to add a new lesson to a student which already has a lesson, you will receive an error.
 </div>
 
@@ -129,7 +130,7 @@ A lesson is represented by a single date, which is the date (in the fixed format
  
 When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
-A lesson is considered **passed** if the date of lesson recorded is **before the current date**(Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
+A lesson is considered **passed** if the date of lesson recorded is **before the current date** (Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lesson again. Lessons are updated whenever the application is launched.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -144,20 +145,20 @@ A **recurring lesson** has two key attributes:
 * **`LESSONDATE`**: the date when the first lesson starts
 * **`INTERVAL`**: the number of days between each lesson
 
-For example, if your lesson starts on `2025-10-10` and occurs once every week, then:
+For example, if your lesson starts on `2025-12-10` and occurs once every week, then:
 
-* `LESSONDATE` = `2025-10-10`
+* `LESSONDATE` = `2025-12-10`
 * `INTERVAL` = `7`
 
 The system automatically updates a recurring lesson whenever its `LESSONDATE` is earlier than the current date. It does this by adding the `INTERVAL` (in days) to the previous `LESSONDATE`, moving it forward to the next scheduled lesson.
 
 For instance:
 
-* Today’s date = `2025-10-20`
-* Current `LESSONDATE` = `2025-10-19`
+* Today’s date = `2025-12-20`
+* Current `LESSONDATE` = `2025-12-19`
 * `INTERVAL` = `7`
 
-Since the recorded lesson date has already passed, the system updates it to **2025-10-26** — one week later.
+Since the recorded lesson date has already passed, the system updates it to **2025-12-26** — one week later.
 
 This ensures your recurring lessons always reflect the *next upcoming* session without requiring manual changes.
 
@@ -184,23 +185,22 @@ Format: `help`
 
 ### Adding a new student: `addStu`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Warning:**
+<div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 The `add` command available in the previous versions is deprecated and cannot be used anymore.
 Use this command instead to add a new student
 </div>
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]
+Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-A person can have 0 or 1 address
-A person can have any number of tags (including 0)
-All other fields are compulsory
-When a student is initialised, *by default* : 
-1. the student has not paid for any lesson(refer to track for more info)
-2. the student does not have any lesson (refer to addLesson for more info)
-3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. </div>
+* A person can have 0 or 1 address 
+* A person can have any number of tags (including 0)
+* All other fields are compulsory 
+* When a student is initialised, *by default* :
+  1. the student has not paid for any lesson(refer to track for more info)
+  2. the student does not have any lesson (refer to addLesson for more info)
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
 
 Examples:
 * `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
@@ -277,12 +277,11 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `chem` will match `Chem`
+* The search is case-insensitive. e.g. `chem` will match `ChEm`
 * The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
 * Only tags are searched.
 * Partial matches are allowed. e.g. `chem` will match `chemistry`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. physics math will return all persons with either tag.
+* Persons matching at least one keyword will be returned.
 
 Examples:
 * `searchtag cHemiStrY` returns all persons tagged with `chemistry`
@@ -308,19 +307,19 @@ Examples:
 
 Add the scheduled upcoming lesson for the specified person.
 
-Format: `addLesson INDEX l/LESSON_DATE [every/INTERVAL]`
+Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified `INDEX`
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
-* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-10-05`, note that `2025-10-1` or `2025-1-10` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
+* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-12-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate after how many days will the lesson automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 
 Examples:
-* `list` followed by `addLesson 2 l/Wednesday` add the 2nd person's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson 1 l/Monday` adds the 1st person's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
+* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -362,7 +361,7 @@ AddressBook data are saved in the hard disk automatically after any command that
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. **Do not edit that data file as it will affect the app's startup functionality.**
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
 If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
@@ -380,7 +379,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **A**: StudentConnect so far does not support edit function. You may use the command `delete INDEX` first and then recreate the student.
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
-**A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-10-29` and your lesson is set on that day. It will only be considered outdated on `2025-10-30`.
+**A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -389,7 +388,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 
----
+--------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
 
@@ -404,5 +403,5 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
 | **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
 | **List**           | `list`                                                                                                                                                                                                    |
-| **Payment Status** | `payment INDEX [s/paid \| s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
+| **Payment Status** | `payment INDEX [s/paid                                                                                                                                                                                    | s/unpaid]`<br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
 | **Help**           | `help`                                                                                                                                                                                                    |
