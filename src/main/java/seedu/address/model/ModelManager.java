@@ -157,7 +157,7 @@ public class ModelManager implements Model {
 
                 PaymentStatus ps = s.getPaymentStatus();
                 for (int i = 0; i < passedLessons; i++) {
-                    if (ps.getOutstandingLessonPayments() <= -999999) {
+                    if (ps.getOutstandingLessonPayments() >= 999999) {
                         break;
                     }
                     ps = ps.update(PaymentStatus.PaymentStatusValue.UNPAID);
