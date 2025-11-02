@@ -418,8 +418,8 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 **Q**: How do I transfer my data to another computer?<br>
 **A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. 
 
-**Q**: How do I edit student information if I input anything wrong?<br>
-**A**: StudentConnect so far does not support the edit function. You may use the command `delete INDEX` first and then recreate the student. 
+**Q**: How do I edit the lesson information if I input anything wrong?<br>
+**A**: StudentConnect so far does not support the editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson thorugh the `addLesson` command again.
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
 **A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
