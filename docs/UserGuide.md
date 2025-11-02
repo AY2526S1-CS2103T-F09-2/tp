@@ -177,6 +177,13 @@ Keeping track of students at different education levels can be confusing — esp
 
 You can set or update a student's education level using the `addStu` or `edit` command.
 
+<div id="command-notes" markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the education level:**<br>
+We assume that private tutors only teach students from Primary 1 to Junior 2. Any other education levels will be categorized as "OTHERS".
+
+</div>
+
 **Supported Education Levels**
 
 To ensure consistency and make tracking easier, **StudentConnect** only accepts the following education levels:
