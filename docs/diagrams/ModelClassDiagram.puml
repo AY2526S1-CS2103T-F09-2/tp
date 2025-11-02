@@ -21,7 +21,7 @@ Class Phone
 Class Tag
 Class "<<enumeration>>\nEducationLevel" as EducationLevel {
     PRIMARY_ONE,
-	PRIMARY_TWO,
+    PRIMARY_TWO,
 	PRIMARY_THREE,...
 }
 show EducationLevel members
