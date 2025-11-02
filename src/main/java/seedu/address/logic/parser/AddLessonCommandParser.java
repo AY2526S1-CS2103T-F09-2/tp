@@ -5,6 +5,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INTERVAL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LESSON;
 
 import seedu.address.commons.core.index.Index;
+import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import seedu.address.logic.commands.AddLessonCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Lesson;
@@ -14,9 +17,6 @@ import seedu.address.model.RecurringLesson;
  * Parses input arguments and creates a new AddLessonCommand object.
  */
 public class AddLessonCommandParser implements Parser<AddLessonCommand> {
-
-    public static final String MESSAGE_INVALID_DATE = "Date should be in the format "
-            + "YYYY-MM-DD and within 365 days from now";
 
     /**
      * Parses the given {@code String} of arguments in the context of the
@@ -37,7 +37,40 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         String lessonDate = argMultimap.getValue(PREFIX_LESSON).get().trim();
         Lesson lesson;
-        if (!Lesson.isValidLessonDate(lessonDate)) {
+
+        try {
+            LocalDate.parse(lessonDate);
+            if (!Lesson.isValidLessonDate(lessonDate)) {
+                throw new ParseException("Invalid date: must be in yyyy-MM-DD format within 364 days from now");
+            }
+        } catch (DateTimeParseException e) {
+            if (lessonDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+                try {
+                    String[] parts = lessonDate.split("-");
+                    int y = Integer.parseInt(parts[0]);
+                    int m = Integer.parseInt(parts[1]);
+                    int d = Integer.parseInt(parts[2]);
+                    YearMonth ym = YearMonth.of(y, m);
+                    // day is invalid for this month
+                    boolean dayInvalid = d < 1 || d > ym.lengthOfMonth();
+                    if (dayInvalid) {
+                        LocalDate firstOfMonth = ym.atDay(1);
+                        LocalDate lastOfMonth = ym.atEndOfMonth();
+                        LocalDate now = LocalDate.now();
+                        LocalDate upper = now.plusDays(364);
+                        boolean monthIntersects = (!firstOfMonth.isAfter(upper)) && (!lastOfMonth.isBefore(now));
+                        if (monthIntersects) {
+                            throw new ParseException(
+                                    "Invalid date: must be a real calendar date in yyyy-MM-DD format within 364 days from now");
+                        }
+                    }
+                } catch (Exception ex) {
+                    if (ex instanceof ParseException) {
+                        throw (ParseException) ex;
+                    }
+                }
+            }
+
             throw new ParseException("Invalid date: must be in yyyy-MM-DD format within 364 days from now");
         }
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
