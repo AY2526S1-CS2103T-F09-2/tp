@@ -2,63 +2,66 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
---------------------------------------------------------------------------------------------------------------------
+- Table of Contents
+  {:toc}
+
+---
 
 ## **Acknowledgements**
 
-* **StudentConnect** is built upon the [**AB3(Address Book Level 3)**](https://se-education.org/addressbook-level3) project.
+- **StudentConnect** is built upon the [**AB3(Address Book Level 3)**](https://se-education.org/addressbook-level3) project.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Setting up, getting started**
 
 Refer to the guide [_Setting up and getting started_](SettingUp.md).
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Design**
 
 <div markdown="span" class="alert alert-primary">
 
 :bulb: **Tip:** The `.puml` files used to create diagrams are in this document `docs/diagrams` folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+
 </div>
 
 ### Architecture
 
 <img src="images/ArchitectureDiagram.png" width="280" />
 
-The ***Architecture Diagram*** given above explains the high-level design of the App.
+The **_Architecture Diagram_** given above explains the high-level design of the App.
 
 Given below is a quick overview of main components and how they interact with each other.
 
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
-* At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
-* At shut down, it shuts down the other components and invokes cleanup methods where necessary.
+
+- At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
+- At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
 The bulk of the app's work is done by the following four components:
 
-* [**`UI`**](#ui-component): The UI of the App.
-* [**`Logic`**](#logic-component): The command executor.
-* [**`Model`**](#model-component): Holds the data of the App in memory.
-* [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+- [**`UI`**](#ui-component): The UI of the App.
+- [**`Logic`**](#logic-component): The command executor.
+- [**`Model`**](#model-component): Holds the data of the App in memory.
+- [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
 **How the architecture components interact with each other**
 
-The *Sequence Diagram* below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact with each other for the scenario where the user issues the command `delete 1`.
 
 <img src="images/ArchitectureSequenceDiagram.png" width="574" />
 
 Each of the four main components (also shown in the diagram above),
 
-* defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+- defines its _API_ in an `interface` with the same name as the Component.
+- implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -78,10 +81,10 @@ The `UI` component uses the JavaFx UI framework. The layout of these UI parts ar
 
 The `UI` component,
 
-* executes user commands using the `Logic` component.
-* listens for changes to `Model` data so that the UI can be updated with the modified data.
-* keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
-* depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
+- executes user commands using the `Logic` component.
+- listens for changes to `Model` data so that the UI can be updated with the modified data.
+- keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
+- depends on some classes in the `Model` component, as it displays `Person` object residing in the `Model`.
 
 ### Logic component
 
@@ -111,36 +114,44 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <img src="images/ParserClasses.png" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+
+- When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+- All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
+
 **API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
 #### The `Model` component
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+- stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
+- stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+- stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
+- does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 <img src="images/BetterModelClassDiagram.png" width="450" />
 </div>
 
 #### The `Student` Component
-* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
-* The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
+
+- The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`.
+- The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
 
-#### The `Lesson` Component 
-* The lesson component represents a single lesson that is owned by a student that is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` java object that records the date of a lesson. 
-* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which is represents the state where the student does not have any lesson. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It seves as a check on whether the student has any lesson. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
-* Another sub-class of lesson is called `RecurringLesson`, which handles lessons that regularly updates itself after a certain time interval. It has a `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
-* The behaviour of a lesson object largely are mostly tied to the commands that creates or deletes a lesson. Additionally, whenever the application is launched. TJe `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of lesson whose date is `INTERVAL` days past the previous lesson date.
+#### The `Lesson` Component
+
+- The lesson component represents a single lesson that is owned by a student that is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` java object that records the date of a lesson.
+- There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which is represents the state where the student does not have any lesson. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It seves as a check on whether the student has any lesson. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
+- Another sub-class of lesson is called `RecurringLesson`, which handles lessons that regularly updates itself after a certain time interval. It has a `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
+- The behaviour of a lesson object largely are mostly tied to the commands that creates or deletes a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of lesson whose date is `INTERVAL` days past the previous lesson date.
+- Notes on input and validation:
+  - The `addLesson` command accepts an optional `every/INTERVAL` prefix to create a `RecurringLesson`.
+  - The parser (`AddLessonCommandParser`) enforces that the `every/` prefix may be provided at most once; providing it multiple times will cause a `ParseException` and the command will be rejected. See `src/main/java/seedu/address/logic/parser/AddLessonCommandParser.java` for details.
+  - The `RecurringLesson` class validates the `INTERVAL` to be a positive integer within acceptable bounds (see `RecurringLesson.isValidInterval`). Invalid or out-of-range intervals are rejected by the parser.
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
@@ -151,9 +162,10 @@ How the parsing works:
 <img src="images/StorageClassDiagram.png" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
-* inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+
+- can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+- inherits from both `AddressBookStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
+- depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
 
 ### Common classes
 
@@ -161,13 +173,13 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 ## **Documentation, logging, testing, configuration, dev-ops**
 
-* [Documentation guide](Documentation.md)
-* [Testing guide](Testing.md)
-* [Logging guide](Logging.md)
-* [Configuration guide](Configuration.md)
-* [DevOps guide](DevOps.md)
+- [Documentation guide](Documentation.md)
+- [Testing guide](Testing.md)
+- [Logging guide](Logging.md)
+- [Configuration guide](Configuration.md)
+- [DevOps guide](DevOps.md)
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Requirements**
 
@@ -175,23 +187,22 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 **Target user profile**: Private tutors
 
-* has a need to manage a significant number of student/parent contacts
-* has a need to keep track of student's subjects
-* has to keep track of student's weekly meeting time
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+- has a need to manage a significant number of student/parent contacts
+- has a need to keep track of student's subjects
+- has to keep track of student's weekly meeting time
+- prefer desktop apps over other types
+- can type fast
+- prefers typing to mouse interactions
+- is reasonably comfortable using CLI apps
 
 **Value proposition**: provides tutors a fast way to organize contacts, lesson schedules, and guardian details, ensuring no confusion about classes or missed communication with parents.
-
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​            | I want to …​                                                  | So that I can…​                                 |
-|----------|--------------------|---------------------------------------------------------------|-------------------------------------------------|
+| -------- | ------------------ | ------------------------------------------------------------- | ----------------------------------------------- |
 | `* * *`  | As a private tutor | I want to be able to add my students’ contacts                | so that I can remember them                     |
 | `* * *`  | As a private tutor | I want to be able to delete a student contact                 | so that they are not in my contact list         |
 | `* * *`  | As a private tutor | I want to search the student’s contact information            | so that I can locate them easily                |
@@ -209,15 +220,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to add a person's contact
 2.  StudentConnect adds the person.
 
-
     Use case ends.
 
 **Extensions**
 
-* 2a. The person has already been added.
+- 2a. The person has already been added.
 
   Use case ends.
-
 
 **Use case: Delete a person**
 
@@ -226,19 +235,17 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to delete a person
 2.  StudentConnect deletes the person
 
-
-       Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The person didn't exist.
+- 2a. The person didn't exist.
 
-    * 2a1. StudentConnect shows an error message.
+  - 2a1. StudentConnect shows an error message.
 
-        Use case resumes at step 2.
+    Use case resumes at step 2.
 
   Use case ends.
-
 
 **Use case: Search for a person**
 
@@ -247,16 +254,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to search for a person
 2.  StudentConnect lists the person
 
-
-       Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The person doesn't exist.
+- 2a. The person doesn't exist.
 
-    * 2a1. StudentConnect shows an error message.
+  - 2a1. StudentConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
   Use case ends.
 
@@ -267,24 +273,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  User requests to add a lesson time for a person
 2.  StudentConnect adds the time for the person
 
-
-       Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 2a. The person doesn't exist.
+- 2a. The person doesn't exist.
 
-    * 2a1. StudentConnect shows an error message.
+  - 2a1. StudentConnect shows an error message.
 
-      Use case resumes at step 2.
+    Use case resumes at step 2.
 
-* 2b. The person already has an allocated time.
+- 2b. The person already has an allocated time.
 
-    * 2b1. The new lesson time will overwrite the previous lesson time.
+  - 2b1. The new lesson time will overwrite the previous lesson time.
 
-
-
-    Use case ends.
+  Use case ends.
 
 **Use case: Track payment for a person's lesson**
 
@@ -292,31 +295,29 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  User requests to track if a person has paid for the latest lesson.
 2.  User marks person's latest lesson as paid.
-3. StudentConnect marks the person's payment status as paid.
+3.  StudentConnect marks the person's payment status as paid.
 
-
-       Use case ends.
+    Use case ends.
 
 **Extensions**
 
-* 1a. The person doesn't exist.
+- 1a. The person doesn't exist.
 
-    * 1a1. StudentConnect shows an error message.
+  - 1a1. StudentConnect shows an error message.
 
-      Use case resumes at step 1.
+    Use case resumes at step 1.
 
-* 1b. The person has no assigned lesson.
+- 1b. The person has no assigned lesson.
 
-    * 1b1. StudentConnect shows an error message.
+  - 1b1. StudentConnect shows an error message.
 
-      Use case resumes at step 1.
+    Use case resumes at step 1.
 
-* 2a. The person's payment status is already paid.
+- 2a. The person's payment status is already paid.
 
-    * 2a.  StudentConnect throws an error.
+  - 2a. StudentConnect throws an error.
 
-
-        Use case ends.
+    Use case ends.
 
 ### Non-Functional Requirements
 
@@ -326,11 +327,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class in the addressbook.
+- **Mainstream OS**: Windows, Linux, Unix, MacOS
+- **Private contact detail**: A contact detail that is not meant to be shared with others
+- **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class in the addressbook.
 
---------------------------------------------------------------------------------------------------------------------
+---
 
 ## **Appendix: Instructions for manual testing**
 
@@ -354,8 +355,7 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
-       Expected: The most recent window size and location is retained.
-
+      Expected: The most recent window size and location is retained.
 
 ### Deleting a person
 
