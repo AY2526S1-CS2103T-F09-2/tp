@@ -150,7 +150,6 @@ public class ModelManager implements Model {
                     LocalDate to = normalized.getLessonDateTime();
                     int intervalDays = current.getIntervalDays();
                     long days = ChronoUnit.DAYS.between(from, to);
-
                     passedLessons = (int) days / intervalDays;
                 } else {
                     passedLessons = 1;
@@ -158,6 +157,9 @@ public class ModelManager implements Model {
 
                 PaymentStatus ps = s.getPaymentStatus();
                 for (int i = 0; i < passedLessons; i++) {
+                    if (ps.getOutstandingLessonPayments() >= 999999) {
+                        break;
+                    }
                     ps = ps.update(PaymentStatus.PaymentStatusValue.UNPAID);
                 }
 
