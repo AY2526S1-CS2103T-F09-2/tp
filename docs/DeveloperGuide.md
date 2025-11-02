@@ -190,13 +190,17 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​            | I want to …​                                                  | So that I can…​                                 |
-|----------|--------------------|---------------------------------------------------------------|-------------------------------------------------|
-| `* * *`  | As a private tutor | I want to be able to add my students’ contacts                | so that I can remember them                     |
-| `* * *`  | As a private tutor | I want to be able to delete a student contact                 | so that they are not in my contact list         |
-| `* * *`  | As a private tutor | I want to search the student’s contact information            | so that I can locate them easily                |
-| `* * *`  | As a private tutor | I want to track payment status per lesson                     | so that I know which lessons have been paid for |
-| `* * *`  | As a private tutor | I want to keep track of my students’ (recurrent) lesson times | so that I will not forget about the schedules   |
+| Priority | As a …​            | I want to …​                                                  | So that I can…​                                              |
+|----------|--------------------|---------------------------------------------------------------|--------------------------------------------------------------|
+| `* * *`  | As a private tutor | I want to be able to add my students’ contacts                | so that I can remember them                                  |
+| `* * *`  | As a private tutor | I want to be able to delete a student contact                 | so that they are not in my contact list                      |
+| `* * *`  | As a private tutor | I want to search the student’s contact information            | so that I can locate them easily                             |
+| `* * *`  | As a private tutor | I want to track payment status per lesson                     | so that I know which lessons have been paid for              |
+| `* * *`  | As a private tutor | I want to track my students' education level                  | so that I can tailor my lessons accordingly                  |
+| `* * *`  | As a private tutor | I want to search for students by tags                         | so that I can quickly filter students with specific subjects |
+| `* * *`  | As a private tutor | I want to be able to edit my students' list                   | so that I can keep their information up to date              |
+| `* * *`  | As a private tutor | I want to keep track of my students’ (recurrent) lesson times | so that I will not forget about the schedules                |
+
 
 ### Use cases
 
