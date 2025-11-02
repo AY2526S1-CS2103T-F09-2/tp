@@ -221,7 +221,7 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ and **its number of digits must be less than 10**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative.
@@ -262,6 +262,7 @@ Format: `payment INDEX [s/paid | s/unpaid]`
 * Check payment status of the person at the specified `INDEX`.
   * The index refers to the index number shown in the displayed person list.
   * The index **must be a positive integer** 1, 2, 3, …​
+  * The index's number of digits **must be less than 10**.
 * Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
   * Vertical bar `|` means “or” i.e. you can choose only one of the options given.
 * When a status flag is provided, the system updates the student’s payment record accordingly.
@@ -297,6 +298,7 @@ Format: `delete INDEX`
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
+- The index's number of digits **must be less than 10**.
 
 Examples:
 
@@ -311,7 +313,8 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified `INDEX`
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a positive integer** 1, 2, 3, …​ 
+* The index's number of digits **must be less than 10**.
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-12-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
@@ -329,6 +332,7 @@ Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** not greater than the total number of persons in the address book.
+* The index's number of digits **must be less than 10**.
 * If the student has a scheduled lesson, the command cancels that lesson.
 * If the student has no scheduled lesson, an error message will be displayed.
 
