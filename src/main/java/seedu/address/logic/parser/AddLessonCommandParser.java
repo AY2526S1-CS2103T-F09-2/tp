@@ -37,12 +37,14 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         String lessonDate = argMultimap.getValue(PREFIX_LESSON).get().trim();
+        String nowStr = LocalDate.now().toString();
         Lesson lesson;
 
         try {
             LocalDate.parse(lessonDate);
             if (!Lesson.isValidLessonDate(lessonDate)) {
-                throw new ParseException("Invalid date: must be in yyyy-MM-DD format within 364 days from now");
+                throw new ParseException(
+                        "Invalid date: must be in yyyy-MM-DD format within 364 days from now (" + nowStr + ")");
             }
         } catch (DateTimeParseException e) {
             if (lessonDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
@@ -62,8 +64,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                         boolean monthIntersects = (!firstOfMonth.isAfter(upper)) && (!lastOfMonth.isBefore(now));
                         if (monthIntersects) {
                             throw new ParseException(
-                                    "Invalid date: must be a real calendar date in yyyy-MM-DD format "
-                                            + "within 364 days from now");
+                                    "Invalid date: must be a real calendar date in yyyy-MM-DD format within 364 "
+                                            + "days from now (" + nowStr + ")");
                         }
                     }
                 } catch (Exception ex) {
@@ -73,7 +75,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                 }
             }
 
-            throw new ParseException("Invalid date: must be in yyyy-MM-DD format within 364 days from now");
+            throw new ParseException(
+                    "Invalid date: must be in yyyy-MM-DD format within 364 days from now (" + nowStr + ")");
         }
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
             String intervalStr = argMultimap.getValue(PREFIX_INTERVAL).get().trim();
