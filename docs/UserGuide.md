@@ -55,7 +55,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
    * `list` &ndash; Lists all contacts.
 
-   * `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+   * `addStu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
 
    * `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
 
@@ -97,7 +97,7 @@ Check out the [Features](#features) below for a full list of commands and detail
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
 ### Student
-A student is represented as an item in the student list. You can add a student by calling the [`addstu`](#adding-a-new-student-addstu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
+A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
 The number index is based on the order that the student is added into the list.
 
 A student has the following attributes, as shown on the example above:
@@ -116,7 +116,7 @@ A student can only have **zero or one lesson**. If you try to add a new lesson t
 The list of the student that appears at the bottom of the application interface. It shows all students that is stored in the application. These students in the student list can be accessed by commands such as [`addLesson`](#add-a-lesson--addlesson), whenever we need to refer to a specific student that is **already created**.
  
 ### Tag 
-A tag is a piece of text that records a unique characteristic of the student. You can optionally add any number of tags when you create a new [student](#student) by calling the [`addstu`](#adding-a-new-student-addstu) command.
+A tag is a piece of text that records a unique characteristic of the student. You can optionally add any number of tags when you create a new [student](#student) by calling the [`addStu`](#adding-a-new-student-addStu) command.
 
 In StudentConnect, you can use the tag in the following way:
 1. Record the subject of the [student](#student) (e.g. `History`, `Chemistry`) if you teach multiple subjects
@@ -195,7 +195,7 @@ Use this command instead to add a new student
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
+Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address 
 * A person can have any number of tags (including 0)
@@ -207,11 +207,11 @@ Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   4. If `edu/` is used but left empty or contains only spaces (e.g., ' '), the education level defaults to `UNKNOWN`.
 
 Examples:
-* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
-* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
-* `addstu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
-* `addstu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
-* `addstu n/Alex Tan p/91223344 e/alex@example.com`
+* `addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
+* `addStu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
+* `addStu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
+* `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
+* `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
 ### Listing all persons : `list`
 
@@ -398,7 +398,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 | Action             | Format, Examples                                                                                                                                                                                          |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
+| **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
 | **Add Lesson**     | `addLesson n/NAME d/LESSONDATE [every/INTERVAL]​` <br> e.g. `addLesson n/Paul d/2025-12-13`                                                                                                               |
 | **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
 | **Clear**          | `clear`                                                                                                                                                                                                   |
