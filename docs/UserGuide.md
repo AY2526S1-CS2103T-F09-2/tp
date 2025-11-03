@@ -359,6 +359,7 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
+* See the [FAQ section](#faq) if you want to specify the hour of the lesson
 
 Examples:
 * `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
@@ -423,6 +424,11 @@ Furthermore, certain edits can cause the StudentConnect to behave in unexpected 
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
 **A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
+
+**Q**: How can we update the exact time of the lesson in hours ?<br>
+**A**: StudentConnect lets you add lessons based primarily on the date — this design choice keeps your lesson list simple, clean, and focused. We believe that for most tutors, the most important information to see at a glance is the lesson date, so you can prioritise and prepare for upcoming sessions without distraction.
+
+However, we recognise that lesson time is also essential. To record lesson times without cluttering the main lesson list, you can simply add a time tag to the student’s record. This way, you still have full visibility over when each lesson happens, while keeping the interface focused and easy to follow.
 
 --------------------------------------------------------------------------------------------------------------------
 
