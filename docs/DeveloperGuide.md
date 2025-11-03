@@ -381,20 +381,20 @@ testers are expected to do more *exploratory* testing.
 ### Adding a new student
 1. Adding a person to the address book
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
-   
+
    2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
    Expected: A student with name Alex Tan, phone number 91223344, and email alex@example.com is added to the end of the list of students.
-   
+
    3. Test case: `addStu n/Choo p/81112222 a/Blk 1`<br>
    Expected: No new student is added. Error details shown in the status message.
-   
+
    4. Other incorrect addStu commands to try: `addStu`, `addStu p/12345678 e/123@example.com`, `...`
    Expected: similar to previous.
 
 ### Editing a person
 1. Editing an existing person in the address book
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
-   
+
    2. Test case: `edit 2 n/Betsy Crower`<br>
    Expected: The person at index 2 has gotten their name changed to Betsy Crower. New details of the person shown in the status message.
 
