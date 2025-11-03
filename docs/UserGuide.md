@@ -96,6 +96,9 @@ Check out the [Features](#features) below for a full list of commands and detail
 
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
+### INDEX
+
+
 ### Student
 A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student.
 The number index is based on the order that the student is added into the list.
@@ -219,7 +222,7 @@ This flexibility means you don't need to memorise a strict format — simply typ
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help](images/helpMessage.png)
 
 Format: `help`
 
@@ -250,11 +253,15 @@ Examples:
 * `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
 * `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
+![img_10.png](img_10.png)
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+![img_11.png](img_11.png)
 
 ### Editing a person : `edit`
 
@@ -275,6 +282,8 @@ Examples:
 *  `edit 3 edu/sec 4` Changes the 3rd person's education level to SEC_4.
 *  `edit 4 edu/` Clears the 4th person's education level back to UNKNOWN.
 
+![img_12.png](img_12.png)
+
 ### Locating persons by name: `find`
 
 Finds persons whose names contain any of the given keywords.
@@ -290,9 +299,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
+- `find Alex` returns `Alex Yeoh`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+![img_13.png](img_13.png)
 
 ### Payment Status of a person : `payment`
 
@@ -318,6 +328,8 @@ There is a soft bound from negative to positive **1 million** for the number of 
 If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
 </div>
 
+![img_14.png](img_14.png)
+
 ### Locating persons by tag: `searchtag`
 
 Finds persons whose tags contain any of the given keywords.
@@ -333,7 +345,8 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 Examples:
 * if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`
 * `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
-  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+
+![img_15.png](img_15.png)
 
 ### Deleting a person : `delete`
 
@@ -350,6 +363,8 @@ Examples:
 
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+![img_16.png](img_16.png)
 
 ### Add a lesson : `addLesson`
 
@@ -371,6 +386,8 @@ Examples:
 * `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
 * `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
 
+![img_17.png](img_17.png)
+
 ### Cancel a lesson : `cancelLesson`
 
 Cancels the scheduled upcoming lesson at the specified index.
@@ -385,14 +402,17 @@ Format: `cancelLesson INDEX`
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
-![result for 'cancelLesson 6'](images/CancelLesson6.png)
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
+
+![img_18.png](img_18.png)
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+![img_9.png](img_9.png)
 
 ### Exiting the program : `exit`
 
