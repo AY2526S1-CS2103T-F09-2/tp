@@ -96,6 +96,18 @@ Check out the [Features](#features) below for a full list of commands and detail
 
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
+### INDEX
+
+1-based indexing of Student based on displayed list on app.
+
+<div id="command-notes" markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the education level:**<br>
+
+Note that if you use commands that filters Students in list e.g. `find`, then the index used for commands would be based on what is displayed.
+
+</div>
+
 ### Student
 A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student.
 The number index is based on the order that the student is added into the list.
