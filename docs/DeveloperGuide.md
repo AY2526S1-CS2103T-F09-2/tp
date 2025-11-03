@@ -126,7 +126,7 @@ How the parsing works:
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StudentConnect`, which `Person` references. This allows `StudentConnect` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 <img src="images/BetterModelClassDiagram.png" width="450" />
 </div>
 
@@ -328,7 +328,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class in the addressbook.
+* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous addressbook application.
 
 --------------------------------------------------------------------------------------------------------------------
 
