@@ -134,7 +134,7 @@ How the parsing works:
 * The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.
 * The behaviour of the student class is mostly similar to a person in the model, as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is an enum that records fixed values of education levels(such as P3, etc.)
 
-<img src="images/StudentClassDiagram.png" width="550" />
+<img src="images/studentClassDiagram.png" width="550" />
 
 #### The `Lesson` Component
 * The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.
