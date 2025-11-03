@@ -58,7 +58,7 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.)
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -131,16 +131,16 @@ How the parsing works:
 </div>
 
 #### The `Student` Component
-* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields `Lesson` and `PaymentStatus`. 
-* The behaviour of the student class is mostly similar to a person in the model as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is a enum that records fixed values of education levels(such as P3, etc.)
+* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.  
+* The behaviour of the student class is mostly similar to a person in the model, as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is an enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
 
 #### The `Lesson` Component 
-* The lesson component represents a single lesson that is owned by a student that is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` java object that records the date of a lesson. 
-* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which is represents the state where the student does not have any lesson. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It seves as a check on whether the student has any lesson. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
-* Another sub-class of lesson is called `RecurringLesson`, which handles lessons that regularly updates itself after a certain time interval. It has a `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
-* The behaviour of a lesson object largely are mostly tied to the commands that creates or deletes a lesson. Additionally, whenever the application is launched. TJe `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of lesson whose date is `INTERVAL` days past the previous lesson date.
+* The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.  
+* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which represents the state where the student does not have any lessons. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It serves as a check on whether the student has any lessons. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson. 
+* Another subclass of lesson is called `RecurringLesson`, which handles lessons that regularly update themselves after a certain time interval. It has an `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details) 
+* The behaviour of a lesson object is mostly tied to the commands that create or delete a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of the lesson whose date is `INTERVAL` days past the previous lesson date. 
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
@@ -207,11 +207,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `StudentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: Add a student**
 
 **MSS**
 
-1.  User requests to add a person's contact
+1.  User requests to add student's contact
 2.  StudentConnect adds the person.
 
 
@@ -376,3 +376,73 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+### Adding a new student
+1. Adding a person to the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   
+   2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
+   Expected: A student with name Alex Tan, phone number 91223344, and email alex@example.com is added to the end of the list of students.
+   
+   3. Test case: `addStu n/Choo p/81112222 a/Blk 1`<br>
+   Expected: No new student is added. Error details shown in the status message.
+   
+   4. Other incorrect addStu commands to try: `addStu`, `addStu p/12345678 e/123@example.com`, `...`
+   Expected: similar to previous.
+
+### Editing a person
+1. Editing an existing person in the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   
+   2. Test case: `edit 2 n/Betsy Crower`<br>
+   Expected: The person at index 2 has gotten their name changed to Betsy Crower. New details of the person shown in the status message.
+
+   3. Test case: `edit 0 p/12345678`<br>
+   Expected: No person is edited. Error details shown in the status message.
+
+   4. Other incorrect edit commands to try: `edit`, `edit x n/newname`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Managing payment status of a person
+1. Displaying or updating the payment status of a person in the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `payment 2`<br>
+   Expected: Name and payment status of the second person in the list are shown in the status message.
+   3. Test case: `payment 0`<br>
+   Expected: Error details shown in the status message.
+   4. Other incorrect payment commands to try: `payment`, `payment x`,`...`(where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Locating persons by tag
+1. Finding a person whose tags contain any of the given keywords
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a tag to be tested. Otherwise, run `edit 1 t/chemistry` and `edit 2 t/physics`.
+   2. Test case: `searchtag chemistry physics`<br>
+   Expected: Message `2 person listed!` shown in the status message. The list now only contain the first two students.
+   3. Test case: `searchtag`<br>
+   Expected: The displayed list is not changed. Error details shown in the status message.
+
+### Adding a lesson
+1. Adding a lesson to an existing student
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `addLesson 2 d/2025-12-20`<br>
+   Expected: The person at index 2 now has a lesson on the date 2025-12-20. New details of the person shown in the status message.
+   3. Test case: `addLesson 0 d/2025-12-15`<br>
+   Expected: No lesson is added. Error details shown in the status message.
+   4. Other incorrect edit commands to try: `addLesson`, `addLesson x d/2025-12-25`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+### Cancelling a lesson
+1. Cancelling a lesson of an existing student
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `cancelLesson 2`<br>
+   Expected: The person at index 2 with a scheduled lesson will get their lesson cancelled. Lesson of the person becomes None. New details of the person shown in the status message.
+   3. Test case: `cancelLesson 0`<br>
+   Expected: No lesson is cancelled. Error details shown in the status message.
+   4. Other incorrect edit commands to try: `cancelLesson`, `cancelLesson x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+### Testing auto-update of lesson dates
+1. Testing if lesson dates of all students in the list will be auto-updated as time passes
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`. 
+   2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
+   3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
+   Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
