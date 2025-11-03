@@ -36,7 +36,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
-   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
+   * *(For advanced command app users and **Mac users**)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    <br>
@@ -96,6 +96,20 @@ Check out the [Features](#features) below for a full list of commands and detail
 
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
+### INDEX
+
+1-based indexing number of Student based on displayed list on app.
+
+The index must be a **positive integer** and max index number you can enter is based on **last index number** of student in the displayed list.
+
+<div id="command-notes" markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the education level:**<br>
+
+Note that if you use commands that filters Students in list e.g. `find`, then the index used for commands would be based on what is displayed.
+
+</div>
+
 ### Student
 A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student.
 The number index is based on the order that the student is added into the list.
@@ -104,7 +118,7 @@ A student has the following attributes, as shown in the example above:
 1. name: The name of the student(must be **less than or equals to 35 characters**)
 2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
-4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
+4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters. )
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 7. education level: The education level of the student
@@ -238,7 +252,7 @@ This flexibility means you don't need to memorise a strict format — simply typ
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help](images/helpMessage.png)
 
 Format: `help`
 
@@ -254,13 +268,16 @@ However, if you really insist to use `add` command. The `add` command will still
 
 </div>
 
-Adds a person to the address book.
+Adds a person to the list.
 
 Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address
 * A person can have any number of tags (including 0)
-* All other fields are compulsory
+* Name, phone number, and email fields are compulsory
+* Emails should be of the format local-part@domain and adhere to the following:
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 * When a student is initialised, *by default* :
   1. the student has not paid for any lesson(refer to track for more info)
   2. the student does not have any lesson (refer to addLesson for more info)
@@ -281,19 +298,23 @@ Examples:
 * `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
 * `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
+![img_10.png](img_10.png)
+
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the list.
 
 Format: `list`
 
+![img_11.png](img_11.png)
+
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ and **its number of digits must be less than 10**.
+* Edits the person at the specified [INDEX](#index).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e., adding tags is not cumulative.
@@ -305,6 +326,8 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 edu/sec 4` Changes the 3rd person's education level to SEC_4.
 *  `edit 4 edu/` Clears the 4th person's education level back to UNKNOWN.
+
+![img_12.png](img_12.png)
 
 ### Locating persons by name: `find`
 
@@ -321,33 +344,33 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
+- `find Alex` returns `Alex Yeoh`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+![img_13.png](img_13.png)
 
 ### Payment Status of a person : `payment`
 
-Displays or updates the payment status of a person in the address book.
+Displays or updates the payment status of a person in the list.
 
 Format: `payment INDEX [s/paid | s/unpaid]`
 
-* Check the payment status of the person at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * The index's number of digits **must be less than 10**.
+* Check the payment status of the person at the specified [INDEX](#index).
 * Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
   * Vertical bar `|` means “or” i.e., you can choose only one of the options given.
 * When a status flag is provided, the system updates the student’s payment record accordingly.
 
 Examples:
-* `list` followed by `payment 2` displays the payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+* `list` followed by `payment 2` displays the payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the list as paid. Then displays the updated payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the list as unpaid. Then displays the updated payment status of the 2nd person in the list.
 
 <div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 There is a soft bound from negative to positive **1 million** for the number of outstanding lessons that you can have.
 If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
 </div>
+
+![img_14.png](img_14.png)
 
 ### Locating persons by tag: `searchtag`
 
@@ -364,23 +387,23 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 Examples:
 * if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`
 * `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
-  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+
+![img_15.png](img_15.png)
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the list.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
-- The index's number of digits **must be less than 10**.
+- Deletes the person at the specified [INDEX](#index).
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `list` followed by `delete 2` deletes the 2nd person in the list.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+![img_16.png](img_16.png)
 
 ### Add a lesson : `addLesson`
 
@@ -388,19 +411,18 @@ Add the scheduled upcoming lesson for the specified person.
 
 Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
-* Adds a lesson for the student at the specified `INDEX`
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The index's number of digits **must be less than 10**.
+* Adds a lesson for the student at the specified [INDEX](#index).
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
-* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
+* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the list.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes might be different depends on your layout) of your desktop/laptop, we follow the **system time** based on your device.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 * See the [FAQ section](#faq) if you want to specify the hour of the lesson
 
 Examples:
-* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the list.
+* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the list.
+
+![img_17.png](img_17.png)
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -409,21 +431,24 @@ Cancels the scheduled upcoming lesson at the specified index.
 Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the address book.
-* The index's number of digits **must be less than 10**.
-* If the student has a scheduled lesson, the command cancels that lesson.
+* Cancel lesson of the student at the specified [INDEX](#index).
+* If the student has a scheduled normal lesson, the command cancels that lesson.
+* If the student has a scheduled recurring lesson, the command cancels all the recurring lessons.
 * If the student has no scheduled lesson, an error message will be displayed.
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
-![result for 'cancelLesson 6'](images/CancelLesson6.png)
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
+
+![img_18.png](img_18.png)
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the list.
 
 Format: `clear`
+
+![img_9.png](img_9.png)
 
 ### Exiting the program : `exit`
 
@@ -464,6 +489,8 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 **Q**: How can we update the exact time of the lesson in hours ?<br>
 **A**: StudentConnect lets you add lessons based primarily on the date — this design choice keeps your lesson list simple, clean, and focused. We believe that for most tutors, the most important information to see at a glance is the lesson date, so you can prioritise and prepare for upcoming sessions without distraction.
 
+**Q**: After filtering the list with commands like `searchtag` or `find`, can I still run commands on people who are not visible in the UI?
+**A**: No. Once you filter the list using commands such as `searchtag` or `find`, subsequent commands only affect the people currently displayed in the UI. To return to the full list, use the `list` command.
 However, we recognise that lesson time is also essential. To record lesson times without cluttering the main lesson list, you can simply add a time tag to the student’s record. This way, you still have full visibility over when each lesson happens, while keeping the interface focused and easy to follow.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -472,7 +499,7 @@ However, we recognise that lesson time is also essential. To record lesson times
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **If you click on the lower part of a person card**, there is a chance for the interface to glitch. It will not always happen and will not affect the overall functionality of the application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
