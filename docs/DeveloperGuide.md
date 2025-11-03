@@ -285,9 +285,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2b. The person already has an allocated time.
 
-    * 2b1. The new lesson time will overwrite the previous lesson time.
-
-
+    * 2b1. Student connect shows an error message.
+      
+      Use case resumes at step 2.
 
     Use case ends.
 
