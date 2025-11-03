@@ -125,7 +125,11 @@ In StudentConnect, you can use the tag in the following way:
 3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `Feedback` or `NoFeedback`)
 4. Record the platform that you use if you are hosting online lessons(e.g. `Online`)
 
-(Note that the length of tag is intentionally unrestricted)
+<div markdown="block" class="alert alert-danger">
+
+:bulb: **Warning:**
+Tag names are limited to a maximum of 15 characters. This constraint helps ensure that tags remain concise, readable, and meaningful. In real usage, tags are intended to serve as quick identifiers — such as a subject (`Math`), or lesson type (`online`). Allowing excessively long tags increases the likelihood of messy and cluttered displays.
+</div>
 
 ### Lesson
 
