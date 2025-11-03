@@ -54,7 +54,6 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
                     int m = Integer.parseInt(parts[1]);
                     int d = Integer.parseInt(parts[2]);
                     YearMonth ym = YearMonth.of(y, m);
-                    // day is invalid for this month
                     boolean dayInvalid = d < 1 || d > ym.lengthOfMonth();
                     if (dayInvalid) {
                         LocalDate firstOfMonth = ym.atDay(1);
@@ -81,15 +80,12 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
         if (argMultimap.getValue(PREFIX_INTERVAL).isPresent()) {
             String intervalStr = argMultimap.getValue(PREFIX_INTERVAL).get().trim();
             if (!intervalStr.matches("\\d+")) {
-                throw new ParseException("Interval must be a plain positive integer less than 365");
+                throw new ParseException("Interval must be a positive integer less than 365");
             }
-
             int interval = Integer.parseInt(intervalStr);
-
             if (interval <= 0 || interval >= 365) {
                 throw new ParseException("Interval must be a positive integer less than 365");
             }
-
             lesson = new RecurringLesson(lessonDate, interval);
         } else {
             lesson = new Lesson(lessonDate);
