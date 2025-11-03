@@ -65,5 +65,11 @@ public class PaymentCommandParserTest {
 
         // status string with whitespaces and empty status
         assertParseFailure(parser, "     1    s/  ", failureMessage);
+
+        assertParseFailure(parser, "1 s/paid s/paid", failureMessage);
+
+        assertParseFailure(parser, "1 s/paid asdsadsadsad", failureMessage);
+
+        assertParseFailure(parser, " s/paid asdsadsadsad", failureMessage);
     }
 }
