@@ -334,6 +334,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous addressbook application.
+* **Student List** : The panel at the bottom of the StudentConnect interface displaying all student profiles that have been created and stored in the system. It provides a quick overview of existing students for easy reference and selection.
+* **Lesson**: An entity which contains a `LocalDate` that is owned by a student. It meaningfully represents the next lesson that the student will have. The `LocalDate` represents the date that the lesson starts.
+* **Recurring lesson**: A lesson arrangement set on a fixed weekly schedule, where the tutor conducts lessons with a student on the same day each time interval. 
+* **Payment Status:** A positive numerical value that indicates the student’s current payment balance for lessons. The value means the student has outstanding lessons that are yet to be paid.
+* **Education Level:** An Enum field used to record the academic level of each student for organisational clarity.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
