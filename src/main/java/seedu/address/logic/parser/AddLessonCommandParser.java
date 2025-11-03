@@ -33,7 +33,8 @@ public class AddLessonCommandParser implements Parser<AddLessonCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddLessonCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LESSON);
+        // Ensure lesson and interval prefixes are not duplicated
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_LESSON, PREFIX_INTERVAL);
 
         Index index = ParserUtil.parseIndex(argMultimap.getPreamble());
         String lessonDate = argMultimap.getValue(PREFIX_LESSON).get().trim();

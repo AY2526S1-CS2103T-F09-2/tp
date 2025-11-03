@@ -96,6 +96,20 @@ Check out the [Features](#features) below for a full list of commands and detail
 
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
+### INDEX
+
+1-based indexing number of Student based on displayed list on app.
+
+The index must be a **positive integer** and max index number you can enter is based on **last index number** of student in the displayed list.
+
+<div id="command-notes" markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the education level:**<br>
+
+Note that if you use commands that filters Students in list e.g. `find`, then the index used for commands would be based on what is displayed.
+
+</div>
+
 ### Student
 A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student.
 The number index is based on the order that the student is added into the list.
@@ -219,7 +233,7 @@ This flexibility means you don't need to memorise a strict format — simply typ
 
 Shows a message explaining how to access the help page.
 
-![help message](images/helpMessage.png)
+![help](images/helpMessage.png)
 
 Format: `help`
 
@@ -250,11 +264,15 @@ Examples:
 * `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
 * `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
+![img_10.png](img_10.png)
+
 ### Listing all persons : `list`
 
 Shows a list of all persons in the address book.
 
 Format: `list`
+
+![img_11.png](img_11.png)
 
 ### Editing a person : `edit`
 
@@ -262,7 +280,7 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ and **its number of digits must be less than 10**.
+* Edits the person at the specified [INDEX](#index).
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e., adding tags is not cumulative.
@@ -274,6 +292,8 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 *  `edit 3 edu/sec 4` Changes the 3rd person's education level to SEC_4.
 *  `edit 4 edu/` Clears the 4th person's education level back to UNKNOWN.
+
+![img_12.png](img_12.png)
 
 ### Locating persons by name: `find`
 
@@ -290,9 +310,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
+- `find Alex` returns `Alex Yeoh`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+  
+![img_13.png](img_13.png)
 
 ### Payment Status of a person : `payment`
 
@@ -300,10 +321,7 @@ Displays or updates the payment status of a person in the address book.
 
 Format: `payment INDEX [s/paid | s/unpaid]`
 
-* Check the payment status of the person at the specified `INDEX`.
-  * The index refers to the index number shown in the displayed person list.
-  * The index **must be a positive integer** 1, 2, 3, …​
-  * The index's number of digits **must be less than 10**.
+* Check the payment status of the person at the specified [INDEX](#index).
 * Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
   * Vertical bar `|` means “or” i.e., you can choose only one of the options given.
 * When a status flag is provided, the system updates the student’s payment record accordingly.
@@ -317,6 +335,8 @@ Examples:
 There is a soft bound from negative to positive **1 million** for the number of outstanding lessons that you can have.
 If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
 </div>
+
+![img_14.png](img_14.png)
 
 ### Locating persons by tag: `searchtag`
 
@@ -333,7 +353,8 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 Examples:
 * if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`
 * `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
-  ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+
+![img_15.png](img_15.png)
 
 ### Deleting a person : `delete`
 
@@ -341,15 +362,14 @@ Deletes the specified person from the address book.
 
 Format: `delete INDEX`
 
-- Deletes the person at the specified `INDEX`.
-- The index refers to the index number shown in the displayed person list.
-- The index **must be a positive integer** 1, 2, 3, …​
-- The index's number of digits **must be less than 10**.
+- Deletes the person at the specified [INDEX](#index).
 
 Examples:
 
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+![img_16.png](img_16.png)
 
 ### Add a lesson : `addLesson`
 
@@ -357,10 +377,7 @@ Add the scheduled upcoming lesson for the specified person.
 
 Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
-* Adds a lesson for the student at the specified `INDEX`
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* The index's number of digits **must be less than 10**.
+* Adds a lesson for the student at the specified [INDEX](#index).
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes might be different depends on your layout) of your desktop/laptop, we follow the **system time** based on your device.
@@ -371,30 +388,32 @@ Examples:
 * `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
 * `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
 
+![img_17.png](img_17.png)
+
 ### Cancel a lesson : `cancelLesson`
 
 Cancels the scheduled upcoming lesson at the specified index.
 
 Format: `cancelLesson INDEX`
 
-* The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the address book.
-* The index's number of digits **must be less than 10**.
-* If the person is not a student, the command returns an error message.
+* Cancel lesson of the student at the specified [INDEX](#index).
 * If the student has a scheduled normal lesson, the command cancels that lesson.
 * If the student has a scheduled recurring lesson, the command cancels all the recurring lessons.
 * If the student has no scheduled lesson, an error message will be displayed.
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
-![result for 'cancelLesson 6'](images/CancelLesson6.png)
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
+
+![img_18.png](img_18.png)
 
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
 
 Format: `clear`
+
+![img_9.png](img_9.png)
 
 ### Exiting the program : `exit`
 

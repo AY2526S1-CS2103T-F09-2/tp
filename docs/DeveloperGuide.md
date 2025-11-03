@@ -370,21 +370,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. The student has no assigned lesson.
+* 1b. The student's payment status is already paid.
 
-    * 1b1. StudentConnect shows an error message.
-
-      Use case resumes at step 1.
-
-* 1c. The student's payment status is already paid.
-
-    * 1c1.  StudentConnect throws an error.
+    * 1b1.  StudentConnect throws an error.
   
       Use case resumes at step 1.
 
-* 1d. The index is invalid.
+* 1c. The index is invalid.
 
-    * 1d1.  StudentConnect throws an error.
+    * 1c1.  StudentConnect throws an error.
 
       Use case resumes at step 1.
 
@@ -409,21 +403,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
 
-* 1b. The student has no assigned lesson.
+* 1b. The index is invalid.
 
-    * 1b1. StudentConnect shows an error message.
-
-      Use case resumes at step 1.
-
-* 1c. The student's payment status is already unpaid.
-
-    * 1c1.  StudentConnect throws an error.
-  
-      Use case resumes at step 1.
-
-* 1d. The index is invalid.
-
-    * 1d1.  StudentConnect throws an error.
+    * 1b1.  StudentConnect throws an error.
 
       Use case resumes at step 1.
 
