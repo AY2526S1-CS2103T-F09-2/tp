@@ -168,11 +168,25 @@ This ensures your recurring lessons always reflect the *next upcoming* session w
 ### Payment Status
 Payment tracking has been an anathema to private tutors, especially when there are multiple students with different payment habits. We use the payment status to make this issue simple.
 
-The payment status records the balance between **the number of lessons that students have paid** or the **number of lessons that have passed**
-* If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `10-13 = -3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the [tag](#tag-) feature to also record the price of each lesson, and everything becomes easy calculation.
 
-**The number of lessons that students have paid for** is tracked manually. You can update this by using the  [payment](#payment-status) command.
-**The number of lessons passed** is automatically updated whenever a lesson has passed(See [lesson](#lesson) for more details).
+payment status equals **the number of lessons that students have paid minus the number of lessons that need to be paid** 
+
+
+**How do we track payments in StudentConnect?**
+
+**The number of lessons that students have paid for** can be tracked manually or automatically. 
+For manual update, you can update this by using the  [payment](#payment-status) command.
+For automatic update, the payment status updates itself when lessons are **passed**(See [lesson](#lesson) for more details). Whenever a lesson is passed, it shows that a new lesson needs to be paid, so the payment status will be updated by 1.  
+
+* If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `-10+13 = 3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the [tag](#tag-) feature to also record the price of each lesson, and everything becomes easy calculation.
+
+<div markdown="span" class="alert alert-danger">
+
+:bulb: **Warning:**
+
+We do not allow the students to overpay the lesson. In other words, the payment status should not go below 0. This is because pre-payment is an unpopular option for private tutoring. However, recording overpayment is comming soon in future versions.
+
+</div>
 
 ### Education Level
 Keeping track of students at different education levels can be confusing — especially when you're teaching multiple levels at once. To help you stay organised, StudentConnect allows you to record each student's education level.
