@@ -118,7 +118,7 @@ A student has the following attributes, as shown in the example above:
 1. name: The name of the student(must be **less than or equals to 35 characters**)
 2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
-4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
+4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters. )
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 7. education level: The education level of the student
@@ -457,6 +457,8 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 **Q**: How can we update the exact time of the lesson in hours ?<br>
 **A**: StudentConnect lets you add lessons based primarily on the date — this design choice keeps your lesson list simple, clean, and focused. We believe that for most tutors, the most important information to see at a glance is the lesson date, so you can prioritise and prepare for upcoming sessions without distraction.
 
+**Q**: After filtering the list with commands like `searchtag` or `find`, can I still run commands on people who are not visible in the UI?
+**A**: No. Once you filter the list using commands such as `searchtag` or `find`, subsequent commands only affect the people currently displayed in the UI. To return to the full list, use the `list` command.
 However, we recognise that lesson time is also essential. To record lesson times without cluttering the main lesson list, you can simply add a time tag to the student’s record. This way, you still have full visibility over when each lesson happens, while keeping the interface focused and easy to follow.
 
 --------------------------------------------------------------------------------------------------------------------
