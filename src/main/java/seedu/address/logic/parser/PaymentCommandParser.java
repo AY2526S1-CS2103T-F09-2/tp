@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAYMENT_STATUS;
 
+import java.util.List;
 import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
@@ -25,7 +26,10 @@ public class PaymentCommandParser implements Parser<PaymentCommand> {
         try {
             ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_PAYMENT_STATUS);
             Optional<String> paymentStatusString = argMultimap.getValue(PREFIX_PAYMENT_STATUS);
-
+            List<String> statusList = argMultimap.getAllValues(PREFIX_PAYMENT_STATUS);
+            if (statusList.size() > 1) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, PaymentCommand.MESSAGE_USAGE));
+            }
             // if argument s/ flag used then check if it is a valid argument
             if ((paymentStatusString.isPresent() && !PaymentStatus.isValidPaymentStatus(paymentStatusString))
                     || argMultimap.getPreamble().isEmpty()) {
