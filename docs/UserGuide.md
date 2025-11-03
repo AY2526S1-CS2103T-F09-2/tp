@@ -36,7 +36,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
-   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
+   * *(For advanced command app users and **Mac users**)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    <br>
