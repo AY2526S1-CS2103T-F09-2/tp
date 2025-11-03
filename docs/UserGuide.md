@@ -29,13 +29,13 @@ The Quick Start section below will guide you through your first steps. Don’t w
     If you use these websites links to download the platform, they are from the latest versions that are far above 17. No worries!
     </div>
 
-2. Download the latest version of our application as a `.jar` file from [here](https://github.com/se-edu/addressbook-level3/releases). This is going to be the body of our application.
+2. Download the latest version of our application as a `.jar` file from [here](https://github.com/AY2526S1-CS2103T-F09-2/tp/releases/tag/v1.5). This is going to be the body of our application.
 
-3. Once you have downloaded the file, copy the file to the folder you want to use as the _home folder_ for your AddressBook. You need a place where the data of the application can be stored so **make sure that you place the file in an empty folder.**
+3. Once you have downloaded the file, copy the file to the folder you want to use as the _home folder_ for StudentConnect. You need a place where the data of the application can be stored so **make sure that you place the file in an empty folder.**
 
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
-   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    <br>
@@ -54,7 +54,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
    * `list` &ndash; Lists all contacts.
 
-   * `addstu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
+   * `addStu n/John Doe p/98765432 e/johnd@example.com` &ndash; Adds a student named `John Doe`.
 
    * `delete 3` &ndash; Deletes the 3rd contact shown in the current list.
 
@@ -127,7 +127,7 @@ In StudentConnect, you can use the tag in the following way:
 ### Lesson
 
 A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
-* For instance, a lesson that starts at `November 10th 2024 5pm` should be represented as `2024-11-10` in the system.
+* For instance, a lesson that starts at `November 10th 2024` should be represented as `2024-11-10` in the system.
  
 When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
@@ -230,7 +230,7 @@ Use this command instead to add a new student.
 
 Adds a person to the address book.
 
-Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
+Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address 
 * A person can have any number of tags (including 0)
@@ -241,11 +241,11 @@ Format: `addstu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level)
 
 Examples:
-* `addstu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
-* `addstu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
-* `addstu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
-* `addstu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
-* `addstu n/Alex Tan p/91223344 e/alex@example.com`
+* `addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
+* `addStu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
+* `addStu n/Cindy Wong p/12355677 e/12345@example.com edu/j1`
+* `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
+* `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
 ### Listing all persons : `list`
 
@@ -259,7 +259,7 @@ Edits an existing person in the address book.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​ and **its number of digits must be less than 10**.
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e., adding tags is not cumulative. 
@@ -300,6 +300,7 @@ Format: `payment INDEX [s/paid | s/unpaid]`
 * Check the payment status of the person at the specified `INDEX`. 
   * The index refers to the index number shown in the displayed person list.
   * The index **must be a positive integer** 1, 2, 3, …​
+  * The index's number of digits **must be less than 10**.
 * Optionally, you may include a status flag (`s/paid` or `s/unpaid`) to update the student's payment status.
   * Vertical bar `|` means “or” i.e., you can choose only one of the options given. 
 * When a status flag is provided, the system updates the student’s payment record accordingly.
@@ -340,6 +341,7 @@ Format: `delete INDEX`
 - Deletes the person at the specified `INDEX`.
 - The index refers to the index number shown in the displayed person list.
 - The index **must be a positive integer** 1, 2, 3, …​
+- The index's number of digits **must be less than 10**.
 
 Examples:
 
@@ -354,8 +356,9 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified `INDEX`
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
-* If the person is a student **with a scheduled lesson**, the command shows an error. This is also true for recurring lessons. 
+* The index **must be a positive integer** 1, 2, 3, …​ 
+* The index's number of digits **must be less than 10**.
+* If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
@@ -372,10 +375,9 @@ Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
 * The index **must be a positive integer** not greater than the total number of persons in the address book.
-* This command checks if the person at the specified index is a student.
-* If the person is not a student, the command returns an error message.
-* If the person is a student with a scheduled lesson, the command cancels that lesson.
-* If they are a student with no scheduled lesson, an error message will be displayed.
+* The index's number of digits **must be less than 10**.
+* If the student has a scheduled lesson, the command cancels that lesson.
+* If the student has no scheduled lesson, an error message will be displayed.
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
@@ -400,15 +402,15 @@ Format: `exit`
 
 ### Saving the data
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+StudentConnect data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. **Do not edit that data file as it will affect the app's startup functionality.**
+StudentConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. **Do not edit that data file as it will affect the app's startup functionality.**
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file make its format invalid, AddressBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, StudentConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause StudentConnect to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
@@ -416,7 +418,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder. 
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentConnect home folder.
 
 **Q**: How do I edit the lesson information if I input anything wrong?<br>
 **A**: StudentConnect so far does not support the editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson thorugh the `addLesson` command again.
@@ -437,7 +439,7 @@ Furthermore, certain edits can cause the AddressBook to behave in unexpected way
 
 | Action             | Format, Examples                                                                                                                                                                                          |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
+| **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `addStu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
 | **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                            |
 | **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
 | **Clear**          | `clear`                                                                                                                                                                                                   |

@@ -371,3 +371,73 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
+
+
+### Adding a new student
+1. Adding a person to the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   
+   2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
+   Expected: A student with name Alex Tan, phone number 91223344, and email alex@example.com is added to the end of the list of students.
+   
+   3. Test case: `addStu n/Choo p/81112222 a/Blk 1`<br>
+   Expected: No new student is added. Error details shown in the status message.
+   
+   4. Other incorrect addStu commands to try: `addStu`, `addStu p/12345678 e/123@example.com`, `...`
+   Expected: similar to previous.
+
+### Editing a person
+1. Editing an existing person in the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   
+   2. Test case: `edit 2 n/Betsy Crower`<br>
+   Expected: The person at index 2 has gotten their name changed to Betsy Crower. New details of the person shown in the status message.
+
+   3. Test case: `edit 0 p/12345678`<br>
+   Expected: No person is edited. Error details shown in the status message.
+
+   4. Other incorrect edit commands to try: `edit`, `edit x n/newname`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Managing payment status of a person
+1. Displaying or updating the payment status of a person in the address book
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `payment 2`<br>
+   Expected: Name and payment status of the second person in the list are shown in the status message.
+   3. Test case: `payment 0`<br>
+   Expected: Error details shown in the status message.
+   4. Other incorrect payment commands to try: `payment`, `payment x`,`...`(where x is larger than the list size)<br>
+   Expected: Similar to previous.
+
+### Locating persons by tag
+1. Finding a person whose tags contain any of the given keywords
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a tag to be tested. Otherwise, run `edit 1 t/chemistry` and `edit 2 t/physics`.
+   2. Test case: `searchtag chemistry physics`<br>
+   Expected: Message `2 person listed!` shown in the status message. The list now only contain the first two students.
+   3. Test case: `searchtag`<br>
+   Expected: The displayed list is not changed. Error details shown in the status message.
+
+### Adding a lesson
+1. Adding a lesson to an existing student
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `addLesson 2 d/2025-12-20`<br>
+   Expected: The person at index 2 now has a lesson on the date 2025-12-20. New details of the person shown in the status message.
+   3. Test case: `addLesson 0 d/2025-12-15`<br>
+   Expected: No lesson is added. Error details shown in the status message.
+   4. Other incorrect edit commands to try: `addLesson`, `addLesson x d/2025-12-25`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+### Cancelling a lesson
+1. Cancelling a lesson of an existing student
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
+   2. Test case: `cancelLesson 2`<br>
+   Expected: The person at index 2 with a scheduled lesson will get their lesson cancelled. Lesson of the person becomes None. New details of the person shown in the status message.
+   3. Test case: `cancelLesson 0`<br>
+   Expected: No lesson is cancelled. Error details shown in the status message.
+   4. Other incorrect edit commands to try: `cancelLesson`, `cancelLesson x`, `...` (where x is larger than the list size)<br>
+   Expected: Similar to previous.
+### Testing auto-update of lesson dates
+1. Testing if lesson dates of all students in the list will be auto-updated as time passes
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`. 
+   2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
+   3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
+   Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
