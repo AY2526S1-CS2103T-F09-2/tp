@@ -7,6 +7,7 @@ import java.util.Arrays;
 import seedu.address.logic.commands.SearchTagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new {@link SearchTagCommand} object.
@@ -38,6 +39,12 @@ public class SearchTagCommandParser implements Parser<SearchTagCommand> {
         }
 
         String[] tagKeywords = trimmedArgs.split("\\s+");
+        // Enforce same constraints as Tag names (alphanumeric). Reject invalid keywords.
+        for (String kw : tagKeywords) {
+            if (!Tag.isValidTagName(kw)) {
+                throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            }
+        }
 
         return new SearchTagCommand(new TagContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
