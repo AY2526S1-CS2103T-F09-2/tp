@@ -243,6 +243,13 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
   4. If `edu/` is used but left empty or contains only spaces (e.g., ' '), the education level defaults to `UNKNOWN`.
 
+<div markdown="span" class="alert alert-danger">
+
+:bulb: **Warning:** duplicate inputs
+
+In StudentConnect, we intentionally prevent users from adding two students with the **exact same name**, because that would most likely be a mistake — a duplicated entry that causes confusion. However, we do allow names that differ in letter casing (for example: `John Doe` and `John DOe`) because private tutors often teach the same student in multiple, separate contexts such as separate time slots for different lessons within the same week. In these cases, tutors sometimes prefer to record them as distinct entries to keep lesson schedules, notes, and payment tracking clear. 
+</div>
+
 Examples:
 * `addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
 * `addStu n/Betsy Crowe t/friend e/betsycrowe@example.com p/1234567 t/history edu/sec 2`
