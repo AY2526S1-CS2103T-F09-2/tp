@@ -285,8 +285,8 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
   2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 * When a student is initialised, *by default* :
-  1. the student has not paid for any lesson(refer to track for more info)
-  2. the student does not have any lesson (refer to addLesson for more info)
+  1. The student has not paid for any lesson (refer to track for more info) 
+  2. The student does not have any lessons (refer to addLesson for more info) 
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
   4. If `edu/` is used but left empty or contains whitespaces, the education level defaults to `UNKNOWN`.
 
@@ -423,17 +423,16 @@ Examples:
 Command box has this output when you run this command: `delete 2`
 
 ![img_16.png](img_16.png)
-
-### Add a lesson : `addLesson`
+### Add a lesson: `addLesson` 
 
 Add the scheduled upcoming lesson for the specified person.
 
 Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified [INDEX](#index).
-* If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
+* If the person is a student **with a scheduled lesson**, the command shows an error. This is also true for recurring lessons. 
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the list.
-* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes might be different depends on your layout) of your desktop/laptop, we follow the **system time** based on your device.
+* The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only regarded as valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes it might be different depending on your layout) of your desktop/laptop. We follow the **system time** based on your device. 
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 * See the [FAQ section](#faq) if you want to specify the hour of the lesson
 
@@ -445,14 +444,14 @@ Command box has this output when you run this command: `addLesson 2 d/2025-12-20
 
 ![img_17.png](img_17.png)
 
-### Cancel a lesson : `cancelLesson`
+### Cancel a lesson: `cancelLesson` 
 
 Cancels the scheduled upcoming lesson at the specified index.
 
 Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
-* Cancel lesson of the student at the specified [INDEX](#index).
+* Cancel the lesson of the student at the specified [INDEX](#index). 
 * If the student has a scheduled normal lesson, the command cancels that lesson.
 * If the student has a scheduled recurring lesson, the command cancels all the recurring lessons.
 * If the student has no scheduled lesson, an error message will be displayed.
@@ -465,7 +464,7 @@ Command box has this output when you run this command: `cancelLesson 2`
 
 ![img_18.png](img_18.png)
 
-### Clearing all entries : `clear`
+### Clearing all entries: `clear` 
 
 Clears all entries from the list.
 
@@ -475,7 +474,7 @@ Command box has this output when you run this command: `clear`
 
 ![img_9.png](img_9.png)
 
-### Exiting the program : `exit`
+### Exiting the program: `exit` 
 
 Exits the program.
 
@@ -494,7 +493,7 @@ StudentConnect data are saved in the hard disk automatically after any command t
 StudentConnect data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. **Do not edit that data file as it will affect the app's startup functionality.**
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
-If your changes to the data file makes its format invalid, StudentConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br>
+If your changes to the data file make its format invalid, StudentConnect will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.<br> 
 Furthermore, certain edits can cause StudentConnect to behave in unexpected ways (e.g. if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 
@@ -503,10 +502,10 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 ## FAQ
 
 **Q**: How do I transfer my data to another computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentConnect home folder.
+**A**: Install the app on the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentConnect home folder. 
 
 **Q**: How do I edit the lesson information if I input anything wrong?<br>
-**A**: StudentConnect so far does not support the editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson through the `addLesson` command again.
+**A**: StudentConnect so far does not support editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson through the `addLesson` command again. 
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
 **A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
