@@ -19,9 +19,9 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 ## Quick start
 
-1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide<br>
+1. Ensure you have Java with version `17` or above installed in your Computer. Java is the platform that we use to run our application. You can click the following link to download the platform and install it by double-clicking the downloaded file and follow the installation guide.<br>
 
-   **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp)
+   **Windows users:** You can download your JDK platform [here](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk25-windowshttps://www.java.com/en/download/manual.jsp).
 
    **Mac users:** Ensure you have the precise JDK version prescribed [here](https://se-education.org/guides/tutorials/javaInstallationMac.html).
 
@@ -115,10 +115,10 @@ A student is represented as an item in the student list. You can add a student b
 The number index is based on the order that the student is added into the list.
 
 A student has the following attributes, as shown in the example above:
-1. name: The name of the student(must be **less than or equals to 35 characters**)
-2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
+1. name: The name of the student (must be **less than or equals to 35 characters**)
+2. phone number: The phone number of a student (must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
-4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters. )
+4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters)
 5. [tag](#tag): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 7. education level: The education level of the student
@@ -148,9 +148,9 @@ Tag names may only contain **letters and numbers**. Special characters are not a
 
 ### Lesson
 
-A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
+A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day.
 * For instance, a lesson that starts at `November 10th 2024` should be represented as `2024-11-10` in the system.
-When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
+When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list).
 
 A lesson is considered **passed** if the date of the lesson recorded is **before the current date** (Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lessons. Lessons are updated whenever the application is launched.
 
@@ -190,7 +190,7 @@ Payment tracking has been an anathema to private tutors, especially when there a
 The payment status records the balance between **the number of lessons that students have paid** or the **number of lessons that have passed**
 * If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `10-13 = -3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the [tag](#tag) feature to also record the price of each lesson, and everything becomes easy calculation.
 
-payment status equals **the number of lessons that students have paid minus the number of lessons that need to be paid** 
+payment status equals **the number of lessons that students have paid minus the number of lessons that need to be paid**.
 
 
 **How do we track payments in StudentConnect?**
@@ -217,7 +217,7 @@ You can set or update a student's education level using the `addStu` or `edit` c
 <div id="command-notes" markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the education level:**<br>
-We assume that private tutors only teach students from Primary 1 to Junior 2. Any other education levels will be categorized as "OTHERS".
+We assume that private tutors only teach students from Primary 1 to Junior 2. Any other education levels will be categorized as `OTHERS`.
 
 </div>
 
@@ -242,7 +242,7 @@ For example, if you want to enter Primary 3, you may type:
 
 Note:
 * Inputs are **case-insensitive**, so `PRI 3`, `Primary 3`, or `pri three` are all valid.
-* **Spacing doesn’t matter**, meaning extra spaces before, after, or between words/numbers will be ignored. For example, `pri 3` or `p ri mary 3` will work correctly
+* **Spacing doesn’t matter**, meaning extra spaces before, after, or between words/numbers will be ignored. For example, `pri 3` or `p ri mary 3` will work correctly.
 
 This flexibility means you don't need to memorise a strict format — simply type the education level in a natural way, and the system will understand your input.
 
@@ -252,7 +252,7 @@ This flexibility means you don't need to memorise a strict format — simply typ
 
 For images of UI command box shown in each feature, we assume that you start with the default data from address list.
 
-**:information_source: To get back default data, delete this folder `[JAR file location]/data/addressbook.json`**<br>
+**:information_source: To get back default data, delete this folder `[JAR file location]/data/addressbook.json`**.<br>
 
 ### Getting help : `help`
 
@@ -282,13 +282,13 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
 * A person can have any number of tags (including 0)
 * Name, phone number, and email fields are compulsory
 * Emails should be of the format local-part@domain and adhere to the following:
-  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods
 * When a student is initialised, *by default* :
   1. The student has not paid for any lesson (refer to track for more info) 
   2. The student does not have any lessons (refer to addLesson for more info) 
-  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
-  4. If `edu/` is used but left empty or contains whitespaces, the education level defaults to `UNKNOWN`.
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`
+  4. If `edu/` is used but left empty or contains whitespaces, the education level defaults to `UNKNOWN`
 
 <div markdown="span" class="alert alert-danger">
 
@@ -313,7 +313,7 @@ Shows a list of all persons in the list.
 
 Format: `list`
 
-Command box has this output when you run this command: `list`
+Command box has this output when you run this command: `list`.
 
 ![img_11.png](img_11.png)
 
@@ -328,7 +328,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed, i.e., adding tags is not cumulative.
 * You can remove all the person’s tags by typing `t/` without specifying any tags after it.
-* To change the education level, provide `edu/EDUCATION_LEVEL`. To clear it back to UNKNOWN, pass edu/ with nothing after it. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level)
+* To change the education level, provide `edu/EDUCATION_LEVEL`. To clear it back to UNKNOWN, pass edu/ with nothing after it. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level).
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
@@ -336,7 +336,7 @@ Examples:
 *  `edit 3 edu/sec 4` Changes the 3rd person's education level to SEC_4.
 *  `edit 4 edu/` Clears the 4th person's education level back to UNKNOWN.
 
-Command box has this output when you run this command: `edit 1 p/91234567 e/johndoe@example.com`
+Command box has this output when you run this command: `edit 1 p/91234567 e/johndoe@example.com`.
 
 ![img_12.png](img_12.png)
 
@@ -346,19 +346,19 @@ Finds persons whose names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g., `hans` will match `Hans`
-* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
+* The search is case-insensitive. e.g., `hans` will match `Hans`.
+* The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`.
 * Only the name is searched.
-* Only full words will be matched, e.g. `Han` will not match `Hans`
+* Only full words will be matched, e.g. `Han` will not match `Hans`.
 * Persons matching at least one keyword will be returned (i.e., `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
 Examples:
 
-- `find Alex` returns `Alex Yeoh`
-- `find alex david` returns `Alex Yeoh`, `David Li`<br>
+- `find Alex` returns `Alex Yeoh`.
+- `find alex david` returns `Alex Yeoh`, `David Li`<br>.
 
-Command box has this output when you run this command: `find Alex`
+Command box has this output when you run this command: `find Alex`.
 
 ![img_13.png](img_13.png)
 
@@ -383,7 +383,7 @@ There is a soft bound from negative to positive **1 million** for the number of 
 If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
 </div>
 
-Command box has this output when you run this command: `payment 1`
+Command box has this output when you run this command: `payment 1`.
 
 ![img_14.png](img_14.png)
 
@@ -393,17 +393,17 @@ Finds persons whose tags contain any of the given keywords.
 
 Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
-* The search is case-insensitive. e.g. `chem` will match `ChEm`
-* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`
+* The search is case-insensitive. e.g. `chem` will match `ChEm`.
+* The order of the keywords does not matter. e.g. `chemistry physics` will match `physics chemistry`.
 * Only tags are searched.
-* Partial matches are allowed. e.g. `chem` will match `chemistry`
+* Partial matches are allowed. e.g. `chem` will match `chemistry`.
 * Persons matching at least one keyword will be returned.
 
 Examples:
-* if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`
-* `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
+* if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`.
+* `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`).
 
-Command box has this output when you run this command: `searchtag math`
+Command box has this output when you run this command: `searchtag math`.
 
 ![img_15.png](img_15.png)
 
@@ -420,7 +420,7 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the list.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-Command box has this output when you run this command: `delete 2`
+Command box has this output when you run this command: `delete 2`.
 
 ![img_16.png](img_16.png)
 ### Add a lesson: `addLesson` 
@@ -434,13 +434,13 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 * If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the list.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only regarded as valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes it might be different depending on your layout) of your desktop/laptop. We follow the **system time** based on your device. 
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
-* See the [FAQ section](#faq) if you want to specify the hour of the lesson
+* See the [FAQ section](#faq) if you want to specify the hour of the lesson.
 
 Examples:
 * `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the list.
 * `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the list.
 
-Command box has this output when you run this command: `addLesson 2 d/2025-12-20`
+Command box has this output when you run this command: `addLesson 2 d/2025-12-20`.
 
 ![img_17.png](img_17.png)
 
@@ -460,7 +460,7 @@ Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
 
-Command box has this output when you run this command: `cancelLesson 2`
+Command box has this output when you run this command: `cancelLesson 2`.
 
 ![img_18.png](img_18.png)
 
@@ -470,7 +470,7 @@ Clears all entries from the list.
 
 Format: `clear`
 
-Command box has this output when you run this command: `clear`
+Command box has this output when you run this command: `clear`.
 
 ![img_9.png](img_9.png)
 
