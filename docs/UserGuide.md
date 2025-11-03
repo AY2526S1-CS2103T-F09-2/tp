@@ -433,6 +433,8 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 **Q**: How can we update the exact time of the lesson in hours ?<br>
 **A**: StudentConnect lets you add lessons based primarily on the date — this design choice keeps your lesson list simple, clean, and focused. We believe that for most tutors, the most important information to see at a glance is the lesson date, so you can prioritise and prepare for upcoming sessions without distraction.
 
+**Q**: After filtering the list with commands like `searchtag` or `find`, can I still run commands on people who are not visible in the UI?
+**A**: No. Once you filter the list using commands such as `searchtag` or `find`, subsequent commands only affect the people currently displayed in the UI. To return to the full list, use the `list` command.
 However, we recognise that lesson time is also essential. To record lesson times without cluttering the main lesson list, you can simply add a time tag to the student’s record. This way, you still have full visibility over when each lesson happens, while keeping the interface focused and easy to follow.
 
 --------------------------------------------------------------------------------------------------------------------
