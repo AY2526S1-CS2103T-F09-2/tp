@@ -131,7 +131,6 @@ In StudentConnect, you can use the tag in the following way:
 
 A lesson is represented by a single date, which is the date (in the fixed format of `yyyy-MM-dd`) that the lesson starts. We assume that the lesson will end on the same day
 * For instance, a lesson that starts at `November 10th 2024` should be represented as `2024-11-10` in the system.
-
 When a student is created, the student by default does not have any lesson. To record an upcoming lesson to the student, use [addLesson](#add-a-lesson--addlesson) command to create a new lesson to the [student](#student) in the [student list](#student-list)
 
 A lesson is considered **passed** if the date of the lesson recorded is **before the current date** (Note that if the lesson date is the same as the current date, it is **not considered passed**). If a lesson is **passed**, the lesson will be dropped from the student who had the lesson, so the student will no longer have any lessons. Lessons are updated whenever the application is launched.
@@ -441,16 +440,16 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                          |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action             | Format, Examples                                                                                                                                                                                             |
+|--------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `addStu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
-| **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                                    |
-| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          |
-| **Clear**          | `clear`                                                                                                                                                                                                   |
-| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [edu/EDUCATION_LEVEL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                          |
-| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
-| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
-| **List**           | `list`                                                                                                                                                                                                    |
-| **Payment Status** | `payment INDEX [s/paid OR s/unpaid] <br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
-| **Help**           | `help`                                                                                                                                                                                                    |
+| **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                                       |
+| **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                             |
+| **Clear**          | `clear`                                                                                                                                                                                                      |
+| **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                           |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [edu/EDUCATION_LEVEL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                             |
+| **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                    |
+| **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                   |
+| **List**           | `list`                                                                                                                                                                                                       |
+| **Payment Status** | `payment INDEX [s/paid OR s/unpaid] <br> e.g. `payment 1 s/unpaid`                                                                                                                                           |
+| **Help**           | `help`                                                                                                                                                                                                       |
