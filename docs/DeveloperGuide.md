@@ -101,10 +101,10 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -145,7 +145,7 @@ How the parsing works:
 <img src="images/LessonClassDiagram.png" width="600" />
 
 #### Payment Status
-The payment status contains an integer which represents **the number of lessons that students have paid - the number of lessons that need to be paid**. Every single stduent has exactly one payment status.
+The payment status contains an integer which represents **the number of lessons that students have paid - the number of lessons that need to be paid**. Every single student has exactly one payment status.
 
 We check whether the student has an outstanding lesson by checking whether the payment status equals `0`. 
 
@@ -155,7 +155,7 @@ We check whether the student has an outstanding lesson by checking whether the p
 
 The payment command updates the payment command manually by adding 1(`s/unpaid`) or subtracting 1(`s/paid`) to a new lesson.
 
-For automatic update, the payment status updates itself when the `LESSONDATE` of a lesson is past the current date(the system date). The application checks this when it is first launched. The check and the update is then done in the `ModelManager` class. If the `LESSONDATE` of a lesson is past the current date(the system date), the payment status will increase by 1.  
+For automatic update, the payment status updates itself when the `LESSONDATE` of a lesson is past the current date(the system date). The application checks this when it is first launched. The check and the update are then done in the `ModelManager` class. If the `LESSONDATE` of a lesson is past the current date(the system date), the payment status will increase by 1.  
 
 #### Education Level
 The education level is an `enum` object that represents the student's education level. It accepts a wide range of inputs that convert the. The payment status of a student can be edited using the `addStu` or `edit` command. 
@@ -540,7 +540,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Glossary
 
-* **Mainstream OS**: Windows, Linux, Unix, MacOS
+* **Mainstream OS**: Windows, Linux, Unix, macOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous AddressBook application.
 * **Student List** : The panel at the bottom of the StudentConnect interface displaying all student profiles that have been created and stored in the system. It provides a quick overview of existing students for easy reference and selection.
@@ -569,13 +569,13 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 
@@ -585,18 +585,18 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
 
 ### Adding a new student
 1. Adding a person to the list
+
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
 
    2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
