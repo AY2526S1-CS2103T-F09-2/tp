@@ -236,7 +236,10 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
 
 * A person can have 0 or 1 address
 * A person can have any number of tags (including 0)
-* All other fields are compulsory
+* Name, phone number, and email fields are compulsory
+* Emails should be of the format local-part@domain and adhere to the following:
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 * When a student is initialised, *by default* :
   1. the student has not paid for any lesson(refer to track for more info)
   2. the student does not have any lesson (refer to addLesson for more info)
