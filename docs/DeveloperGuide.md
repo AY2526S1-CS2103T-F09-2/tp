@@ -172,11 +172,12 @@ The `enum` contains the following fields
 
 When we convert the education level `enum` from a `String` input (from a command) to an enum object, several string inputs are supported for one `enum` item. 
 For example, the following `Strings` converts to the enum item `primary 3`:
-| Format           | Example        | Notes                                                   |
-|------------------|-------------------|---------------------------------------------------------|
-| Original form    | `primary 3`      | Full words + number                                     |
-| Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
-| Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
+* **Original form:** `primary 3`  
+Full words + number 
+* **Abbreviation:** `pri 3`     
+primary → pri, secondary → sec, junior → jc (no other forms allowed)
+* **Number in words:** `primary three`  
+You may combine with abbreviations too, e.g. `pri three`
 
 
 ### Storage component
