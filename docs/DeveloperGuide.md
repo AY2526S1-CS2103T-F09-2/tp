@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous addressbook application.
+* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous AddressBook application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -379,7 +379,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Adding a new student
-1. Adding a person to the address book
+1. Adding a person to the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
 
    2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
@@ -392,7 +392,7 @@ testers are expected to do more *exploratory* testing.
    Expected: similar to previous.
 
 ### Editing a person
-1. Editing an existing person in the address book
+1. Editing an existing person in the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
 
    2. Test case: `edit 2 n/Betsy Crower`<br>
@@ -405,7 +405,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 ### Managing payment status of a person
-1. Displaying or updating the payment status of a person in the address book
+1. Displaying or updating the payment status of a person in the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
    2. Test case: `payment 2`<br>
    Expected: Name and payment status of the second person in the list are shown in the status message.

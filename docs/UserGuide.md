@@ -230,7 +230,7 @@ The `add` command available in the previous versions is deprecated and cannot be
 Use this command instead to add a new student.
 </div>
 
-Adds a person to the address book.
+Adds a person to the list.
 
 Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
@@ -255,13 +255,13 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the list.
 
 Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
@@ -299,7 +299,7 @@ Examples:
 
 ### Payment Status of a person : `payment`
 
-Displays or updates the payment status of a person in the address book.
+Displays or updates the payment status of a person in the list.
 
 Format: `payment INDEX [s/paid | s/unpaid]`
 
@@ -312,9 +312,9 @@ Format: `payment INDEX [s/paid | s/unpaid]`
 * When a status flag is provided, the system updates the student’s payment record accordingly.
 
 Examples:
-* `list` followed by `payment 2` displays the payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+* `list` followed by `payment 2` displays the payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the list as paid. Then displays the updated payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the list as unpaid. Then displays the updated payment status of the 2nd person in the list.
 
 <div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 There is a soft bound from negative to positive **1 million** for the number of outstanding lessons that you can have.
@@ -340,7 +340,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the list.
 
 Format: `delete INDEX`
 
@@ -351,7 +351,7 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `list` followed by `delete 2` deletes the 2nd person in the list.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ### Add a lesson : `addLesson`
@@ -365,14 +365,14 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 * The index **must be a positive integer** 1, 2, 3, …​
 * The index's number of digits **must be less than 10**.
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
-* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
+* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the list.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes might be different depends on your layout) of your desktop/laptop, we follow the **system time** based on your device.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 * See the [FAQ section](#faq) if you want to specify the hour of the lesson
 
 Examples:
-* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the list.
+* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the list.
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -381,7 +381,7 @@ Cancels the scheduled upcoming lesson at the specified index.
 Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** not greater than the total number of persons in the address book.
+* The index **must be a positive integer** not greater than the total number of persons in the list.
 * The index's number of digits **must be less than 10**.
 * If the student has a scheduled lesson, the command cancels that lesson.
 * If the student has no scheduled lesson, an error message will be displayed.
@@ -393,7 +393,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the list.
 
 Format: `clear`
 
