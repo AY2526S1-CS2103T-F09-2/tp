@@ -401,7 +401,8 @@ Format: `cancelLesson INDEX`
 
 * The index refers to the index number shown in the displayed person list.
 * Cancel lesson of the student at the specified [INDEX](#index).
-* If the student has a scheduled lesson, the command cancels that lesson.
+* If the student has a scheduled normal lesson, the command cancels that lesson.
+* If the student has a scheduled recurring lesson, the command cancels all the recurring lessons.
 * If the student has no scheduled lesson, an error message will be displayed.
 
 Examples:
