@@ -131,16 +131,16 @@ How the parsing works:
 </div>
 
 #### The `Student` Component
-* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.  
+* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.
 * The behaviour of the student class is mostly similar to a person in the model, as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is an enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
 
-#### The `Lesson` Component 
-* The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.  
-* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which represents the state where the student does not have any lessons. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It serves as a check on whether the student has any lessons. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson. 
-* Another subclass of lesson is called `RecurringLesson`, which handles lessons that regularly update themselves after a certain time interval. It has an `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details) 
-* The behaviour of a lesson object is mostly tied to the commands that create or delete a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of the lesson whose date is `INTERVAL` days past the previous lesson date. 
+#### The `Lesson` Component
+* The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.
+* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which represents the state where the student does not have any lessons. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It serves as a check on whether the student has any lessons. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
+* Another subclass of lesson is called `RecurringLesson`, which handles lessons that regularly update themselves after a certain time interval. It has an `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
+* The behaviour of a lesson object is mostly tied to the commands that create or delete a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of the lesson whose date is `INTERVAL` days past the previous lesson date.
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
@@ -442,7 +442,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 ### Testing auto-update of lesson dates
 1. Testing if lesson dates of all students in the list will be auto-updated as time passes
-   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`. 
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`.
    2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
    3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
    Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
