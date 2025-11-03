@@ -60,7 +60,6 @@ public class CancelLessonCommand extends Command {
             throw new CommandException(MESSAGE_NO_LESSON);
         }
 
-        PaymentStatus newPay = student.getPaymentStatus().update(PaymentStatus.PaymentStatusValue.PAID);
         Student edited = new Student(
                 student.getName(),
                 student.getPhone(),
@@ -68,7 +67,7 @@ public class CancelLessonCommand extends Command {
                 student.getAddress(),
                 student.getTags(),
                 Lesson.getEmpty(),
-                newPay,
+                student.getPaymentStatus(),
                 student.getEducationLevel()
         );
 
