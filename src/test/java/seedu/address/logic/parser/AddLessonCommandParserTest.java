@@ -16,23 +16,23 @@ public class AddLessonCommandParserTest {
 
     @Test
     public void parse_normal_success() throws Exception {
-        String input = " 1 d/2025-11-02";
-        assertEquals(new AddLessonCommand(Index.fromOneBased(1), new Lesson("2025-11-02")),
+        String input = " 1 d/2026-10-02";
+        assertEquals(new AddLessonCommand(Index.fromOneBased(1), new Lesson("2026-10-02")),
                 parser.parse(input));
     }
 
     @Test
     public void parse_recurring_success() throws Exception {
-        String input = " 1 d/2025-11-02 every/7";
+        String input = " 1 d/2026-10-02 every/7";
         assertEquals(new AddLessonCommand(Index.fromOneBased(1),
-                new RecurringLesson("2025-11-02", 7)), parser.parse(input));
+                new RecurringLesson("2026-10-02", 7)), parser.parse(input));
     }
 
     @Test
     public void parse_recurringWithOneDay_success() throws Exception {
-        String input = " 1 d/2025-11-02 every/1";
+        String input = " 1 d/2026-10-02 every/1";
         assertEquals(new AddLessonCommand(Index.fromOneBased(1),
-                new RecurringLesson("2025-11-02", 1)), parser.parse(input));
+                new RecurringLesson("2026-10-02", 1)), parser.parse(input));
     }
 
     @Test

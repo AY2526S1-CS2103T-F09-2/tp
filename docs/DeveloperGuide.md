@@ -126,21 +126,21 @@ How the parsing works:
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `StudentConnect`, which `Person` references. This allows `StudentConnect` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
 <img src="images/BetterModelClassDiagram.png" width="450" />
 </div>
 
 #### The `Student` Component
-* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.  
+* The student component is a new component that is introduced in the application StudentConnect. It directly inherits from person and has two extra fields, `Lesson` and `PaymentStatus`.
 * The behaviour of the student class is mostly similar to a person in the model, as it directly inherits from a person. However, in StudentConnect, you can manage the most recent lesson of that student and the payment status of that particular student. Moreover, `students` can be labelled based on their respective education levels, which is an enum that records fixed values of education levels(such as P3, etc.)
 
 <img src="images/StudentClassDiagram.png" width="550" />
 
-#### The `Lesson` Component 
-* The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.  
-* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which represents the state where the student does not have any lessons. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It serves as a check on whether the student has any lessons. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson. 
-* Another subclass of lesson is called `RecurringLesson`, which handles lessons that regularly update themselves after a certain time interval. It has an `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details) 
-* The behaviour of a lesson object is mostly tied to the commands that create or delete a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of the lesson whose date is `INTERVAL` days past the previous lesson date. 
+#### The `Lesson` Component
+* The lesson component represents a single lesson that is owned by a student who is already instantiated in the student list. A Lesson is an **immutable object** that contains a single field of `lessonDate`, which is a `LocalDate` Java object that records the date of a lesson.
+* There is a static instance of a singleton object stored in the `Lesson` class named `EMPTY`, which represents the state where the student does not have any lessons. It is an instance of `Lesson`'s private subclass `EmptyLesson`. It serves as a check on whether the student has any lessons. It also handles all situations whenever an operation that deals with the lesson a student is called on a student while the student has no lesson.
+* Another subclass of lesson is called `RecurringLesson`, which handles lessons that regularly update themselves after a certain time interval. It has an `interval` field that tracks the number of days between each lesson.(See the next bullet point for more details)
+* The behaviour of a lesson object is mostly tied to the commands that create or delete a lesson. Additionally, whenever the application is launched. The `ModelManager` will check whether the lesson date is past the current date. If so, the lesson will be updated by calling the method `getNextLesson()`, which returns the `EMPTY` instance for a normal lesson. However, for a recurring lesson, it will return a **new instance** of the lesson whose date is `INTERVAL` days past the previous lesson date.
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
@@ -333,7 +333,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class in the addressbook.
+* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous addressbook application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -381,20 +381,20 @@ testers are expected to do more *exploratory* testing.
 ### Adding a new student
 1. Adding a person to the address book
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
-   
+
    2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
    Expected: A student with name Alex Tan, phone number 91223344, and email alex@example.com is added to the end of the list of students.
-   
+
    3. Test case: `addStu n/Choo p/81112222 a/Blk 1`<br>
    Expected: No new student is added. Error details shown in the status message.
-   
+
    4. Other incorrect addStu commands to try: `addStu`, `addStu p/12345678 e/123@example.com`, `...`
    Expected: similar to previous.
 
 ### Editing a person
 1. Editing an existing person in the address book
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
-   
+
    2. Test case: `edit 2 n/Betsy Crower`<br>
    Expected: The person at index 2 has gotten their name changed to Betsy Crower. New details of the person shown in the status message.
 
@@ -442,7 +442,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 ### Testing auto-update of lesson dates
 1. Testing if lesson dates of all students in the list will be auto-updated as time passes
-   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`. 
+   1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`.
    2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
    3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
    Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
