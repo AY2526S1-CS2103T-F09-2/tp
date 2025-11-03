@@ -67,32 +67,34 @@ public class PaymentCommandTest {
         Student student = generateStudent(personToEdit);
         addLessonToModel(student); // student has 1 unpaid lesson
 
-        // get back same student with updated fields
-        personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        student = generateStudent(personToEdit);
+        // get back same student with same fields as we are just going to set below that:
+        // student has 1 additional unpaid lesson
+        // then set student as make 1 payment
+        String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
+                student.getName(), student.getPaymentStatus());
+
+        // paid flag only works if have 1 outstanding lesson so set as that
+        student = student.updatePaymentStatus(new PaymentStatus(1));
+        model.setPerson(personToEdit, student);
 
         // pay for 1 lesson
         Optional<PaymentStatusValue> newPaymentStatus = Optional.of(PaymentStatusValue.PAID);
         PaymentCommand paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
-        Student newStudent = student.paid();
 
-        String expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                newStudent.getName(), newStudent.getPaymentStatus());
+
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(student, newStudent);
+        expectedModel.setPerson(student, student.paid());
         assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
-
-        student = newStudent;
 
         // unpay for 1 lesson
         newPaymentStatus = Optional.of(PaymentStatusValue.UNPAID);
         paymentCommand = new PaymentCommand(INDEX_FIRST_PERSON, newPaymentStatus);
-        newStudent = student.unpaid();
-
         expectedMessage = String.format(MESSAGE_PAYMENT_STATUS_SUCCESS,
-                newStudent.getName(), newStudent.getPaymentStatus());
+                student.getName(), student.getPaymentStatus());
+
+        personToEdit = student;
         expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.setPerson(student, newStudent);
+        expectedModel.setPerson(personToEdit, student.unpaid());
         assertCommandSuccess(paymentCommand, model, expectedMessage, expectedModel);
     }
 

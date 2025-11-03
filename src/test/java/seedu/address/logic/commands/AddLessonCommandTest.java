@@ -205,7 +205,7 @@ public class AddLessonCommandTest {
     }
 
     @Test
-    public void execute_addLessonMarksStudentAsUnpaid_success() throws Exception {
+    public void execute_addLessonMarksStudentOutstandingPaymentAsZero() throws Exception {
         Model model = new ModelManager();
         Person person = new PersonBuilder().build();
         model.addPerson(person);
@@ -215,7 +215,7 @@ public class AddLessonCommandTest {
 
         // Verify the student has unpaid status (outstanding lesson count incremented)
         Student student = (Student) model.getFilteredPersonList().get(0);
-        assertTrue(student.getPaymentStatus().getOutstandingLessonPayments() > 0);
+        assertEquals(0, student.getPaymentStatus().getOutstandingLessonPayments());
     }
 
     @Test

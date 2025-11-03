@@ -144,6 +144,41 @@ How the parsing works:
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
+#### Payment Status
+The payment status contains an integer which represents **the number of lessons that students have paid - the number of lessons that need to be paid**. Every single stduent has exactly one payment status.
+
+We check whether the student has an outstanding lesson by checking whether the payment status equals `0`. 
+
+* If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `-10+13 = 3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the tag feature to also record the price of each lesson, and everything becomes easy calculation.
+
+**The number of lessons that students have paid for** can be tracked manually or automatically. 
+
+The payment command updates the payment command manually by adding 1(`s/unpaid`) or subtracting 1(`s/paid`) to a new lesson.
+
+For automatic update, the payment status updates itself when the `LESSONDATE` of a lesson is past the current date(the system date). The application checks this when it is first launched. The check and the update is then done in the `ModelManager` class. If the `LESSONDATE` of a lesson is past the current date(the system date), the payment status will increase by 1.  
+
+#### Education Level
+The education level is an `enum` object that represents the student's education level. It accepts a wide range of inputs that convert the. The payment status of a student can be edited using the `addStu` or `edit` command. 
+
+**Supported Education Levels**
+
+The `enum` contains the following fields  
+
+* `primary [n]`, where `1 <= n <= 6`
+* `secondary [n]`, where `1 <= n <= 5`
+* `junior [n]`, where `1 <= n <= 2`("junior" refers to junior college)
+
+**Flexible Input Formats**
+
+When we convert the education level `enum` from a `String` input (from a command) to an enum object, several string inputs are supported for one `enum` item. 
+For example, the following `Strings` converts to the enum item `primary 3`:
+| Format           | Example        | Notes                                                   |
+|------------------|-------------------|---------------------------------------------------------|
+| Original form    | `primary 3`      | Full words + number                                     |
+| Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
+| Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
+
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
@@ -478,6 +513,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous AddressBook application.
+* **Student List** : The panel at the bottom of the StudentConnect interface displaying all student profiles that have been created and stored in the system. It provides a quick overview of existing students for easy reference and selection.
+* **Lesson**: An entity which contains a `LocalDate` that is owned by a student. It meaningfully represents the next lesson that the student will have. The `LocalDate` represents the date that the lesson starts.
+* **Recurring lesson**: A lesson arrangement set on a fixed weekly schedule, where the tutor conducts lessons with a student on the same day each time interval. 
+* **Payment Status:** A positive numerical value that indicates the student’s current payment balance for lessons. The value means the student has outstanding lessons that are yet to be paid.
+* **Education Level:** An Enum field used to record the academic level of each student for organisational clarity.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -485,7 +526,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -575,6 +618,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No lesson is added. Error details shown in the status message.
    4. Other incorrect edit commands to try: `addLesson`, `addLesson x d/2025-12-25`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
+
 ### Cancelling a lesson
 1. Cancelling a lesson of an existing student
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
@@ -584,9 +628,54 @@ testers are expected to do more *exploratory* testing.
    Expected: No lesson is cancelled. Error details shown in the status message.
    4. Other incorrect edit commands to try: `cancelLesson`, `cancelLesson x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
+
 ### Testing auto-update of lesson dates
 1. Testing if lesson dates of all students in the list will be auto-updated as time passes
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`.
    2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
    3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
    Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
+
+## Appendix 2: Planned enhancements
+
+### 1. Support for Negative Payment Status (Overpayment Tracking)
+
+**Description:**
+The payment status system will be extended to allow negative values, enabling tutors to record situations where a student has prepaid for lessons. For example, if a student prepays for 5 lessons before attending any, the payment status will be `-5`.
+
+**Rationale:**
+Although the initial design assumes pay-as-you-go (a common practice), some private tutors — especially those managing higher lesson volume or group classes — collect payment in advance. By supporting negative balances, tutors can also record prepaid lesson credits
+
+**Implementation Notes:**
+
+* Validation logic for payment status will be updated to allow negative values
+* Future UI/CLI updates may include indicators for prepaid credits
+* Payment-related features (e.g., export / summary) will support both outstanding and prepaid balances
+
+### 2. Precise Lesson Scheduling: Time-Based Support
+
+**Description:**
+Lesson scheduling will be enhanced to support both date and exact time, including hours and minutes (e.g., `2025-01-12 17:30`).
+
+**Rationale:**
+Tutors often manage several lessons per day at different time slots. The ability to specify time improves lesson scheduling accuracy and reminder and preparation logic.
+
+**Implementation Notes:**
+
+* Internal date handling will be migrated from `LocalDate` to `LocalDateTime` (or equivalent time object). Lesson sorting & UI display logic will be updated to prioritize time when available
+
+* Potential integration with automated reminders or calendar exports in future releases
+
+### 3. Extended Person Model for Parents / Guardians
+
+**Description:**
+The system will introduce additional person types, starting with a dedicated Parent/Guardian entity, implemented as a subclass of Person.
+
+**Rationale:**
+Private tutors frequently interact not only with students, but also with parents or guardians regarding payment coordination and scheduling adjustments.Differentiating persons ensures accurate association between student-parent pairs and better record organisation. Future support for multiple guardians per student (e.g., mother + father contacts)
+
+**Implementation Notes:**
+
+* A `Parent` class will inherit from `Person`
+* A `Student` may reference one or more `Parent` object
+* This architecture supports richer contact management, laying groundwork for optional features such as messaging integration or multi-contact notification systems.
