@@ -96,6 +96,9 @@ Check out the [Features](#features) below for a full list of commands and detail
 
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
+### INDEX
+
+
 ### Student
 A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student.
 The number index is based on the order that the student is added into the list.
@@ -250,7 +253,7 @@ Examples:
 * `addStu n/Choo P p/81112222 e/choo@example.com a/Blk 1 edu/other`
 * `addStu n/Alex Tan p/91223344 e/alex@example.com`
 
-![addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3](img.png)
+![img_10.png](img_10.png)
 
 ### Listing all persons : `list`
 
@@ -258,7 +261,7 @@ Shows a list of all persons in the address book.
 
 Format: `list`
 
-![list](img_1.png)
+![img_11.png](img_11.png)
 
 ### Editing a person : `edit`
 
@@ -279,7 +282,7 @@ Examples:
 *  `edit 3 edu/sec 4` Changes the 3rd person's education level to SEC_4.
 *  `edit 4 edu/` Clears the 4th person's education level back to UNKNOWN.
 
-![edit 1 p/91234567 e/johndoe@example.com](img_2.png)
+![img_12.png](img_12.png)
 
 ### Locating persons by name: `find`
 
@@ -296,10 +299,10 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-- `find John` returns `john` and `John Doe`
+- `find Alex` returns `Alex Yeoh`
 - `find alex david` returns `Alex Yeoh`, `David Li`<br>
   
-![img_3.png](img_3.png)
+![img_13.png](img_13.png)
 
 ### Payment Status of a person : `payment`
 
@@ -325,7 +328,7 @@ There is a soft bound from negative to positive **1 million** for the number of 
 If your update(whether automatically from a recurring lesson or manually from the command) exceeds the bounds, all updates will fail, and the same payment status will be returned.
 </div>
 
-![img_4.png](img_4.png)
+![img_14.png](img_14.png)
 
 ### Locating persons by tag: `searchtag`
 
@@ -341,10 +344,9 @@ Format: `searchtag KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * if you want to search all students who study chemistry, use `searchtag cHemiStrY` returns all persons tagged with `chemistry`
-  * `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
-    ![result for 'searchtag fri col'](images/searchtagFriCol.png)
+* `searchtag Fri Col` returns all persons with tags containing `fri` (e.g. `friends`) or `col` (e.g. `colleagues`)
 
-![searchtag friends](img_5.png)
+![img_15.png](img_15.png)
 
 ### Deleting a person : `delete`
 
@@ -362,7 +364,7 @@ Examples:
 - `list` followed by `delete 2` deletes the 2nd person in the address book.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![img_6.png](img_6.png)
+![img_16.png](img_16.png)
 
 ### Add a lesson : `addLesson`
 
@@ -384,7 +386,7 @@ Examples:
 * `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
 * `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
 
-![img_7.png](img_7.png)
+![img_17.png](img_17.png)
 
 ### Cancel a lesson : `cancelLesson`
 
@@ -400,10 +402,9 @@ Format: `cancelLesson INDEX`
 
 Examples:
 * `list` followed by `cancelLesson 6` cancels the 6th person's upcoming lesson if the 6th person is a student with a scheduled lesson.
-![result for 'cancelLesson 6'](images/CancelLesson6.png)
 * `find Betsy` followed by `cancelLesson 1` cancels the lesson of the 1st person in the results of the `find` command if they are a student with a scheduled lesson.
 
-![img_8.png](img_8.png)
+![img_18.png](img_18.png)
 
 ### Clearing all entries : `clear`
 
