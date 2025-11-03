@@ -119,7 +119,7 @@ A student has the following attributes, as shown in the example above:
 2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
 4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters. )
-5. [tag](#tag-): Tags that record extra information of a student
+5. [tag](#tag): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 7. education level: The education level of the student
 
@@ -187,6 +187,8 @@ This ensures your recurring lessons always reflect the *next upcoming* session w
 ### Payment Status
 Payment tracking has been an anathema to private tutors, especially when there are multiple students with different payment habits. We use the payment status to make this issue simple.
 
+The payment status records the balance between **the number of lessons that students have paid** or the **number of lessons that have passed**
+* If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `10-13 = -3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the [tag](#tag) feature to also record the price of each lesson, and everything becomes easy calculation.
 
 payment status equals **the number of lessons that students have paid minus the number of lessons that need to be paid** 
 
@@ -282,7 +284,7 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
   1. the student has not paid for any lesson(refer to track for more info)
   2. the student does not have any lesson (refer to addLesson for more info)
   3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
-  4. If `edu/` is used but left empty or contains only spaces (e.g., ' '), the education level defaults to `UNKNOWN`.
+  4. If `edu/` is used but left empty or contains whitespaces, the education level defaults to `UNKNOWN`.
 
 <div markdown="span" class="alert alert-danger">
 
@@ -338,7 +340,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The search is case-insensitive. e.g., `hans` will match `Hans`
 * The order of the keywords does not matter. e.g., `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched, e.g,. `Han` will not match `Hans`
+* Only full words will be matched, e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e., `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
@@ -481,7 +483,7 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous StudentConnect home folder.
 
 **Q**: How do I edit the lesson information if I input anything wrong?<br>
-**A**: StudentConnect so far does not support the editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson thorugh the `addLesson` command again.
+**A**: StudentConnect so far does not support the editing lessons directly. You may use the command `cancelLesson INDEX` first and then add the lesson through the `addLesson` command again.
 
 **Q**: If I add a lesson on the day of the lesson itself, is it counted as being outdated?<br>
 **A**: No, your lesson will only delete/update itself (depending on the type of the lesson) after the date of the lesson has passed. For example, if today is `2025-12-29` and your lesson is set on that day. It will only be considered outdated on `2025-12-30`.
