@@ -19,7 +19,12 @@ Class Email
 Class Name
 Class Phone
 Class Tag
-Class "<<enumeration>>\nEducationLevel" as EducationLevel
+Class "<<enumeration>>\nEducationLevel" as EducationLevel {
+    PRIMARY_ONE,
+    PRIMARY_TWO,
+	PRIMARY_THREE,...
+}
+show EducationLevel members
 
 class Student
 class Lesson

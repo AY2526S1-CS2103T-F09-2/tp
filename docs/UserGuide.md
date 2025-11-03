@@ -7,7 +7,8 @@ title: User Guide
 
 **StudentConnect** is a desktop application designed to help private tutors manage student contacts and lesson schedules. With simple commands, you can record and retrieve important student information with ease.
 
-No matter what subjects you teach, which education levels you target, or whether your lessons are online or in-person, **StudentConnect** supports your tutoring needs. If juggling multiple students feels overwhelming, our features are here to help. With just a few quick commands, you can manage student contacts, schedule lessons, and track payments — all in one place.
+No matter what subjects you teach, which education levels you target, or whether your lessons are online or in-person, **StudentConnect** supports your tutoring needs. Our main focus is on students from Primary 1 to Junior 2, but the features work for any level. 
+If juggling multiple students feels overwhelming, our features are here to help. With just a few quick commands, you can manage student contacts, schedule lessons, and track payments — all in one place.
 
 The Quick Start section below will guide you through your first steps. Don’t worry if you’ve never used a command-based application before — it’s simple to learn, and we’re here to help you get started!
 
@@ -96,8 +97,8 @@ Check out the [Features](#features) below for a full list of commands and detail
 To have a better understanding of how we process the commands in StudentConnect, you can take a look at the basic concepts here!
 
 ### Student
-A student is represented as an item in the student list. You can add a student by calling the [`addstu`](#adding-a-new-student-addstu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
-The number index is based on the order in which the student is added to the list.
+A student is represented as an item in the student list. You can add a student by calling the [`addStu`](#adding-a-new-student-addStu) command and delete a student by calling the [`delete`](#deleting-a-person--delete) command. Once a student is added, it will appear on the list at the bottom of the panel, with a number index assigned to the student. 
+The number index is based on the order that the student is added into the list.
 
 A student has the following attributes, as shown in the example above:
 1. name: The name of the student(must be **less than or equals to 35 characters**)
@@ -116,13 +117,15 @@ A student can only have **zero or one lesson**. If you try to add a new lesson t
 The list of students appears at the bottom of the application interface. It shows all students that is stored in the application. These students in the student list can be accessed by commands such as [`addLesson`](#add-a-lesson--addlesson), whenever we need to refer to a specific student that is **already created**.
  
 ### Tag 
-A tag is a piece of text that records a unique characteristic of the student. You can optionally add any number of tags when you create a new [student](#student) by calling the [`addstu`](#adding-a-new-student-addstu) command.
+A tag is a piece of text that records a unique characteristic of the student. You can optionally add any number of tags when you create a new [student](#student) by calling the [`addStu`](#adding-a-new-student-addStu) command.
 
 In StudentConnect, you can use the tag in the following way:
-1. Record the subject of the [student](#student) (e.g., `history`, `chemistry`) if you teach multiple subjects 
-2. Record information about the [student](#student) that you need to remind yourself (e.g. `50$/hr`)
-3. Record whether you need to provide feedback to the [student](#student)'s parents (e.g. `feedback/no-feedback`) 
-4. Record the platform that you use if you are hosting online lessons(e.g.,` platform: Giggle meet`)
+1. Record the subject of the [student](#student) (e.g. `History`, `Chemistry`) if you teach multiple subjects
+2. Record information about the [student](#student) that you need to remind yourself (e.g. `50PerHr`)
+3. Record whether you need to provide feedbacks to the [student](#student)'s parents (e.g. `Feedback` or `NoFeedback`)
+4. Record the platform that you use if you are hosting online lessons(e.g. `Online`)
+
+(Note that the length of tag is intentionally unrestricted)
 
 ### Lesson
 
@@ -236,9 +239,10 @@ Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDU
 * A person can have any number of tags (including 0)
 * All other fields are compulsory 
 * When a student is initialised, *by default* :
-  1. The student has not paid for any lesson(refer to track for more info) 
-  2. The student does not have any lessons (refer to addLesson for more info) 
-  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`. For how to replace `EDUCATION_LEVEL` with a valid education level, refer to [education level](#education-level)
+  1. the student has not paid for any lesson(refer to track for more info)
+  2. the student does not have any lesson (refer to addLesson for more info)
+  3. If `edu/` is omitted, the education level defaults to `UNKNOWN`.
+  4. If `edu/` is used but left empty or contains only spaces (e.g., ' '), the education level defaults to `UNKNOWN`.
 
 Examples:
 * `addStu n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 edu/primary 3`
@@ -440,13 +444,13 @@ Furthermore, certain edits can cause StudentConnect to behave in unexpected ways
 | Action             | Format, Examples                                                                                                                                                                                          |
 |--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Student**    | `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]` <br> e.g. `addStu n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague edu/sec 4` |
-| **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                            |
+| **Add Lesson**     | `addLesson INDEX d/LESSONSDATE [every/INTERVAL]​` <br> e.g. `addLesson 1 d/2025-12-13`                                                                                                                    |
 | **Cancel Lesson**  | `cancelLesson INDEX​` <br> e.g. `cancelLesson 3`                                                                                                                                                          | 
 | **Clear**          | `clear`                                                                                                                                                                                                   |
 | **Delete**         | `delete INDEX`<br> e.g. `delete 3`                                                                                                                                                                        |
-| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [edu/EDUCATION_LEVEL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                                |
+| **Edit**           | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]… [edu/EDUCATION_LEVEL]​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                          |
 | **Find**           | `find KEYWORD [MORE_KEYWORDS]`<br> e.g. `find James Jake`                                                                                                                                                 |
 | **Search Tag**     | `searchtag KEYWORD [MORE_KEYWORDS]`<br> e.g. `searchtag chemistry physics`                                                                                                                                |
 | **List**           | `list`                                                                                                                                                                                                    |
-| **Payment Status** | `payment INDEX [s/paid OR s/unpaid]`                                                                                                                                                                                    <br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
+| **Payment Status** | `payment INDEX [s/paid OR s/unpaid] <br> e.g. `payment 1 s/unpaid`                                                                                                                                        |
 | **Help**           | `help`                                                                                                                                                                                                    |
