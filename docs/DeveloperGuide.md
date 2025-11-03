@@ -203,7 +203,7 @@ This section describes some noteworthy details on how certain features are imple
 
 ### addStu/delete feature
 
-The `addStu`/`delete` mechanism in `StudentConnect` builds the foundation of the application. It adds a student and deletes the student, which is represented as an item in the student list.
+ The `addStu`/`delete` mechanism in `StudentConnect` builds the foundation of the application. It adds a student and deletes the student, which is represented as an item in the student list.
 
 Given below is an example usage scenario and how the addStu/delete mechanism behaves at each step.
 
@@ -211,7 +211,7 @@ Step 1. The user launches the application for the first time.`StudentConnect` wi
 
 Step 2. The user executes `addStu n/David …​` to add a new person. The `addStu` command also calls the storage and UI, causing the newly created student to be saved into the file `addressBook.json` (We kept the name for the data file) and displayed on the interface.
 
-Step 3. The user executes `delete 2` command to delete the 5th person in the address book. The `delete` command calls, causing the second student that appears in the student list to be deleted. Then the deleted student list is observed by the UI and storage, leading to corresponding updates on the interface and in the file `addressBook.json`
+Step 3. The user executes `delete 2` command to delete the 5th person in the address book. The `delete` command is called, causing the second student that appears in the student list to be deleted. Then the deleted student list is observed by the UI and storage, leading to corresponding updates on the interface and in the file `addressBook.json`
 
 
 <div markdown="span" class="alert alert-info">
