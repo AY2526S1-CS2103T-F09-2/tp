@@ -209,9 +209,9 @@ Given below is an example usage scenario and how the addStu/delete mechanism beh
 
 Step 1. The user launches the application for the first time.`StudentConnect` will be initialized with the initial address book state.
 
-Step 2. The user executes `addStu n/David …​` to add a new person. A new `student` object is created and the student is appended as the last element of the student list. The `addStu` command also calls the storage and UI, causing the newly created student to be saved into the file `addressBook.json` (We kept the name for the data file) and displayed on the interface.
+Step 2. The user executes `addStu n/David …​` to add a new person. A new `student` object is created and the student is appended as the last element of the student list. The `addStu` command also calls the storage and UI, causing the newly created student to be saved into the file `addressbook.json` (We kept the name for the data file) and displayed on the interface.
 
-Step 3. The user executes `delete 2` command to delete the 5th person in the address book. The `delete` command is called, causing the second student that appears in the student list to be deleted. Then the deletion of the student from the student list is observed by the UI and storage, leading to corresponding updates on the interface and in the file `addressBook.json`
+Step 3. The user executes `delete 2` command to delete the 5th person in the address book. The `delete` command is called, causing the second student that appears in the student list to be deleted. Then the deletion of the student from the student list is observed by the UI and storage, leading to corresponding updates on the interface and in the file `addressbook.json`
 
 
 <div markdown="span" class="alert alert-info">
