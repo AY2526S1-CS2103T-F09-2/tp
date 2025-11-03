@@ -341,7 +341,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 Given below are instructions to test the app manually.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** These instructions only provide a starting point for testers to work on;
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:** These instructions only provide a starting point for testers to work on;
 testers are expected to do more *exploratory* testing.
 
 </div>
@@ -431,6 +433,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No lesson is added. Error details shown in the status message.
    4. Other incorrect edit commands to try: `addLesson`, `addLesson x d/2025-12-25`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
+
 ### Cancelling a lesson
 1. Cancelling a lesson of an existing student
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
@@ -440,9 +443,54 @@ testers are expected to do more *exploratory* testing.
    Expected: No lesson is cancelled. Error details shown in the status message.
    4. Other incorrect edit commands to try: `cancelLesson`, `cancelLesson x`, `...` (where x is larger than the list size)<br>
    Expected: Similar to previous.
+
 ### Testing auto-update of lesson dates
 1. Testing if lesson dates of all students in the list will be auto-updated as time passes
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list. Ensure at least one student in the list has a lesson to be tested. If no student has a lesson, use `addLesson 1 d/2025-12-15` and `addLesson 2 d/2025-12-01 every/7`.
    2. Go to your laptop / computer's settings, search for date&ime settings. **Close `set date and time automatically`** and **close `set time zone automatically using your location`**
    3. You will now be able to adjust your system date and time manually. Set the date to be `2025-12-16`. Exit the application and re-launch it.
    Expected: The person at index 1 will now have no lessons. The person at index 2 will have a lesson on `2025-12-22`.
+
+## Appendix 2: Planned enhancements
+
+### 1. Support for Negative Payment Status (Overpayment Tracking)
+
+**Description:**
+The payment status system will be extended to allow negative values, enabling tutors to record situations where a student has prepaid for lessons. For example, if a student prepays for 5 lessons before attending any, the payment status will be `-5`.
+
+**Rationale:**
+Although the initial design assumes pay-as-you-go (a common practice), some private tutors — especially those managing higher lesson volume or group classes — collect payment in advance. By supporting negative balances, tutors can also record prepaid lesson credits
+
+**Implementation Notes:**
+
+* Validation logic for payment status will be updated to allow negative values
+* Future UI/CLI updates may include indicators for prepaid credits
+* Payment-related features (e.g., export / summary) will support both outstanding and prepaid balances
+
+### 2. Precise Lesson Scheduling: Time-Based Support
+
+**Description:**
+Lesson scheduling will be enhanced to support both date and exact time, including hours and minutes (e.g., `2025-01-12 17:30`).
+
+**Rationale:**
+Tutors often manage several lessons per day at different time slots. The ability to specify time improves lesson scheduling accuracy and reminder and preparation logic.
+
+**Implementation Notes:**
+
+* Internal date handling will be migrated from `LocalDate` to `LocalDateTime` (or equivalent time object). Lesson sorting & UI display logic will be updated to prioritize time when available
+
+* Potential integration with automated reminders or calendar exports in future releases
+
+### 3. Extended Person Model for Parents / Guardians
+
+**Description:**
+The system will introduce additional person types, starting with a dedicated Parent/Guardian entity, implemented as a subclass of Person.
+
+**Rationale:**
+Private tutors frequently interact not only with students, but also with parents or guardians regarding payment coordination and scheduling adjustments.Differentiating persons ensures accurate association between student-parent pairs and better record organisation. Future support for multiple guardians per student (e.g., mother + father contacts)
+
+**Implementation Notes:**
+
+* A `Parent` class will inherit from `Person`
+* A `Student` may reference one or more `Parent` object
+* This architecture supports richer contact management, laying groundwork for optional features such as messaging integration or multi-contact notification systems.
