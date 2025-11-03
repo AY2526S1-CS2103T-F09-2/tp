@@ -24,17 +24,12 @@ Person <|-- Student
 Student *--> PaymentStatus
 Student *--> Lesson
 
-
-enum EducationLevel {
-	UNKNOWN
-	PRIMARY
-	SECONDARY
-	DIPLOMA
-	BACHELORS
-	MASTERS
-	PHD
-	OTHER
+Class "<<enumeration>>\nEducationLevel" as EducationLevel {
+    PRIMARY_ONE,
+    PRIMARY_TWO,
+	PRIMARY_THREE,...
 }
+show EducationLevel members
 
 class Student {
 	-PaymentStatus paymentStatus
