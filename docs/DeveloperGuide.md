@@ -172,11 +172,12 @@ The `enum` contains the following fields
 
 When we convert the education level `enum` from a `String` input (from a command) to an enum object, several string inputs are supported for one `enum` item. 
 For example, the following `Strings` converts to the enum item `primary 3`:
-| Format           | Example        | Notes                                                   |
-|------------------|-------------------|---------------------------------------------------------|
-| Original form    | `primary 3`      | Full words + number                                     |
-| Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
-| Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
+* **Original form:** `primary 3`  
+Full words + number 
+* **Abbreviation:** `pri 3`     
+primary → pri, secondary → sec, junior → jc (no other forms allowed)
+* **Number in words:** `primary three`  
+You may combine with abbreviations too, e.g. `pri three`
 
 
 ### Storage component
@@ -194,6 +195,34 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.address.commons` package.
 
+--------------------------------------------------
+
+## **Implementation**
+
+This section describes some noteworthy details on how certain features are implemented.
+
+### addStu/delete feature
+
+ The `addStu`/`delete` mechanism in `StudentConnect` builds the foundation of the application. It adds a student and deletes the student, which is represented as an item in the student list.
+
+Given below is an example usage scenario and how the addStu/delete mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.`StudentConnect` will be initialized with the initial address book state.
+
+Step 2. The user executes `addStu n/David …​` to add a new person. A new `student` object is created and the student is appended as the last element of the student list. The `addStu` command also calls the storage and UI, causing the newly created student to be saved into the file `addressbook.json` (We kept the name for the data file) and displayed on the interface.
+
+Step 3. The user executes `delete 2` command to delete the 5th person in the address book. The `delete` command is called, causing the second student that appears in the student list to be deleted. Then the deletion of the student from the student list is observed by the UI and storage, leading to corresponding updates on the interface and in the file `addressbook.json`
+
+
+<div markdown="span" class="alert alert-info">
+
+:information_source: **Note:**
+ If a command fails its execution, it will not update the storage and the UI, so the storage and the student list on the interface remains the same state as before.
+
+</div>
+
+
+
 ## **Documentation, logging, testing, configuration, dev-ops**
 
 * [Documentation guide](Documentation.md)
@@ -201,6 +230,7 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
 
 --------------------------------------------------------------------------------------------------------------------
 
