@@ -225,9 +225,14 @@ Format: `help`
 
 ### Adding a new student: `addStu`
 
-<div markdown="span" class="alert alert-danger">:bulb: **Warning:**
+<div markdown="span" class="alert alert-danger">
+
+:bulb: **Warning:**
+
 The `add` command available in the previous versions is deprecated and cannot be used anymore.
-Use this command instead to add a new student.
+Use this command instead to add a new student. DO NOT USE IT IN ANY SITUATION!
+However, if you really insist to use `add` command. The `add` command will still add a student by default.
+
 </div>
 
 Adds a person to the address book.
