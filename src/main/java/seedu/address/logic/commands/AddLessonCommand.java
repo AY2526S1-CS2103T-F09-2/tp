@@ -82,8 +82,6 @@ public class AddLessonCommand extends Command {
                     toAdd,
                     targetStudent.getPaymentStatus(),
                     targetStudent.getEducationLevel());
-            // increment outstanding payment for the newly added lesson
-            newStudent = newStudent.unpaid();
         } else {
             // Convert Person to Student and add lesson
             newStudent = new Student(
@@ -93,8 +91,6 @@ public class AddLessonCommand extends Command {
                     foundPerson.getAddress(),
                     foundPerson.getTags(),
                     toAdd);
-            // mark as unpaid for the new lesson
-            newStudent = newStudent.unpaid();
         }
 
         model.setPerson(foundPerson, newStudent);
