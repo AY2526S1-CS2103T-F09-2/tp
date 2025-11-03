@@ -196,9 +196,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | As a private tutor | I want to be able to delete a student contact                 | so that they are not in my contact list                      |
 | `* * *`  | As a private tutor | I want to search the student’s contact information            | so that I can locate them easily                             |
 | `* * *`  | As a private tutor | I want to track payment status per lesson                     | so that I know which lessons have been paid for              |
+| `* * *`  | As a private tutor | I want to see which students have unpaid lessons              | so that I can follow up on payments                          |
 | `* * *`  | As a private tutor | I want to track my students' education level                  | so that I can tailor my lessons accordingly                  |
 | `* * *`  | As a private tutor | I want to search for students by tags                         | so that I can quickly filter students with specific subjects |
-| `* * *`  | As a private tutor | I want to be able to edit my students' list                   | so that I can keep their information up to date              |
+| `* * *`  | As a private tutor | I want to add multiple tags to students                       | so that I can categorise students in different ways          |
+| `* * *`  | As a private tutor | I want to be able to edit my students' information            | so that I can keep their information up to date              |
 | `* * *`  | As a private tutor | I want to be able to cancel my student's lesson               | so that I can manage schedule changes                        |
 | `* * *`  | As a private tutor | I want to keep track of my students’ (recurrent) lesson times | so that I will not forget about the schedules                |
 
@@ -207,118 +209,260 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `StudentConnect` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Add a student**
+**Use case: UC1 - Add a student**
 
 **MSS**
 
 1.  User requests to add student's contact
-2.  StudentConnect adds the person.
+2.  StudentConnect adds the student.
 
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The person has already been added.
+* 2a. The student has already been added.
 
-  Use case ends.
+    * 2a1. StudentConnect shows an error.
+
+    Use case ends.
+
+* 2b. The required fields keyed in are wrong.
+
+    * 2b1. StudentConnect shows an error.
+
+        Use case resumes at step 1. 
+
+  
+    Use case ends.
 
 
-**Use case: Delete a person**
+**Use case: UC2 - Delete a student**
 
 **MSS**
 
-1.  User requests to delete a person
-2.  StudentConnect deletes the person
+1.  User requests to delete a student
+2.  StudentConnect deletes the student and all associated data
 
 
        Use case ends.
 
 **Extensions**
 
-* 2a. The person didn't exist.
+* 2a. The student doesn't exist.
 
     * 2a1. StudentConnect returns `0 persons listed!`.
 
         Use case resumes at step 2.
 
-  Use case ends.
+* 2b. Invalid index provided.
 
+    * 2b1. StudentConnect shows an error message
+  
+        Use case resumes at step 2.
 
-**Use case: Search for a person**
-
-**MSS**
-
-1.  User requests to search for a person
-2.  StudentConnect lists the person
-
-
-       Use case ends.
-
-**Extensions**
-
-* 2a. The person doesn't exist.
-
-    * 2a1. StudentConnect shows an error message.
-
-      Use case resumes at step 2.
-
-  Use case ends.
-
-**Use case: Add a lesson time for a person**
-
-**MSS**
-
-1.  User requests to add a lesson time for a person
-2.  StudentConnect adds the time for the person
-
-
-       Use case ends.
-
-**Extensions**
-
-* 2a. The person doesn't exist.
-
-    * 2a1. StudentConnect shows an error message.
-
-      Use case resumes at step 2.
-
-* 2b. The person already has an allocated time.
-
-    * 2b1. Student connect shows an error message.
-      
-      Use case resumes at step 2.
-
+    
     Use case ends.
 
-**Use case: Track payment for a person's lesson**
+
+**Use case: UC3 - Search for a student**
 
 **MSS**
 
-1.  User requests to track if a person has paid for the latest lesson.
-2.  User marks person's latest lesson as paid.
-3. StudentConnect marks the person's payment status as paid.
+1.  User requests to search for a student
+2.  StudentConnect lists the student
 
 
        Use case ends.
 
 **Extensions**
 
-* 1a. The person doesn't exist.
+* 2a. The student doesn't exist.
+
+    * 2a1. StudentConnect shows an error message.
+
+      Use case resumes at step 2.
+
+  
+    Use case ends.
+
+**Use case: UC4 - Add a (recurring) lesson for a student**
+
+**MSS**
+
+1.  User requests to add a (recurring) lesson for a student
+2.  StudentConnect adds the (recurring) lesson date for the student
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The student doesn't exist.
 
     * 1a1. StudentConnect shows an error message.
 
       Use case resumes at step 1.
 
-* 1b. The person has no assigned lesson.
+* 1b. The student already has an allocated lesson.
+
+    * 1b1. StudentConnect shows an error message.
+      
+      Use case resumes at step 1.
+
+* 1c. The lesson date is invalid.
+
+    * 1c1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+
+    Use case ends.
+
+**Use case: UC5 - Cancels a (recurring) lesson for a student**
+
+**MSS**
+
+1.  User requests to cancel a (recurring) lesson for a student
+2.  StudentConnect cancels the (recurring) lesson for the student
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The student doesn't exist.
+
+    * 1a1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The student has no lessons allocated.
 
     * 1b1. StudentConnect shows an error message.
 
       Use case resumes at step 1.
 
-* 2a. The person's payment status is already paid.
+* 1c. The index is invalid.
 
-    * 2a.  StudentConnect throws an error.
+    * 1c1. StudentConnect shows an error message.
+  
+      Use case resumes at step 1.
+
+
+    Use case ends.
+
+**Use case: UC6 - Mark student as having paid lesson**
+
+**MSS**
+
+1.  User marks student as having paid lesson.
+2.  StudentConnect marks the student's payment status as paid.
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The student doesn't exist.
+
+    * 1a1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The student's payment status is already paid.
+
+    * 1b1.  StudentConnect throws an error.
+  
+      Use case resumes at step 1.
+
+* 1c. The index is invalid.
+
+    * 1c1.  StudentConnect throws an error.
+
+      Use case resumes at step 1.
+
+
+        Use case ends.
+
+**Use case: UC7 - Mark student as not having paid lesson**
+
+**MSS**
+
+1.  User marks student as having not paid lesson.
+2.  StudentConnect marks the student's payment status as unpaid.
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The student doesn't exist.
+
+    * 1a1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. The index is invalid.
+
+    * 1b1.  StudentConnect throws an error.
+
+      Use case resumes at step 1.
+
+
+        Use case ends.
+
+**Use case: UC8 - Edit a student's information**
+
+**MSS**
+
+1.  User requests to edit a student's information.
+2.  StudentConnect edits the student's information.
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The index is invalid.
+
+    * 1a1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. No fields to edit are given.
+
+    * 1b1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+
+        Use case ends.
+
+**Use case: UC9 - Search for tags**
+
+**MSS**
+
+1.  User requests to search for tags.
+2.  StudentConnect searches through the list based on tags.
+3.  StudentConnect returns the required list.
+
+
+       Use case ends.
+
+**Extensions**
+
+* 1a. The tag is invalid.
+
+    * 1a1. StudentConnect shows an error message.
+
+      Use case resumes at step 1.
+
+* 1b. No tags are provided.
+
+    * 1b1. StudentConnect shows an error message.
+  
+      Use case resumes at step 1.
 
 
         Use case ends.
@@ -333,7 +477,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous addressbook application.
+* **Student** : A recordable entity in the application **StudentConnect**, which inherits itself from the `person` class used in the previous AddressBook application.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -379,7 +523,7 @@ testers are expected to do more *exploratory* testing.
 
 
 ### Adding a new student
-1. Adding a person to the address book
+1. Adding a person to the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
 
    2. Test case: `addStu n/Alex Tan p/91223344 e/alex@example.com`<br>
@@ -392,7 +536,7 @@ testers are expected to do more *exploratory* testing.
    Expected: similar to previous.
 
 ### Editing a person
-1. Editing an existing person in the address book
+1. Editing an existing person in the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
 
    2. Test case: `edit 2 n/Betsy Crower`<br>
@@ -405,7 +549,7 @@ testers are expected to do more *exploratory* testing.
    Expected: Similar to previous.
 
 ### Managing payment status of a person
-1. Displaying or updating the payment status of a person in the address book
+1. Displaying or updating the payment status of a person in the list
    1. Prerequisites: List all persons using the `list` command. Multiple students in the list.
    2. Test case: `payment 2`<br>
    Expected: Name and payment status of the second person in the list are shown in the status message.
