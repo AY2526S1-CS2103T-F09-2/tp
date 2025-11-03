@@ -104,7 +104,7 @@ A student has the following attributes, as shown in the example above:
 1. name: The name of the student(must be **less than or equals to 35 characters**)
 2. phone number: The phone number of a student(must be **less than or equals to 20 numbers**)
 3. email address: The email address of a student
-4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons)
+4. address: The address of the student (This is optional, so you do not need to include this if you are hosting online lessons. It accepts special characters. )
 5. [tag](#tag-): Tags that record extra information of a student
 6. [lesson](#lesson): The lesson that the student has
 7. education level: The education level of the student
