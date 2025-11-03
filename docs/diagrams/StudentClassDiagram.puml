@@ -33,5 +33,5 @@ Student "1" --> "1" PaymentStatus
 Lesson  --> "1" Lesson : nextLesson
 addStudentCommand --> Student: creates >
 deleteCommand --> Student: deletes >
-Student ..> JsonAdaptedStudent: converts to
+Student ..> JsonAdaptedStudent: converts to >
 @enduml
