@@ -36,7 +36,7 @@ The Quick Start section below will guide you through your first steps. Don’t w
 
 4. There are a few different ways to launch the application :
    * double-click the `.jar` file that you have downloaded.
-   * *(For advanced command app users)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
+   * *(For advanced command app users and **Mac users**)* Open a command terminal,  `cd` into the folder you put the jar file in, and use the `java -jar StudentConnect.jar` (The name will be different for the PE exam, please replace the `jar` file name with `CS2103T-F09-2StudentConnect.jar`) command to run the application.<br>
    The application interface similar to the below should appear in a few seconds. Note how the app contains some sample data.
 
    <br>
@@ -244,13 +244,16 @@ The `add` command available in the previous versions is deprecated and cannot be
 Use this command instead to add a new student.
 </div>
 
-Adds a person to the address book.
+Adds a person to the list.
 
 Format: `addStu n/NAME p/PHONE_NUMBER e/EMAIL [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]`
 
 * A person can have 0 or 1 address
 * A person can have any number of tags (including 0)
-* All other fields are compulsory
+* Name, phone number, and email fields are compulsory
+* Emails should be of the format local-part@domain and adhere to the following:
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
 * When a student is initialised, *by default* :
   1. the student has not paid for any lesson(refer to track for more info)
   2. the student does not have any lesson (refer to addLesson for more info)
@@ -268,7 +271,7 @@ Examples:
 
 ### Listing all persons : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all persons in the list.
 
 Format: `list`
 
@@ -276,7 +279,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing person in the list.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​ [edu/EDUCATION_LEVEL]…​`
 
@@ -317,7 +320,7 @@ Examples:
 
 ### Payment Status of a person : `payment`
 
-Displays or updates the payment status of a person in the address book.
+Displays or updates the payment status of a person in the list.
 
 Format: `payment INDEX [s/paid | s/unpaid]`
 
@@ -327,9 +330,9 @@ Format: `payment INDEX [s/paid | s/unpaid]`
 * When a status flag is provided, the system updates the student’s payment record accordingly.
 
 Examples:
-* `list` followed by `payment 2` displays the payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the address book as paid. Then displays the updated payment status of the 2nd person in the address book.
-* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the address book as unpaid. Then displays the updated payment status of the 2nd person in the address book.
+* `list` followed by `payment 2` displays the payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/paid` marks 1 lesson of the 2nd person in the list as paid. Then displays the updated payment status of the 2nd person in the list.
+* `list` followed by `payment 2 s/unpaid` marks 1 lesson of the 2nd person in the list as unpaid. Then displays the updated payment status of the 2nd person in the list.
 
 <div markdown="span" class="alert alert-danger">:bulb: **Warning:**
 There is a soft bound from negative to positive **1 million** for the number of outstanding lessons that you can have.
@@ -358,7 +361,7 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes the specified person from the list.
 
 Format: `delete INDEX`
 
@@ -366,7 +369,7 @@ Format: `delete INDEX`
 
 Examples:
 
-- `list` followed by `delete 2` deletes the 2nd person in the address book.
+- `list` followed by `delete 2` deletes the 2nd person in the list.
 - `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
 ![img_16.png](img_16.png)
@@ -379,14 +382,14 @@ Format: `addLesson INDEX d/LESSON_DATE [every/INTERVAL]`
 
 * Adds a lesson for the student at the specified [INDEX](#index).
 * If the person is a student **with a scheduled lesson**, the command shows an error. This is true also for recurring lessons.
-* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the address book.
+* If they are a student **with no scheduled lesson**, the upcoming lesson will be added and displayed in the list.
 * The `LESSONDATE` refers to the date of the lesson to be added. It follows a strict format of `yyyy-MM-dd`(e.g. `2025-12-22`, note that `2025-12-1` or `2025-2-11` **are considered as wrong formats** because your month and date must be **in two characters**). The start date of the lesson is only considered valid when it is within the range from the **current date where you add the lesson** until **364 days past that current date**. This is to prevent unreasonable inputs. To check your current date, you can refer to the **right bottom corner** (Sometimes might be different depends on your layout) of your desktop/laptop, we follow the **system time** based on your device.
 * If you want to add a **recurring lesson**, a lesson that refreshes itself after a fixed number of days, you can use the optional `every/` identifier with a **positive integer** to indicate how many days the lesson will automatically update itself to the next date instead of deleting itself. When you do not have the `every/` identifier. The lesson will be counted as a normal lesson, which automatically deletes itself after the date of the lesson has passed.
 * See the [FAQ section](#faq) if you want to specify the hour of the lesson
 
 Examples:
-* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the address book.
-* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the address book.
+* `list` followed by `addLesson 2 d/2025-12-20` add the 2nd person's upcoming lesson and displays it in the list.
+* `find Betsy` followed by `addLesson 1 d/2025-12-27` adds the 1st person's lesson and displays it in the list.
 
 ![img_17.png](img_17.png)
 
@@ -396,6 +399,7 @@ Cancels the scheduled upcoming lesson at the specified index.
 
 Format: `cancelLesson INDEX`
 
+* The index refers to the index number shown in the displayed person list.
 * Cancel lesson of the student at the specified [INDEX](#index).
 * If the student has a scheduled lesson, the command cancels that lesson.
 * If the student has no scheduled lesson, an error message will be displayed.
@@ -408,7 +412,7 @@ Examples:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all entries from the list.
 
 Format: `clear`
 
@@ -461,7 +465,7 @@ However, we recognise that lesson time is also essential. To record lesson times
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
-
+3. **If you click on the lower part of a person card**, there is a chance for the interface to glitch. It will not always happen and will not affect the overall functionality of the application.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
