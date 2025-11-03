@@ -94,4 +94,10 @@ public class AddLessonCommandParserTest {
         String input = " abc d/2025-11-02";
         assertThrows(ParseException.class, () -> parser.parse(input));
     }
+
+    @Test
+    public void parse_duplicateInterval_throwsParseException() {
+        String input = " 1 d/2025-11-02 every/7 every/14";
+        assertThrows(ParseException.class, () -> parser.parse(input));
+    }
 }
