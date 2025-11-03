@@ -144,6 +144,44 @@ How the parsing works:
 
 <img src="images/LessonClassDiagram.png" width="600" />
 
+#### Payment Status
+The payment status contains an integer which represents **the number of lessons that students have paid - the number of lessons that need to be paid**. Every single stduent has exactly one payment status.
+
+We check whether the student has outstanding lesson by checking whether the payment status equals to `0`.
+
+* If the student has paid for `10` lessons and `13` lessons have passed in total, the payment status will be `-10+13 = 3`, which means that the student has **3 outstanding lessons that need to be paid**. You can combine this with the tag feature to also record the price of each lesson, and everything becomes easy calculation.
+
+**The number of lessons that students have paid for** can be tracked manually or automatically. 
+
+The payment command updates the payment command manually by adding 1(`s/unpaid`) or subtracting 1(`s/paid`) to a new lesson.
+
+For automatic update, the payment status updates itself when the `LESSONDATE` of a lesson is past the current date(the system date). The application checks this when it is first launched. The check and the update is then done in the `ModelMananger` class. If the the `LESSONDATE` of a lesson is past the current date(the system date), the payment status will increase by 1.  
+
+
+
+#### Education Level
+The education level is an `enum` object which represents the student's education level in the . It accepts a wide range of inputs that converts the. The payment status of a student can be edited using the `addStu` or `edit` command.
+
+**Supported Education Levels**
+
+The `enum` contains following fields 
+
+* `primary [n]`, where `1 <= n <= 6`
+* `secondary [n]`, where `1 <= n <= 5`
+* `junior [n]`, where `1 <= n <= 2`("junior" refers to junior college)
+
+**Flexible Input Formats**
+
+When we convert the education level `enum` from a `String` input (from a command) to an enum objects, several string inputs are supported for one `enum` item.
+For example, the following `Strings` converts to the enum item `primary 3`:
+
+| Format           | Example        | Notes                                                   |
+|------------------|-------------------|---------------------------------------------------------|
+| Original form    | `primary 3`      | Full words + number                                     |
+| Abbreviation     | `pri 3`          | primary → pri, secondary → sec, junior → jc **(no other forms allowed)**             |
+| Number in words  | `primary three`  | You may combine with abbreviations too, e.g. `pri three` |
+
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
