@@ -158,7 +158,7 @@ The payment command updates the payment command manually by adding 1(`s/unpaid`)
 For automatic update, the payment status updates itself when the `LESSONDATE` of a lesson is past the current date(the system date). The application checks this when it is first launched. The check and the update are then done in the `ModelManager` class. If the `LESSONDATE` of a lesson is past the current date(the system date), the payment status will increase by 1.  
 
 #### Education Level
-The education level is an `enum` object that represents the student's education level. It accepts a wide range of inputs that convert the. The payment status of a student can be edited using the `addStu` or `edit` command. 
+The education level is an `enum` object that represents the student's education level. It accepts a wide range of inputs that convert the string input to the Enumeration value. The payment status of a student can be edited using the `addStu` or `edit` command. 
 
 **Supported Education Levels**
 
