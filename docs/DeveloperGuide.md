@@ -10,6 +10,7 @@ title: Developer Guide
 ## **Acknowledgements**
 
 * **StudentConnect** is built upon the [**AB3(Address Book Level 3)**](https://se-education.org/addressbook-level3) project.
+* AI-assistance in test code declaration: ChatGPT provided guidance on the JUnit test structure of `ModelManager#refreshLessonDates()` by giving an example testcase. It also provided suggestions on how to further improve test coverage for `ModelManager#refreshLessonDates()` and `cancelLessonCommandTest`. The tests for `ModelManager#refreshLessonDates()` followed the example structure and are manually validated.
 
 --------------------------------------------------------------------------------------------------------------------
 
